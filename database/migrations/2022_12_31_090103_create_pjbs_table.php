@@ -15,21 +15,22 @@ class CreatePjbsTable extends Migration
     {
         Schema::create('pjbs', function (Blueprint $table) {
             $table->id();
-            $table->string('nm',60)->nullable();
-            $table->string('tpt_lhr',60)->nullable();
-            $table->date('tgl_lhr')->nullable();
-            $table->text('hub')->nullable();
+            $table->string('nm',60);
+            $table->string('tpt_lhr',60);
+            $table->date('tgl_lhr');
+            $table->text('hub');
             $table->text('bangsa')->default('indonesia');
             $table->enum('jk',['L','P']);
-            $table->text('almt')->nullable();
-            $table->string('no_hp')->nullable();
-            $table->string('no_ktp')->nullable();
-            $table->date('tgl_ktp')->nullable();
-            $table->enum('pddk',['SD','SMP','SMA','D1','D2','D3','S1','S2','S3'])->nullable();
+            $table->text('almt');
+            $table->string('pekerjaan',15)->nullable();
+            $table->string('no_hp');
+            $table->string('no_ktp');
+            $table->date('tgl_ktp');
+            $table->enum('pddk',['SD','SMP','SMA','D1','D2','D3','S1','S2','S3']);
             $table->string('kursus',60)->nullable();
-            $table->string('jbt',60)->nullable();
-            $table->string('foto',60)->nullable();
-            $table->string('scanktp',60)->nullable();
+            $table->string('jbt',60);
+            $table->string('foto',60);
+            $table->string('scanktp',60);
             $table->timestamps();
         });
     }

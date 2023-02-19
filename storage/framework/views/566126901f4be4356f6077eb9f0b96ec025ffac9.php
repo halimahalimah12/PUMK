@@ -1,13 +1,11 @@
 
 
 <?php $__env->startSection('container'); ?>
-
-
     <div class="col-lg-9">
       <div class="card">
-          <div class="card-body">
-            
-            <?php if($user->is_admin ==0 ): ?>
+        <div class="card-body">
+          <?php if($user->is_admin ==0 ): ?>
+              <div style="overflow-x:auto">
                 <table class="table table-striped">
                   <tbody>
                     <tr>
@@ -40,19 +38,21 @@
                     </tr>
                   </tbody>
                 </table>
-                
-                <div class="fw-bold">Data Diri Penangung Jawab Usah</div>
+              </div>
+              
+              <div class="fw-bold">Data Diri Penangung Jawab Usah</div>
+              <div style="overflow-x:auto">
                 <table class="table table-striped">
                   <tbody>
                     <tr>
                       <td>Nama </td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->data_mitra->nm); ?></td>
+                      <td><?php echo e(ucwords($pengajuan1->data_mitra->nm)); ?></td>
                     </tr>
                     <tr>
                       <td>Tempat Lahir </td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->data_mitra->tpt_lhr); ?></td>
+                      <td><?php echo e(ucwords($pengajuan1->data_mitra->tpt_lhr)); ?></td>
                     </tr>
                     <tr>
                       <td>Tenggal Lahir </td>
@@ -62,22 +62,22 @@
                     <tr>
                       <td> Jenis Kelamin</td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->data_mitra->jk); ?></td>
+                      <td><?php echo e(ucwords($pengajuan1->data_mitra->jk)); ?></td>
                     </tr>
                     <tr>
                       <td>Status Perkawinan</td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->data_mitra->sts_prk); ?></td>
+                      <td><?php echo e(ucwords($pengajuan1->data_mitra->sts_prk)); ?></td>
                     </tr>
                     <tr>
                       <td>Kebangsaan </td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->data_mitra->bangsa); ?></td>
+                      <td><?php echo e(ucwords($pengajuan1->data_mitra->bangsa)); ?></td>
                     </tr>
                     <tr>
                       <td>Alamat Rumah</td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->data_mitra->almt); ?></td>
+                      <td><?php echo e(ucwords($pengajuan1->data_mitra->almt)); ?></td>
                     </tr>
                     <tr>
                       <td>Nomor Telpon </td>
@@ -102,23 +102,25 @@
                     <tr>
                       <td>Kursus</td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->data_mitra->kursus); ?></td>
+                      <td><?php echo e(ucwords($pengajuan1->data_mitra->kursus)); ?></td>
                     </tr>
                     <tr>
                       <td>Jabatan</td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->data_mitra->jbt); ?></td>
+                      <td><?php echo e(ucwords($pengajuan1->data_mitra->jbt)); ?></td>
                     </tr>
                   </tbody>
                 </table> 
-                
-                <div class="fw-bold ">Data Perusahaan</div> 
+              </div>
+              
+              <div class="fw-bold ">Data Perusahaan</div> 
+              <div style="overflow-x:auto">
                 <table class="table table-striped">
                   <tbody>
                     <tr>
                       <td>Nama Perusahaan</td>
                       <td>:</td>
-                      <td><?php echo e($ush->nama_ush); ?></td>
+                      <td><?php echo e(ucwords($ush->nama_ush)); ?></td>
                     </tr>
                     <tr>
                       <td>Akta Perusahaan </td>
@@ -133,12 +135,12 @@
                     <tr>
                       <td> Bidang Usaha</td>
                       <td>:</td>
-                      <td><?php echo e($ush->jnsush); ?></td>
+                      <td><?php echo e(ucwords($ush->sektorush)); ?></td>
                     </tr>
                     <tr>
                       <td>Jenis Usaha</td>
                       <td>:</td>
-                      <td><?php echo e($ush->jnsush); ?></td>
+                      <td><?php echo e(ucwords($ush->jnsush)); ?></td>
                     </tr>
                     <tr>
                       <td>Berdiri Sejak </td>
@@ -148,7 +150,7 @@
                     <tr>
                       <td>Alamat Perusahaan</td>
                       <td>:</td>
-                      <td><?php echo e($ush->almt_ush); ?></td>
+                      <td><?php echo e(ucwords($ush->almt_ush)); ?></td>
                     </tr>
                     <tr>
                       <td>Nomor Telpon </td>
@@ -163,12 +165,12 @@
                     <tr>
                       <td>Nama Bank </td>
                       <td>:</td>
-                      <td><?php echo e($ush->bank); ?></td>
+                      <td><?php echo e(strtoupper($ush->bank)); ?></td>
                     </tr>
                     <tr>
                       <td>Atas Nama</td>
                       <td>:</td>
-                      <td><?php echo e($ush->atsnm); ?></td>
+                      <td><?php echo e(ucwords($ush->atsnm)); ?></td>
                     </tr>
                     <tr>
                       <td>Nomor Rekening</td>
@@ -177,19 +179,21 @@
                     </tr>
                   </tbody>
                 </table> 
-                
-                <div class="fw-bold "> Data Diri Penangung Jawab Berikutnya </div> 
+              </div>
+              
+              <div class="fw-bold "> Data Diri Penangung Jawab Berikutnya </div> 
+              <div style="overflow-x:auto">
                 <table class="table table-striped">
                   <tbody>
                     <tr>
                       <td>Nama </td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->pjb->nm); ?></td>
+                      <td><?php echo e(ucwords($pengajuan1->pjb->nm)); ?></td>
                     </tr>
                     <tr>
                       <td>Tempat Lahir </td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->pjb->tpt_lhr); ?></td>
+                      <td><?php echo e(ucwords($pengajuan1->pjb->tpt_lhr)); ?></td>
                     </tr>
                     <tr>
                       <td>Tenggal Lahir </td>
@@ -204,17 +208,17 @@
                     <tr>
                       <td>Status Hubungan dengan Penangung Jawab Usaha</td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->pjb->hub); ?></td>
+                      <td><?php echo e(ucwords($pengajuan1->pjb->hub)); ?></td>
                     </tr>
                     <tr>
                       <td>Kebangsaan </td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->pjb->bangsa); ?></td>
+                      <td><?php echo e(ucwords($pengajuan1->pjb->bangsa)); ?></td>
                     </tr>
                     <tr>
                       <td>Alamat Rumah</td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->pjb->almt); ?></td>
+                      <td><?php echo e(ucwords($pengajuan1->pjb->almt)); ?></td>
                     </tr>
                     <tr>
                       <td>Nomor Telpon </td>
@@ -239,25 +243,27 @@
                     <tr>
                       <td>Kursus</td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->pjb->kursus); ?></td>
+                      <td><?php echo e(ucwords($pengajuan1->pjb->kursus)); ?></td>
                     </tr>
                     <tr>
                       <td>Jabatan</td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->pjb->jbt); ?></td>
+                      <td><?php echo e(ucwords($pengajuan1->pjb->jbt)); ?></td>
                     </tr>
                   </tbody>
                 </table> 
-                
-                <div class="fw-bold "> Nilai Asset </div> 
+              </div>
+              
+              <div class="fw-bold "> Nilai Asset </div> 
+              <div style="overflow-x:auto">
                 <table  class="table table-bordered css-serials">
                   <thead>
-                      <tr>
-                        <th >No</th>
-                        <th > ASSET  </th>
-                        <th class="titikdua">:</th>
-                        <th > NILAI (RP) </th>
-                      </tr>
+                    <tr>
+                      <th >No</th>
+                      <th > ASSET  </th>
+                      <th class="titikdua">:</th>
+                      <th > NILAI (RP) </th>
+                    </tr>
                   </thead>
                   <tbody>
                     <tr>
@@ -305,68 +311,70 @@
                     <tr>
                       <th colspan=2 style="text-align:center"  > Total Nilai Asset</th>
                       <th class="titikdua">:</th>
-                      <td class="isi"> <?php echo e($pengajuan1->aset->formatRupiah('totaset')); ?></td>
+                      <th class="isi"> <?php echo e($pengajuan1->aset->formatRupiah('totaset')); ?></th>
                     </tr>
                   </tbody>
                 </table>
-                
-                <div class="fw-bold "> Alat Kerja dan Alat Bantu </div> 
+              </div>
+              
+              <div class="fw-bold "> Alat Kerja dan Alat Bantu </div> 
+              <div style="overflow-x:auto">
                 <table  class="table table-bordered css-serials" >
                   <thead>
-                      <tr>
-                        <th > NO.  </th>
-                        <th class="data1">NAMA BARANG</th>
-                        <th class="data1"> HARGA SATUAN </th>
-                        <th  class="data1"> JML HARGA (Rp) </th>
-                      </tr>
+                    <tr>
+                      <th > NO.  </th>
+                      <th class="data1">NAMA BARANG</th>
+                      <th class="data1"> HARGA SATUAN </th>
+                      <th  class="data1"> JML HARGA (Rp) </th>
+                    </tr>
                   </thead>
                   <tbody>
-                  <?php $__currentLoopData = $alat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $alt): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                      <tr>
-                      <td class="nomor">.</td>
-                      <td ><?php echo e(ucwords( $alt->nm_brg)); ?></td>
-                      <td > <?php echo e($alt->formatRupiah('hrg_satuan')); ?></td>
-                      <td > <?php echo e($alt->formatRupiah('jmlh')); ?></td>
-                    </tr>
-                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                  <tr>
+                    <?php $__currentLoopData = $alat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $alt): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <tr>
+                        <td class="nomor">.</td>
+                        <td ><?php echo e(ucwords( $alt->nm_brg)); ?></td>
+                        <td > <?php echo e($alt->formatRupiah('hrg_satuan')); ?></td>
+                        <td > <?php echo e($alt->formatRupiah('jmlh')); ?></td>
+                      </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <tr>
                       <th style="text-align:center" colspan=3> Jumlah</th>
-                      <th align=left >Rp <?php echo e($totalat); ?></th>
-                    
+                      <th align=left >Rp <?php echo e(number_format($totalat,0,',','.')); ?></th>
                     </tr>
-                    
                   </tbody>
                 </table> 
-                
-                <div class="fw-bold "> Tenaga Kerja  </div> 
+              </div>
+              
+              <div class="fw-bold "> Tenaga Kerja  </div> 
+              <div style="overflow-x:auto">
                 <table  class="table table-bordered css-serials" >
                   <thead>
-                      <tr>
-                        <th > NO.  </th>
-                        <th class="data1" >NAMA </th>
-                        <th class="data1"> JABATAN </th>
-                        <th class="data1"> GAJI (Rp) </th>
-                      </tr>
+                    <tr>
+                      <th > NO.  </th>
+                      <th class="data1" >NAMA </th>
+                      <th class="data1"> JABATAN </th>
+                      <th class="data1"> GAJI (Rp) </th>
+                    </tr>
                   </thead>
                   <tbody>
-                  <?php $__currentLoopData = $tenaga; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tng): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $tenaga; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tng): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                       <tr>
-                      <td class="nomor">.</td>
-                      <td ><?php echo e(ucwords( $tng->nm_tngk)); ?></td>
-                      <td ><?php echo e(ucwords( $tng->jbt )); ?></td>
-                      <td > <?php echo e($tng->formatRupiah('gaji')); ?></td>
+                        <td class="nomor">.</td>
+                        <td ><?php echo e(ucwords( $tng->nm_tngk)); ?></td>
+                        <td ><?php echo e(ucwords( $tng->jbt )); ?></td>
+                        <td > <?php echo e($tng->formatRupiah('gaji')); ?></td>
+                      </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <tr>
+                        <th colspan=3> Jumlah</th>
+                        <th align=left >Rp <?php echo e(number_format($totgaji,0,',','.')); ?></th>
                     </tr>
-                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                  <tr>
-                      <th colspan=3> Jumlah</th>
-                      <th align=left >Rp <?php echo e($totgaji); ?></th>
-                    
-                    </tr>
-                    
                   </tbody>
                 </table> 
-                
-                <div class="fw-bold "> Biaya Oprasional  </div> 
+              </div>
+              
+              <div class="fw-bold "> Biaya Oprasional  </div> 
+              <div style="overflow-x:auto">
                 <table  class="table table-bordered css-serials" >
                   <tbody>
                     <tr>
@@ -402,12 +410,14 @@
                     <tr>
                       <th colspan=2 align=center; > Total Biaya Oprasional</th>
                       <th class="titikdua">:</th>
-                      <td class="isi"><?php echo e($pengajuan1->oprasional->formatRupiah('totop')); ?></td>
+                      <th class="isi"><?php echo e($pengajuan1->oprasional->formatRupiah('totop')); ?></th>
                     </tr>
                   </tbody>
                 </table> 
-                
-                <div class="fw-bold "> Omzet </div> 
+              </div>
+              
+              <div class="fw-bold "> Omzet </div> 
+              <div style="overflow-x:auto">
                 <table  class="table table-bordered css-serials" >
                   <thead>
                       <tr>
@@ -418,35 +428,33 @@
                       </tr>
                   </thead>
                   <tbody>
-                  <?php $__currentLoopData = $omzet; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $omz): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $omzet; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $omz): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                       <tr>
-                      <td class="nomor">.</td>
-                      <td ><?php echo e(ucwords( $omz->nm_brg)); ?></td>
-                      <td align=right> <?php echo e($omz->formatRupiah('hrg_satuan')); ?></td>
-                      <td > <?php echo e($omz->formatRupiah('jmlh')); ?></td>
-                    </tr>
-                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                  <tr>
+                        <td class="nomor">.</td>
+                        <td ><?php echo e(ucwords( $omz->nm_brg)); ?></td>
+                        <td align=right> <?php echo e($omz->formatRupiah('hrg_satuan')); ?></td>
+                        <td > <?php echo e($omz->formatRupiah('jmlh')); ?></td>
+                      </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <tr>
                       <th colspan=3> Jumlah</th>
-                      <th align=left >Rp <?php echo e($totomzet); ?></th>
-                    
+                      <th align=left >Rp <?php echo e(number_format($totomzet,0,',','.')); ?></th>
                     </tr>
-                    
                   </tbody>
                 </table> 
-                
-                <div class="fw-bold "> Penempataan Modal</div> 
+              </div>
+              
+              <div class="fw-bold "> Penempataan Modal</div> 
+              <div style="overflow-x:auto">
                 <table  class="table table-bordered css-serials" >
                   <thead>
                       <tr>
                         <th > NO.  </th>
                         <th class="data1">URAIAN</th>
                         <th class="data1" > JUMLAH (Rp) </th>
-
                       </tr>
                   </thead>
                   <tbody>
-                
                     <tr >
                       <td class="nomor"></td>
                       <td >investasi</td>
@@ -457,87 +465,88 @@
                       <td >Modal Usaha</td>
                       <td class="rp"><?php echo e($pengajuan1->formatRupiah('modal')); ?></td>
                     </tr>
-                
-                  <tr >
+                    <tr >
                       <th colspan=2> Jumlah</th>
                       <th class="rp">Rp <?php echo e($pengajuan1->formatRupiah('bsr_pinjaman')); ?> </th>
                     </tr>
-                    
                   </tbody>
                 </table> 
-                
-                <div class="fw-bold "> Dokumen</div> 
+              </div>
+              
+              <div class="fw-bold "> Dokumen</div> 
+              <div style="overflow-x:auto">
                 <table class="table table-striped">
                   <tbody>
                       <tr>
                         <td>Pas Foto Penanggung Jawab Usaha</td>
                         <td>:</td>
-                        <td><embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan1->data_mitra->foto)); ?>" width="300" height="200"></td>
+                        <td><embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan1->data_mitra->foto)); ?>" width="200" height="200"></td>
                       </tr>
                       <tr>
                         <td>Scan KTP Penanggung Jawab Usaha</td>
                         <td>:</td>
-                        <td><embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan1->data_mitra->scanktp)); ?>" width="300" height="200"></td>
+                        <td><embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan1->data_mitra->scanktp)); ?>" width="200" height="200"></td>
                       </tr>
                       <tr>
                         <td>Pas Foto Penanggung Jawab Berikutnya</td>
                         <td>:</td>
-                        <td><embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan1->pjb->foto)); ?>" width="300" height="200"></td>
+                        <td><embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan1->pjb->foto)); ?>" width="200" height="200"></td>
                       </tr>
                       <tr>
                         <td>Scan KTP Penanggung Jawab Berikutnya</td>
                         <td>:</td>
-                        <td><embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan1->pjb->scanktp)); ?>" width="300" height="200"></td>
+                        <td><embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan1->pjb->scanktp)); ?>" width="200" height="200"></td>
                       </tr>
                       <tr>
-                          <td>Bukti tanda keseriusan </td>
-                          <td>:</td>
-                          <td><button type="button" class="btn btn-primary btn-sm"> <a href="/bukti-keseriusan"style="color:white;"> Lihat </a></button></td>
+                        <td>Bukti tanda keseriusan </td>
+                        <td>:</td>
+                        <td><button type="button" class="btn btn-primary btn-sm"> <a href="/bukti-keseriusan/<?php echo e($pengajuan1->id); ?>"style="color:white;"> Lihat </a></button></td>
                       </tr>
                       <tr>
                         <td>Scan KK</td>
                         <td>:</td>
-                        <td><button type="button" class="btn btn-primary btn-sm"> <a href="/scan-kk"style="color:white;"> Lihat </a></button></td>
+                        <td><button type="button" class="btn btn-primary btn-sm"> <a href="/scan-kk/<?php echo e($pengajuan1->id); ?>"style="color:white;"> Lihat </a></button></td>
                       </tr>
                       <tr>
                         <td>Foto Kegiatan Usah</td>
                         <td>:</td>
-                        <td> <embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan1->foto_kegiatan)); ?>" width="300" height="200"></td>
+                        <td> <embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan1->foto_kegiatan)); ?>" width="200" height="200"></td>
                       </tr>
                       <tr>
                         <td>Scan Surat Keterangan Berusaha dari RT/RW Setingkat</td>
                         <td>:</td>
-                        <td><button type="button" class="btn btn-primary btn-sm"> <a href="/ket-berusaha"style="color:white;"> Lihat </a></button></td>
+                        <td><button type="button" class="btn btn-primary btn-sm"> <a href="/ket-berusaha/<?php echo e($pengajuan1->id); ?>"style="color:white;"> Lihat </a></button></td>
                       </tr>
                       <tr>
                         <td>Surat Belum Dibina BUMN</td>
                         <td>:</td>
-                        <td><button type="button" class="btn btn-primary btn-sm"> <a href="/surat-belum-dibina-bumn"style="color:white;"> Lihat </a></button></td>
+                        <td><button type="button" class="btn btn-primary btn-sm"> <a href="/surat-belum-dibina-bumn/<?php echo e($pengajuan1->id); ?>"style="color:white;"> Lihat </a></button></td>
                       </tr>
                       <tr>
                         <td>Surat Penanggung Jawab berikutnya</td>
                         <td>:</td>
-                        <td><button type="button" class="btn btn-primary btn-sm"> <a href="/surat-penanggung-jawab-berikutnya"style="color:white;"> Lihat </a></button></td>
+                        <td><button type="button" class="btn btn-primary btn-sm"> <a href="/surat-penanggung-jawab-berikutnya/<?php echo e($pengajuan1->id); ?>"style="color:white;"> Lihat </a></button></td>
                       </tr>
                       <tr>
                         <td>Surat Kesanggupan Melunasi Peminjaman</td>
                         <td>:</td>
-                        <td><button type="button" class="btn btn-primary btn-sm"> <a href="/surat-kesanggupan-melunasi"style="color:white;"> Lihat </a></button></td>
+                        <td><button type="button" class="btn btn-primary btn-sm"> <a href="/surat-kesanggupan-melunasi/<?php echo e($pengajuan1->id); ?>"style="color:white;"> Lihat </a></button></td>
                       </tr>
                   </tbody>
-
                 </table> 
-              <?php else: ?>
-              
-                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin')): ?>
-                  <div class="row">
-                    <div class="col-8"><h5 class="card-title"> Detail Pengajuan</h5> </div>
-                    <div class="col-4">
-                        <button class="btn btn-primary" style="margin-top:12px; float:right" >
-                          <a href="/cetak/<?php echo e($pengajuan->id); ?>" class="bi bi-printer" style="color:white" > </a>
-                        </button>
-                    </div>
+              </div>
+            <?php else: ?>
+            
+              <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin')): ?>
+                <div class="row">
+                  <div class="col-lg-8 col-10 "><h5 class="card-title"> Detail Pengajuan</h5> </div>
+                  <div class="col-lg-4 col-2">
+                      <button class="btn btn-primary" style="margin-top:12px; float:right" >
+                        <a href="/cetak/<?php echo e($pengajuan->id); ?>" class="bi bi-printer" style="color:white" > </a>
+                      </button>
                   </div>
+                </div>
+                <div style="overflow-x:auto">
                   <table class="table table-striped">
                     <tbody>
                       <tr>
@@ -549,40 +558,42 @@
                         <td>Status Pengajuan</td>
                         <td>:</td>
                         <td>
-                        <?php if($pengajuan->status == 'menunggu'): ?> 
-                            <span class="badge bg-secondary">Menunggu</span>
-                          <?php elseif($pengajuan->status == 'lulus'): ?>
-                            <span class="badge bg-success">Pengajuan Diterima</span>
-                          <?php else: ?>
-                            <span class="badge bg-danger">Pengajuan Ditolak</span>
-                        <?php endif; ?>
+                          <?php if($pengajuan->status == 'menunggu'): ?> 
+                              <span class="badge bg-secondary">Menunggu</span>
+                            <?php elseif($pengajuan->status == 'lulus'): ?>
+                              <span class="badge bg-success">Pengajuan Diterima</span>
+                            <?php else: ?>
+                              <span class="badge bg-danger">Pengajuan Ditolak</span>
+                          <?php endif; ?>
                         </td>
                       </tr>
                       <tr>
                         <td>Nama Usaha</td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->data_mitra->data_ush->nama_ush); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->data_mitra->data_ush->nama_ush)); ?></td>
                       </tr>
                       <tr>
                         <td>Nama Penanggung Jawab Usaha</td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->data_mitra->nm); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->data_mitra->nm)); ?></td>
                       </tr>
                     </tbody>
                   </table>
-                  
-                  <div class="fw-bold">Data Diri Penangung Jawab Usah</div>
+                </div>
+                
+                <div class="fw-bold">Data Diri Penangung Jawab Usah</div>
+                <div style="overflow-x:auto">
                   <table class="table table-striped">
                     <tbody>
                       <tr>
                         <td style="width:350px">Nama </td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->data_mitra->nm); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->data_mitra->nm)); ?></td>
                       </tr>
                       <tr>
                         <td>Tempat Lahir </td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->data_mitra->tpt_lhr); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->data_mitra->tpt_lhr)); ?></td>
                       </tr>
                       <tr>
                         <td>Tenggal Lahir </td>
@@ -597,17 +608,17 @@
                       <tr>
                         <td>Status Perkawinan</td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->data_mitra->sts_prk); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->data_mitra->sts_prk)); ?></td>
                       </tr>
                       <tr>
                         <td>Kebangsaan </td>
                         <td>:</td>
-                        
+                        <td><?php echo e(ucwords($pengajuan->data_mitra->bangsa)); ?></td>
                       </tr>
                       <tr>
                         <td>Alamat Rumah</td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->data_mitra->almt); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->data_mitra->almt)); ?></td>
                       </tr>
                       <tr>
                         <td>Nomor Telpon </td>
@@ -637,18 +648,20 @@
                       <tr>
                         <td>Jabatan</td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->data_mitra->jbt); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->data_mitra->jbt)); ?></td>
                       </tr>
                     </tbody>
                   </table> 
-                  
-                  <div class="fw-bold ">Data Perusahaan</div> 
+                </div>
+                
+                <div class="fw-bold ">Data Perusahaan</div> 
+                <div style="overflow-x:auto">
                   <table class="table table-striped">
                     <tbody>
                       <tr>
                         <td style="width:350px">Nama Perusahaan</td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->data_mitra->data_ush->nama_ush); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->data_mitra->data_ush->nama_ush)); ?></td>
                       </tr>
                       <tr>
                         <td>Akta Perusahaan </td>
@@ -663,12 +676,12 @@
                       <tr>
                         <td> Bidang Usaha</td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->data_mitra->data_ush->jnsush); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->data_mitra->data_ush->sektorush)); ?></td>
                       </tr>
                       <tr>
                         <td>Jenis Usaha</td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->data_mitra->data_ush->jnsush); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->data_mitra->data_ush->jnsush)); ?></td>
                       </tr>
                       <tr>
                         <td>Berdiri Sejak </td>
@@ -678,7 +691,7 @@
                       <tr>
                         <td>Alamat Perusahaan</td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->data_mitra->data_ush->almt_ush); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->data_mitra->data_ush->almt_ush)); ?></td>
                       </tr>
                       <tr>
                         <td>Nomor Telpon </td>
@@ -693,7 +706,7 @@
                       <tr>
                         <td>Nama Bank </td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->data_mitra->data_ush->bank); ?></td>
+                        <td><?php echo e(strtoupper($pengajuan->data_mitra->data_ush->bank)); ?></td>
                       </tr>
                       <tr>
                         <td>Atas Nama</td>
@@ -707,19 +720,21 @@
                       </tr>
                     </tbody>
                   </table> 
-                  
-                  <div class="fw-bold "> Data Diri Penangung Jawab Berikutnya </div> 
+                </div>
+                
+                <div class="fw-bold "> Data Diri Penangung Jawab Berikutnya </div> 
+                <div style="overflow-x:auto">
                   <table class="table table-striped">
                     <tbody>
                       <tr>
                         <td>Nama </td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->pjb->nm); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->pjb->nm )); ?></td>
                       </tr>
                       <tr>
                         <td>Tempat Lahir </td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->pjb->tpt_lhr); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->pjb->tpt_lhr)); ?></td>
                       </tr>
                       <tr>
                         <td>Tenggal Lahir </td>
@@ -734,17 +749,17 @@
                       <tr>
                         <td>Status Hubungan dengan Penangung Jawab Usaha</td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->pjb->hub); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->pjb->hub)); ?></td>
                       </tr>
                       <tr>
                         <td>Kebangsaan </td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->pjb->bangsa); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->pjb->bangsa)); ?></td>
                       </tr>
                       <tr>
                         <td>Alamat Rumah</td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->pjb->almt); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->pjb->almt)); ?></td>
                       </tr>
                       <tr>
                         <td>Nomor Telpon </td>
@@ -769,25 +784,27 @@
                       <tr>
                         <td>Kursus</td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->pjb->kursus); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->pjb->kursus)); ?></td>
                       </tr>
                       <tr>
                         <td>Jabatan</td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->pjb->jbt); ?></td>
+                        <td><?php echo e(ucwords($pengajuan->pjb->jbt)); ?></td>
                       </tr>
                     </tbody>
-                  </table> 
-                  
-                  <div class="fw-bold "> Nilai Asset </div> 
+                  </table>
+                </div>
+                
+                <div class="fw-bold "> Nilai Asset </div> 
+                <div style="overflow-x:auto">
                   <table  class="table table-bordered css-serials">
                     <thead>
-                        <tr>
-                          <th >No</th>
-                          <th > ASSET  </th>
-                          <th class="titikdua">:</th>
-                          <th > NILAI (RP) </th>
-                        </tr>
+                      <tr>
+                        <th >No</th>
+                        <th > ASSET  </th>
+                        <th class="titikdua">:</th>
+                        <th > NILAI (RP) </th>
+                      </tr>
                     </thead>
                     <tbody>
                       <tr>
@@ -835,12 +852,14 @@
                       <tr>
                         <th colspan=2 style="text-align:center"  > Total Nilai Asset</th>
                         <th class="titikdua">:</th>
-                        <td class="isi"><?php echo e($pengajuan->aset->formatRupiah('totaset')); ?></td>
+                        <th class="isi"><?php echo e($pengajuan->aset->formatRupiah('totaset')); ?></th>
                       </tr>
                     </tbody>
                   </table>
-                  
-                  <div class="fw-bold "> Alat Kerja dan Alat Bantu </div> 
+                </div>
+                
+                <div class="fw-bold "> Alat Kerja dan Alat Bantu </div> 
+                <div style="overflow-x:auto">
                   <table  class="table table-bordered css-serials" >
                     <thead>
                         <tr>
@@ -851,52 +870,52 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php $__currentLoopData = $alat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $alt): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                      <?php $__currentLoopData = $alat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $alt): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
                         <tr>
-                        <td class="nomor">.</td>
-                        <td ><?php echo e(ucwords( $alt->nm_brg)); ?></td>
-                        <td > <?php echo e($alt->formatRupiah('hrg_satuan')); ?></td>
-                        <td > <?php echo e($alt->formatRupiah('jmlh')); ?></td>
-                      </tr>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
-                    <tr>
+                          <td class="nomor">.</td>
+                          <td ><?php echo e(ucwords( $alt->nm_brg)); ?></td>
+                          <td > <?php echo e($alt->formatRupiah('hrg_satuan')); ?></td>
+                          <td > <?php echo e($alt->formatRupiah('jmlh')); ?></td>
+                        </tr>
+                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
+                      <tr>
                         <th style="text-align:center" colspan=3> Jumlah</th>
-                        <th align=left >Rp <?php echo e($totalat); ?></th>
-                      
+                        <th align=left >Rp <?php echo e(number_format($totalat,0,',','.')); ?></th>
                       </tr>
-                      
                     </tbody>
                   </table> 
-                  
-                  <div class="fw-bold "> Tenaga Kerja  </div> 
+                </div>
+                
+                <div class="fw-bold "> Tenaga Kerja  </div> 
+                <div style="overflow-x:auto">
                   <table  class="table table-bordered css-serials" >
                     <thead>
-                        <tr>
-                          <th > NO.  </th>
-                          <th class="data1" >NAMA </th>
-                          <th class="data1"> JABATAN </th>
-                          <th class="data1"> GAJI (Rp) </th>
-                        </tr>
+                      <tr>
+                        <th > NO.  </th>
+                        <th class="data1" >NAMA </th>
+                        <th class="data1"> JABATAN </th>
+                        <th class="data1"> GAJI (Rp) </th>
+                      </tr>
                     </thead>
                     <tbody>
-                    <?php $__currentLoopData = $tenaga; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tng): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                      <?php $__currentLoopData = $tenaga; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tng): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                        <td class="nomor">.</td>
-                        <td ><?php echo e(ucwords( $tng->nm_tngk)); ?></td>
-                        <td ><?php echo e(ucwords( $tng->jbt )); ?></td>
-                        <td > <?php echo e($tng->formatRupiah('gaji')); ?></td>
+                          <td class="nomor">.</td>
+                          <td ><?php echo e(ucwords( $tng->nm_tngk)); ?></td>
+                          <td ><?php echo e(ucwords( $tng->jbt )); ?></td>
+                          <td > <?php echo e($tng->formatRupiah('gaji')); ?></td>
+                        </tr>
+                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                      <tr>
+                        <th colspan=3 style="text-align:center" > Jumlah</th>
+                        <th align=left >Rp <?php echo e(number_format($totgaji,0,',','.')); ?></th>
                       </tr>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <tr>
-                        <th colspan=3> Jumlah</th>
-                        <th align=left >Rp <?php echo e($totgaji); ?></th>
-                      
-                      </tr>
-                      
                     </tbody>
                   </table> 
-                  
-                  <div class="fw-bold "> Biaya Oprasional  </div> 
+                </div>
+                
+                <div class="fw-bold "> Biaya Oprasional  </div> 
+                <div style="overflow-x:auto">
                   <table  class="table table-bordered css-serials" >
                     <tbody>
                       <tr>
@@ -930,53 +949,53 @@
                         <td class="isi"> <?php echo e($pengajuan->oprasional->formatRupiah('lain')); ?></td>
                       </tr>
                       <tr>
-                        <th colspan=2 align=center; > Total Biaya Oprasional</th>
+                        <th colspan=2 style="text-align:center"  > Total Biaya Oprasional</th>
                         <th class="titikdua">:</th>
-                        <td class="isi"> <?php echo e($pengajuan->oprasional->formatRupiah('totop')); ?></td>
+                        <th class="isi"> <?php echo e($pengajuan->oprasional->formatRupiah('totop')); ?></th>
                       </tr>
                     </tbody>
                   </table> 
-                  
-                  <div class="fw-bold "> Omzet </div> 
+                </div>
+                
+                <div class="fw-bold "> Omzet </div> 
+                <div style="overflow-x:auto">
                   <table  class="table table-bordered css-serials" >
                     <thead>
                         <tr>
-                          <th > NO.  </th>
+                          <th> NO.  </th>
                           <th class="data1">NAMA BARANG</th>
-                          <th > HARGA SATUAN </th>
-                          <th  class="data1"> JML HARGA (Rp) </th>
+                          <th> HARGA SATUAN </th>
+                          <th  class="data1" align=center> JML HARGA (Rp) </th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php $__currentLoopData = $omzet; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $omz): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <tr>
-                        <td class="nomor">.</td>
-                        <td ><?php echo e(ucwords( $omz->nm_brg)); ?></td>
-                        <td align=right> <?php echo e($omz->formatRupiah('hrg_satuan')); ?></td>
-                        <td > <?php echo e($omz->formatRupiah('jmlh')); ?></td>
+                      <?php $__currentLoopData = $omzet; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $omz): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                          <tr>
+                          <td class="nomor">.</td>
+                          <td ><?php echo e(ucwords( $omz->nm_brg)); ?></td>
+                          <td align=right> <?php echo e($omz->formatRupiah('hrg_satuan')); ?></td>
+                          <td > <?php echo e($omz->formatRupiah('jmlh')); ?></td>
+                        </tr>
+                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                      <tr>
+                        <th colspan=3 style="text-align:center" > Jumlah</th>
+                        <th align=left >Rp <?php echo e(number_format($totomzet,0,',','.')); ?></th>
                       </tr>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <tr>
-                        <th colspan=3> Jumlah</th>
-                        <th align=left >Rp <?php echo e($totomzet); ?></th>
-                      
-                      </tr>
-                      
                     </tbody>
                   </table> 
-                  
-                  <div class="fw-bold "> Penempataan Modal</div> 
+                </div>
+                
+                <div class="fw-bold "> Penempataan Modal</div> 
+                <div style="overflow-x:auto">
                   <table  class="table table-bordered css-serials" >
                     <thead>
                         <tr>
                           <th > NO.  </th>
                           <th class="data1">URAIAN</th>
-                          <th class="data1" > JUMLAH (Rp) </th>
-
+                          <th class="data1"  > JUMLAH (Rp) </th>
                         </tr>
                     </thead>
                     <tbody>
-                  
                       <tr >
                         <td class="nomor"></td>
                         <td >investasi</td>
@@ -987,81 +1006,80 @@
                         <td >Modal Usaha</td>
                         <td class="rp"> <?php echo e($pengajuan->formatRupiah('modal')); ?></td>
                       </tr>
-                  
-                    <tr >
-                        <th colspan=2> Jumlah</th>
+                      <tr>
+                        <th colspan=2 style="text-align:center" > Jumlah</th>
                         <th class="rp"> <?php echo e($pengajuan->formatRupiah('bsr_pinjaman')); ?> </th>
                       </tr>
-                      
                     </tbody>
                   </table> 
-                  
-                  <div class="fw-bold "> Dokumen</div> 
+                </div>
+                
+                <div class="fw-bold "> Dokumen</div> 
+                <div style="overflow-x:auto">
                   <table class="table table-striped">
                     <tbody>
-                        <tr>
-                          <td>Pas Foto Penanggung Jawab Usaha</td>
+                      <tr>
+                        <td>Pas Foto Penanggung Jawab Usaha</td>
+                        <td>:</td>
+                          <td><embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan->data_mitra->foto)); ?>" width="200" height="200"></td>
+                      </tr>
+                      <tr>
+                        <td>Scan KTP Penanggung Jawab Usaha</td>
+                        <td>:</td>
+                        <td><embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan->data_mitra->scanktp)); ?>" width="200" height="200"></td>
+                      </tr>
+                      <tr>
+                        <td>Pas Foto Penanggung Jawab Berikutnya</td>
+                        <td>:</td>
+                        <td><embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan->pjb->foto)); ?>" width="200" height="200"></td>
+                      </tr>
+                      <tr>
+                        <td>Scan KTP Penanggung Jawab Berikutnya</td>
+                        <td>:</td>
+                        <td><embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan->pjb->scanktp)); ?>" width="200" height="200"></td>
+                      </tr>
+                      <tr>
+                          <td>Bukti tanda keseriusan </td>
                           <td>:</td>
-                          <td><embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan->data_mitra->foto)); ?>" width="300" height="200"></td>
-                        </tr>
-                        <tr>
-                          <td>Scan KTP Penanggung Jawab Usaha</td>
-                          <td>:</td>
-                          <td><embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan->data_mitra->scanktp)); ?>" width="300" height="200"></td>
-                        </tr>
-                        <tr>
-                          <td>Pas Foto Penanggung Jawab Berikutnya</td>
-                          <td>:</td>
-                          <td><embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan->pjb->foto)); ?>" width="300" height="200"></td>
-                        </tr>
-                        <tr>
-                          <td>Scan KTP Penanggung Jawab Berikutnya</td>
-                          <td>:</td>
-                          <td><embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan->pjb->scanktp)); ?>" width="300" height="200"></td>
-                        </tr>
-                        <tr>
-                            <td>Bukti tanda keseriusan </td>
-                            <td>:</td>
-                            <td><button type="button" class="btn btn-primary btn-sm"> <a href="/bukti-keseriusan"style="color:white;"> Lihat </a></button></td>
-                        </tr>
-                        <tr>
-                          <td>Scan KK</td>
-                          <td>:</td>
-                          <td><button type="button" class="btn btn-primary btn-sm"> <a href="/scan-kk"style="color:white;"> Lihat </a></button></td>
-                        </tr>
-                        <tr>
-                          <td>Foto Kegiatan Usah</td>
-                          <td>:</td>
-                          <td> <embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan->foto_kegiatan)); ?>" width="300" height="200"></td>
-                        </tr>
-                        <tr>
-                          <td>Scan Surat Keterangan Berusaha dari RT/RW Setingkat</td>
-                          <td>:</td>
-                          <td><button type="button" class="btn btn-primary btn-sm"> <a href="/ket-berusaha"style="color:white;"> Lihat </a></button></td>
-                        </tr>
-                        <tr>
-                          <td>Surat Belum Dibina BUMN</td>
-                          <td>:</td>
-                          <td><button type="button" class="btn btn-primary btn-sm"> <a href="/surat-belum-dibina-bumn"style="color:white;"> Lihat </a></button></td>
-                        </tr>
-                        <tr>
-                          <td>Surat Penanggung Jawab berikutnya</td>
-                          <td>:</td>
-                          <td><button type="button" class="btn btn-primary btn-sm"> <a href="/surat-penanggung-jawab-berikutnya"style="color:white;"> Lihat </a></button></td>
-                        </tr>
-                        <tr>
-                          <td>Surat Kesanggupan Melunasi Peminjaman</td>
-                          <td>:</td>
-                          <td><button type="button" class="btn btn-primary btn-sm"> <a href="/surat-kesanggupan-melunasi"style="color:white;"> Lihat </a></button></td>
-                        </tr>
+                          <td><button type="button" class="btn btn-primary btn-sm"> <a href="/bukti-keseriusan/<?php echo e($pengajuan->id); ?>"style="color:white;"> Lihat </a></button></td>
+                      </tr>
+                      <tr>
+                        <td>Scan KK</td>
+                        <td>:</td>
+                        <td><button type="button" class="btn btn-primary btn-sm"> <a href="/scan-kk/<?php echo e($pengajuan->id); ?>"style="color:white;"> Lihat </a></button></td>
+                      </tr>
+                      <tr>
+                        <td>Foto Kegiatan Usah</td>
+                        <td>:</td>
+                        <td> <embed src = "<?php echo e(asset('storage/dokumen/'.$pengajuan->foto_kegiatan)); ?>" width="200" height="200"></td>
+                      </tr>
+                      <tr>
+                        <td>Scan Surat Keterangan Berusaha dari RT/RW Setingkat</td>
+                        <td>:</td>
+                        <td><button type="button" class="btn btn-primary btn-sm"> <a href="/ket-berusaha/<?php echo e($pengajuan->id); ?>"style="color:white;"> Lihat </a></button></td>
+                      </tr>
+                      <tr>
+                        <td>Surat Belum Dibina BUMN</td>
+                        <td>:</td>
+                        <td><button type="button" class="btn btn-primary btn-sm"> <a href="/surat-belum-dibina-bumn/<?php echo e($pengajuan->id); ?>"style="color:white;"> Lihat </a></button></td>
+                      </tr>
+                      <tr>
+                        <td>Surat Penanggung Jawab berikutnya</td>
+                        <td>:</td>
+                        <td><button type="button" class="btn btn-primary btn-sm"> <a href="/surat-penanggung-jawab-berikutnya/<?php echo e($pengajuan->id); ?>"style="color:white;"> Lihat </a></button></td>
+                      </tr>
+                      <tr>
+                        <td>Surat Kesanggupan Melunasi Peminjaman</td>
+                        <td>:</td>
+                        <td><button type="button" class="btn btn-primary btn-sm"> <a href="/surat-kesanggupan-melunasi/<?php echo e($pengajuan->id); ?>"style="color:white;"> Lihat </a></button></td>
+                      </tr>
                     </tbody>
-
                   </table> 
-                <?php endif; ?>
-            <?php endif; ?>
-          </div>
+                </div>
+              <?php endif; ?>
+          <?php endif; ?>
+        </>
       </div>
     </div>
-
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('dashboard.layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\applaravel\pumk\resources\views/dashboard/pengajuan/detail.blade.php ENDPATH**/ ?>

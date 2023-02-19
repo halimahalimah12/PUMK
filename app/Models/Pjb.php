@@ -17,6 +17,7 @@ class Pjb extends Model
         'tgl_lhr',
         'hub',
         'almt',
+        'pekerjaan',
         'bangsa',
         'no_hp',
         'no_ktp',

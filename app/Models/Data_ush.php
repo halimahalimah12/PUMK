@@ -16,8 +16,10 @@ class Data_ush extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'nama_ush',
         'jnsush',
+        'sektorush',
         'thn_berdiri',
         'almt_ush',
         'akta_ush',
@@ -28,6 +30,7 @@ class Data_ush extends Model
         'bank',
         'atsnm',
         'norek',
+        'almtbank'
     ];
 
     public function data_mitra(){

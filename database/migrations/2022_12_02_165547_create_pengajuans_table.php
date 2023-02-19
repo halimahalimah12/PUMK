@@ -15,27 +15,26 @@ class CreatePengajuansTable extends Migration
     {
         Schema::create('pengajuans', function (Blueprint $table) {
             $table->id();
-             $table->foreignId('user_id');
+            $table->foreignId('user_id');
             $table->foreignId('data_mitra_id');
-            $table->foreignId('pjb_id')->nullable();
-            $table->foreignId('aset_id')->nullable();
-            $table->foreignId('oprasional_id')->nullable();
-          
-            $table->enum('status',['menunggu','tidak','lulus'])->default('menunggu');
-            $table->text('ket')->nullable(); //
+            $table->foreignId('pjb_id');
+            $table->foreignId('aset_id');
+            $table->foreignId('oprasional_id');
+            $table->enum('status',['menunggu','tidak','lulus','lulus_survei','lunas'])->default('menunggu');
+            $table->text('ket')->nullable(); 
 
             // Penempatan modal
-            $table->integer('modal')->nullable();
-            $table->integer('investasi')->nullable(); //
-            $table->integer('bsr_pinjaman')->nullable();
+            $table->integer('modal');
+            $table->integer('investasi'); 
+            $table->integer('bsr_pinjaman');
 
-            $table->string('kk',100)->nullable();//sca kk
-            $table->string('bkt_keseriusan',100)->nullable(); //bukti keseriusan
-            $table->string('surat_blmbina',100)->nullable(); //surat belum dibina bumn
-            $table->string('surat_pj',100)->nullable();//surat penanggung jawab
-            $table->string('surat_ksglns',100)->nullable(); //surat kesanggupan bayar 
-            $table->string('surat_ush_rt',100)->nullable(); //surat usaha dari rt
-            $table->string('foto_kegiatan',100)->nullable();  //foto kegiatan usaha
+            $table->string('kk',100);//scan kk
+            $table->string('bkt_keseriusan',100); //bukti keseriusan
+            $table->string('surat_blmbina',100); //surat belum dibina bumn
+            $table->string('surat_pj',100);//surat penanggung jawab
+            $table->string('surat_ksglns',100); //surat kesanggupan bayar 
+            $table->string('surat_ush_rt',100); //surat usaha dari rt
+            $table->string('foto_kegiatan',100);  //foto kegiatan usaha
 
             $table->rememberToken();
 

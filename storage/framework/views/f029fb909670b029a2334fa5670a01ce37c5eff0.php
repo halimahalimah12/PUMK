@@ -30,17 +30,40 @@
                     <?php echo method_field('put'); ?>
                     <?php echo csrf_field(); ?>
                     <div class="row mb-3" style="padding-top:25px">
-                      <label for="inputPassword3" class="col-sm-3 col-form-label">Tanggal Penyaluran</label>
+                      <label for="tgl_penyaluran" class="col-sm-3 col-form-label">Tanggal Penyaluran</label>
                       <div class="col-sm-9">
-                        <input type="date" class="form-control <?php $__errorArgs = ['tgl'];
+                        <input type="date" class="form-control <?php $__errorArgs = ['tgl_penyaluran'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid  <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>"  name="tgl" value="<?php echo e(old('tgl', $kp->tgl_penyaluran)); ?>">
-                                  <?php $__errorArgs = ['tgl'];
+unset($__errorArgs, $__bag); ?>"  name="tgl_penyaluran"  value="<?php echo e(old('tgl_penyaluran',$kp->tgl_penyaluran)); ?>">
+                                  <?php $__errorArgs = ['tgl_penyaluran'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?><div class="invalid-feedback"><?php echo e($message); ?></div><?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                        
+                      </div>
+                    </div>
+                    
+                    <div class="row mb-3" >
+                      <label for="no_kontrak" class="col-sm-3 col-form-label">Nomor Kontrak</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control <?php $__errorArgs = ['no_kontrak'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid  <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="no_kontrak" name="no_kontrak" value="<?php echo e(old('no_kontrak', $kp->no_kontrak)); ?>" >
+                                <?php $__errorArgs = ['no_kontrak'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -51,236 +74,148 @@ unset($__errorArgs, $__bag); ?>
                       </div>
                     </div>
                     <div class="row mb-3" >
-                      <label for="no_kontrak" class="col-sm-3 col-form-label">Nomor Kontrak</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="no_kontrak" name="no_kontrak" value="<?php echo e(old('no_kontrak', $kp->no_kontrak)); ?>" >
-                      </div>
-                    </div>
-                    <div class="row mb-3" >
                       <label for="inputEmail3" class="col-sm-3 col-form-label">Besar Pinjaman</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputText" value="<?php echo e($kp->formatRupiah('pinjaman')); ?>" disabled>
+                        <input type="text" class="form-control " id="inputText" value="<?php echo e($kp->formatRupiah('pinjaman')); ?>" disabled>
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="sbthn" class="col-sm-3 col-form-label">Suku Bunga Efektif /Tahun </label>
+                      <label for="sbbln" class="col-sm-3 col-form-label">Jangka Waktu Peminjaman (Bulan)</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="sbthn" value="0.06">
+                        <input type="text" class="form-control <?php $__errorArgs = ['waktu'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid  <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="waktu"  value="24 <?php echo e(old('waktu',$kp->waktu)); ?>"  >
+                              <?php $__errorArgs = ['waktu'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?><div class="invalid-feedback"><?php echo e($message); ?></div><?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="sbbln" class="col-sm-3 col-form-label">Suku Bunga Efektif /Bulan</label>
+                      <label for="sbthn" class="col-sm-3 col-form-label">Suku Bunga Efektif /Tahun (%) </label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="sbbln" value="0.5">
+                        <input type="text" class="form-control <?php $__errorArgs = ['sb_thn'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid  <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="sb_thn" value=" 6 <?php echo e(old('sb_thn',$kp->sb_thn)); ?>" > 
+                                <?php $__errorArgs = ['sb_thn'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?><div class="invalid-feedback"><?php echo e($message); ?></div><?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="sbbln" class="col-sm-3 col-form-label">Suku Bunga Efektif /Bulan (%)</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control  <?php $__errorArgs = ['sb_bln'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid  <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="sb_bln" value=" 0.05<?php echo e(old('sb_bln',$kp->sb_bln)); ?>">
+                              <?php $__errorArgs = ['sb_bln'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?><div class="invalid-feedback"><?php echo e($message); ?></div><?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                       </div>
                     </div>
                     
                     <button type="submit" class="btn btn-primary"><i class="ri-send-plane-fill"></i></i> Kirim </button>
                   </form>
                 </div>
-                <div style="padding-top:25px">
-                  <table class="table table-bordered">
+                <?php if($kp->sb_bln != null): ?>
+                <div style="padding-top:25px; overflow-x:auto"> 
+                  <table class="table table-bordered" style="text-align:center">
                     <thead>
                       <tr >
-                        <th rowspan="2" align="center" valign="middle">ANG ke</th>
-                        <th colspan="2" align="center" scope="col">Tajuh Tempo</th>
-                        <th colspan="4" align="center">Rincian Anggaran</th>
+                        <th rowspan="2" valign="middle">ANG ke</th>
+                        <th colspan="2" scope="col">Tajuh Tempo</th>
+                        <th colspan="3">Rincian Anggaran</th>
+                        <th rowspan="2">Saldo</th>
                       </tr>
                       <tr>
                         <th scope="col">Bulan</th>
                         <th scope="col">Tahun</th>
-                        <th scope="col">Pokok</th>
                         <th scope="col">Jasa Pinj 0.25%</th>
+                        <th scope="col">Pokok</th>
                         <th scope="col">Jumlah </th>
-                        <th scope="col">Saldo</th>
                       <tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row">1</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(1)->format("F ")); ?></td>
-                        
-                        <td>28</td>
-                        <td>2016-05-25</td>
-                        <td>28</td>
-                        <td>2016-05-25</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td><?php echo e($kp->formatRupiah('pinjaman')); ?></td>
                       </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(2)->format("F ")); ?></td>
-                        
-                        <td>35</td>
-                        <td>2014-12-05</td>
-                        <td>28</td>
-                        <td>2016-05-25</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(3)->format("F ")); ?></td>
-                        
-                        <td>45</td>
-                        <td>2011-08-12</td>
-                        <td>28</td>
-                        <td>2016-05-25</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">4</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(4)->format("F ")); ?></td>
-                        
-                        <td>34</td>
-                        <td>2012-06-11</td>
-                        <td>28</td>
-                        <td>2016-05-25</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">5</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(5)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                        <td>28</td>
-                        <td>2016-05-25</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">6</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(6)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                        <td>28</td>
-                        <td>2016-05-25</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">7</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(7)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                        <td>28</td>
-                        <td>2016-05-25</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">8</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(8)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">9</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(9)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">10</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(10)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">11</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(11)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">12</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(12)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">13</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(13)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">14</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(14)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">15</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(15)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">16</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(16)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">17</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(17)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">18</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(18)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">19</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(19)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">20</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(20)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">21</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(21)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">22</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(22)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">23</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(23)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">24</th>
-                        <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth(24)->format("F ")); ?></td>
-                        
-                        <td>47</td>
-                        <td>2011-04-19</td>
-                      </tr>
+                      <?php $sumpokok = 0;
+                            $sumjasa = 0;
+                            $sum = 0;
+                            $sumsaldo =0;
+                            ?>
+                        <?php for( 
+                          $i =1, 
+                          $saldo = $kp->pinjaman,
+                          $sb_bln = $kp->sb_bln/100,
+                          $waktu = $kp->waktu,
+                          $pembagi = 1-1/pow(1+$sb_bln,$waktu),
+                          $jumlah = $saldo*$sb_bln/ $pembagi;
+                          $i  <= 24 ; $i++): ?>
+                            <tr>
+                            <td scope="row"><?php echo e($i); ?></td>
+                            <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("F ")); ?></td>
+                            <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("Y ")); ?></td>
+                            <td>Rp. <?php echo e(number_format(round($jasa=$saldo*$sb_bln), 0, ',','.')); ?> </td>
+                            <td>Rp.<?php echo e(number_format(round($pokok=$jumlah-$jasa), 0, ',','.')); ?> </td>
+                            <td>Rp. <?php echo e(number_format(round($jumlah), 0, ',','.')); ?> </td>
+                            <td>Rp.<?php echo e(number_format(round($saldo = $saldo-$pokok), 0, ',','.')); ?></td>
+                          </tr>
+                          <?php 
+                            $sumpokok += $pokok;
+                            $sumjasa += $jasa;
+                            $sum += $jumlah;
+                            $sumsaldo += $saldo;
+                          ?>
+                        <?php endfor; ?>
+
+                        <tr>
+                        <th colspan="3">Jumlah </th>
+                        <th>Rp. <?php echo e(number_format(round($sumjasa), 0, ',','.')); ?></th>
+                        <th>Rp. <?php echo e(number_format(round($sumpokok), 0, ',','.')); ?></th>
+                        <th>Rp. <?php echo e(number_format(round($sum), 0, ',','.')); ?></th>
+                        <th></th>
+                        </tr>
                     </tbody>
                   </table>
                 </div>
+                <?php endif; ?>
+
             </div>
             <div class="tab-pane fade" id="profile-justified" role="tabpanel" aria-labelledby="profile-tab">
                   Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
@@ -291,5 +226,8 @@ unset($__errorArgs, $__bag); ?>
           </div>
         </div>
     </div>
+
+
+
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('dashboard.layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\applaravel\pumk\resources\views/dashboard/kartu_piutang/view.blade.php ENDPATH**/ ?>

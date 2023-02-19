@@ -5,7 +5,6 @@
   <div class="card">
           <div class="card-body">
                 <h5 class="card-title">Data Mitra </h5>
-
                     <!-- pegajuan admin -->
                   <button type="button" class="btn btn-primary">
                     <a href="/pengajuan/create"  style="color:white;"> Tambah</a>
@@ -32,7 +31,6 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </tbody>
                 </table>
-                <!-- End Table with stripped rows -->
           </div>
   </div>
 <?php $__env->stopSection(); ?>

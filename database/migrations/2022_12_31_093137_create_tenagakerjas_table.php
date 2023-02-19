@@ -15,9 +15,9 @@ class CreateTenagakerjasTable extends Migration
     {
         Schema::create('tenagakerjas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pengajuan_id')->nullable();
+            $table->foreignId('pengajuan_id');
             $table->string('nm_tngk');
-            $table->string('jbt')->nullable();
+            $table->string('jbt');
             $table->integer('gaji');
             $table->timestamps();
         });

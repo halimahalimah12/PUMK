@@ -69,8 +69,6 @@ class Pengajuan extends Model
         return DB::table('pengajuans')->where('id', $id_pengajuan)->first();
     }
 
-    
-
     protected $fillable = [
         'user_id',
         'data_mitra_id',

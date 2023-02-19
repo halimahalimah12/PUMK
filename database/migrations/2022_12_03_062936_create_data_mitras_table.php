@@ -22,8 +22,9 @@ class CreateDataMitrasTable extends Migration
             $table->date('tgl_lhr')->nullable();
             $table->enum('sts_prk',['belum','kawin','cerhidup','cermati'])->nullable();
             $table->enum('jk',['L','P'])->nullable();
-            $table->text('bangsa')->default('indonesia');
+            $table->text('bangsa')->default('indonesia')->nullable();
             $table->text('almt')->nullable();
+            $table->string('pekerjaan',15)->nullable();
             $table->string('kel',60)->nullable();
             $table->string('kec',60)->nullable();
             $table->string('kab',60)->nullable();

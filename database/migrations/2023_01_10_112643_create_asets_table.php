@@ -16,14 +16,14 @@ class CreateAsetsTable extends Migration
         Schema::create('asets', function (Blueprint $table) {
             $table->id();
              // Aset
-            $table->integer('tanah')->nullable();
-            $table->integer('bangunan')->nullable();
-            $table->integer('persediaan')->nullable();
-            $table->integer('alat')->nullable();
-            $table->integer('kas')->nullable();
-            $table->integer('piutang')->nullable();
-            $table->integer('peralatan')->nullable();
-            $table->integer('totaset')->nullable();
+            $table->integer('tanah');
+            $table->integer('bangunan');
+            $table->integer('persediaan');
+            $table->integer('alat');
+            $table->integer('kas');
+            $table->integer('piutang');
+            $table->integer('peralatan');
+            $table->integer('totaset');
             $table->timestamps();
         });
     }

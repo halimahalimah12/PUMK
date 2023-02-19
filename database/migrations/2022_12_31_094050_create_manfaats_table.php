@@ -15,9 +15,8 @@ class CreateManfaatsTable extends Migration
     {
         Schema::create('manfaats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pengajuan_id')->nullable();
+            $table->foreignId('pengajuan_id');
             $table->text('manfaat');
-
             $table->timestamps();
         });
     }

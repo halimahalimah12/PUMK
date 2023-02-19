@@ -16,12 +16,12 @@ class CreateOprasionalsTable extends Migration
         Schema::create('oprasionals', function (Blueprint $table) {
             $table->id();
              // Biaya operasional
-             $table->integer('transport')->nullable();
-             $table->integer('listrik')->nullable();
-             $table->integer('telpon')->nullable();
-             $table->integer('atk')->nullable();
-             $table->integer('lain')->nullable();
-             $table->integer('totop')->nullable();
+            $table->integer('transport');
+            $table->integer('listrik');
+            $table->integer('telpon');
+            $table->integer('atk');
+            $table->integer('lain');
+            $table->integer('totop');
             $table->timestamps();
         });
     }

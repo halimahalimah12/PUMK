@@ -21,6 +21,7 @@ class Data_mitra extends Model
         'tgl_lhr',
         'sts_prk',
         'almt',
+        'pekerjaan',
         'kel',
         'kec',
         'kab',

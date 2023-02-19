@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,32 +24,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.bubble.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-   
 
     <!-- Template Main CSS File -->
     <link href="{{ asset ('assets/css/style.css') }}" rel="stylesheet">
-
   </head>
-
   <body>
-
     @include('dashboard.layouts.header')
-
     @include('dashboard.layouts.sidebar')
-  
+    <!-- main -->
     <main id="main" class="main">
-
         @yield('container')
-
-    </main><!-- End #main -->
+    </main>
 
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
       <div class="copyright">
         &copy; Copyright <strong><span>Halimah</span></strong>. All Rights Reserved
       </div>
-    
-    </footer><!-- End Footer -->
+    </footer>
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -64,12 +55,7 @@
     <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
     <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
 
- <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-     
     <!-- Template Main JS File -->
-    {{-- <script src="{{ asset('assets/js/main.js')}}"></script>--}}
-    {{-- <script src="{{ asset('assets/js/main.js')}}"></script>  --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.js" integrity="sha512-nO7wgHUoWPYGCNriyGzcFwPSF+bPDOR+NvtOYy2wMcWkrnCNPKBcFEkU80XIN14UVja0Gdnff9EmydyLlOL7mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -78,9 +64,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
-
+    <script src="{{ asset('assets/js/main.js') }}"></script>
   </body>
-
 </html>
 

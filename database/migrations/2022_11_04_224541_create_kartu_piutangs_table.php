@@ -17,14 +17,11 @@ class CreateKartuPiutangsTable extends Migration
             $table->id();
             $table->foreignId('pengajuan_id');
             $table->date('tgl_penyaluran')->nullable();
-            $table->integer('pinjaman')->nullable();
+            $table->integer('pinjaman');
             $table->string('no_kontrak')->nullable();
             $table->float('sb_thn')->nullable();
-            $table->float('sb_bln')->nullable();
-            $table->year('thn')->nullable();
-            $table->string('bln')->nullable();
-            $table->integer('pokok')->nullable();
-            $table->integer('jasa')->nullable();
+            $table->float('sb_bln', 8,3)->nullable();
+            $table->integer('waktu')->nullable();
             $table->timestamps();
         });
     }

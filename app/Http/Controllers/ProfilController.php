@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\file;
 
-
 class ProfilController extends Controller
 {
     
@@ -49,6 +48,7 @@ class ProfilController extends Controller
             'stsper'    => 'required',
             'gender'    => 'required',
             'alamat'    => 'required',
+            'pekerjaan' => 'required',
             'klh'       => 'required|string',
             'kec'       => 'required|string',
             'kab'       => 'required|string',
@@ -57,18 +57,18 @@ class ProfilController extends Controller
             'tglktp'    => 'required|date',
             'pddk'      => 'required',
             'jbt'       => 'required | alpha', 
-            'foto'      => 'required | image | file',
-            'scanktp'   => 'required | image | file',
+            'foto'      => 'image | file',
+            'scanktp'   => 'image | file',
 
+            'sektorush'    => 'required',
             'jnsush'    => 'required',
             'thnbrd'    => 'required|numeric',
-            'aktaush'   => 'required|string',
-            'izinush'   => 'required|string',
             'almtush'   => 'required|string',
             'notlpush'  => 'required|numeric',
             'npwp'      => 'required|numeric',
             'tmptush'   => 'required',
             'bank'   => 'required',
+            'almtbank'   => 'required',
             'atsnm'   => 'required',
             'norek'   => 'required',
         ]);
@@ -78,6 +78,7 @@ class ProfilController extends Controller
             'tgl_lhr'   => $validateData['tgllahir'] ,
             'jk'        => $validateData['gender'] ,
             'sts_prk'   => $validateData['stsper'] ,
+            'pekerjaan' => $validateData['pekerjaan'] ,
             'almt'      => $validateData['alamat'] ,
             'kel'       => $validateData['klh'] ,
             'kec'       => $validateData['kec'] ,
@@ -106,9 +107,11 @@ class ProfilController extends Controller
 
         $data_ush= ([
             'jnsush'        => $validateData['jnsush'] ,
+            'sektorush'     => $validateData['sektorush'] ,
+            'almtbank'      => $validateData['almtbank'] ,
             'thn_berdiri'   => $validateData['thnbrd'] ,
-            'akta_ush'      => $validateData['aktaush'] ,
-            'izin_ush'      => $validateData['izinush']  ,
+            'akta_ush'      => $request->aktaush ,
+            'izin_ush'      => $request->izinush  ,
             'almt_ush'      => $validateData['almtush'] ,
             'nohp_ush'      => $validateData['notlpush'] ,
             'npwp'          => $validateData['npwp'] ,

@@ -15,9 +15,9 @@ class CreateOmzetsTable extends Migration
     {
         Schema::create('omzets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pengajuan_id')->nullable();
+            $table->foreignId('pengajuan_id');
             $table->string('nm_brg');
-            $table->string('hrg_satuan')->nullable();
+            $table->string('hrg_satuan');
             $table->integer('jmlh');
             $table->timestamps();
         });

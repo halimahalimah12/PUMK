@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Models\Pengajuan;
 use App\Models\Pembayaran;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Traits\HasFormatRupiah; 
 
@@ -29,11 +30,16 @@ class Kartu_piutang extends Model
         'sb_bln',
         'thn',
         'bln',
-        'pokok',
+        'waktu',
         'jasa',
     ];
     
-    protected $casts = [
-        'tgl_penyaluran' => 'date',
-    ];
+    
+    public function getCreatedAtAttribute($value)
+    {
+        // return Carbon::parse($value)->format('D, d-m-Y ');
+        return Carbon::parse($this->attributes['tgl_penyaluran'])
+            ->translatedFormat('l, d F Y');
+    }
+
 }

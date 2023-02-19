@@ -9,7 +9,7 @@
               <h5>Pengajuan Form</h5>
             </div>
             <div class="card-body">
-              <form class="row g-3  contact-form" action="/pengajuan/<?php echo e($pengajuan->id); ?>" method="POST"   >
+              <form class="row g-3  contact-form" action="/pengajuan/<?php echo e($pengajuan->id); ?>" method="POST" enctype="multipart/form-data"    >
                 <?php echo method_field('put'); ?>
                 <?php echo csrf_field(); ?>
                   <div class="col-12 ">
@@ -548,14 +548,16 @@ unset($__errorArgs, $__bag); ?>
                           <th> Nama Barang </th>
                           <th> Harga Satuan (Rp)</th>
                           <th> Jumlah Harga (Rp)</th>
+                          <th> <a href="javascript:void(0);" class="addalat btn btn-primary" style="float:right;" name="addalat">+ </a></th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="alats" class="alats">
                         <?php $__currentLoopData = $alat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $x): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                           <tr>        
                             <td > <input type="text" name="nm_brg[]" class="form-control " value="<?php echo e(old('nm_brg[]', $x->nm_brg)); ?>">    </td>  
                             <td > <input type="text" name=" hrg_satuan[]"  class="form-control" value="<?php echo e(old('hrg_satuan[]', $x->hrg_satuan)); ?>"> </td>
                             <td > <input type="text" name="jmlh[]" class="form-control" value="<?php echo e(old('jmlh[]', $x->jmlh)); ?>"> </td>
+                            <td > <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
                           </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                       </tbody>
@@ -576,6 +578,7 @@ unset($__errorArgs, $__bag); ?>
                       <tbody id="tngkerja" class="tngkerja">
                         <?php $__currentLoopData = $tenaga; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $x): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                           <tr>
+                            <td > <input type="text" name="id" class="form-control" value="<?php echo e($x->id); ?>"> </td>
                             <td > <input type="text" name="nmkry[]" class="form-control" value="<?php echo e(old('nmkry[]', $x->nm_tngk)); ?>"> </td>
                             <td > <input type="text" name="jbtkry[]" class="form-control" value="<?php echo e(old('jbtkry[]', $x->jbt)); ?>"> </td>
                             <td > <input type="text" name="gaji[]" class="form-control" value="<?php echo e(old('gaji[]', $x->gaji)); ?>"> </td>
@@ -822,7 +825,7 @@ unset($__errorArgs, $__bag); ?>
               <div class="col-12  " style="margin-top:15px">
                     <div class="mb-3">
                         <label for="bkt_serius" class="form-label">Bukti tanda keseriusan </label>
-                        <input type="text" name="oldbktserius" value="<?php echo e($pengajuan->bkt_keseriusan); ?>">
+                        <input type="hidden" name="oldbktserius" value="<?php echo e($pengajuan->bkt_keseriusan); ?>">
                         <input class="form-control <?php $__errorArgs = ['bkt_serius'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -936,7 +939,7 @@ unset($__errorArgs, $__bag); ?>
               
               <div class="col-md-12">
                     <label for="srt_pjb" class="form-label">Upload Surat Penanggung Jawab berikutnya  </label>
-                    <input type="hidden" name="oldpjb" value="<?php echo e($pengajuan->surat_pjb); ?>">
+                    <input type="hidden" name="oldpjb" value="<?php echo e($pengajuan->surat_pj); ?>">
                     <input class="form-control <?php $__errorArgs = ['srt_pjb'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -988,14 +991,15 @@ unset($__errorArgs, $__bag); ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
     
     <script type='text/javascript'>
-    //$("#tanah").inputmask({
-      //      prefix : 'Rp ',
-      //      radixPoint: ',',
-      //      groupSeparator: ".",
-      //      alias: "numeric",
-      //      autoGroup: true,
-      //      digits: 0
-      //  });
+    $('thead').on('click','.addalat',function(){
+      var tr = "<tr>"+
+                  "<td> <input type='text' name='nm_brg[]'   class='form-control' value='<?php echo e(old('nm_brg[]')); ?>' > </td>"+
+                  "<td> <input type='text' name='hrg_satuan[]'  class='form-control' value='<?php echo e(old('hrg_satuan[]')); ?>' > </td>"+
+                  "<td> <input type='text' name='jmlh[]'    class='form-control' value='<?php echo e(old('jmlh[]')); ?>' > </td>"+
+                  "<td> <a href='javascript:;' class='deleterow btn btn-danger' style='float:right;' name='deleterow'> - </a> </td>"+
+                "</tr>"
+          $('#alats').append(tr);
+    });
 
     $('thead').on('click','.addtenagakerja',function(){
       var tr = "<tr>"+
@@ -1019,7 +1023,7 @@ unset($__errorArgs, $__bag); ?>
 
     $('thead').on('click','.addmanfaat',function(){
       var tr = "<tr>"+
-                  "<td> <input type='text' name='jmlh[]' class='form-control'> </td>"+
+                  "<td> <input type='text' name='manfaat[]' class='form-control'> </td>"+
                   "<td> <a href='javascript:;' class='deleterow btn btn-danger' style='float:right;' name='deleterow'> - </a> </td>"+
               "</tr>"
           $('#manfaat').append(tr);
