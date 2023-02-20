@@ -97,7 +97,7 @@
             PT Angkasa Pura II (Persero).
         </p>
         <p class ="justify"> Adapun permohonan  kami  tersebut  untuk&emsp;keperluan  investasi / modal usaha sebesar </br>
-            Rp. {{ $pengajuan1->bsr_pinjaman }}</br>
+            Rp. {{ $pengajuan1->formatRupiah('bsr_pinjaman') }} ( {{ ucwords(Terbilang::angka($pengajuan1->bsr_pinjaman)) }} )
             dengan rincian pemanfaatannya dapat dilihat pada data dibawah ini.</br>
             Sebagai bahan pertimbangan, bersama ini kami sampaikan informasi atau data sebagai 
             berikut :

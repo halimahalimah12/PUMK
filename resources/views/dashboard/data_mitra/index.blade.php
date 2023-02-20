@@ -4,9 +4,9 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Data Mitra </h5>
-      <button type="button" class="btn btn-primary">
+      {{-- <button type="button" class="btn btn-primary">
         <a href="/pengajuan/create"  style="color:white;"> Tambah</a>
-      </button>
+      </button> --}}
       <table class="table table-striped">
         <thead>
           <tr>

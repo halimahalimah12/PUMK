@@ -490,7 +490,7 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <tr>
               <th colspan=3> Jumlah</th>
-              <td class="rp" >Rp <?php echo e($totalat); ?></td>
+              <td class="rp" >Rp <?php echo e(number_format($totalat,0,',','.')); ?></td>
             </tr>
           </tbody>
         </table> 
@@ -515,7 +515,7 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <tr>
               <th colspan=3> Jumlah</th>
-              <td class="rp" >Rp <?php echo e($totgaji); ?></td>
+              <td class="rp" >Rp <?php echo e(number_format($totgaji,0,',','.')); ?></td>
             </tr>
           </tbody>
         </table> 
@@ -582,7 +582,7 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
               <tr>
                 <th colspan=3> Jumlah</th>
-                <td class="rp" >Rp <?php echo e($totomzet); ?></td>
+                <td class="rp" >Rp <?php echo e(number_format($totomzet,0,',','.')); ?></td>
               </tr>
           </tbody>
         </table> 

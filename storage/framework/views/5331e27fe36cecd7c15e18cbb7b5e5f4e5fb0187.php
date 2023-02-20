@@ -1,17 +1,16 @@
 
 
 <?php $__env->startSection('container'); ?>
-
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Biodata Mitra</h5>
         <form  method="post" action="<?php echo e(route('profil.update')); ?>" enctype="multipart/form-data" >
           <?php echo csrf_field(); ?>
           <?php if(session('success')): ?>
-              <div class="alert alert-success">
-                <?php echo e(session ('success')); ?>
+            <div class="alert alert-success">
+              <?php echo e(session ('success')); ?>
 
-              </div>
+            </div>
           <?php endif; ?> 
           <div class="row">  
             
@@ -793,6 +792,5 @@ unset($__errorArgs, $__bag); ?>
         </form>
     </div>
   </div>
-
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('dashboard.layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\applaravel\pumk\resources\views/dashboard/profil/index.blade.php ENDPATH**/ ?>

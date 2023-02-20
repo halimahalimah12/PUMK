@@ -41,7 +41,7 @@
                   <th scope="col">Status</th>
                   @if ($pengajuan == NULL)
                   @else
-                      @if ($ket->ket != NULL)
+                      @if ($ket->ket == NULL)
                       <th >Keterangan</th>
                       @endif
                   @endif
@@ -64,7 +64,7 @@
                         <span class="badge bg-danger">Pengajuan Ditolak</span>
                       @endif
                     </td>
-                    @if ($ket->ket != NULL)
+                    @if ($ket->ket == NULL)
                       <td style="width:420px">{{ $p->ket }} </td>
                     @endif
                     <td>

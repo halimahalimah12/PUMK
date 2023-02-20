@@ -5,7 +5,7 @@
       <div class="card">
         <div class="card-body">
           @if($user->is_admin ==0 )
-              <div style="overflow-x:auto">
+              <div style="overflow-x:auto; margin-top:30px">
                 <table class="table table-striped">
                   <tbody>
                     <tr>

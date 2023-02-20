@@ -490,7 +490,7 @@
             @endforeach
             <tr>
               <th colspan=3> Jumlah</th>
-              <td class="rp" >Rp {{  $totalat }}</td>
+              <td class="rp" >Rp {{  number_format($totalat,0,',','.') }}</td>
             </tr>
           </tbody>
         </table> 
@@ -515,7 +515,7 @@
             @endforeach
             <tr>
               <th colspan=3> Jumlah</th>
-              <td class="rp" >Rp {{ $totgaji }}</td>
+              <td class="rp" >Rp {{ number_format($totgaji,0,',','.') }}</td>
             </tr>
           </tbody>
         </table> 
@@ -582,7 +582,7 @@
             @endforeach
               <tr>
                 <th colspan=3> Jumlah</th>
-                <td class="rp" >Rp {{ $totomzet }}</td>
+                <td class="rp" >Rp {{ number_format($totomzet,0,',','.') }}</td>
               </tr>
           </tbody>
         </table> 

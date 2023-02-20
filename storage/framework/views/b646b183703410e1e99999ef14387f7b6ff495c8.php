@@ -566,9 +566,10 @@ unset($__errorArgs, $__bag); ?>" name="bsr_pjm" id="bsr_pjm" value="<?php echo e
                 $(form).find('span.'+prefix+'_error').text(val[0]);
               });
             }else{
-              $(form)[0].reset();
+              
               window.location ="/pengajuan";
             }
+
           }
         });
       });    

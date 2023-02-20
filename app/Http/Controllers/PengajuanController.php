@@ -286,8 +286,12 @@ class PengajuanController extends Controller
                 $manfaat->save();
             }
             
-            return redirect('/pengajuan')->with('success','Pengajuan berhasil ditambahkan  ');
-            // return response()->json(['error'=>$validateData->errors()->all()]);
+            //return redirect('/pengajuan')->with('success','Pengajuan berhasil ditambahkan  ');
+            //return response()->json(['error'=>$validateData->errors()->all()]);
+
+            if ( $pjb  && $aset && $oprasional && $pengajuan && $alat && $tenagakerja && $omzet && $manfaat ){
+                return response()->json(['code'=>1, 'msg' => 'Berhasil ditambahkan']);
+            }
         }
 
     }

@@ -97,7 +97,7 @@
             PT Angkasa Pura II (Persero).
         </p>
         <p class ="justify"> Adapun permohonan  kami  tersebut  untuk&emsp;keperluan  investasi / modal usaha sebesar </br>
-            Rp. <?php echo e($pengajuan1->bsr_pinjaman); ?></br>
+            Rp. <?php echo e($pengajuan1->formatRupiah('bsr_pinjaman')); ?> ( <?php echo e(ucwords(Terbilang::angka($pengajuan1->bsr_pinjaman))); ?> )
             dengan rincian pemanfaatannya dapat dilihat pada data dibawah ini.</br>
             Sebagai bahan pertimbangan, bersama ini kami sampaikan informasi atau data sebagai 
             berikut :
@@ -145,7 +145,17 @@
               <td class="nomor">.</td>
               <td>Status Perkawinan</td>
               <td class="titikdua">:</td>
-              <td class="isi"><?php echo e(ucwords($pengajuan1->data_mitra->sts_prk)); ?></td>
+              <td class="isi">
+                <?php if ($pengajuan1->data_mitra->sts_prk ==  "belum"){
+                    echo "Belum Kawin";
+                  } elseif ($pengajuan1->data_mitra->sts_prk == "kawin"){
+                    echo "Sudah Kawin";
+                  } elseif ($pengajuan1->data_mitra->sts_prk == "cermati"){
+                    echo "Cerai Mati";
+                  } else {
+                    echo "Cerai Hidup";} 
+                ?>
+              </td>
             </tr>
             <tr>
               <td> </td>
@@ -373,7 +383,7 @@
               <td>H. </td>
               <td colspan=2> Tabungan Rekening Bank</td>
               <td class="titikdua">:</td>
-              <td class="isi"><?php echo e(ucwords($ush->bank)); ?></td>
+              <td class="isi"><?php echo e(strtoupper($ush->bank)); ?></td>
             </tr>
             <tr>
               <td> </td>

@@ -531,6 +531,7 @@
               });
             }else{
               $(form)[0].reset();
+              alert('berhasil ditambahkan.');
               window.location ="/pengajuan";
             }
           }
