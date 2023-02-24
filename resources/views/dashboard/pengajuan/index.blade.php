@@ -33,7 +33,7 @@
               @endempty
           @endif
           <div style="overflow-x:auto">
-            <table class="table " >
+            <table class="table table-striped" id="datatable" >
               <thead>
                 <tr>
                   <th scope="col">No</th>
@@ -41,8 +41,8 @@
                   <th scope="col">Status</th>
                   @if ($pengajuan == NULL)
                   @else
-                      @if ($ket->ket == NULL)
-                      <th >Keterangan</th>
+                      @if ($ket->ket != NULL)
+                        <th >Keterangan</th>
                       @endif
                   @endif
                   <th scope="col">Aksi</th>
@@ -65,6 +65,8 @@
                       @endif
                     </td>
                     @if ($ket->ket == NULL)
+                        <td style="width:370px"></td>
+                      @elseif( $ket->ket != NULL)
                       <td style="width:420px">{{ $p->ket }} </td>
                     @endif
                     <td>
@@ -85,7 +87,7 @@
               </div>
             @endif
             <div style="overflow-x:auto">
-              <table class="table table-striped">
+              <table class="table table-striped" id="datatable">
                 <thead>
                   <tr>
                     <th scope="col">No</th>
@@ -125,7 +127,9 @@
                         @endif
                       </td>
                         @if ( $p->ket != NULL )
-                          <td scope="col" >{{ $p->ket }}</td>
+                            <td scope="col" >{{ $p->ket }}</td>
+                          @elseif( $p->ket == NULL)
+                            <td scope="col" ></td>
                         @endif
                       <td>
                         <a href="/show/{{$p->id}}" class="bi bi-file-earmark-text" ></a>
@@ -157,8 +161,8 @@
                             <select class="form-select" name="status" id="status"  aria-label="Default select example">
                               <option value = "menunggu" {{ $p->status =="menunggu"  ? 'selected' : ''}}>Menunggu</option>
                               <option value = "lulus_survei" {{ $p->status =="lulus_survei"  ? 'selected' : ''}}> Lulus Survei </option> 
-                              <option value = "lulus" {{ $p->status =="lulus"  ? 'selected' : ''}}>Lulus</option>
-                              <option value = "tidak" {{ $p->status =="tidak"  ? 'selected' : ''}}>Tidak Lulus</option>
+                              <option value = "lulus" {{ $p->status =="lulus"  ? 'selected' : ''}}>Pengajuan Diterima</option>
+                              <option value = "tidak" {{ $p->status =="tidak"  ? 'selected' : ''}}>Pengajuan Tidak Diterima</option>
                             </select>
                           </div>
                         </div>
@@ -173,7 +177,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit"  class="btn btn-primary">Save changes</button>
+                        <button type="submit"  class="btn btn-primary">Simpan</button>
                       </div>
                     </form>
                   </div>
@@ -188,6 +192,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+
+
   <script type='text/javascript'>
     $('.menunggu').on('click', function(e){
       console.log(e);
@@ -218,4 +224,5 @@
       }
     });
   </script>
+  
 @endsection

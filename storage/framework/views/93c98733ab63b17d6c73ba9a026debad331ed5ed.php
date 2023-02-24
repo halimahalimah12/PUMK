@@ -34,7 +34,7 @@
               <?php endif; ?>
           <?php endif; ?>
           <div style="overflow-x:auto">
-            <table class="table " >
+            <table class="table table-striped" id="datatable" >
               <thead>
                 <tr>
                   <th scope="col">No</th>
@@ -42,8 +42,8 @@
                   <th scope="col">Status</th>
                   <?php if($pengajuan == NULL): ?>
                   <?php else: ?>
-                      <?php if($ket->ket == NULL): ?>
-                      <th >Keterangan</th>
+                      <?php if($ket->ket != NULL): ?>
+                        <th >Keterangan</th>
                       <?php endif; ?>
                   <?php endif; ?>
                   <th scope="col">Aksi</th>
@@ -66,6 +66,8 @@
                       <?php endif; ?>
                     </td>
                     <?php if($ket->ket == NULL): ?>
+                        <td style="width:370px"></td>
+                      <?php elseif( $ket->ket != NULL): ?>
                       <td style="width:420px"><?php echo e($p->ket); ?> </td>
                     <?php endif; ?>
                     <td>
@@ -87,7 +89,7 @@
               </div>
             <?php endif; ?>
             <div style="overflow-x:auto">
-              <table class="table table-striped">
+              <table class="table table-striped" id="datatable">
                 <thead>
                   <tr>
                     <th scope="col">No</th>
@@ -127,7 +129,9 @@
                         <?php endif; ?>
                       </td>
                         <?php if( $p->ket != NULL ): ?>
-                          <td scope="col" ><?php echo e($p->ket); ?></td>
+                            <td scope="col" ><?php echo e($p->ket); ?></td>
+                          <?php elseif( $p->ket == NULL): ?>
+                            <td scope="col" ></td>
                         <?php endif; ?>
                       <td>
                         <a href="/show/<?php echo e($p->id); ?>" class="bi bi-file-earmark-text" ></a>
@@ -159,8 +163,8 @@
                             <select class="form-select" name="status" id="status"  aria-label="Default select example">
                               <option value = "menunggu" <?php echo e($p->status =="menunggu"  ? 'selected' : ''); ?>>Menunggu</option>
                               <option value = "lulus_survei" <?php echo e($p->status =="lulus_survei"  ? 'selected' : ''); ?>> Lulus Survei </option> 
-                              <option value = "lulus" <?php echo e($p->status =="lulus"  ? 'selected' : ''); ?>>Lulus</option>
-                              <option value = "tidak" <?php echo e($p->status =="tidak"  ? 'selected' : ''); ?>>Tidak Lulus</option>
+                              <option value = "lulus" <?php echo e($p->status =="lulus"  ? 'selected' : ''); ?>>Pengajuan Diterima</option>
+                              <option value = "tidak" <?php echo e($p->status =="tidak"  ? 'selected' : ''); ?>>Pengajuan Tidak Diterima</option>
                             </select>
                           </div>
                         </div>
@@ -175,7 +179,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit"  class="btn btn-primary">Save changes</button>
+                        <button type="submit"  class="btn btn-primary">Simpan</button>
                       </div>
                     </form>
                   </div>
@@ -190,6 +194,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+
+
   <script type='text/javascript'>
     $('.menunggu').on('click', function(e){
       console.log(e);
@@ -220,5 +226,6 @@
       }
     });
   </script>
+  
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('dashboard.layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\applaravel\pumk\resources\views/dashboard/pengajuan/index.blade.php ENDPATH**/ ?>

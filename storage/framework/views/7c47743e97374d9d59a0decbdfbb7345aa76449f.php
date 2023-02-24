@@ -146,7 +146,7 @@
         <!--Profile Iamge Icon -->
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
           <?php if($user->is_admin == 0): ?>
-            <img src = "<?php echo e(asset('storage/dokumen/'.$mitra->foto)); ?>"  alt="Profile" class="rounded-circle">
+            <img src = "<?php echo e(asset('storage/dokumen/'.$mitra->foto)); ?>"  alt="Profile" class="imgDiv" >
             <span class="d-none d-md-block dropdown-toggle ps-2" style="color:white"><?php echo e(ucwords($mitra->nm)); ?></span>
           <?php else: ?>
             <span class="d-none d-md-block dropdown-toggle ps-2" style="color:white"><?php echo e(ucwords($user->email)); ?></span>

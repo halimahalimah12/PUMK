@@ -63,13 +63,13 @@
               <div class="row gx-3 gy-0">
                 <div class="col-12 col-lg-6 form-group clearfix" >
                   <label for="pekerjaan" class="form-label">Pekerjaan</label>
-                  <input type="text" class="form-control @error('pekerjaan') is-invalid  @enderror" id="pekerjaan" name="pekerjaan"value="{{ old('pekerjaan') }}">
-                    @error('pekerjaan')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                  <input type="text" class="form-control" id="pekerjaan" name="pekerjaan"value="{{ old('pekerjaan') }}">
+                  <span class="text-danger error-text pekerjaan_error"> </span>
                 </div>
                 <div class="col-12 col-lg-6 form-group clearfix" >
                   <label for="almt" class="form-label">Alamat</label>
                     <textarea class="form-control  @error('almt') is-invalid  @enderror" id="almt" name="almt" value="{{ old('almt')}}" style="height: 100px"></textarea>
-                    @error('almt')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    <span class="text-danger error-text almt_error"> </span>
                 </div>
               </div>
               <div class="col-12 form-group clearfix">
@@ -148,146 +148,150 @@
           <div class="card-body">
             <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Asset</h5>
             <h6>Asset (Aktiva) yang berkaitan langsung dengan kegiatan usaha</h6>
-              <div class="row mb-3">
-                <label for="tanah" class="col-sm-2 col-form-label">Tanah</label>
+              <div class="row mb-2">
+                <label for="tanah" class="col-sm-2 col-form-label">Tanah (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class="rupiah form-control" name="tanah" id="tanah"  onkeyup="sum();" value="{{ old('tanah') }}">
+                  <input type="text" class=" form-control" name="tanah" id="tanah"  onkeyup="sum();" value="{{ old('tanah') }}">
                   <span class="text-danger error-text tanah_error"> </span>
                 </div>
               </div>
-              <div class="row mb-3">
-                <label for="bangunan" class="col-sm-2 col-form-label">Bangunan</label>
+              <div class="row mb-3" style="margin-top:0px">
+                <label for="bangunan" class="col-sm-2 col-form-label">Bangunan (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="bangunan" id="bangunan" onkeyup="sum();" value="{{ old('bangunan') }}">
+                  <input type="text" class=" form-control" name="bangunan" id="bangunan" onkeyup="sum();" value="{{ old('bangunan') }}">
                   <span class="text-danger error-text bangunan_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="tanah" class="col-sm-2 col-form-label">Persediaan</label>
+                <label for="tanah" class="col-sm-2 col-form-label">Persediaan (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="persediaan" id="persediaan" onkeyup="sum();" value="{{ old('persediaan') }}">
+                  <input type="text" class=" form-control" name="persediaan" id="persediaan" onkeyup="sum();" value="{{ old('persediaan') }}">
                   <span class="text-danger error-text persediaan_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="alat" class="col-sm-2 col-form-label">Peralatan Usaha</label>
+                <label for="alat" class="col-sm-2 col-form-label">Peralatan Usaha (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="alat" id="alat" onkeyup="sum();" value="{{ old('alat') }}">
+                  <input type="text" class=" form-control" name="alat" id="alat" onkeyup="sum();" value="{{ old('alat') }}">
                   <span class="text-danger error-text alat_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="kas" class="col-sm-2 col-form-label">kas</label>
+                <label for="kas" class="col-sm-2 col-form-label">kas (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="kas" id="kas" onkeyup="sum();" value="{{ old('kas') }}">
+                  <input type="text" class=" form-control" name="kas" id="kas" onkeyup="sum();" value="{{ old('kas') }}">
                   <span class="text-danger error-text kas_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="piutang" class="col-sm-2 col-form-label">Piutang</label>
+                <label for="piutang" class="col-sm-2 col-form-label">Piutang (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="piutang" id="piutang" onkeyup="sum();" value="{{ old('piutang') }}">
+                  <input type="text" class=" form-control" name="piutang" id="piutang" onkeyup="sum();" value="{{ old('piutang') }}">
                   <span class="text-danger error-text piutang_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="peralatan" class="col-sm-2 col-form-label">Peralatan Produksi</label>
+                <label for="peralatan" class="col-sm-2 col-form-label">Peralatan Produksi (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="peralatan" id="peralatan" onkeyup="sum();" value="{{ old('peralatan') }}">
+                  <input type="text" class=" form-control" name="peralatan" id="peralatan" onkeyup="sum();" value="{{ old('peralatan') }}">
                   <span class="text-danger error-text peralatan_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
-                <label  for="totaset" class="col-sm-2 col-form-label">Total Aset</label>
+                <label  for="totaset" class="col-sm-2 col-form-label">Total Aset (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="totaset" id="totaset" style="padding-bottom:5px" value="{{ old('totaset') }}">
+                  <input type="text" class=" form-control" name="totaset" id="totaset" style="padding-bottom:5px" value="{{ old('totaset') }}">
                 </div>
               </div>
           </div>
           {{-- Alat --}}
           <div class="card-body">
             <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Alat kerja dan alat bantu</h5>
-            <table class="table table-striped table-responsive" >
-              <thead >
-                <tr>
-                  <th> Nama Barang </th>
-                  <th> Harga Satuan (Rp)</th>
-                  <th> Jumlah Harga (Rp)</th>
-                  <th> <a href="javascript:void(0);" class="addalat btn btn-primary" style="float:right;" name="addalat" id="addalat">+ </a></th>
-                </tr>
-              </thead>
-              <tbody id="alats" class="alats">
-                <tr>
-                  <td> <input type="text" name="nm_brg[]" class="form-control nm_brg" value="{{ old('nm_brg[]') }}"></td>
-                  <td> <input type="text" name="hrg_satuan[]" class="form-control hrg_satuan" value="{{ old('hrg_satuan[]') }}"> </td>
-                  <td> <input type="text" name="jmlh[]" class="form-control jmlh" value="{{ old('jmlh[]') }}"> </td>
-                  <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
-                </tr>
-              </tbody >
-            </table> 
+            <div style="overflow-x:auto">
+              <table class="table table-striped table-responsive" >
+                <thead >
+                  <tr>
+                    <th> Nama Barang </th>
+                    <th> Harga Satuan (Rp)</th>
+                    <th> Jumlah Harga (Rp)</th>
+                    <th> <a href="javascript:void(0);" class="addalat btn btn-primary" style="float:right;" name="addalat" id="addalat">+ </a></th>
+                  </tr>
+                </thead>
+                <tbody id="alats" class="alats">
+                  <tr>
+                    <td> <input type="text" name="nm_brg[]" class="form-control nm_brg" value="{{ old('nm_brg[]') }}"></td>
+                    <td> <input type="text" name="hrg_satuan[]" class="form-control hrg_satuan" value="{{ old('hrg_satuan[]') }}"> </td>
+                    <td> <input type="text" name="jmlh[]" class="form-control jmlh" value="{{ old('jmlh[]') }}"> </td>
+                    <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
+                  </tr>
+                </tbody >
+              </table> 
+            </div>
           </div> 
           {{-- Tenaga kerja --}}
           <div class="card-body">
             <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Tenaga Kerja</h5>
-            <table class="table table-striped" >
-              <thead >
-                <tr>
-                  <th> Nama  </th>
-                  <th> Jabatan</th>
-                  <th> Gaji (Rp)</th>
-                  <th> <a href="javascript:void(0);" class="addtenagakerja btn btn-primary" style="float:right;" name="addtenagakerja" id="addtenagakerja">+ </a></th>
-                </tr>
-              </thead>
-              <tbody id="tngkerja" class="tngkerja">
-                <tr>
-                  <td> <input type="text" name="nmkry[]" class="form-control " value="{{ old('nmkry[]') }}"></td>
-                  <td> <input type="text" name="jbtkry[]" class="form-control " value="{{ old('jbtkry[]') }}"></td>
-                  <td> <input type="text" name="gaji[]" class="form-control " value="{{ old('gaji[]') }}"></td>
-                  <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
-                </tr>
-              </tbody >
-            </table> 
+            <div style="overflow-x:auto">
+              <table class="table table-striped" >
+                <thead >
+                  <tr>
+                    <th> Nama  </th>
+                    <th> Jabatan</th>
+                    <th> Gaji (Rp)</th>
+                    <th> <a href="javascript:void(0);" class="addtenagakerja btn btn-primary" style="float:right;" name="addtenagakerja" id="addtenagakerja">+ </a></th>
+                  </tr>
+                </thead>
+                <tbody id="tngkerja" class="tngkerja">
+                  <tr>
+                    <td> <input type="text" name="nmkry[]" class="form-control " value="{{ old('nmkry[]') }}"></td>
+                    <td> <input type="text" name="jbtkry[]" class="form-control " value="{{ old('jbtkry[]') }}"></td>
+                    <td> <input type="text" name="gaji[]" class="form-control " value="{{ old('gaji[]') }}"></td>
+                    <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
+                  </tr>
+                </tbody >
+              </table> 
+            </div>
           </div>
           {{-- biaya oprasional --}}
           <div class="card-body">
-            <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Biaya Oprasional</h5>
+            <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Biaya Oprasional (Rp)</h5>
             <div class="row mb-3">
-              <label for="transport" class="col-sm-2 col-form-label">Transport</label>
+              <label for="transport" class="col-sm-2 col-form-label">Transport (Rp)</label>
               <div class="col-sm-10">
                 <input type="text" class="uang form-control" name="transport" id="transport" onkeyup="sum1();" value="{{ old('transport') }}">
                 <span class="text-danger error-text transport_error"> </span>
               </div>
             </div>
             <div class="row mb-3">
-              <label for="listrik"  class="col-sm-2 col-form-label">Listrik</label>
+              <label for="listrik"  class="col-sm-2 col-form-label">Listrik (Rp)</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" name="listrik" id="listrik" onkeyup="sum1();" value="{{ old('listrik') }}" >
                 <span class="text-danger error-text listrik_error"> </span>                    
               </div>
             </div>
             <div class="row mb-3">
-              <label for="telp"  class="col-sm-2 col-form-label">Telepon</label>
+              <label for="telp"  class="col-sm-2 col-form-label">Telepon (Rp)</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" name="telp" id="telp" onkeyup="sum1();" value="{{ old('telp') }}">
                 <span class="text-danger error-text telp_error"> </span>
               </div>
             </div>
             <div class="row mb-3">
-              <label for="atk" class="col-sm-2 col-form-label">ATK</label>
+              <label for="atk" class="col-sm-2 col-form-label">ATK (Rp)</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" name="atk" id="atk" onkeyup="sum1();" value="{{ old('atk') }}">
                 <span class="text-danger error-text atk_error"> </span>
               </div>
             </div>
             <div class="row mb-3">
-              <label for="lain" class="col-sm-2 col-form-label">Lain-Lain</label>
+              <label for="lain" class="col-sm-2 col-form-label">Lain-Lain (Rp)</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" name="lain" id="lain" onkeyup="sum1();" value="{{ old('lain') }}">
                 <span class="text-danger error-text lain_error"> </span>
               </div>
             </div>
             <div class="row mb-3">
-              <label  for="totop" class="col-sm-2 col-form-label">Total Oprasional</label>
+              <label  for="totop" class="col-sm-2 col-form-label">Total Oprasional (Rp)</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" name="totop" id="totop" style="padding-bottom:5px" value="{{ old('totop') }}">
               </div>
@@ -296,24 +300,26 @@
           {{-- omzet --}}
           <div class="card-body">
             <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Penjualan (Omzet)</h5>
-              <table class="table table-striped" >
-                <thead >
-                  <tr>
-                    <th> Nama Barang </th>
-                    <th> Harga Satuan (Rp)</th>
-                    <th> Jumlah Harga (Rp)</th>
-                    <th> <a href="javascript:void(0);" class="addomzet btn btn-primary" style="float:right;" name="addomzet" id="addomzet">+ </a></th>
-                  </tr>
-                </thead>
-                <tbody id="omzet" class="omzet">
-                  <tr>
-                    <td> <input type="text" name="nmomzet[]" class="form-control " value="{{ old('nmomzet[]') }}">  </td>
-                    <td> <input type="text" name="hrgomzet[]" class="form-control" value="{{ old('hrgomzet[]') }}"> </td>
-                    <td> <input type="text" name="jmlhomzet[]" class=" form-control" value="{{ old('jmlhomzet[]') }}" > </td>
-                    <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
-                  </tr>
-                </tbody> 
-              </table> 
+              <div style="overflow-x:auto">
+                <table class="table table-striped" >
+                  <thead >
+                    <tr>
+                      <th> Nama Barang </th>
+                      <th> Harga Satuan (Rp)</th>
+                      <th> Jumlah Harga (Rp)</th>
+                      <th> <a href="javascript:void(0);" class="addomzet btn btn-primary" style="float:right;" name="addomzet" id="addomzet">+ </a></th>
+                    </tr>
+                  </thead>
+                  <tbody id="omzet" class="omzet">
+                    <tr>
+                      <td> <input type="text" name="nmomzet[]" class="form-control " value="{{ old('nmomzet[]') }}">  </td>
+                      <td> <input type="text" name="hrgomzet[]" class="form-control" value="{{ old('hrgomzet[]') }}"> </td>
+                      <td> <input type="text" name="jmlhomzet[]" class=" form-control" value="{{ old('jmlhomzet[]') }}" > </td>
+                      <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
+                    </tr>
+                  </tbody> 
+                </table> 
+              </div>
           </div> 
           {{-- Penempatan Modal --}}
           <div class="card-body">
@@ -353,7 +359,7 @@
             </table>              
           </div>
           {{-- bukti keseriusan --}}
-          <div class="col-12  " style="margin-top:15px">
+          <div class="col-12  ">
             <div class="mb-3">
               <label for="bkt_serius" class="form-label">Bukti tanda keseriusan </label>
               <input class="form-control " type="file" id="bkt_serius" name="bkt_serius">
@@ -361,7 +367,7 @@
             </div> 
           </div>
           {{-- scan kk --}}
-          <div class="col-12  " style="margin-top:15px">
+          <div class="col-12  " >
             <div class="mb-3">
               <label for="kk" class="form-label">Scan KK </label>
               <input class="form-control" type="file" id="kk" name="kk">
@@ -369,7 +375,7 @@
             </div> 
           </div>    
           {{-- Kegiatan usaha --}}
-          <div class="col-12 " style="margin-top:0px">
+          <div class="col-12 " >
             <div class="mb-3">
               <label for="foto_kegiatan" class="form-label">Foto Kegiatan Usaha</label>
               <input class="form-control " type="file" id="foto_kegiatan" name="foto_kegiatan">
@@ -377,7 +383,7 @@
             </div> 
           </div>
           {{-- surat usaha dari rt --}}
-          <div class="col-12 " style="margin-top:0px">
+          <div class="col-12 ">
             <div class="mb-3">
               <label for="surat_ush" class="form-label">Scan Surat Keterangan Berusaha dari RT/RW Setingkat</label>
               <input class="form-control" type="file" id="surat_ush" name="surat_ush">
@@ -385,9 +391,9 @@
             </div> 
           </div> 
           {{-- Blm bina BUMN --}}
-            <div class="col-md-4" style="margin-top:0px">
+            <div class="col-md-4">
               <label for="inputEmail5" class="form-label">Format Surat Belum Dibina BUMN </label>
-              <a href="/download"> <button type="button" class="btn btn-success"> Download</button></a>
+              <a href="/download"> <button type="button" class="btn btn-success"><i class="bi bi-download"></i>  Download</button></a>
             </div>
             <div class="col-md-8">
               <label for="srt_blmbina" class="form-label">Surat Belum Dibina BUMN </label>
@@ -477,13 +483,13 @@
       $(this).parent().parent().remove();
     });
     function sum(){
-      var tanahValue      = document.getElementById('tanah').value;
-      var bangunanValue   = document.getElementById('bangunan').value;
-      var persediaanValue = document.getElementById('persediaan').value;
-      var alatValue       = document.getElementById('alat').value;
-      var kasValue        = document.getElementById('kas').value;
-      var piutangValue    = document.getElementById('piutang').value;
-      var peralatranValue = document.getElementById('peralatan').value;
+      var tanahValue      = document.getElementById('tanah').value.replace(',','');
+      var bangunanValue   = document.getElementById('bangunan').value.replace(',','');
+      var persediaanValue = document.getElementById('persediaan').value.replace(',','');
+      var alatValue       = document.getElementById('alat').value.replace(',','');
+      var kasValue        = document.getElementById('kas').value.replace(',','');
+      var piutangValue    = document.getElementById('piutang').value.replace(',','');
+      var peralatranValue = document.getElementById('peralatan').value.replace(',','');
       var result          = parseInt(tanahValue)+parseInt(bangunanValue)+parseInt(persediaanValue)+parseInt(alatValue)+parseInt(kasValue)+parseInt(piutangValue)+parseInt(peralatranValue);
         if (!isNaN(result)){
           document.getElementById('totaset').value=result;
@@ -536,7 +542,9 @@
             }
           }
         });
-      });    
+      });
+
+      
   </script>
 
 @endsection

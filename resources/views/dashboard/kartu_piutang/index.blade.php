@@ -52,8 +52,8 @@
                             <tr>
                               <th scope="col">Bulan</th>
                               <th scope="col">Tahun</th>
-                              <th scope="col">Jasa Pinj 0.25%</th>
                               <th scope="col">Pokok</th>
+                              <th scope="col">Jasa Pinj 0.25%</th>
                               <th scope="col">Jumlah </th>
                             <tr>
                           </thead>
@@ -70,36 +70,45 @@
                             <?php $sumpokok = 0;
                                   $sumjasa = 0;
                                   $sum = 0;
-                                  $sumsaldo =0;
-                                  ?>
-                              @for ( 
-                                $i =1, 
-                                $saldo = $kp->pinjaman,
-                                $sb_bln = $kp->sb_bln/100,
-                                $waktu = $kp->waktu,
-                                $pembagi = 1-1/pow(1+$sb_bln,$waktu),
-                                $jumlah = $saldo*$sb_bln/ $pembagi;
-                                $i  <= 24 ; $i++)
+                            ?>
+                            @for ( 
+                              $i =1,
+                              $saldoawal = $kp->pinjaman,
+                              $saldo = $kp->pinjaman,
+                              $sb_bln = $kp->sb_bln/100,
+                              $waktu = $kp->waktu,
+                              $pokok = $saldoawal/$waktu,
+                              $jasa = $saldoawal*$sb_bln,
+                              $jasa1= $jasa/2;
+                              $i <= 24  ; $i++)
                                 <tr>
-                                  <td scope="row">{{ $i}}</td>
-                                  <td>{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("F ") }}</td>
-                                  <td>{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("Y ") }}</td>
-                                  <td>Rp. {{ number_format(round($jasa=$saldo*$sb_bln), 0, ',','.') }} </td>
-                                  <td>Rp.{{ number_format(round($pokok=$jumlah-$jasa), 0, ',','.') }} </td>
-                                  <td>Rp. {{ number_format(round($jumlah), 0, ',','.') }} </td>
-                                  <td>Rp.{{ number_format(round($saldo = $saldo-$pokok), 0, ',','.') }}</td>
-                                </tr>
-                                <?php 
-                                  $sumpokok += $pokok;
-                                  $sumjasa += $jasa;
-                                  $sum += $jumlah;
-                                  $sumsaldo += $saldo;
-                                ?>
-                              @endfor
+                                <td scope="row">{{ $i}}</td>
+                                <td>{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("F ") }}</td>
+                                <td>{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("Y ") }}</td>
+                                <td>Rp.{{ number_format(round($pokok), 0, ',','.') }} </td>
+                                @if($i <= 12 )
+                                    <td>Rp. {{ number_format(round($jasa), 0, ',','.') }} </td>
+                                    <td>Rp. {{ number_format(round($jumlah = $pokok+$jasa), 0, ',','.') }} </td>
+                                    <?php  $sumjasa += $jasa; 
+                                          $sum += $jumlah;
+                                    ?>
+                                  @else 
+                                    <td>Rp. {{ number_format(round($jasa1), 0, ',','.') }} </td>
+                                    <td>Rp. {{ number_format(round($jumlah = $pokok+$jasa1), 0, ',','.') }} </td>
+                                    <?php  $sumjasa += $jasa1; 
+                                            $sum += $jumlah;
+                                    ?>
+                                @endif
+                                <td>Rp.{{ number_format(round($saldo = $saldo-$pokok), 0, ',','.') }}</td>
+                              </tr>
+                              <?php 
+                                $sumpokok += $pokok;
+                              ?>
+                            @endfor
                               <tr>
                                 <th colspan="3">Jumlah </th>
-                                <th>Rp. {{ number_format(round($sumjasa), 0, ',','.') }}</th>
                                 <th>Rp. {{ number_format(round($sumpokok), 0, ',','.') }}</th>
+                                <th>Rp. {{ number_format(round($sumjasa), 0, ',','.') }}</th>
                                 <th>Rp. {{ number_format(round($sum), 0, ',','.') }}</th>
                                 <th></th>
                               </tr>
@@ -117,7 +126,7 @@
             </div>
           @endif
           <div style="overflow-x:auto">
-            <table class="table table-striped">
+            <table class="table table-striped" id="datatable">
               <thead>
                 <tr>
                   <th scope="col">No</th>
@@ -136,8 +145,10 @@
                     <td>{{ $p->formatRupiah('pinjaman') }}</td>                    
                     <td>
                       <a href="/kartupiutang/{{$p->id}}/edit" class="bi bi-file-earmark-text" ></a>
-                      <a href="/cetak-kartu-piutang/{{ $p->id }}" class="bi bi-printer" > </a>
-                      <a href="/kartupiutang/hapus/{{ $p->id }}" class="bi bi-trash" onclick="return confirm('Apakah anda yakin ? ')"></a>
+                      @if ($p->tgl_penyaluran != NULL && $p->no_kontrak != NULL && $p->sb_bln != NULL && $p->sb_thn != NULL)
+                        <a href="/cetak-kartu-piutang/{{ $p->id }}" class="bi bi-printer" > </a>
+                      @endif
+                      {{-- <a href="/kartupiutang/hapus/{{ $p->id }}" class="bi bi-trash" onclick="return confirm('Apakah anda yakin ? ')"></a> --}}
                     </td> 
                   </tr>
                 @endforeach

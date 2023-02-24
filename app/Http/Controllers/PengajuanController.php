@@ -83,6 +83,7 @@ class PengajuanController extends Controller
             'tgl_lhr'   => 'required',
             'hub'       => 'required',
             'gender'    => 'required',
+            'pekerjaan'      => 'required',
             'almt'      => 'required',
             'no_hp'     => 'required|numeric',
             'no_ktp'    => 'required|numeric',
@@ -688,6 +689,8 @@ class PengajuanController extends Controller
         $pjb      = Pjb::where('id',$pengajuan->pjb_id);
         $aset     = Aset::where('id',$pengajuan->aset_id);
         $op      = Oprasional::where('id',$pengajuan->oprasional_id);
+        $kp     = Kartu_piutang::where('pengajuan_id',$pengajuan->id);
+
 
         $pengajuan->delete();
         $alat->delete();
@@ -697,6 +700,7 @@ class PengajuanController extends Controller
         $pjb->delete();
         $aset->delete();
         $op->delete();
+        $kp->delete();
 
         return redirect('/pengajuan')->with('success','Data berhasil di hapus');
     }

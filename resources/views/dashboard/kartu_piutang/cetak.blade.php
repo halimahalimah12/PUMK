@@ -82,20 +82,20 @@
               </tr>
             </table>
             <div style="padding-top:25px">
-              <table  >
+              <table>
                 <thead>
-                  <tr >
+                  <tr>
                     <th rowspan="2" valign="middle">ANG ke</th>
                     <th colspan="2" scope="col">Tajuh Tempo</th>
                     <th colspan="3">Rincian Anggaran</th>
                     <th rowspan="2">Saldo</th>
                   </tr>
                   <tr>
-                    <th scope="col">Bulan</th>
-                    <th scope="col">Tahun</th>
+                    <th scope="col" width="85px">Bulan</th>
+                    <th scope="col" width="60px">Tahun</th>
+                    <th scope="col" width="110px">Pokok</th>
                     <th scope="col">Jasa Pinj 0.25%</th>
-                    <th scope="col">Pokok</th>
-                    <th scope="col">Jumlah </th>
+                    <th scope="col"  width="110px">Jumlah </th>
                   <tr>
                 </thead>
                 <tbody>
@@ -111,36 +111,45 @@
                   <?php $sumpokok = 0;
                         $sumjasa = 0;
                         $sum = 0;
-                        $sumsaldo =0;
                         ?>
                     @for ( 
-                      $i =1, 
+                      $i =1,
+                      $saldoawal = $kp->pinjaman,
                       $saldo = $kp->pinjaman,
                       $sb_bln = $kp->sb_bln/100,
                       $waktu = $kp->waktu,
-                      $pembagi = 1-1/pow(1+$sb_bln,$waktu),
-                      $jumlah = $saldo*$sb_bln/ $pembagi;
-                      $i  <= 24 ; $i++)
+                      $pokok = $saldoawal/$waktu,
+                      $jasa = $saldoawal*$sb_bln,
+                      $jasa1= $jasa/2;
+                      $i <= 24  ; $i++)
                         <tr>
                         <td scope="row">{{ $i}}</td>
                         <td>{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("F ") }}</td>
                         <td>{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("Y ") }}</td>
-                        <td>Rp. {{ number_format(round($jasa=$saldo*$sb_bln), 0, ',','.') }} </td>
-                        <td>Rp.{{ number_format(round($pokok=$jumlah-$jasa), 0, ',','.') }} </td>
-                        <td>Rp. {{ number_format(round($jumlah), 0, ',','.') }} </td>
+                        <td>Rp.{{ number_format(round($pokok), 0, ',','.') }} </td>
+                        @if($i <= 12 )
+                            <td>Rp. {{ number_format(round($jasa), 0, ',','.') }} </td>
+                            <td>Rp. {{ number_format(round($jumlah = $pokok+$jasa), 0, ',','.') }} </td>
+                            <?php  $sumjasa += $jasa; 
+                                  $sum += $jumlah;
+                            ?>
+                          @else 
+                            <td>Rp. {{ number_format(round($jasa1), 0, ',','.') }} </td>
+                            <td>Rp. {{ number_format(round($jumlah = $pokok+$jasa1), 0, ',','.') }} </td>
+                            <?php  $sumjasa += $jasa1; 
+                                    $sum += $jumlah;
+                            ?>
+                        @endif
                         <td>Rp.{{ number_format(round($saldo = $saldo-$pokok), 0, ',','.') }}</td>
                       </tr>
                       <?php 
                         $sumpokok += $pokok;
-                        $sumjasa += $jasa;
-                        $sum += $jumlah;
-                        $sumsaldo += $saldo;
                       ?>
                     @endfor
                     <tr>
                     <th colspan="3">Jumlah </th>
-                    <td>Rp. {{ number_format(round($sumjasa), 0, ',','.') }}</td>
                     <td>Rp. {{ number_format(round($sumpokok), 0, ',','.') }}</td>
+                    <td>Rp. {{ number_format(round($sumjasa), 0, ',','.') }}</td>
                     <td>Rp. {{ number_format(round($sum), 0, ',','.') }}</td>
                     <td></td>
                     </tr>
@@ -179,20 +188,20 @@
               </tr>
             </table>
             <div style="padding-top:25px">
-            <table  >
+            <table>
               <thead>
-                <tr >
+                <tr>
                   <th rowspan="2" valign="middle">ANG ke</th>
                   <th colspan="2" scope="col">Tajuh Tempo</th>
                   <th colspan="3">Rincian Anggaran</th>
-                  <th rowspan="2">Saldo</th>
+                  <th rowspan="2"  width="110px">Saldo</th>
                 </tr>
                 <tr>
-                  <th scope="col">Bulan</th>
-                  <th scope="col">Tahun</th>
+                  <th scope="col" width="85px">Bulan</th>
+                  <th scope="col" width="60px">Tahun</th>
+                  <th scope="col" width="110px">Pokok</th>
                   <th scope="col">Jasa Pinj 0.25%</th>
-                  <th scope="col">Pokok</th>
-                  <th scope="col">Jumlah </th>
+                  <th scope="col"  width="110px">Jumlah </th>
                 <tr>
               </thead>
               <tbody>
@@ -208,37 +217,45 @@
                 <?php $sumpokok = 0;
                       $sumjasa = 0;
                       $sum = 0;
-                      $sumsaldo =0;
+                ?>
+                    @for ( 
+                      $i =1,
+                      $saldoawal = $kp->pinjaman,
+                      $saldo = $kp->pinjaman,
+                      $sb_bln = $kp->sb_bln/100,
+                      $waktu = $kp->waktu,
+                      $pokok = $saldoawal/$waktu,
+                      $jasa = $saldoawal*$sb_bln,
+                      $jasa1= $jasa/2;
+                      $i <= 24  ; $i++)
+                        <tr>
+                        <td scope="row">{{ $i}}</td>
+                        <td>{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("F ") }}</td>
+                        <td>{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("Y ") }}</td>
+                        <td>Rp.{{ number_format(round($pokok), 0, ',','.') }} </td>
+                        @if($i <= 12 )
+                            <td>Rp. {{ number_format(round($jasa), 0, ',','.') }} </td>
+                            <td>Rp. {{ number_format(round($jumlah = $pokok+$jasa), 0, ',','.') }} </td>
+                            <?php  $sumjasa += $jasa; 
+                                  $sum += $jumlah;
+                            ?>
+                          @else 
+                            <td>Rp. {{ number_format(round($jasa1), 0, ',','.') }} </td>
+                            <td>Rp. {{ number_format(round($jumlah = $pokok+$jasa1), 0, ',','.') }} </td>
+                            <?php  $sumjasa += $jasa1; 
+                                    $sum += $jumlah;
+                            ?>
+                        @endif
+                        <td>Rp.{{ number_format(round($saldo = $saldo-$pokok), 0, ',','.') }}</td>
+                      </tr>
+                      <?php 
+                        $sumpokok += $pokok;
                       ?>
-                  @for ( 
-                    $i =1, 
-                    $saldo = $kp->pinjaman,
-                    $sb_bln = $kp->sb_bln/100,
-                    $waktu = $kp->waktu,
-                    $pembagi = 1-1/pow(1+$sb_bln,$waktu),
-                    $jumlah = $saldo*$sb_bln/ $pembagi;
-                    $i  <= 24 ; $i++)
-                      <tr>
-                      <td scope="row">{{ $i}}</td>
-                      <td>{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("F ") }}</td>
-                      <td>{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("Y ") }}</td>
-                      <td>Rp. {{ number_format(round($jasa=$saldo*$sb_bln), 0, ',','.') }} </td>
-                      <td>Rp.{{ number_format(round($pokok=$jumlah-$jasa), 0, ',','.') }} </td>
-                      <td>Rp. {{ number_format(round($jumlah), 0, ',','.') }} </td>
-                      <td>Rp.{{ number_format(round($saldo = $saldo-$pokok), 0, ',','.') }}</td>
-                    </tr>
-                    <?php 
-                      $sumpokok += $pokok;
-                      $sumjasa += $jasa;
-                      $sum += $jumlah;
-                      $sumsaldo += $saldo;
-                    ?>
-                  @endfor
-
+                    @endfor
                   <tr>
                   <th colspan="3">Jumlah </th>
-                  <td>Rp. {{ number_format(round($sumjasa), 0, ',','.') }}</td>
                   <td>Rp. {{ number_format(round($sumpokok), 0, ',','.') }}</td>
+                  <td>Rp. {{ number_format(round($sumjasa), 0, ',','.') }}</td>
                   <td>Rp. {{ number_format(round($sum), 0, ',','.') }}</td>
                   <td></td>
                   </tr>

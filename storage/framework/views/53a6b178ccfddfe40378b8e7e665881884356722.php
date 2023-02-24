@@ -5,7 +5,7 @@
     <div class="card-body">
       <h5 class="card-title">Data Mitra </h5>
       
-      <table class="table table-striped">
+      <table class="table table-striped" id="datatable">
         <thead>
           <tr>
             <th scope="col">No</th>

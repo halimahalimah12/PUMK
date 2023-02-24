@@ -32,16 +32,14 @@
                 <label for="tgl_penyaluran" class="col-sm-3 col-form-label">Tanggal Penyaluran</label>
                 <div class="col-sm-9">
                   <input type="date" class="form-control @error('tgl_penyaluran') is-invalid  @enderror"  name="tgl_penyaluran"  value="{{ old('tgl_penyaluran',$kp->tgl_penyaluran) }}">
-                            @error('tgl_penyaluran')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                  
+                    @error('tgl_penyaluran')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
               </div>
-              
               <div class="row mb-3" >
                 <label for="no_kontrak" class="col-sm-3 col-form-label">Nomor Kontrak</label>
                 <div class="col-sm-9">
                   <input type="text" class="form-control @error('no_kontrak') is-invalid  @enderror" id="no_kontrak" name="no_kontrak" value="{{ old('no_kontrak', $kp->no_kontrak) }}" >
-                          @error('no_kontrak')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    @error('no_kontrak')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
               </div>
               <div class="row mb-3" >
@@ -53,33 +51,32 @@
               <div class="row mb-3">
                 <label for="sbbln" class="col-sm-3 col-form-label">Jangka Waktu Peminjaman (Bulan)</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control @error('waktu') is-invalid  @enderror" name="waktu"  value="24 {{ old('waktu',$kp->waktu) }}"  >
-                        @error('waktu')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                  <input type="text" class="form-control @error('waktu') is-invalid  @enderror" name="waktu"  value=" {{ old('waktu',$kp->waktu) }}"  >
+                    @error('waktu')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="sbthn" class="col-sm-3 col-form-label">Suku Bunga Efektif /Tahun (%) </label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control @error('sb_thn') is-invalid  @enderror" name="sb_thn" value=" 6 {{ old('sb_thn',$kp->sb_thn) }}" > 
-                          @error('sb_thn')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                  <input type="text" class="form-control @error('sb_thn') is-invalid  @enderror" name="sb_thn" value="  {{ old('sb_thn',$kp->sb_thn) }}" > 
+                    @error('sb_thn')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="sbbln" class="col-sm-3 col-form-label">Suku Bunga Efektif /Bulan (%)</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control  @error('sb_bln') is-invalid  @enderror" name="sb_bln" value=" 0.05{{ old('sb_bln',$kp->sb_bln) }}">
-                        @error('sb_bln')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                  <input type="text" class="form-control  @error('sb_bln') is-invalid  @enderror" name="sb_bln" value=" {{ old('sb_bln',$kp->sb_bln) }}" placeholder="0.05">
+                    @error('sb_bln')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
               </div>
-              
-              <button type="submit" class="btn btn-primary"><i class="ri-send-plane-fill"></i></i> Kirim </button>
+              <button type="submit" class="btn btn-primary"><i class="ri-send-plane-fill"></i></i> Simpan </button>
             </form>
           </div>
           @if($kp->sb_bln != null)
             <div style="padding-top:25px; overflow-x:auto"> 
               <table class="table table-bordered" style="text-align:center">
                 <thead>
-                  <tr >
+                  <tr>
                     <th rowspan="2" valign="middle">ANG ke</th>
                     <th colspan="2" scope="col">Tajuh Tempo</th>
                     <th colspan="3">Rincian Anggaran</th>
@@ -88,8 +85,8 @@
                   <tr>
                     <th scope="col">Bulan</th>
                     <th scope="col">Tahun</th>
-                    <th scope="col">Jasa Pinj 0.25%</th>
                     <th scope="col">Pokok</th>
+                    <th scope="col">Jasa Pinj 0.25%</th>
                     <th scope="col">Jumlah </th>
                   <tr>
                 </thead>
@@ -106,36 +103,45 @@
                   <?php $sumpokok = 0;
                         $sumjasa = 0;
                         $sum = 0;
-                        $sumsaldo =0;
-                        ?>
+                  ?>
                     @for ( 
-                      $i =1, 
+                      $i =1,
+                      $saldoawal = $kp->pinjaman,
                       $saldo = $kp->pinjaman,
                       $sb_bln = $kp->sb_bln/100,
                       $waktu = $kp->waktu,
-                      $pembagi = 1-1/pow(1+$sb_bln,$waktu),
-                      $jumlah = $saldo*$sb_bln/ $pembagi;
-                      $i  <= 24 ; $i++)
+                      $pokok = $saldoawal/$waktu,
+                      $jasa = $saldoawal*$sb_bln,
+                      $jasa1= $jasa/2;
+                      $i <= 24  ; $i++)
                         <tr>
                         <td scope="row">{{ $i}}</td>
                         <td>{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("F ") }}</td>
                         <td>{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("Y ") }}</td>
-                        <td>Rp. {{ number_format(round($jasa=$saldo*$sb_bln), 0, ',','.') }} </td>
-                        <td>Rp.{{ number_format(round($pokok=$jumlah-$jasa), 0, ',','.') }} </td>
-                        <td>Rp. {{ number_format(round($jumlah), 0, ',','.') }} </td>
+                        <td>Rp.{{ number_format(round($pokok), 0, ',','.') }} </td>
+                        @if($i <= 12 )
+                            <td>Rp. {{ number_format(round($jasa), 0, ',','.') }} </td>
+                            <td>Rp. {{ number_format(round($jumlah = $pokok+$jasa), 0, ',','.') }} </td>
+                            <?php  $sumjasa += $jasa; 
+                                  $sum += $jumlah;
+                            ?>
+                          @else 
+                            <td>Rp. {{ number_format(round($jasa1), 0, ',','.') }} </td>
+                            <td>Rp. {{ number_format(round($jumlah = $pokok+$jasa1), 0, ',','.') }} </td>
+                            <?php  $sumjasa += $jasa1; 
+                                    $sum += $jumlah;
+                            ?>
+                        @endif
                         <td>Rp.{{ number_format(round($saldo = $saldo-$pokok), 0, ',','.') }}</td>
                       </tr>
                       <?php 
                         $sumpokok += $pokok;
-                        $sumjasa += $jasa;
-                        $sum += $jumlah;
-                        $sumsaldo += $saldo;
                       ?>
                     @endfor
                     <tr>
                     <th colspan="3">Jumlah </th>
-                    <th>Rp. {{ number_format(round($sumjasa), 0, ',','.') }}</th>
                     <th>Rp. {{ number_format(round($sumpokok), 0, ',','.') }}</th>
+                    <th>Rp. {{ number_format(round($sumjasa), 0, ',','.') }}</th>
                     <th>Rp. {{ number_format(round($sum), 0, ',','.') }}</th>
                     <th></th>
                     </tr>

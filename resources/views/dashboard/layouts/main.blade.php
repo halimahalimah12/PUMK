@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.bubble.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css">
+
     <!-- Template Main CSS File -->
     <link href="{{ asset ('assets/css/style.css') }}" rel="stylesheet">
   </head>
@@ -37,12 +40,13 @@
     </main>
 
     <!-- ======= Footer ======= -->
+    {{-- <div class="fixed-bottom"> --}}
     <footer id="footer" class="footer">
       <div class="copyright">
         &copy; Copyright <strong><span>Halimah</span></strong>. All Rights Reserved
       </div>
     </footer>
-
+{{-- </div> --}}
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
@@ -65,6 +69,20 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.mask.min.js') }}"></script>
+
+
+      <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js" ></script>
+      <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js" ></script>
+      <script>
+        $(document).ready( function () {
+            $('#datatable').DataTable();
+            $('.rupiah').mask("#.##0",{
+              reverse:true
+            });
+
+        } );
+      </script>
   </body>
 </html>
 

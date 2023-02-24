@@ -14,11 +14,9 @@
         {{-- u/ user --}}
         <!-- Tables Nav -->
         <li class="nav-item">
-          <ul class="nav-link collapsed">
-            <a href="/pengajuan">
+            <a  class="nav-link collapsed" href="/pengajuan">
               <i class="bi bi-telegram"></i><span>Pengajuan</span>
             </a>
-          </ul>
         </li>
         <!-- Tables Nav -->
         <li class="nav-item">
@@ -40,8 +38,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link collapsed" href="pages-register.html">
-            <i class="bi bi-clock-history"></i>
-            <span>History</span>
+            <i class="bi bi-clock-history"></i> <span>History</span>
           </a>
         </li>
         <li class="nav-item">

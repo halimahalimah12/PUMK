@@ -63,22 +63,8 @@
               <div class="row gx-3 gy-0">
                 <div class="col-12 col-lg-6 form-group clearfix" >
                   <label for="pekerjaan" class="form-label">Pekerjaan</label>
-                  <input type="text" class="form-control <?php $__errorArgs = ['pekerjaan'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid  <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" id="pekerjaan" name="pekerjaan"value="<?php echo e(old('pekerjaan')); ?>">
-                    <?php $__errorArgs = ['pekerjaan'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?><div class="invalid-feedback"><?php echo e($message); ?></div><?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
+                  <input type="text" class="form-control" id="pekerjaan" name="pekerjaan"value="<?php echo e(old('pekerjaan')); ?>">
+                  <span class="text-danger error-text pekerjaan_error"> </span>
                 </div>
                 <div class="col-12 col-lg-6 form-group clearfix" >
                   <label for="almt" class="form-label">Alamat</label>
@@ -90,14 +76,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid  <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('almt')); ?>" style="height: 100px"></textarea>
-                    <?php $__errorArgs = ['almt'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?><div class="invalid-feedback"><?php echo e($message); ?></div><?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
+                    <span class="text-danger error-text almt_error"> </span>
                 </div>
               </div>
               <div class="col-12 form-group clearfix">
@@ -176,146 +155,150 @@ unset($__errorArgs, $__bag); ?>
           <div class="card-body">
             <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Asset</h5>
             <h6>Asset (Aktiva) yang berkaitan langsung dengan kegiatan usaha</h6>
-              <div class="row mb-3">
-                <label for="tanah" class="col-sm-2 col-form-label">Tanah</label>
+              <div class="row mb-2">
+                <label for="tanah" class="col-sm-2 col-form-label">Tanah (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class="rupiah form-control" name="tanah" id="tanah"  onkeyup="sum();" value="<?php echo e(old('tanah')); ?>">
+                  <input type="text" class=" form-control" name="tanah" id="tanah"  onkeyup="sum();" value="<?php echo e(old('tanah')); ?>">
                   <span class="text-danger error-text tanah_error"> </span>
                 </div>
               </div>
-              <div class="row mb-3">
-                <label for="bangunan" class="col-sm-2 col-form-label">Bangunan</label>
+              <div class="row mb-3" style="margin-top:0px">
+                <label for="bangunan" class="col-sm-2 col-form-label">Bangunan (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="bangunan" id="bangunan" onkeyup="sum();" value="<?php echo e(old('bangunan')); ?>">
+                  <input type="text" class=" form-control" name="bangunan" id="bangunan" onkeyup="sum();" value="<?php echo e(old('bangunan')); ?>">
                   <span class="text-danger error-text bangunan_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="tanah" class="col-sm-2 col-form-label">Persediaan</label>
+                <label for="tanah" class="col-sm-2 col-form-label">Persediaan (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="persediaan" id="persediaan" onkeyup="sum();" value="<?php echo e(old('persediaan')); ?>">
+                  <input type="text" class=" form-control" name="persediaan" id="persediaan" onkeyup="sum();" value="<?php echo e(old('persediaan')); ?>">
                   <span class="text-danger error-text persediaan_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="alat" class="col-sm-2 col-form-label">Peralatan Usaha</label>
+                <label for="alat" class="col-sm-2 col-form-label">Peralatan Usaha (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="alat" id="alat" onkeyup="sum();" value="<?php echo e(old('alat')); ?>">
+                  <input type="text" class=" form-control" name="alat" id="alat" onkeyup="sum();" value="<?php echo e(old('alat')); ?>">
                   <span class="text-danger error-text alat_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="kas" class="col-sm-2 col-form-label">kas</label>
+                <label for="kas" class="col-sm-2 col-form-label">kas (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="kas" id="kas" onkeyup="sum();" value="<?php echo e(old('kas')); ?>">
+                  <input type="text" class=" form-control" name="kas" id="kas" onkeyup="sum();" value="<?php echo e(old('kas')); ?>">
                   <span class="text-danger error-text kas_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="piutang" class="col-sm-2 col-form-label">Piutang</label>
+                <label for="piutang" class="col-sm-2 col-form-label">Piutang (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="piutang" id="piutang" onkeyup="sum();" value="<?php echo e(old('piutang')); ?>">
+                  <input type="text" class=" form-control" name="piutang" id="piutang" onkeyup="sum();" value="<?php echo e(old('piutang')); ?>">
                   <span class="text-danger error-text piutang_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="peralatan" class="col-sm-2 col-form-label">Peralatan Produksi</label>
+                <label for="peralatan" class="col-sm-2 col-form-label">Peralatan Produksi (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="peralatan" id="peralatan" onkeyup="sum();" value="<?php echo e(old('peralatan')); ?>">
+                  <input type="text" class=" form-control" name="peralatan" id="peralatan" onkeyup="sum();" value="<?php echo e(old('peralatan')); ?>">
                   <span class="text-danger error-text peralatan_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
-                <label  for="totaset" class="col-sm-2 col-form-label">Total Aset</label>
+                <label  for="totaset" class="col-sm-2 col-form-label">Total Aset (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="totaset" id="totaset" style="padding-bottom:5px" value="<?php echo e(old('totaset')); ?>">
+                  <input type="text" class=" form-control" name="totaset" id="totaset" style="padding-bottom:5px" value="<?php echo e(old('totaset')); ?>">
                 </div>
               </div>
           </div>
           
           <div class="card-body">
             <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Alat kerja dan alat bantu</h5>
-            <table class="table table-striped table-responsive" >
-              <thead >
-                <tr>
-                  <th> Nama Barang </th>
-                  <th> Harga Satuan (Rp)</th>
-                  <th> Jumlah Harga (Rp)</th>
-                  <th> <a href="javascript:void(0);" class="addalat btn btn-primary" style="float:right;" name="addalat" id="addalat">+ </a></th>
-                </tr>
-              </thead>
-              <tbody id="alats" class="alats">
-                <tr>
-                  <td> <input type="text" name="nm_brg[]" class="form-control nm_brg" value="<?php echo e(old('nm_brg[]')); ?>"></td>
-                  <td> <input type="text" name="hrg_satuan[]" class="form-control hrg_satuan" value="<?php echo e(old('hrg_satuan[]')); ?>"> </td>
-                  <td> <input type="text" name="jmlh[]" class="form-control jmlh" value="<?php echo e(old('jmlh[]')); ?>"> </td>
-                  <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
-                </tr>
-              </tbody >
-            </table> 
+            <div style="overflow-x:auto">
+              <table class="table table-striped table-responsive" >
+                <thead >
+                  <tr>
+                    <th> Nama Barang </th>
+                    <th> Harga Satuan (Rp)</th>
+                    <th> Jumlah Harga (Rp)</th>
+                    <th> <a href="javascript:void(0);" class="addalat btn btn-primary" style="float:right;" name="addalat" id="addalat">+ </a></th>
+                  </tr>
+                </thead>
+                <tbody id="alats" class="alats">
+                  <tr>
+                    <td> <input type="text" name="nm_brg[]" class="form-control nm_brg" value="<?php echo e(old('nm_brg[]')); ?>"></td>
+                    <td> <input type="text" name="hrg_satuan[]" class="form-control hrg_satuan" value="<?php echo e(old('hrg_satuan[]')); ?>"> </td>
+                    <td> <input type="text" name="jmlh[]" class="form-control jmlh" value="<?php echo e(old('jmlh[]')); ?>"> </td>
+                    <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
+                  </tr>
+                </tbody >
+              </table> 
+            </div>
           </div> 
           
           <div class="card-body">
             <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Tenaga Kerja</h5>
-            <table class="table table-striped" >
-              <thead >
-                <tr>
-                  <th> Nama  </th>
-                  <th> Jabatan</th>
-                  <th> Gaji (Rp)</th>
-                  <th> <a href="javascript:void(0);" class="addtenagakerja btn btn-primary" style="float:right;" name="addtenagakerja" id="addtenagakerja">+ </a></th>
-                </tr>
-              </thead>
-              <tbody id="tngkerja" class="tngkerja">
-                <tr>
-                  <td> <input type="text" name="nmkry[]" class="form-control " value="<?php echo e(old('nmkry[]')); ?>"></td>
-                  <td> <input type="text" name="jbtkry[]" class="form-control " value="<?php echo e(old('jbtkry[]')); ?>"></td>
-                  <td> <input type="text" name="gaji[]" class="form-control " value="<?php echo e(old('gaji[]')); ?>"></td>
-                  <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
-                </tr>
-              </tbody >
-            </table> 
+            <div style="overflow-x:auto">
+              <table class="table table-striped" >
+                <thead >
+                  <tr>
+                    <th> Nama  </th>
+                    <th> Jabatan</th>
+                    <th> Gaji (Rp)</th>
+                    <th> <a href="javascript:void(0);" class="addtenagakerja btn btn-primary" style="float:right;" name="addtenagakerja" id="addtenagakerja">+ </a></th>
+                  </tr>
+                </thead>
+                <tbody id="tngkerja" class="tngkerja">
+                  <tr>
+                    <td> <input type="text" name="nmkry[]" class="form-control " value="<?php echo e(old('nmkry[]')); ?>"></td>
+                    <td> <input type="text" name="jbtkry[]" class="form-control " value="<?php echo e(old('jbtkry[]')); ?>"></td>
+                    <td> <input type="text" name="gaji[]" class="form-control " value="<?php echo e(old('gaji[]')); ?>"></td>
+                    <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
+                  </tr>
+                </tbody >
+              </table> 
+            </div>
           </div>
           
           <div class="card-body">
-            <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Biaya Oprasional</h5>
+            <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Biaya Oprasional (Rp)</h5>
             <div class="row mb-3">
-              <label for="transport" class="col-sm-2 col-form-label">Transport</label>
+              <label for="transport" class="col-sm-2 col-form-label">Transport (Rp)</label>
               <div class="col-sm-10">
                 <input type="text" class="uang form-control" name="transport" id="transport" onkeyup="sum1();" value="<?php echo e(old('transport')); ?>">
                 <span class="text-danger error-text transport_error"> </span>
               </div>
             </div>
             <div class="row mb-3">
-              <label for="listrik"  class="col-sm-2 col-form-label">Listrik</label>
+              <label for="listrik"  class="col-sm-2 col-form-label">Listrik (Rp)</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" name="listrik" id="listrik" onkeyup="sum1();" value="<?php echo e(old('listrik')); ?>" >
                 <span class="text-danger error-text listrik_error"> </span>                    
               </div>
             </div>
             <div class="row mb-3">
-              <label for="telp"  class="col-sm-2 col-form-label">Telepon</label>
+              <label for="telp"  class="col-sm-2 col-form-label">Telepon (Rp)</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" name="telp" id="telp" onkeyup="sum1();" value="<?php echo e(old('telp')); ?>">
                 <span class="text-danger error-text telp_error"> </span>
               </div>
             </div>
             <div class="row mb-3">
-              <label for="atk" class="col-sm-2 col-form-label">ATK</label>
+              <label for="atk" class="col-sm-2 col-form-label">ATK (Rp)</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" name="atk" id="atk" onkeyup="sum1();" value="<?php echo e(old('atk')); ?>">
                 <span class="text-danger error-text atk_error"> </span>
               </div>
             </div>
             <div class="row mb-3">
-              <label for="lain" class="col-sm-2 col-form-label">Lain-Lain</label>
+              <label for="lain" class="col-sm-2 col-form-label">Lain-Lain (Rp)</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" name="lain" id="lain" onkeyup="sum1();" value="<?php echo e(old('lain')); ?>">
                 <span class="text-danger error-text lain_error"> </span>
               </div>
             </div>
             <div class="row mb-3">
-              <label  for="totop" class="col-sm-2 col-form-label">Total Oprasional</label>
+              <label  for="totop" class="col-sm-2 col-form-label">Total Oprasional (Rp)</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" name="totop" id="totop" style="padding-bottom:5px" value="<?php echo e(old('totop')); ?>">
               </div>
@@ -324,24 +307,26 @@ unset($__errorArgs, $__bag); ?>
           
           <div class="card-body">
             <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Penjualan (Omzet)</h5>
-              <table class="table table-striped" >
-                <thead >
-                  <tr>
-                    <th> Nama Barang </th>
-                    <th> Harga Satuan (Rp)</th>
-                    <th> Jumlah Harga (Rp)</th>
-                    <th> <a href="javascript:void(0);" class="addomzet btn btn-primary" style="float:right;" name="addomzet" id="addomzet">+ </a></th>
-                  </tr>
-                </thead>
-                <tbody id="omzet" class="omzet">
-                  <tr>
-                    <td> <input type="text" name="nmomzet[]" class="form-control " value="<?php echo e(old('nmomzet[]')); ?>">  </td>
-                    <td> <input type="text" name="hrgomzet[]" class="form-control" value="<?php echo e(old('hrgomzet[]')); ?>"> </td>
-                    <td> <input type="text" name="jmlhomzet[]" class=" form-control" value="<?php echo e(old('jmlhomzet[]')); ?>" > </td>
-                    <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
-                  </tr>
-                </tbody> 
-              </table> 
+              <div style="overflow-x:auto">
+                <table class="table table-striped" >
+                  <thead >
+                    <tr>
+                      <th> Nama Barang </th>
+                      <th> Harga Satuan (Rp)</th>
+                      <th> Jumlah Harga (Rp)</th>
+                      <th> <a href="javascript:void(0);" class="addomzet btn btn-primary" style="float:right;" name="addomzet" id="addomzet">+ </a></th>
+                    </tr>
+                  </thead>
+                  <tbody id="omzet" class="omzet">
+                    <tr>
+                      <td> <input type="text" name="nmomzet[]" class="form-control " value="<?php echo e(old('nmomzet[]')); ?>">  </td>
+                      <td> <input type="text" name="hrgomzet[]" class="form-control" value="<?php echo e(old('hrgomzet[]')); ?>"> </td>
+                      <td> <input type="text" name="jmlhomzet[]" class=" form-control" value="<?php echo e(old('jmlhomzet[]')); ?>" > </td>
+                      <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
+                    </tr>
+                  </tbody> 
+                </table> 
+              </div>
           </div> 
           
           <div class="card-body">
@@ -388,7 +373,7 @@ unset($__errorArgs, $__bag); ?>" name="bsr_pjm" id="bsr_pjm" value="<?php echo e
             </table>              
           </div>
           
-          <div class="col-12  " style="margin-top:15px">
+          <div class="col-12  ">
             <div class="mb-3">
               <label for="bkt_serius" class="form-label">Bukti tanda keseriusan </label>
               <input class="form-control " type="file" id="bkt_serius" name="bkt_serius">
@@ -396,7 +381,7 @@ unset($__errorArgs, $__bag); ?>" name="bsr_pjm" id="bsr_pjm" value="<?php echo e
             </div> 
           </div>
           
-          <div class="col-12  " style="margin-top:15px">
+          <div class="col-12  " >
             <div class="mb-3">
               <label for="kk" class="form-label">Scan KK </label>
               <input class="form-control" type="file" id="kk" name="kk">
@@ -404,7 +389,7 @@ unset($__errorArgs, $__bag); ?>" name="bsr_pjm" id="bsr_pjm" value="<?php echo e
             </div> 
           </div>    
           
-          <div class="col-12 " style="margin-top:0px">
+          <div class="col-12 " >
             <div class="mb-3">
               <label for="foto_kegiatan" class="form-label">Foto Kegiatan Usaha</label>
               <input class="form-control " type="file" id="foto_kegiatan" name="foto_kegiatan">
@@ -412,7 +397,7 @@ unset($__errorArgs, $__bag); ?>" name="bsr_pjm" id="bsr_pjm" value="<?php echo e
             </div> 
           </div>
           
-          <div class="col-12 " style="margin-top:0px">
+          <div class="col-12 ">
             <div class="mb-3">
               <label for="surat_ush" class="form-label">Scan Surat Keterangan Berusaha dari RT/RW Setingkat</label>
               <input class="form-control" type="file" id="surat_ush" name="surat_ush">
@@ -420,9 +405,9 @@ unset($__errorArgs, $__bag); ?>" name="bsr_pjm" id="bsr_pjm" value="<?php echo e
             </div> 
           </div> 
           
-            <div class="col-md-4" style="margin-top:0px">
+            <div class="col-md-4">
               <label for="inputEmail5" class="form-label">Format Surat Belum Dibina BUMN </label>
-              <a href="/download"> <button type="button" class="btn btn-success"> Download</button></a>
+              <a href="/download"> <button type="button" class="btn btn-success"><i class="bi bi-download"></i>  Download</button></a>
             </div>
             <div class="col-md-8">
               <label for="srt_blmbina" class="form-label">Surat Belum Dibina BUMN </label>
@@ -513,13 +498,13 @@ unset($__errorArgs, $__bag); ?>" name="bsr_pjm" id="bsr_pjm" value="<?php echo e
       $(this).parent().parent().remove();
     });
     function sum(){
-      var tanahValue      = document.getElementById('tanah').value;
-      var bangunanValue   = document.getElementById('bangunan').value;
-      var persediaanValue = document.getElementById('persediaan').value;
-      var alatValue       = document.getElementById('alat').value;
-      var kasValue        = document.getElementById('kas').value;
-      var piutangValue    = document.getElementById('piutang').value;
-      var peralatranValue = document.getElementById('peralatan').value;
+      var tanahValue      = document.getElementById('tanah').value.replace(',','');
+      var bangunanValue   = document.getElementById('bangunan').value.replace(',','');
+      var persediaanValue = document.getElementById('persediaan').value.replace(',','');
+      var alatValue       = document.getElementById('alat').value.replace(',','');
+      var kasValue        = document.getElementById('kas').value.replace(',','');
+      var piutangValue    = document.getElementById('piutang').value.replace(',','');
+      var peralatranValue = document.getElementById('peralatan').value.replace(',','');
       var result          = parseInt(tanahValue)+parseInt(bangunanValue)+parseInt(persediaanValue)+parseInt(alatValue)+parseInt(kasValue)+parseInt(piutangValue)+parseInt(peralatranValue);
         if (!isNaN(result)){
           document.getElementById('totaset').value=result;
@@ -566,13 +551,15 @@ unset($__errorArgs, $__bag); ?>" name="bsr_pjm" id="bsr_pjm" value="<?php echo e
                 $(form).find('span.'+prefix+'_error').text(val[0]);
               });
             }else{
-              
+              $(form)[0].reset();
+              alert('berhasil ditambahkan.');
               window.location ="/pengajuan";
             }
-
           }
         });
-      });    
+      });
+
+      
   </script>
 
 <?php $__env->stopSection(); ?>
