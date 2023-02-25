@@ -151,49 +151,49 @@
               <div class="row mb-2">
                 <label for="tanah" class="col-sm-2 col-form-label">Tanah (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class=" form-control" name="tanah" id="tanah"  onkeyup="sum();" value="{{ old('tanah') }}">
+                  <input type="text" class="rupiah  form-control" name="tanah" id="tanah"  onkeyup="sum();" value="{{ old('tanah') }}">
                   <span class="text-danger error-text tanah_error"> </span>
                 </div>
               </div>
               <div class="row mb-3" style="margin-top:0px">
                 <label for="bangunan" class="col-sm-2 col-form-label">Bangunan (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class=" form-control" name="bangunan" id="bangunan" onkeyup="sum();" value="{{ old('bangunan') }}">
+                  <input type="text" class="rupiah  form-control" name="bangunan" id="bangunan" onkeyup="sum();" value="{{ old('bangunan') }}">
                   <span class="text-danger error-text bangunan_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="tanah" class="col-sm-2 col-form-label">Persediaan (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class=" form-control" name="persediaan" id="persediaan" onkeyup="sum();" value="{{ old('persediaan') }}">
+                  <input type="text" class="rupiah  form-control" name="persediaan" id="persediaan" onkeyup="sum();" value="{{ old('persediaan') }}">
                   <span class="text-danger error-text persediaan_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="alat" class="col-sm-2 col-form-label">Peralatan Usaha (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class=" form-control" name="alat" id="alat" onkeyup="sum();" value="{{ old('alat') }}">
+                  <input type="text" class="rupiah  form-control" name="alat" id="alat" onkeyup="sum();" value="{{ old('alat') }}">
                   <span class="text-danger error-text alat_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="kas" class="col-sm-2 col-form-label">kas (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class=" form-control" name="kas" id="kas" onkeyup="sum();" value="{{ old('kas') }}">
+                  <input type="text" class="rupiah form-control" name="kas" id="kas" onkeyup="sum();" value="{{ old('kas') }}">
                   <span class="text-danger error-text kas_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="piutang" class="col-sm-2 col-form-label">Piutang (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class=" form-control" name="piutang" id="piutang" onkeyup="sum();" value="{{ old('piutang') }}">
+                  <input type="text" class=" rupiah form-control" name="piutang" id="piutang" onkeyup="sum();" value="{{ old('piutang') }}">
                   <span class="text-danger error-text piutang_error"> </span>
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="peralatan" class="col-sm-2 col-form-label">Peralatan Produksi (Rp)</label>
                 <div class="col-sm-10">
-                  <input type="text" class=" form-control" name="peralatan" id="peralatan" onkeyup="sum();" value="{{ old('peralatan') }}">
+                  <input type="text" class=" rupiah form-control" name="peralatan" id="peralatan" onkeyup="sum();" value="{{ old('peralatan') }}">
                   <span class="text-danger error-text peralatan_error"> </span>
                 </div>
               </div>
@@ -219,9 +219,9 @@
                 </thead>
                 <tbody id="alats" class="alats">
                   <tr>
-                    <td> <input type="text" name="nm_brg[]" class="form-control nm_brg" value="{{ old('nm_brg[]') }}"></td>
-                    <td> <input type="text" name="hrg_satuan[]" class="form-control hrg_satuan" value="{{ old('hrg_satuan[]') }}"> </td>
-                    <td> <input type="text" name="jmlh[]" class="form-control jmlh" value="{{ old('jmlh[]') }}"> </td>
+                    <td> <input type="text" name="nm_brg[]" class="form-control" value="{{ old('nm_brg[]') }}"></td>
+                    <td> <input type="text" name="hrg_satuan[]" class="form-control" value="{{ old('hrg_satuan[]') }}"> </td>
+                    <td> <input type="text" name="jmlh[]" class="rupiah form-control" id="jmlh" value="{{ old('jmlh[]') }}"> </td>
                     <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
                   </tr>
                 </tbody >
@@ -245,7 +245,7 @@
                   <tr>
                     <td> <input type="text" name="nmkry[]" class="form-control " value="{{ old('nmkry[]') }}"></td>
                     <td> <input type="text" name="jbtkry[]" class="form-control " value="{{ old('jbtkry[]') }}"></td>
-                    <td> <input type="text" name="gaji[]" class="form-control " value="{{ old('gaji[]') }}"></td>
+                    <td> <input type="text" name="gaji[]" class="rupiah form-control " value="{{ old('gaji[]') }}"></td>
                     <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
                   </tr>
                 </tbody >
@@ -258,42 +258,42 @@
             <div class="row mb-3">
               <label for="transport" class="col-sm-2 col-form-label">Transport (Rp)</label>
               <div class="col-sm-10">
-                <input type="text" class="uang form-control" name="transport" id="transport" onkeyup="sum1();" value="{{ old('transport') }}">
+                <input type="text" class="rupiah form-control" name="transport" id="transport" onkeyup="sum1();" value="{{ old('transport') }}">
                 <span class="text-danger error-text transport_error"> </span>
               </div>
             </div>
             <div class="row mb-3">
               <label for="listrik"  class="col-sm-2 col-form-label">Listrik (Rp)</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="listrik" id="listrik" onkeyup="sum1();" value="{{ old('listrik') }}" >
+                <input type="text" class="rupiah form-control" name="listrik" id="listrik" onkeyup="sum1();" value="{{ old('listrik') }}" >
                 <span class="text-danger error-text listrik_error"> </span>                    
               </div>
             </div>
             <div class="row mb-3">
               <label for="telp"  class="col-sm-2 col-form-label">Telepon (Rp)</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="telp" id="telp" onkeyup="sum1();" value="{{ old('telp') }}">
+                <input type="text" class="rupiah form-control" name="telp" id="telp" onkeyup="sum1();" value="{{ old('telp') }}">
                 <span class="text-danger error-text telp_error"> </span>
               </div>
             </div>
             <div class="row mb-3">
               <label for="atk" class="col-sm-2 col-form-label">ATK (Rp)</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="atk" id="atk" onkeyup="sum1();" value="{{ old('atk') }}">
+                <input type="text" class="rupiah form-control" name="atk" id="atk" onkeyup="sum1();" value="{{ old('atk') }}">
                 <span class="text-danger error-text atk_error"> </span>
               </div>
             </div>
             <div class="row mb-3">
               <label for="lain" class="col-sm-2 col-form-label">Lain-Lain (Rp)</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="lain" id="lain" onkeyup="sum1();" value="{{ old('lain') }}">
+                <input type="text" class="rupiah form-control" name="lain" id="lain" onkeyup="sum1();" value="{{ old('lain') }}">
                 <span class="text-danger error-text lain_error"> </span>
               </div>
             </div>
             <div class="row mb-3">
               <label  for="totop" class="col-sm-2 col-form-label">Total Oprasional (Rp)</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="totop" id="totop" style="padding-bottom:5px" value="{{ old('totop') }}">
+                <input type="text" class="rupiah form-control" name="totop" id="totop" style="padding-bottom:5px" value="{{ old('totop') }}">
               </div>
             </div>
           </div>
@@ -314,7 +314,7 @@
                     <tr>
                       <td> <input type="text" name="nmomzet[]" class="form-control " value="{{ old('nmomzet[]') }}">  </td>
                       <td> <input type="text" name="hrgomzet[]" class="form-control" value="{{ old('hrgomzet[]') }}"> </td>
-                      <td> <input type="text" name="jmlhomzet[]" class=" form-control" value="{{ old('jmlhomzet[]') }}" > </td>
+                      <td> <input type="text" name="jmlhomzet[]" class="rupiah form-control" value="{{ old('jmlhomzet[]') }}" > </td>
                       <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
                     </tr>
                   </tbody> 
@@ -326,17 +326,16 @@
             <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Penempatan Modal</h5>
             <div class="col-12 ">
               <label for="modal" class="form-label"> Modal Usaha</label>
-              <input type="text" class="form-control " name="modal" id="modal" onkeyup="sum_modal();" value="{{ old('modal') }}">
+              <input type="text" class="rupiah form-control " name="modal" id="modal" onkeyup="sum_modal();" value="{{ old('modal') }}">
               <span class="text-danger error-text modal_error"> </span>
             </div>
             <div class="col-12 ">
               <label for="invst" class="form-label"> Investasi Usaha</label>
-              <input type="text" class="form-control " name="invest" id="invest" onkeyup="sum_modal();" value="{{ old('invest') }}">
-              <p>* Jika tidak ada, beri tanda strip(-) </p>
+              <input type="text" class="rupiah form-control " name="invest" id="invest" onkeyup="sum_modal();" value="{{ old('invest') }}">
             </div>
             <div class="col-12 ">
               <label for="bsr_pjm" class="form-label">Besar Pinjaman yang Diajukan </label>
-              <input type="text" class="form-control @error('bsr_pjm') is-invalid @enderror" name="bsr_pjm" id="bsr_pjm" value="{{ old('bsr_pjm') }}">
+              <input type="text" class="rupiah form-control " name="bsr_pjm" id="bsr_pjm" value="{{ old('bsr_pjm') }}">
               <span class="text-danger error-text bsr_pjm_error"> </span>
             </div>
           </div>
@@ -483,17 +482,62 @@
       $(this).parent().parent().remove();
     });
     function sum(){
-      var tanahValue      = document.getElementById('tanah').value.replace(',','');
-      var bangunanValue   = document.getElementById('bangunan').value.replace(',','');
-      var persediaanValue = document.getElementById('persediaan').value.replace(',','');
-      var alatValue       = document.getElementById('alat').value.replace(',','');
-      var kasValue        = document.getElementById('kas').value.replace(',','');
-      var piutangValue    = document.getElementById('piutang').value.replace(',','');
-      var peralatranValue = document.getElementById('peralatan').value.replace(',','');
-      var result          = parseInt(tanahValue)+parseInt(bangunanValue)+parseInt(persediaanValue)+parseInt(alatValue)+parseInt(kasValue)+parseInt(piutangValue)+parseInt(peralatranValue);
-        if (!isNaN(result)){
-          document.getElementById('totaset').value=result;
+      var tanahValue      = document.getElementById('tanah').value;
+      var bangunanValue   = document.getElementById('bangunan').value;
+      var persediaanValue = document.getElementById('persediaan').value;
+      var alatValue       = document.getElementById('alat').value;
+      var kasValue        = document.getElementById('kas').value;
+      var piutangValue    = document.getElementById('piutang').value;
+      var peralatranValue = document.getElementById('peralatan').value;
+      
+      var tes1 = tanahValue.split("")
+			for( var i = 0; i < tes1.length; i++){ 
+          if ( tes1[i] === ',' || tes1[i] === '.') {
+          tes1.splice(i, 1); 
         }
+			}
+			var tes2 = bangunanValue.split("")
+			for( var i = 0; i < tes2.length; i++){ 
+          if ( tes2[i] === ',' || tes2[i] === '.') {
+          tes2.splice(i, 1); 
+        }
+      }
+      var tes3 = persediaanValue.split("")
+			for( var i = 0; i < tes3.length; i++){ 
+          if ( tes3[i] === ',' || tes3[i] === '.') {
+          tes3.splice(i, 1); 
+        }
+      }
+      var tes4 = alatValue.split("")
+			for( var i = 0; i < tes4.length; i++){ 
+          if ( tes4[i] === ',' || tes4[i] === '.') {
+          tes4.splice(i, 1); 
+        }
+      }
+      var tes5 = kasValue.split("")
+			for( var i = 0; i < tes5.length; i++){ 
+          if ( tes5[i] === ',' || tes5[i] === '.') {
+          tes5.splice(i, 1); 
+        }
+      }
+      var tes6 = piutangValue.split("")
+			for( var i = 0; i < tes6.length; i++){ 
+          if ( tes6[i] === ',' || tes6[i] === '.') {
+          tes6.splice(i, 1); 
+        }
+      }
+      var tes7 = peralatranValue.split("")
+			for( var i = 0; i < tes7.length; i++){ 
+          if ( tes7[i] === ',' || tes7[i] === '.') {
+          tes7.splice(i, 1); 
+        }
+      }
+
+      var result          = parseInt(tes1.join(""))+parseInt(tes2.join(""))+parseInt(tes3.join(""))+parseInt(tes4.join(""))+parseInt(tes5.join(""))+parseInt(tes6.join(""))+parseInt(tes7.join(""));
+
+      if (!isNaN(result)){
+        document.getElementById('totaset').value=currency(result).format();
+      }
     }
 
     function sum1(){
@@ -502,18 +546,61 @@
       var telpValue       = document.getElementById('telp').value;
       var atkValue        = document.getElementById('atk').value;
       var lainValue       = document.getElementById('lain').value;
-      var result          = parseInt(transportValue)+parseInt(listrikValue)+parseInt(telpValue)+parseInt(atkValue)+parseInt(lainValue);
+      var test1 = transportValue.split("")
+			for( var i = 0; i < test1.length; i++){ 
+          if ( test1[i] === ',' || test1[i] === '.') {
+          test1.splice(i, 1); 
+        }
+			}
+			var test2 = listrikValue.split("")
+			for( var i = 0; i < test2.length; i++){ 
+          if ( test2[i] === ',' || test2[i] === '.') {
+          test2.splice(i, 1); 
+        }
+      }
+      var test3 = telpValue.split("")
+			for( var i = 0; i < test3.length; i++){ 
+          if ( test3[i] === ',' || test3[i] === '.') {
+          test3.splice(i, 1); 
+        }
+      }
+      var test4 = atkValue.split("")
+			for( var i = 0; i < test4.length; i++){ 
+          if ( test4[i] === ',' || test4[i] === '.') {
+          test4.splice(i, 1); 
+        }
+      }
+      var test5 = lainValue.split("")
+			for( var i = 0; i < test5.length; i++){ 
+          if ( test5[i] === ',' || test5[i] === '.') {
+          test5.splice(i, 1); 
+        }
+      }
+      var result          = parseInt(test1.join(""))+parseInt(test2.join(""))+parseInt(test3.join(""))+parseInt(test4.join(""))+parseInt(test5.join(""));
+
         if (!isNaN(result)){
-          document.getElementById('totop').value=result;
+          document.getElementById('totop').value=currency(result).format();
         }
     }
 
     function sum_modal(){
       var modalValue  = document.getElementById('modal').value;
       var investValue    = document.getElementById('invest').value;
-      var result          = parseInt(modalValue)+parseInt(investValue);
+      var test1 = modalValue.split("")
+			for( var i = 0; i < test1.length; i++){ 
+          if ( test1[i] === ',' || test1[i] === '.') {
+          test1.splice(i, 1); 
+        }
+			}
+			var test2 = investValue.split("")
+			for( var i = 0; i < test2.length; i++){ 
+          if ( test2[i] === ',' || test2[i] === '.') {
+          test2.splice(i, 1); 
+        }
+      }
+      var result          = parseInt(test1.join(""))+parseInt(test2.join(""));
         if (!isNaN(result)){
-          document.getElementById('bsr_pjm').value=result;
+          document.getElementById('bsr_pjm').value=currency(result).format();
         }
     }
 

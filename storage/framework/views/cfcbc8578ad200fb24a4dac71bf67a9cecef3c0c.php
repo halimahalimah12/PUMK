@@ -40,13 +40,13 @@
     </main>
 
     <!-- ======= Footer ======= -->
-    <div class="fixed-bottom">
+    
     <footer id="footer" class="footer">
       <div class="copyright">
         &copy; Copyright <strong><span>Halimah</span></strong>. All Rights Reserved
       </div>
     </footer>
-</div>
+
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
@@ -74,10 +74,11 @@
 
       <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js" ></script>
       <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js" ></script>
+      <script type="text/javascript" src="https://unpkg.com/currency.js@1.2.2/dist/currency.min.js"></script>
       <script>
         $(document).ready( function () {
             $('#datatable').DataTable();
-            $('.rupiah').mask("#.##0",{
+            $('.rupiah').mask("#,##0",{
               reverse:true
             });
 
