@@ -29,12 +29,12 @@
                     <tr>
                       <td>Nama Usaha</td>
                       <td>:</td>
-                      <td><?php echo e($ush->nama_ush); ?></td>
+                      <td><?php echo e(ucwords($ush->nama_ush)); ?></td>
                     </tr>
                     <tr>
                       <td>Nama Penanggung Jawab Usaha</td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->data_mitra->nm); ?></td>
+                      <td><?php echo e(ucwords($pengajuan1->data_mitra->nm)); ?></td>
                     </tr>
                   </tbody>
                 </table>
@@ -62,7 +62,11 @@
                     <tr>
                       <td> Jenis Kelamin</td>
                       <td>:</td>
-                      <td><?php echo e(ucwords($pengajuan1->data_mitra->jk)); ?></td>
+                      <td>
+                          <?php if( $pengajuan1->data_mitra->jk == "L" ): ?> Laki - laki
+                            <?php else: ?> Perempuan
+                          <?php endif; ?>
+                      </td>
                     </tr>
                     <tr>
                       <td>Status Perkawinan</td>
@@ -203,7 +207,11 @@
                     <tr>
                       <td> Jenis Kelamin</td>
                       <td>:</td>
-                      <td><?php echo e($pengajuan1->pjb->jk); ?></td>
+                      <td>
+                          <?php if( $pengajuan1->pjb->jk == "L" ): ?> Laki - laki
+                            <?php else: ?> Perempuan
+                          <?php endif; ?>
+                      </td>
                     </tr>
                     <tr>
                       <td>Status Hubungan dengan Penangung Jawab Usaha</td>
@@ -603,7 +611,11 @@
                       <tr>
                         <td> Jenis Kelamin</td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->data_mitra->jk); ?></td>
+                        <td>
+                            <?php if( $pengajuan->data_mitra->jk == "L" ): ?> Laki - laki
+                              <?php else: ?> Perempuan
+                            <?php endif; ?>
+                        </td>
                       </tr>
                       <tr>
                         <td>Status Perkawinan</td>
@@ -744,7 +756,11 @@
                       <tr>
                         <td> Jenis Kelamin</td>
                         <td>:</td>
-                        <td><?php echo e($pengajuan->pjb->jk); ?></td>
+                        <td>
+                            <?php if( $pengajuan->pjb->jk == "L" ): ?> Laki - laki
+                              <?php else: ?> Perempuan
+                            <?php endif; ?>
+                        </td>
                       </tr>
                       <tr>
                         <td>Status Hubungan dengan Penangung Jawab Usaha</td>

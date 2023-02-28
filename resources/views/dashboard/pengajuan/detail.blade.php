@@ -29,12 +29,12 @@
                     <tr>
                       <td>Nama Usaha</td>
                       <td>:</td>
-                      <td>{{ $ush->nama_ush  }}</td>
+                      <td>{{ ucwords($ush->nama_ush)  }}</td>
                     </tr>
                     <tr>
                       <td>Nama Penanggung Jawab Usaha</td>
                       <td>:</td>
-                      <td>{{ $pengajuan1->data_mitra->nm }}</td>
+                      <td>{{ ucwords($pengajuan1->data_mitra->nm) }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -62,7 +62,11 @@
                     <tr>
                       <td> Jenis Kelamin</td>
                       <td>:</td>
-                      <td>{{ ucwords($pengajuan1->data_mitra->jk)}}</td>
+                      <td>
+                          @if( $pengajuan1->data_mitra->jk == "L" ) Laki - laki
+                            @else Perempuan
+                          @endif
+                      </td>
                     </tr>
                     <tr>
                       <td>Status Perkawinan</td>
@@ -203,7 +207,11 @@
                     <tr>
                       <td> Jenis Kelamin</td>
                       <td>:</td>
-                      <td>{{ $pengajuan1->pjb->jk}}</td>
+                      <td>
+                          @if( $pengajuan1->pjb->jk == "L" ) Laki - laki
+                            @else Perempuan
+                          @endif
+                      </td>
                     </tr>
                     <tr>
                       <td>Status Hubungan dengan Penangung Jawab Usaha</td>
@@ -603,7 +611,11 @@
                       <tr>
                         <td> Jenis Kelamin</td>
                         <td>:</td>
-                        <td>{{ $pengajuan->data_mitra->jk}}</td>
+                        <td>
+                            @if( $pengajuan->data_mitra->jk == "L" ) Laki - laki
+                              @else Perempuan
+                            @endif
+                        </td>
                       </tr>
                       <tr>
                         <td>Status Perkawinan</td>
@@ -744,7 +756,11 @@
                       <tr>
                         <td> Jenis Kelamin</td>
                         <td>:</td>
-                        <td>{{ $pengajuan->pjb->jk}}</td>
+                        <td>
+                            @if( $pengajuan->pjb->jk == "L" ) Laki - laki
+                              @else Perempuan
+                            @endif
+                        </td>
                       </tr>
                       <tr>
                         <td>Status Hubungan dengan Penangung Jawab Usaha</td>

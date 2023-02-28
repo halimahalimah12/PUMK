@@ -34,20 +34,21 @@ class PengajuanController extends Controller
     public function index()
     {
         $user      = User::where('id', Auth::user()->id)->first();
-        $ket = Pengajuan::select('ket')->first();
+        
         // halamaan  user
         if($user->is_admin ==0 )
         {
             $mitra     = Data_Mitra::where('user_id',$user->id)->first();
             $ush       = Data_Ush::where('user_id',$user->id)->first();
             $pengajuan = Pengajuan::where('data_mitra_id',$mitra->id)->get();
+            $ket = Pengajuan::select('ket')->first();
             $last      = DB::table('pengajuans')
                         ->where('user_id',$user->id)
                         ->latest('id')->first();
             return view('dashboard.pengajuan.index' ,compact('pengajuan','user','last','mitra','ush','ket') );
         }else{
             $pengajuan1 = Pengajuan::orderByDesc('id')->get();
-            return view('dashboard.pengajuan.index' ,compact('pengajuan1','user','ket') );
+            return view('dashboard.pengajuan.index' ,compact('pengajuan1','user') );
         }
         
     }
@@ -75,7 +76,7 @@ class PengajuanController extends Controller
         //dd($request->all());
         $user      = User::where('id', Auth::user()->id)->first();
         $mitra     = Data_Mitra::where('user_id',$user->id)->first();
-
+        
         $validateData = \Validator::make($request->all(),[
             // pjb
             'nm_pjb'    => 'required|max:255',
@@ -83,7 +84,7 @@ class PengajuanController extends Controller
             'tgl_lhr'   => 'required',
             'hub'       => 'required',
             'gender'    => 'required',
-            'pekerjaan'      => 'required',
+            'pekerjaan' => 'required',
             'almt'      => 'required',
             'no_hp'     => 'required|numeric',
             'no_ktp'    => 'required|numeric',
@@ -93,25 +94,25 @@ class PengajuanController extends Controller
             'foto'      => 'required | image | file',
             'scanktp'   => 'required | image | file',
 
-            'tanah'     => 'required |numeric',
-            'bangunan'  => 'required |numeric',
-            'persediaan'=> 'required |numeric',
-            'peralatan' => 'required |numeric',
-            'kas'       => 'required |numeric',
-            'piutang'   => 'required |numeric',
-            'alat'      => 'required |numeric',
-            'totaset'   => 'required |numeric',
+            'tanah'     => 'required ',
+            'bangunan'  => 'required ',
+            'persediaan'=> 'required ',
+            'peralatan' => 'required ',
+            'kas'       => 'required ',
+            'piutang'   => 'required ',
+            'alat'      => 'required ',
+            'totaset'   => 'required ',
 
-            'transport' => 'required |numeric',
-            'listrik'   => 'required |numeric',
-            'telp'      => 'required |numeric',
-            'atk'       => 'required |numeric',
-            'lain'      => 'required |numeric',
-            'totop'     => 'required |numeric',
+            'transport' => 'required ',
+            'listrik'   => 'required ',
+            'telp'      => 'required ',
+            'atk'       => 'required ',
+            'lain'      => 'required ',
+            'totop'     => 'required ',
 
-            'modal'     => 'required |numeric',
-            'invest'    => 'required |numeric',
-            'bsr_pjm'   => 'required |numeric',
+            'modal'     => 'required ',
+            'invest'    => 'required ',
+            'bsr_pjm'   => 'required ',
 
             'bkt_serius'    => 'required',
             'kk'            => 'required',
@@ -124,6 +125,7 @@ class PengajuanController extends Controller
         if (!$validateData->passes()) {
             return response()->json(['code'=>0,'error'=>$validateData->errors()->toArray()]);
         } else {
+            
             $pjb = new Pjb;
             $pjb->nm        =   $request->nm_pjb;
             $pjb->jk        =   $request->gender;
@@ -158,23 +160,25 @@ class PengajuanController extends Controller
             $pjb->save();
     
             $aset = new Aset;
-            $aset->tanah           = $request->tanah; 
-            $aset->bangunan        = $request->bangunan; 
-            $aset->persediaan      = $request->persediaan; 
-            $aset->alat            = $request->alat; 
-            $aset->kas             = $request->kas; 
-            $aset->piutang         = $request->piutang; 
-            $aset->peralatan       = $request->peralatan; 
-            $aset->totaset         = $request->totaset; 
+            $aset->tanah           = str_replace(",", "", $request->tanah); 
+            $aset->bangunan        = str_replace(",", "",$request->bangunan); 
+            $aset->persediaan      = str_replace(",", "",$request->persediaan); 
+            $aset->alat            = str_replace(",", "",$request->alat); 
+            $aset->kas             = str_replace(",", "",$request->kas); 
+            $aset->piutang         = str_replace(",", "",$request->piutang); 
+            $aset->peralatan       = str_replace(",", "",$request->peralatan); 
+            $totset = str_replace(".00", "",$request->totaset);
+            $aset->totaset         = str_replace(",", "",$totset); 
             $aset->save();
-    
+            
             $oprasional = new Oprasional;
-            $oprasional->transport = $request->transport; 
-            $oprasional->listrik   = $request->listrik; 
-            $oprasional->telpon    = $request->telp; 
-            $oprasional->atk       = $request->atk; 
-            $oprasional->lain      = $request->lain; 
-            $oprasional->totop     = $request->totop; 
+            $oprasional->transport = str_replace(",", "",$request->transport); 
+            $oprasional->listrik   = str_replace(",", "",$request->listrik); 
+            $oprasional->telpon    = str_replace(",", "",$request->telp); 
+            $oprasional->atk       = str_replace(",", "",$request->atk); 
+            $oprasional->lain      = str_replace(",", "",$request->lain);
+            $totop= str_replace(".00", "",$request->totop);
+            $oprasional->totop     = str_replace(",", "",$totop); 
             $oprasional->save();
     
             $pengajuan = new Pengajuan;
@@ -184,9 +188,11 @@ class PengajuanController extends Controller
             $pengajuan->aset_id         = $aset->id;
             $pengajuan->oprasional_id   = $oprasional->id;
     
-            $pengajuan->modal        = $request->modal; 
-            $pengajuan->investasi    = $request->invest; 
-            $pengajuan->bsr_pinjaman = $request->bsr_pjm; 
+            $pengajuan->modal        = str_replace(",", "",$request->modal); 
+            $pengajuan->investasi    = str_replace(",", "",$request->invest); 
+            $bsr_pjm= str_replace(".00", "",$request->bsr_pjm);
+            $pengajuan->bsr_pinjaman = str_replace(",", "",$bsr_pjm); 
+            
     
             if  ($request->file( 'bkt_serius')){
                 $file           =   $request->file('bkt_serius');
@@ -247,22 +253,21 @@ class PengajuanController extends Controller
                 $alat = new Alat;
                 $alat->pengajuan_id =   $pengajuan->id;
                 $alat->nm_brg       =   $nm_brg[$no];
-                $alat->hrg_satuan   =   $hrg_satuan[$no];
-                $alat->jmlh         =   $jmlh[$no];
+                $alat->hrg_satuan   =   str_replace(",", "",$hrg_satuan[$no]);
+                $alat->jmlh         =   str_replace(",", "",$jmlh[$no]);
                 $alat->save();
             }
     
             $nmkry     = $request->nmkry;
             $jbtkry    = $request->jbtkry;
             $gaji      = $request->gaji;
-            $pengajuan_id = $pengajuan->id;
     
             for ($no =0 ; $no< count($nmkry) ; $no++ ) { 
                 $tenagakerja = new Tenagakerja;
                 $tenagakerja->pengajuan_id = $pengajuan->id;
                 $tenagakerja->nm_tngk      = $nmkry[$no];
                 $tenagakerja->jbt          = $jbtkry[$no];
-                $tenagakerja->gaji         = $gaji[$no];
+                $tenagakerja->gaji         = str_replace(",", "",$gaji[$no]);
                 $tenagakerja->save();
             }
             
@@ -274,8 +279,8 @@ class PengajuanController extends Controller
                 $omzet = new Omzet;
                 $omzet->pengajuan_id    =   $pengajuan->id;
                 $omzet->nm_brg          =   $nmomzet[$no];
-                $omzet->hrg_satuan      =   $hrgomzet[$no];
-                $omzet->jmlh            =   $jmlhomzet[$no];
+                $omzet->hrg_satuan      =   str_replace(",", "",$hrgomzet[$no]);
+                $omzet->jmlh            =   str_replace(",", "",$jmlhomzet[$no]);
                 $omzet->save();
             }
     
@@ -287,9 +292,6 @@ class PengajuanController extends Controller
                 $manfaat->save();
             }
             
-            //return redirect('/pengajuan')->with('success','Pengajuan berhasil ditambahkan  ');
-            //return response()->json(['error'=>$validateData->errors()->all()]);
-
             if ( $pjb  && $aset && $oprasional && $pengajuan && $alat && $tenagakerja && $omzet && $manfaat ){
                 return response()->json(['code'=>1, 'msg' => 'Berhasil ditambahkan']);
             }
@@ -387,18 +389,6 @@ class PengajuanController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    // Public function updatemodal(Request $request, $id )
-
-    // {
-    //     $pengajuan1  = Pengajuan::find($id);
-    //     $status =([
-    //         'status' => $request->status,
-    //         'ket'=> $request->ket,
-    //     ]);
-    //     $pengajuan1->update($status);
-        
-    // }
-    
     public function update(Request $request, $id)
     {
         $pengajuan  = Pengajuan::find($id);
@@ -425,25 +415,25 @@ class PengajuanController extends Controller
             'pddk'      => 'required',
             'jbt'       => 'required | alpha', 
 
-            'tanah'     => 'required |numeric',
-            'bangunan'  => 'required |numeric',
-            'persediaan'=> 'required |numeric',
-            'peralatan' => 'required |numeric',
-            'kas'       => 'required |numeric',
-            'piutang'   => 'required |numeric',
-            'alat'      => 'required |numeric',
-            'totaset'   => 'required |numeric',
+            'tanah'     => 'required',
+            'bangunan'  => 'required',
+            'persediaan'=> 'required',
+            'peralatan' => 'required',
+            'kas'       => 'required',
+            'piutang'   => 'required',
+            'alat'      => 'required',
+            'totaset'   => 'required',
 
-            'transport' => 'required |numeric',
-            'listrik'   => 'required |numeric',
-            'telp'      => 'required |numeric',
-            'atk'       => 'required |numeric',
-            'lain'      => 'required |numeric',
-            'totop'     => 'required |numeric',
+            'transport' => 'required',
+            'listrik'   => 'required',
+            'telp'      => 'required',
+            'atk'       => 'required',
+            'lain'      => 'required',
+            'totop'     => 'required',
 
-            'modal'     => 'required |numeric',
-            'invest'    => 'required |numeric',
-            'bsr_pjm'   => 'required |numeric',
+            'modal'     => 'required',
+            'invest'    => 'required',
+            'bsr_pjm'   => 'required',
         ]);
 
         $dtpjb =([
@@ -490,32 +480,32 @@ class PengajuanController extends Controller
         $pjb->update($scanktp);
         
         $dtaset = ([
-            'tanah'     => $validateData['tanah'], 
-            'bangunan'  => $validateData['bangunan'], 
-            'persediaan'=> $validateData['persediaan'], 
-            'alat'      => $validateData['alat'], 
-            'kas'       => $validateData['kas'], 
-            'piutang'   => $validateData['piutang'], 
-            'peralatan' => $validateData['peralatan'], 
-            'totaset'   => $validateData['totaset'], 
+            'tanah'     => str_replace(",", "", $validateData['tanah']), 
+            'bangunan'  => str_replace(",", "", $validateData['bangunan']), 
+            'persediaan'=> str_replace(",", "", $validateData['persediaan']), 
+            'alat'      => str_replace(",", "", $validateData['alat']), 
+            'kas'       => str_replace(",", "", $validateData['kas']), 
+            'piutang'   => str_replace(",", "", $validateData['piutang']), 
+            'peralatan' => str_replace(",", "", $validateData['peralatan']), 
+            'totaset'   => str_replace(",", "", $validateData['totaset']), 
         ]);
 
         $aset->update($dtaset);
 
         $dtop = ([
-            'transport'=> $validateData['transport'],  
-            'listrik'  => $validateData['listrik'],  
-            'telpon'   => $validateData['telp'],  
-            'atk'      => $validateData['atk'],  
-            'lain'     => $validateData['lain'],  
-            'totop'    => $validateData['totop'], 
+            'transport'=> str_replace(",", "", $validateData['transport']),  
+            'listrik'  => str_replace(",", "", $validateData['listrik']),  
+            'telpon'   => str_replace(",", "", $validateData['telp']),  
+            'atk'      => str_replace(",", "", $validateData['atk']),  
+            'lain'     => str_replace(",", "", $validateData['lain']),  
+            'totop'    => str_replace(",", "", $validateData['totop']), 
         ]);
         $oprasional->update($dtop);
 
         $dtpengajuan = ([
-            'modal'       => $validateData['modal'],  
-            'investasi'   => $validateData['invest'],  
-            'bsr_pinjaman'=> $validateData['bsr_pjm'],  
+            'modal'       => str_replace(",", "", $validateData['modal']),  
+            'investasi'   => str_replace(",", "", $validateData['invest']),  
+            'bsr_pinjaman'=> str_replace(",", "", $validateData['bsr_pjm']),  
         ]);
         $pengajuan1->update($dtpengajuan); 
 
@@ -618,8 +608,8 @@ class PengajuanController extends Controller
             $alat = new Alat;
             $alat->pengajuan_id =   $pengajuan->id;
             $alat->nm_brg       =   $nm_brg[$no];
-            $alat->hrg_satuan   =   $hrg_satuan[$no];
-            $alat->jmlh         =   $jmlh[$no];
+            $alat->hrg_satuan   =   str_replace(",", "", $hrg_satuan[$no]);
+            $alat->jmlh         =   str_replace(",", "", $jmlh[$no]);
             $alat->save();
         }
         
@@ -633,7 +623,7 @@ class PengajuanController extends Controller
             $tenagakerja->pengajuan_id = $pengajuan->id;
             $tenagakerja->nm_tngk      = $nmkry[$no];
             $tenagakerja->jbt          = $jbtkry[$no];
-            $tenagakerja->gaji         = $gaji[$no];
+            $tenagakerja->gaji         = str_replace(",", "", $gaji[$no]);
             $tenagakerja->save();
         }
         
@@ -645,8 +635,8 @@ class PengajuanController extends Controller
             $omzet = new Omzet;
             $omzet->pengajuan_id    =   $pengajuan->id;
             $omzet->nm_brg          =   $nmomzet[$no];
-            $omzet->hrg_satuan      =   $hrgomzet[$no];
-            $omzet->jmlh            =   $jmlhomzet[$no];
+            $omzet->hrg_satuan      =   str_replace(",", "", $hrgomzet[$no]);
+            $omzet->jmlh            =   str_replace(",", "", $jmlhomzet[$no]);
             $omzet->save();
         }
 
@@ -753,7 +743,7 @@ class PengajuanController extends Controller
             $kp = Kartu_piutang::where('pengajuan_id',$pengajuan1->id);
             $kp = new Kartu_piutang;
             $kp->pengajuan_id = $pengajuan1->id;
-            $kp->pinjaman = $request->bsrpemin;
+            $kp->pinjaman = str_replace(",", "",$request->bsrpemin);
             $kp->save();
             return redirect()->back()->with('flash_message_success','Data berhasil di perbarui'); 
         }

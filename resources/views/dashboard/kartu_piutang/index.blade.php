@@ -144,7 +144,7 @@
                     <td>{{ ucwords($p->pengajuan->data_mitra->data_ush->nama_ush) }}</td>
                     <td>{{ $p->formatRupiah('pinjaman') }}</td>                    
                     <td>
-                      <a href="/kartupiutang/{{$p->id}}/edit" class="bi bi-file-earmark-text" ></a>
+                      <a href="/kartupiutang/{{$p->id}}/edit" class="bi bi-pencil-square"  ></a>
                       @if ($p->tgl_penyaluran != NULL && $p->no_kontrak != NULL && $p->sb_bln != NULL && $p->sb_thn != NULL)
                         <a href="/cetak-kartu-piutang/{{ $p->id }}" class="bi bi-printer" > </a>
                       @endif

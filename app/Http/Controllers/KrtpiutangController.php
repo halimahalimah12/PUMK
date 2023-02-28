@@ -36,8 +36,7 @@ class KrtpiutangController extends Controller
             }
             return view('dashboard.kartu_piutang.index' ,compact('user','pengajuan','mitra') );
         } else {
-            $pengajuan = Pengajuan::first();
-            $kp = Kartu_piutang::where('Pengajuan_id', $pengajuan->id)->get();
+            $kp = Kartu_piutang::get();
             return view('dashboard.kartu_piutang.index' ,compact('user','kp') );
         }
     }

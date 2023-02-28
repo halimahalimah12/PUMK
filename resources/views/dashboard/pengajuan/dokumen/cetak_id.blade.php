@@ -138,7 +138,11 @@
               <td class="nomor">.</td>
               <td>Jenis Kelamin</td>
               <td class="titikdua">:</td>
-              <td class="isi">{{ucwords($pengajuan1->data_mitra->jk) }}</td>
+              <td class="isi">
+                  @if($pengajuan1->data_mitra->jk == "L" ) Laki - laki
+                    @else Perempuan
+                  @endif
+              </td>
             </tr>
             <tr>
               <td > </td>
@@ -250,7 +254,11 @@
               <td class="nomor">.</td>
               <td> Jenis Kelamin</td>
               <td class="titikdua">:</td>
-              <td class="isi">{{ucwords($pengajuan1->pjb->jk) }}</td>
+              <td class="isi">{{ucwords() }}
+                  @if($pengajuan1->pjb->jk == "L" ) Laki - laki
+                    @else Perempuan
+                  @endif
+              </td>
             </tr>
             <tr>
               <td > </td>

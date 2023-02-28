@@ -145,7 +145,7 @@
                     <td><?php echo e(ucwords($p->pengajuan->data_mitra->data_ush->nama_ush)); ?></td>
                     <td><?php echo e($p->formatRupiah('pinjaman')); ?></td>                    
                     <td>
-                      <a href="/kartupiutang/<?php echo e($p->id); ?>/edit" class="bi bi-file-earmark-text" ></a>
+                      <a href="/kartupiutang/<?php echo e($p->id); ?>/edit" class="bi bi-pencil-square"  ></a>
                       <?php if($p->tgl_penyaluran != NULL && $p->no_kontrak != NULL && $p->sb_bln != NULL && $p->sb_thn != NULL): ?>
                         <a href="/cetak-kartu-piutang/<?php echo e($p->id); ?>" class="bi bi-printer" > </a>
                       <?php endif; ?>

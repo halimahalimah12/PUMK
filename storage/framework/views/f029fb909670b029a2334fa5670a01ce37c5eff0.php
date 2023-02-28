@@ -108,7 +108,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid  <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="sb_thn" value="  <?php echo e(old('sb_thn',$kp->sb_thn)); ?>" > 
+unset($__errorArgs, $__bag); ?>" name="sb_thn" onkeyup="bagi();" id="sb_thn" value="  <?php echo e(old('sb_thn',$kp->sb_thn)); ?>" > 
                     <?php $__errorArgs = ['sb_thn'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -129,7 +129,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid  <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="sb_bln" value=" <?php echo e(old('sb_bln',$kp->sb_bln)); ?>" placeholder="0.05">
+unset($__errorArgs, $__bag); ?>" name="sb_bln" id="sb_bln"  value=" <?php echo e(old('sb_bln',$kp->sb_bln)); ?>" >
                     <?php $__errorArgs = ['sb_bln'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -177,7 +177,6 @@ unset($__errorArgs, $__bag); ?>
                   ?>
                     <?php for( 
                       $i =1,
-                      $x =13,
                       $saldoawal = $kp->pinjaman,
                       $saldo = $kp->pinjaman,
                       $sb_bln = $kp->sb_bln/100,
@@ -231,5 +230,15 @@ unset($__errorArgs, $__bag); ?>
       </div>
     </div>
   </div>
+
+    <script type='text/javascript'>
+    function bagi(){
+      var sb_thn = document.getElementById('sb_thn').value; 
+      var result = parseFloat(sb_thn)/12;
+      if (!isNaN(result)){
+        document.getElementById('sb_bln').value=result;
+      }
+    }
+    </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('dashboard.layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\applaravel\pumk\resources\views/dashboard/kartu_piutang/view.blade.php ENDPATH**/ ?>

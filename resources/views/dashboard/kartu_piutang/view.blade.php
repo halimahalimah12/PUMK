@@ -58,14 +58,14 @@
               <div class="row mb-3">
                 <label for="sbthn" class="col-sm-3 col-form-label">Suku Bunga Efektif /Tahun (%) </label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control @error('sb_thn') is-invalid  @enderror" name="sb_thn" value="  {{ old('sb_thn',$kp->sb_thn) }}" > 
+                  <input type="text" class="form-control @error('sb_thn') is-invalid  @enderror" name="sb_thn" onkeyup="bagi();" id="sb_thn" value="  {{ old('sb_thn',$kp->sb_thn) }}" > 
                     @error('sb_thn')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="sbbln" class="col-sm-3 col-form-label">Suku Bunga Efektif /Bulan (%)</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control  @error('sb_bln') is-invalid  @enderror" name="sb_bln" value=" {{ old('sb_bln',$kp->sb_bln) }}" placeholder="0.05">
+                  <input type="text" class="form-control  @error('sb_bln') is-invalid  @enderror" name="sb_bln" id="sb_bln"  value=" {{ old('sb_bln',$kp->sb_bln) }}" >
                     @error('sb_bln')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
               </div>
@@ -159,4 +159,14 @@
       </div>
     </div>
   </div>
+
+    <script type='text/javascript'>
+    function bagi(){
+      var sb_thn = document.getElementById('sb_thn').value; 
+      var result = parseFloat(sb_thn)/12;
+      if (!isNaN(result)){
+        document.getElementById('sb_bln').value=result;
+      }
+    }
+    </script>
 @endsection

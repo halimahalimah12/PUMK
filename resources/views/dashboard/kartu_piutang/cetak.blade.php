@@ -58,8 +58,8 @@
       <div class="page">
         @if( $user->is_admin == 0)
             <center> <h3> KARTU PIUTANG </h3> </center>
-            <center> <h3> PROGRAM KEMITRAAN BANDARA SULTAN THAHA</h3> </center>
-            <table class="noborder">
+            <center> <h3 > PROGRAM KEMITRAAN BANDARA SULTAN THAHA</h3> </center>
+            <table class="noborder" >
               <tr class="noborder">
                 <td class="noborder">Nama Mitra</td>
                 <td class="noborder">:</td>
@@ -80,15 +80,20 @@
                 <td class="noborder">:</td>
                 <td class="noborder">{{ ($kp->formatRupiah('pinjaman')) }}</td>
               </tr>
+              <tr class="noborder">
+                <td class="noborder">Nomor Kontrak</td>
+                <td class="noborder">:</td>
+                <td class="noborder">{{ $kp->no_kontrak }}</td>
+              </tr>
             </table>
-            <div style="padding-top:25px">
+            <div style="padding-top:20px">
               <table>
                 <thead>
                   <tr>
                     <th rowspan="2" valign="middle">ANG ke</th>
                     <th colspan="2" scope="col">Tajuh Tempo</th>
                     <th colspan="3">Rincian Anggaran</th>
-                    <th rowspan="2">Saldo</th>
+                    <th rowspan="2"  width="110px">Saldo</th>
                   </tr>
                   <tr>
                     <th scope="col" width="85px">Bulan</th>
@@ -184,7 +189,12 @@
               <tr class="noborder">
                 <td class="noborder">Besar Pinjaman </td>
                 <td class="noborder">:</td>
-                <td class="noborder">{{ ($kp->formatRupiah('pinjaman')) }}</td>
+                <td class="noborder">{{ $kp->formatRupiah('pinjaman') }}</td>
+              </tr>
+              <tr class="noborder">
+                <td class="noborder">Nomor Kontrak</td>
+                <td class="noborder">:</td>
+                <td class="noborder">{{ $kp->no_kontrak }}</td>
               </tr>
             </table>
             <div style="padding-top:25px">

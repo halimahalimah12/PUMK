@@ -25,10 +25,10 @@
               <div class="alert alert-info"> Silahkan Lengkapi Data Usaha Terlebih Dahulu.</div>
             <?php else: ?>
               <?php if(empty($last)): ?>
-                <button type="button" class="btn btn-primary"> <a href="/pengajuan/create"  style="color:white;"> Tambah</a></button>
+                <button type="button" class="btn btn-primary" style="margin-bottom:12px"> <a href="/pengajuan/create"  style="color:white;"> Tambah</a></button>
                 <?php else: ?>
                   <?php if($last->status == 'tidak'): ?>
-                      <button type="button" class="btn btn-primary"> <a href="/pengajuan/create"  style="color:white;"> Tambah</a> </button>
+                      <button type="button" class="btn btn-primary" style="margin-bottom:12px"> <a href="/pengajuan/create"  style="color:white;"> Tambah</a> </button>
                     <?php else: ?>
                   <?php endif; ?>
               <?php endif; ?>
@@ -43,7 +43,8 @@
                   <?php if($pengajuan == NULL): ?>
                   <?php else: ?>
                       <?php if($ket->ket != NULL): ?>
-                        <th >Keterangan</th>
+                          <th >Keterangan</th>
+                        <?php else: ?>
                       <?php endif; ?>
                   <?php endif; ?>
                   <th scope="col">Aksi</th>
@@ -66,7 +67,7 @@
                       <?php endif; ?>
                     </td>
                     <?php if($ket->ket == NULL): ?>
-                        <td style="width:370px"></td>
+                        
                       <?php elseif( $ket->ket != NULL): ?>
                       <td style="width:420px"><?php echo e($p->ket); ?> </td>
                     <?php endif; ?>
@@ -97,13 +98,8 @@
                     <th scope="col">Besar Pinjaman</th>
                     <th scope="col">Tanggal</th>
                     <th scope="col">Status</th>
-                    <?php if($pengajuan1 == NULL): ?>
-                      <?php else: ?>
-                        <?php if($ket->ket != NULL): ?>
-                            <th scope="col">Keterangan</th>
-                          <?php endif; ?>
-                    <?php endif; ?>
-                      <th scope="col">Aksi</th>
+                    <th scope="col">Keterangan</th>
+                    <th scope="col">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -128,11 +124,7 @@
                             <span class="badge bg-danger">Pengajuan Ditolak</span>
                         <?php endif; ?>
                       </td>
-                        <?php if( $p->ket != NULL ): ?>
-                            <td scope="col" ><?php echo e($p->ket); ?></td>
-                          <?php elseif( $p->ket == NULL): ?>
-                            <td scope="col" ></td>
-                        <?php endif; ?>
+                      <td scope="col" ><?php echo e($p->ket); ?></td>
                       <td>
                         <a href="/show/<?php echo e($p->id); ?>" class="bi bi-file-earmark-text" ></a>
                         <a href="/survei/<?php echo e($p->id); ?>" class="bi bi-file-earmark-check" ></a>
@@ -170,7 +162,10 @@
                         </div>
                         <div class="col-12 " >
                           <label for="bsrpemin" class="form-label" id="bsrpin" >Besar Peminjaman yang diberikan </label>
-                          <input type="text" class="form-control hide" name="bsrpemin"  id="bsrpemin">
+                          <div class="input-group mb-3">
+                            <span class="input-group-text rp">Rp.</span>
+                            <input type="text" class="rupiah form-control hide" name="bsrpemin"  id="bsrpemin">
+                        </div> 
                         </div> 
                         <div class="col-12 ">
                           <label for="ket" class="form-label" id="lebket">Keterangan </label>
@@ -199,8 +194,9 @@
   <script type='text/javascript'>
     $('.menunggu').on('click', function(e){
       console.log(e);
-      $('#bsrpemin').hide();
+        $('#bsrpemin').hide();
         $('#bsrpin').hide();
+        $('.rp').hide();
         $('#lebket').hide();
         $('#ket').hide();
       });
@@ -209,17 +205,20 @@
       var status= e.target.value;
       if (status == "lulus"){
         $('#bsrpin').show();
+        $('.rp').show();
         $('#bsrpemin').show();
         $('#lebket').show();
         $('#ket').show();
       } else if ( status == "menunggu"){
         $('#bsrpemin').hide();
+        $('.rp').hide();
         $('#bsrpin').hide();
         $('#lebket').hide();
         $('#ket').hide();
       }
       else{
         $('#bsrpemin').hide();
+        $('.rp').hide();
         $('#bsrpin').hide();
         $('#lebket').show();
         $('#ket').show();

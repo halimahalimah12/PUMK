@@ -79,7 +79,7 @@
         $(document).ready( function () {
             $('#datatable').DataTable();
             $('.rupiah').mask("#,##0",{
-              reverse:true
+              reverse:true,
             });
 
         } );

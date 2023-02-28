@@ -358,7 +358,9 @@ unset($__errorArgs, $__bag); ?>
                   <div class="row mb-3">
                     <label for="tanah" class="col-sm-2 col-form-label">Tanah</label>
                     <div class="col-sm-10">
-                      <input type="text" class="rupiah form-control <?php $__errorArgs = ['tanah'];
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">Rp.</span>
+                        <input type="text" class="rupiah form-control <?php $__errorArgs = ['tanah'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -366,7 +368,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="tanah" id="tanah"  onkeyup="sum();" value="<?php echo e(old('tanah', $pengajuan->aset->tanah)); ?>" >
-                      <?php $__errorArgs = ['tanah'];
+                        <?php $__errorArgs = ['tanah'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -374,12 +376,15 @@ $message = $__bag->first($__errorArgs[0]); ?>  <div class="invalid-feedback"><?p
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <label for="tanah" class="col-sm-2 col-form-label">Bangunan</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control <?php $__errorArgs = ['bangunan'];
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">Rp.</span>
+                        <input type="text" class="rupiah form-control <?php $__errorArgs = ['bangunan'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -387,7 +392,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="bangunan" id="bangunan" onkeyup="sum();" value="<?php echo e(old('bangunan', $pengajuan->aset->bangunan)); ?>" >
-                      <?php $__errorArgs = ['bangunan'];
+                        <?php $__errorArgs = ['bangunan'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -395,12 +400,15 @@ $message = $__bag->first($__errorArgs[0]); ?> <div class="invalid-feedback"><?ph
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <label for="tanah" class="col-sm-2 col-form-label">Persediaan</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control <?php $__errorArgs = ['persediaan'];
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">Rp.</span>
+                        <input type="text" class="rupiah form-control <?php $__errorArgs = ['persediaan'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -408,7 +416,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="persediaan" id="persediaan" onkeyup="sum();" value="<?php echo e(old('persediaan', $pengajuan->aset->persediaan)); ?>" >
-                      <?php $__errorArgs = ['persediaan'];
+                        <?php $__errorArgs = ['persediaan'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -416,12 +424,15 @@ $message = $__bag->first($__errorArgs[0]); ?><div class="invalid-feedback"><?php
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <label for="tanah" class="col-sm-2 col-form-label">Peralatan Usaha</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control <?php $__errorArgs = ['alat'];
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">Rp.</span>
+                        <input type="text" class="rupiah form-control <?php $__errorArgs = ['alat'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -429,7 +440,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="alat" id="alat" onkeyup="sum();" value="<?php echo e(old('alat', $pengajuan->aset->alat)); ?>" >
-                      <?php $__errorArgs = ['alat'];
+                        <?php $__errorArgs = ['alat'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -437,12 +448,15 @@ $message = $__bag->first($__errorArgs[0]); ?> <div class="invalid-feedback"><?ph
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <label for="kas" class="col-sm-2 col-form-label">kas</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control <?php $__errorArgs = ['kas'];
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Rp.</span>
+                        <input type="text" class="rupiah form-control <?php $__errorArgs = ['kas'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -450,7 +464,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="kas" id="kas" onkeyup="sum();" value="<?php echo e(old('kas', $pengajuan->aset->kas)); ?>" >
-                      <?php $__errorArgs = ['kas'];
+                        <?php $__errorArgs = ['kas'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -458,12 +472,15 @@ $message = $__bag->first($__errorArgs[0]); ?> <div class="invalid-feedback"><?ph
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <label for="piutang" class="col-sm-2 col-form-label">Piutang</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control <?php $__errorArgs = ['piutang'];
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">Rp.</span>
+                        <input type="text" class="rupiah form-control <?php $__errorArgs = ['piutang'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -471,7 +488,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="piutang" id="piutang" onkeyup="sum();" value="<?php echo e(old('piutang', $pengajuan->aset->piutang)); ?>" >
-                      <?php $__errorArgs = ['piutang'];
+                        <?php $__errorArgs = ['piutang'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -479,12 +496,15 @@ $message = $__bag->first($__errorArgs[0]); ?> <div class="invalid-feedback"><?ph
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <label for="peralatan" class="col-sm-2 col-form-label">Peralatan Produksi</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control <?php $__errorArgs = ['peralatan'];
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">Rp.</span>
+                        <input type="text" class="rupiah form-control <?php $__errorArgs = ['peralatan'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -492,7 +512,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="peralatan" id="peralatan" onkeyup="sum();" value="<?php echo e(old('peralatan', $pengajuan->aset->peralatan)); ?>" >
-                      <?php $__errorArgs = ['peralatan'];
+                        <?php $__errorArgs = ['peralatan'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -500,12 +520,15 @@ $message = $__bag->first($__errorArgs[0]); ?> <div class="invalid-feedback"><?ph
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <label  for="totaset" class="col-sm-2 col-form-label">Total Aset</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control <?php $__errorArgs = ['totaset'];
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">Rp.</span>
+                        <input type="text" class="rupiah form-control <?php $__errorArgs = ['totaset'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -513,7 +536,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="totaset" id="totaset" style="padding-bottom:5px" value="<?php echo e(old('totaset', $pengajuan->aset->totaset)); ?>" >
-                        <?php $__errorArgs = ['totaset'];
+                          <?php $__errorArgs = ['totaset'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -521,6 +544,7 @@ $message = $__bag->first($__errorArgs[0]); ?> <div class="invalid-feedback"><?ph
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                      </div>
                     </div>
                   </div>  
               </div>
@@ -540,8 +564,8 @@ unset($__errorArgs, $__bag); ?>
                     <?php $__currentLoopData = $alat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $x): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                       <tr>        
                         <td> <input type="text" name="nm_brg[]" class="form-control " value="<?php echo e(old('nm_brg[]', $x->nm_brg)); ?>">    </td>  
-                        <td> <input type="text" name=" hrg_satuan[]"  class="form-control" value="<?php echo e(old('hrg_satuan[]', $x->hrg_satuan)); ?>"> </td>
-                        <td> <input type="text" name="jmlh[]" class="form-control" value="<?php echo e(old('jmlh[]', $x->jmlh)); ?>"> </td>
+                        <td> <input type="text" name=" hrg_satuan[]"  class="rupiah form-control" value="<?php echo e(old('hrg_satuan[]', $x->hrg_satuan)); ?>"> </td>
+                        <td> <input type="text" name="jmlh[]" class="rupiah form-control" value="<?php echo e(old('jmlh[]', $x->jmlh)); ?>"> </td>
                         <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
                       </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -565,7 +589,7 @@ unset($__errorArgs, $__bag); ?>
                       <tr>
                         <td > <input type="text" name="nmkry[]" class="form-control" value="<?php echo e(old('nmkry[]', $x->nm_tngk)); ?>"> </td>
                         <td > <input type="text" name="jbtkry[]" class="form-control" value="<?php echo e(old('jbtkry[]', $x->jbt)); ?>"> </td>
-                        <td > <input type="text" name="gaji[]" class="form-control" value="<?php echo e(old('gaji[]', $x->gaji)); ?>"> </td>
+                        <td > <input type="text" name="gaji[]" class="rupiah form-control" value="<?php echo e(old('gaji[]', $x->gaji)); ?>"> </td>
                         <td > <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
                       </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -578,7 +602,9 @@ unset($__errorArgs, $__bag); ?>
                 <div class="row mb-3">
                   <label for="transport" class="col-sm-2 col-form-label">Transport</label>
                   <div class="col-sm-10">
-                    <input type="text" class="uang form-control <?php $__errorArgs = ['transport'];
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Rp.</span>
+                      <input type="text" class=" rupiah form-control <?php $__errorArgs = ['transport'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -586,7 +612,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="transport" id="transport" onkeyup="sum1();"value="<?php echo e(old('transport',$pengajuan->oprasional->transport)); ?>">
-                      <?php $__errorArgs = ['transport'];
+                        <?php $__errorArgs = ['transport'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -594,12 +620,15 @@ $message = $__bag->first($__errorArgs[0]); ?> <div class="invalid-feedback"><?ph
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                    </div>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="listrik"  class="col-sm-2 col-form-label">Listrik</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control <?php $__errorArgs = ['listrik'];
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Rp.</span>
+                      <input type="text" class="rupiah form-control <?php $__errorArgs = ['listrik'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -607,7 +636,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="listrik" id="listrik" onkeyup="sum1();" value="<?php echo e(old('listrik',$pengajuan->oprasional->listrik)); ?>" >
-                    <?php $__errorArgs = ['listrik'];
+                      <?php $__errorArgs = ['listrik'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -615,12 +644,15 @@ $message = $__bag->first($__errorArgs[0]); ?><div class="invalid-feedback"><?php
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                    </div>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="telp"  class="col-sm-2 col-form-label">Telepon</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control <?php $__errorArgs = ['telp'];
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Rp.</span>
+                      <input type="text" class="rupiah form-control <?php $__errorArgs = ['telp'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -628,7 +660,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="telp" id="telp" onkeyup="sum1();" value="<?php echo e(old('telp',$pengajuan->oprasional->telpon)); ?>">
-                      <?php $__errorArgs = ['telp'];
+                        <?php $__errorArgs = ['telp'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -636,12 +668,15 @@ $message = $__bag->first($__errorArgs[0]); ?> <div class="invalid-feedback"><?ph
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                    </div>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="atk" class="col-sm-2 col-form-label">ATK</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control <?php $__errorArgs = ['atk'];
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Rp.</span>
+                      <input type="text" class="rupiah form-control <?php $__errorArgs = ['atk'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -649,7 +684,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="atk" id="atk" onkeyup="sum1();" value="<?php echo e(old('atk', $pengajuan->oprasional->atk)); ?>">
-                      <?php $__errorArgs = ['atk'];
+                        <?php $__errorArgs = ['atk'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -657,12 +692,15 @@ $message = $__bag->first($__errorArgs[0]); ?> <div class="invalid-feedback"><?ph
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                    </div>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="lain" class="col-sm-2 col-form-label">Lain-Lain</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control <?php $__errorArgs = ['lain'];
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Rp.</span>
+                      <input type="text" class="rupiah form-control <?php $__errorArgs = ['lain'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -670,7 +708,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="lain" id="lain" onkeyup="sum1();" value="<?php echo e(old('lain',$pengajuan->oprasional->lain)); ?>"> 
-                      <?php $__errorArgs = ['lain'];
+                        <?php $__errorArgs = ['lain'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -678,12 +716,15 @@ $message = $__bag->first($__errorArgs[0]); ?> <div class="invalid-feedback"><?ph
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                    </div>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label  for="totop" class="col-sm-2 col-form-label">Total Oprasional</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control <?php $__errorArgs = ['totop'];
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Rp.</span>
+                      <input type="text" class="rupiah form-control <?php $__errorArgs = ['totop'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -691,7 +732,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="totop" id="totop" style="padding-bottom:5px" value="<?php echo e($pengajuan->oprasional->totop); ?>">
-                      <?php $__errorArgs = ['totop'];
+                        <?php $__errorArgs = ['totop'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -699,6 +740,7 @@ $message = $__bag->first($__errorArgs[0]); ?> <div class="invalid-feedback"><?ph
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -719,8 +761,8 @@ unset($__errorArgs, $__bag); ?>
                     <?php $__currentLoopData = $omzet; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $x): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                       <tr>
                         <td> <input type="text" name="nmomzet[]" class="form-control" value="<?php echo e(old('nmomzet[]',$x->nm_brg)); ?>"> </td>
-                        <td> <input type="text" name="hrgomzet[]" class="form-control" value="<?php echo e(old('hrgomzet[]',$x->hrg_satuan)); ?>"> </td>
-                        <td> <input type="text" name="jmlhomzet[]" class=" form-control" value="<?php echo e(old('jmlhomzet[]',$x->jmlh)); ?>" onkeyup="getItems()"> </td>
+                        <td> <input type="text" name="hrgomzet[]" class="rupiah form-control" value="<?php echo e(old('hrgomzet[]',$x->hrg_satuan)); ?>"> </td>
+                        <td> <input type="text" name="jmlhomzet[]" class="rupiah form-control" value="<?php echo e(old('jmlhomzet[]',$x->jmlh)); ?>" onkeyup="getItems()"> </td>
                         <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
                       </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -732,7 +774,9 @@ unset($__errorArgs, $__bag); ?>
                 <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Penempatan Modal</h5>
                 <div class="col-12 ">
                   <label for="modal" class="form-label"> Modal Usaha</label>
-                  <input type="text" class="form-control <?php $__errorArgs = ['modal'];
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">Rp.</span>
+                    <input type="text" class="rupiah form-control <?php $__errorArgs = ['modal'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -740,7 +784,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="modal" id="modal" onkeyup="sum_modal();" value="<?php echo e($pengajuan->modal); ?>">
-                    <?php $__errorArgs = ['modal'];
+                      <?php $__errorArgs = ['modal'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -748,15 +792,21 @@ $message = $__bag->first($__errorArgs[0]); ?><div class="invalid-feedback"><?php
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                  </div>
                 </div>
                 <div class="col-12 ">
                   <label for="invst" class="form-label"> Investasi Usaha</label>
-                  <input type="text" class="form-control " name="invest" id="invest" onkeyup="sum_modal();" value="<?php echo e($pengajuan->investasi); ?>">
-                  <p>* Isi strip (-) jika tidak ada Investasi Usaha</p>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">Rp.</span>
+                    <input type="text" class="rupiah form-control " name="invest" id="invest" onkeyup="sum_modal();" value="<?php echo e($pengajuan->investasi); ?>">
+                  </div>
+                    <p>* Isi strip (-) jika tidak ada Investasi Usaha</p>
                 </div>
                 <div class="col-12 ">
                   <label for="bsr_pjm" class="form-label">Besar Pinjaman yang Diajukan </label>
-                  <input type="text" class="form-control <?php $__errorArgs = ['bsr_pjm'];
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">Rp.</span>
+                    <input type="text" class="rupiah form-control <?php $__errorArgs = ['bsr_pjm'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -764,7 +814,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="bsr_pjm" id="bsr_pjm" value="<?php echo e($pengajuan->bsr_pinjaman); ?>">
-                    <?php $__errorArgs = ['bsr_pjm'];
+                      <?php $__errorArgs = ['bsr_pjm'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -772,6 +822,7 @@ $message = $__bag->first($__errorArgs[0]); ?> <div class="invalid-feedback"><?ph
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                  </div>
                 </div>
               </div>
               
@@ -1002,10 +1053,54 @@ unset($__errorArgs, $__bag); ?>
         var kasValue        = document.getElementById('kas').value;
         var piutangValue    = document.getElementById('piutang').value;
         var peralatranValue = document.getElementById('peralatan').value;
-        var result          = parseInt(tanahValue)+parseInt(bangunanValue)+parseInt(persediaanValue)+parseInt(alatValue)+parseInt(kasValue)+parseInt(piutangValue)+parseInt(peralatranValue);
-          if (!isNaN(result)){
-            document.getElementById('totaset').value=result;
-          }
+         var tes1 = tanahValue.split("")
+			for( var i = 0; i < tes1.length; i++){ 
+          if ( tes1[i] === ',' || tes1[i] === '.') {
+          tes1.splice(i, 1); 
+        }
+			}
+			var tes2 = bangunanValue.split("")
+			for( var i = 0; i < tes2.length; i++){ 
+          if ( tes2[i] === ',' || tes2[i] === '.') {
+          tes2.splice(i, 1); 
+        }
+      }
+      var tes3 = persediaanValue .split("")
+			for( var i = 0; i < tes3.length; i++){ 
+          if ( tes3[i] === ',' || tes3[i] === '.') {
+          tes3.splice(i, 1); 
+        }
+      }
+      var tes4 = alatValue.split("")
+			for( var i = 0; i < tes4.length; i++){ 
+          if ( tes4[i] === ',' || tes4[i] === '.') {
+          tes4.splice(i, 1); 
+        }
+      }
+      var tes5 = kasValue.split("")
+			for( var i = 0; i < tes5.length; i++){ 
+          if ( tes5[i] === ',' || tes5[i] === '.') {
+          tes5.splice(i, 1); 
+        }
+      }
+      var tes6 = piutangValue.split("")
+			for( var i = 0; i < tes6.length; i++){ 
+          if ( tes6[i] === ',' || tes6[i] === '.') {
+          tes6.splice(i, 1); 
+        }
+      }
+      var tes7 = peralatranValue.split("")
+			for( var i = 0; i < tes7.length; i++){ 
+          if ( tes7[i] === ',' || tes7[i] === '.') {
+          tes7.splice(i, 1); 
+        }
+      }
+
+      var result          = parseInt(tes1.join(""))+parseInt(tes2.join(""))+parseInt(tes3.join(""))+parseInt(tes4.join(""))+parseInt(tes5.join(""))+parseInt(tes6.join(""))+parseInt(tes7.join(""));
+
+      if (!isNaN(result)){
+        document.getElementById('totaset').value=currency(result).format();
+      }
       }
 
       function sum1(){
@@ -1014,19 +1109,62 @@ unset($__errorArgs, $__bag); ?>
         var telpValue       = document.getElementById('telp').value;
         var atkValue        = document.getElementById('atk').value;
         var lainValue       = document.getElementById('lain').value;
-        var result          = parseInt(transportValue)+parseInt(listrikValue)+parseInt(telpValue)+parseInt(atkValue)+parseInt(lainValue);
-          if (!isNaN(result)){
-            document.getElementById('totop').value=result;
-          }
+      var test1 = transportValue.split("")
+			for( var i = 0; i < test1.length; i++){ 
+          if ( test1[i] === ',' || test1[i] === '.') {
+          test1.splice(i, 1); 
+        }
+			}
+			var test2 = listrikValue.split("")
+			for( var i = 0; i < test2.length; i++){ 
+          if ( test2[i] === ',' || test2[i] === '.') {
+          test2.splice(i, 1); 
+        }
+      }
+      var test3 = telpValue.split("")
+			for( var i = 0; i < test3.length; i++){ 
+          if ( test3[i] === ',' || test3[i] === '.') {
+          test3.splice(i, 1); 
+        }
+      }
+      var test4 = atkValue.split("")
+			for( var i = 0; i < test4.length; i++){ 
+          if ( test4[i] === ',' || test4[i] === '.') {
+          test4.splice(i, 1); 
+        }
+      }
+      var test5 = lainValue.split("")
+			for( var i = 0; i < test5.length; i++){ 
+          if ( test5[i] === ',' || test5[i] === '.') {
+          test5.splice(i, 1); 
+        }
+      }
+      var result          = parseInt(test1.join(""))+parseInt(test2.join(""))+parseInt(test3.join(""))+parseInt(test4.join(""))+parseInt(test5.join(""));
+
+        if (!isNaN(result)){
+          document.getElementById('totop').value=currency(result).format();
+        }
       }
 
       function sum_modal(){
         var modalValue  = document.getElementById('modal').value;
         var investValue    = document.getElementById('invest').value;
-        var result          = parseInt(modalValue)+parseInt(investValue);
-          if (!isNaN(result)){
-            document.getElementById('bsr_pjm').value=result;
-          }
+      var test1 = modalValue.split("")
+			for( var i = 0; i < test1.length; i++){ 
+          if ( test1[i] === ',' || test1[i] === '.') {
+          test1.splice(i, 1); 
+        }
+			}
+			var test2 = investValue.split("")
+			for( var i = 0; i < test2.length; i++){ 
+          if ( test2[i] === ',' || test2[i] === '.') {
+          test2.splice(i, 1); 
+        }
+      }
+      var result          = parseInt(test1.join(""))+parseInt(test2.join(""));
+        if (!isNaN(result)){
+          document.getElementById('bsr_pjm').value=currency(result).format();
+        }
       }
 
     </script>

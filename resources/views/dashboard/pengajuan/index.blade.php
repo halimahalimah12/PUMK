@@ -24,10 +24,10 @@
               <div class="alert alert-info"> Silahkan Lengkapi Data Usaha Terlebih Dahulu.</div>
             @else
               @empty($last)
-                <button type="button" class="btn btn-primary"> <a href="/pengajuan/create"  style="color:white;"> Tambah</a></button>
+                <button type="button" class="btn btn-primary" style="margin-bottom:12px"> <a href="/pengajuan/create"  style="color:white;"> Tambah</a></button>
                 @else
                   @if($last->status == 'tidak')
-                      <button type="button" class="btn btn-primary"> <a href="/pengajuan/create"  style="color:white;"> Tambah</a> </button>
+                      <button type="button" class="btn btn-primary" style="margin-bottom:12px"> <a href="/pengajuan/create"  style="color:white;"> Tambah</a> </button>
                     @else
                   @endif
               @endempty
@@ -42,7 +42,8 @@
                   @if ($pengajuan == NULL)
                   @else
                       @if ($ket->ket != NULL)
-                        <th >Keterangan</th>
+                          <th >Keterangan</th>
+                        @else
                       @endif
                   @endif
                   <th scope="col">Aksi</th>
@@ -65,7 +66,7 @@
                       @endif
                     </td>
                     @if ($ket->ket == NULL)
-                        <td style="width:370px"></td>
+                        
                       @elseif( $ket->ket != NULL)
                       <td style="width:420px">{{ $p->ket }} </td>
                     @endif
@@ -95,13 +96,8 @@
                     <th scope="col">Besar Pinjaman</th>
                     <th scope="col">Tanggal</th>
                     <th scope="col">Status</th>
-                    @if ($pengajuan1 == NULL)
-                      @else
-                        @if ($ket->ket != NULL)
-                            <th scope="col">Keterangan</th>
-                          @endif
-                    @endif
-                      <th scope="col">Aksi</th>
+                    <th scope="col">Keterangan</th>
+                    <th scope="col">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -126,11 +122,7 @@
                             <span class="badge bg-danger">Pengajuan Ditolak</span>
                         @endif
                       </td>
-                        @if ( $p->ket != NULL )
-                            <td scope="col" >{{ $p->ket }}</td>
-                          @elseif( $p->ket == NULL)
-                            <td scope="col" ></td>
-                        @endif
+                      <td scope="col" >{{ $p->ket }}</td>
                       <td>
                         <a href="/show/{{$p->id}}" class="bi bi-file-earmark-text" ></a>
                         <a href="/survei/{{$p->id}}" class="bi bi-file-earmark-check" ></a>
@@ -168,7 +160,10 @@
                         </div>
                         <div class="col-12 " >
                           <label for="bsrpemin" class="form-label" id="bsrpin" >Besar Peminjaman yang diberikan </label>
-                          <input type="text" class="form-control hide" name="bsrpemin"  id="bsrpemin">
+                          <div class="input-group mb-3">
+                            <span class="input-group-text rp">Rp.</span>
+                            <input type="text" class="rupiah form-control hide" name="bsrpemin"  id="bsrpemin">
+                        </div> 
                         </div> 
                         <div class="col-12 ">
                           <label for="ket" class="form-label" id="lebket">Keterangan </label>
@@ -197,8 +192,9 @@
   <script type='text/javascript'>
     $('.menunggu').on('click', function(e){
       console.log(e);
-      $('#bsrpemin').hide();
+        $('#bsrpemin').hide();
         $('#bsrpin').hide();
+        $('.rp').hide();
         $('#lebket').hide();
         $('#ket').hide();
       });
@@ -207,17 +203,20 @@
       var status= e.target.value;
       if (status == "lulus"){
         $('#bsrpin').show();
+        $('.rp').show();
         $('#bsrpemin').show();
         $('#lebket').show();
         $('#ket').show();
       } else if ( status == "menunggu"){
         $('#bsrpemin').hide();
+        $('.rp').hide();
         $('#bsrpin').hide();
         $('#lebket').hide();
         $('#ket').hide();
       }
       else{
         $('#bsrpemin').hide();
+        $('.rp').hide();
         $('#bsrpin').hide();
         $('#lebket').show();
         $('#ket').show();
