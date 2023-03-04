@@ -39,13 +39,7 @@
                   <th scope="col">No</th>
                   <th> Tanggal</th>
                   <th scope="col">Status</th>
-                  @if ($pengajuan == NULL)
-                  @else
-                      @if ($ket->ket != NULL)
-                          <th >Keterangan</th>
-                        @else
-                      @endif
-                  @endif
+                  <th >Keterangan</th>
                   <th scope="col">Aksi</th>
                 </tr>
               </thead>
@@ -65,11 +59,7 @@
                         <span class="badge bg-danger">Pengajuan Ditolak</span>
                       @endif
                     </td>
-                    @if ($ket->ket == NULL)
-                        
-                      @elseif( $ket->ket != NULL)
-                      <td style="width:420px">{{ $p->ket }} </td>
-                    @endif
+                    <td style="width:320px">{{ $p->ket }} </td>
                     <td>
                       <a href="/show/{{ $p->id }}" class="bi bi-file-earmark-text" ></a>
                       <a href="/cetak/{{ $p->id }}" class="bi bi-printer"> </a>

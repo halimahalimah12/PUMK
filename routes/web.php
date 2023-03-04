@@ -12,6 +12,8 @@ use App\Http\Controllers\DtmitraController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\KrtpiutangController;
+use App\Http\Controllers\PembayaranController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -72,3 +74,9 @@ Route::get('/profil', [ProfilController::class,'edit'])->middleware('auth');
 Route::post('/profil',[ProfilController::class,'update'])->middleware('auth')->name('profil.update');
 Route::get('/foto', [ProfilController::class,'foto'])->middleware('auth');
 Route::get('/scanktp', [ProfilController::class,'scanktp'])->middleware('auth');
+//PEMBAYARAN
+Route::get('/pembayaran', [PembayaranController::class,'index'])->middleware('auth');
+Route::post('/pembayaran',[PembayaranController::class,'store'])->middleware('auth');
+Route::get('/bukti/{id}',[KrtpiutangController::class,'buktipembayaran'])->middleware('auth');
+Route::get('/pembayaran/valid/{id}',[PembayaranController::class,'valid'])->middleware('auth');
+Route::get('/pembayaran/tidak-valid/{id}',[PembayaranController::class,'tidak_valid'])->middleware('auth');

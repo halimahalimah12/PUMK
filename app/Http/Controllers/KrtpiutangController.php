@@ -6,6 +6,7 @@ use App\Models\Data_ush;
 use App\Models\Data_mitra;
 use App\Models\Pengajuan;
 use App\Models\Kartu_piutang;
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -74,7 +75,7 @@ class KrtpiutangController extends Controller
         { // halaman user
             $pengajuan = Pengajuan::where('user_id',$user->id)->first();
             $mitra     = Data_Mitra::where('user_id',$user->id)->first();
-            $kp =Kartu_piutang::where('pengajuan_id',$pengajuan->id)->latest('id')->first();
+            $kp        = Kartu_piutang::where('pengajuan_id',$pengajuan->id)->latest('id')->first();
             $pdf = PDF::loadview('dashboard.kartu_piutang.cetak',compact('user','pengajuan','kp','mitra'))
                     ->setOptions(['defaultFont'=>'sans-serif']);
             return $pdf->setPaper('a4','potrait')->stream('kartu_piutang.pdf');
@@ -99,7 +100,11 @@ class KrtpiutangController extends Controller
     {
         $user = User::where('id', Auth::user()->id)->first();
         $kp = Kartu_piutang::find($id);
-        return view('dashboard.kartu_piutang.view' ,compact('user','kp') );
+        $pembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)->get();
+        $totpembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)
+                        ->where('status','=','valid')->sum('jumlah');
+
+        return view('dashboard.kartu_piutang.view' ,compact('user','kp','pembayaran','totpembayaran') );
     }
 
     /**
@@ -142,5 +147,11 @@ class KrtpiutangController extends Controller
         $kp  = Kartu_piutang::find($id);
         $kp->delete();
         return redirect('/kartupiutang')->with('success','Data berhasil di hapus');
+    }
+
+    public function buktipembayaran($id)
+    {
+        $pembayaran = Pembayaran::find($id);
+        return view('dashboard.pembayaran.bukti',compact('pembayaran'));
     }
 }

@@ -41,11 +41,10 @@ class PengajuanController extends Controller
             $mitra     = Data_Mitra::where('user_id',$user->id)->first();
             $ush       = Data_Ush::where('user_id',$user->id)->first();
             $pengajuan = Pengajuan::where('data_mitra_id',$mitra->id)->get();
-            $ket = Pengajuan::select('ket')->first();
             $last      = DB::table('pengajuans')
                         ->where('user_id',$user->id)
                         ->latest('id')->first();
-            return view('dashboard.pengajuan.index' ,compact('pengajuan','user','last','mitra','ush','ket') );
+            return view('dashboard.pengajuan.index' ,compact('pengajuan','user','last','mitra','ush') );
         }else{
             $pengajuan1 = Pengajuan::orderByDesc('id')->get();
             return view('dashboard.pengajuan.index' ,compact('pengajuan1','user') );

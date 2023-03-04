@@ -254,7 +254,7 @@
               <td class="nomor">.</td>
               <td> Jenis Kelamin</td>
               <td class="titikdua">:</td>
-              <td class="isi">{{ucwords() }}
+              <td class="isi">
                   @if($pengajuan1->pjb->jk == "L" ) Laki - laki
                     @else Perempuan
                   @endif

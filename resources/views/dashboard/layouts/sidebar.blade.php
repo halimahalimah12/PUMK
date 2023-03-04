@@ -30,7 +30,7 @@
               </a>
             </li>
             <li>
-              <a href="forms-layouts.html">
+              <a href="/pembayaran">
                 <i class="bi bi-circle"></i><span>Data Tagihan</span>
               </a>
             </li>
@@ -91,7 +91,7 @@
           </li>
           <!-- Profile Page Nav -->
           <li class="nav-item">
-            <a class="nav-link collapsed" href="users-profile.html">
+            <a class="nav-link collapsed" href="/pembayaran">
               <i class="bi bi-ui-checks"></i>
               <span>Approve Pembayaran</span>
             </a>

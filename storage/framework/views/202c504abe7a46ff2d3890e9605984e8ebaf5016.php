@@ -1010,8 +1010,8 @@ unset($__errorArgs, $__bag); ?>
       $('thead').on('click','.addalat',function(){
         var tr = "<tr>"+
                     "<td> <input type='text' name='nm_brg[]'   class='form-control' value='<?php echo e(old('nm_brg[]')); ?>' > </td>"+
-                    "<td> <input type='text' name='hrg_satuan[]'  class='form-control' value='<?php echo e(old('hrg_satuan[]')); ?>' > </td>"+
-                    "<td> <input type='text' name='jmlh[]'    class='form-control' value='<?php echo e(old('jmlh[]')); ?>' > </td>"+
+                    "<td> <input type='text' name='hrg_satuan[]'  class='rupiah form-control' value='<?php echo e(old('hrg_satuan[]')); ?>' > </td>"+
+                    "<td> <input type='text' name='jmlh[]'    class='rupiah form-control' value='<?php echo e(old('jmlh[]')); ?>' > </td>"+
                     "<td> <a href='javascript:;' class='deleterow btn btn-danger' style='float:right;' name='deleterow'> - </a> </td>"+
                   "</tr>"
             $('#alats').append(tr);
@@ -1020,7 +1020,7 @@ unset($__errorArgs, $__bag); ?>
         var tr = "<tr>"+
                     "<td> <input type='text' name='nmkry[]'   class='form-control' value='<?php echo e(old('nmkry[]')); ?>' > </td>"+
                     "<td> <input type='text' name='jbtkry[]'  class='form-control' value='<?php echo e(old('jbtkry[]')); ?>' > </td>"+
-                    "<td> <input type='text' name='gaji[]'    class='form-control' value='<?php echo e(old('gaji[]')); ?>' > </td>"+
+                    "<td> <input type='text' name='gaji[]'    class='rupiah form-control' value='<?php echo e(old('gaji[]')); ?>' > </td>"+
                     "<td> <a href='javascript:;' class='deleterow btn btn-danger' style='float:right;' name='deleterow'> - </a> </td>"+
                   "</tr>"
             $('#tngkerja').append(tr);
@@ -1028,8 +1028,8 @@ unset($__errorArgs, $__bag); ?>
       $('thead').on('click','.addomzet',function(){
         var tr = "<tr>"+                         
                     "<td> <input type='text' name='nmomzet[]'   class='form-control' > </td>"+
-                    "<td> <input type='text' name='hrgomzet[]'  class='form-control'> </td>"+
-                    "<td> <input type='text' name='jmlhomzet[]' class='form-control'> </td>"+
+                    "<td> <input type='text' name='hrgomzet[]'  class='rupiah form-control'> </td>"+
+                    "<td> <input type='text' name='jmlhomzet[]' class='rupiah form-control'> </td>"+
                     "<td> <a href='javascript:;' class='deleterow btn btn-danger' style='float:right;' name='deleterow'> - </a> </td>"+
                   "</tr>"
             $('#omzet').append(tr);

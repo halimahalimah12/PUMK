@@ -12,10 +12,10 @@
 
       <ul class="nav nav-tabs d-flex" id="myTabjustified" role="tablist">
         <li class="nav-item flex-fill" role="presentation">
-          <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-justified" type="button" role="tab" aria-controls="home" aria-selected="true">Kartu Piutang</button>
+          <button class="nav-link w-100 active" id="kartupiutang-tab" data-bs-toggle="tab" data-bs-target="#kartupiutang-justified" type="button" role="tab" aria-controls="kartupiutang" aria-selected="true">Kartu Piutang</button>
         </li>
         <li class="nav-item flex-fill" role="presentation">
-          <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-justified" type="button" role="tab" aria-controls="profile" aria-selected="false">Angsuran</button>
+          <button class="nav-link w-100" id="angsuran-tab" data-bs-toggle="tab" data-bs-target="#angsuran-justified" type="button" role="tab" aria-controls="angsuran" aria-selected="false">Angsuran</button>
         </li>
         <li class="nav-item flex-fill" role="presentation">
           <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-justified" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
@@ -23,7 +23,7 @@
       </ul>
 
       <div class="tab-content pt-2" id="myTabjustifiedContent">
-        <div class="tab-pane fade show active" id="home-justified" role="tabpanel" aria-labelledby="home-tab">
+        <div class="tab-pane fade show active" id="kartupiutang-justified" role="tabpanel" aria-labelledby="kartupiutang-tab">
           <div calss="card">
             <form class="row g-3  contact-form" action="/kartupiutang/{{ $kp->id }}" method="POST" enctype="multipart/form-data"  >
               @method('put')
@@ -100,12 +100,11 @@
                     <td>0</td>
                     <td>{{ $kp->formatRupiah('pinjaman') }}</td>
                   </tr>
-                  <?php $sumpokok = 0;
-                        $sumjasa = 0;
-                        $sum = 0;
-                  ?>
                     @for ( 
                       $i =1,
+                      $sumpokok = 0,
+                      $sumjasa = 0,
+                      $sum = 0,
                       $saldoawal = $kp->pinjaman,
                       $saldo = $kp->pinjaman,
                       $sb_bln = $kp->sb_bln/100,
@@ -150,13 +149,61 @@
             </div>
           @endif
         </div>
-        <div class="tab-pane fade" id="profile-justified" role="tabpanel" aria-labelledby="profile-tab">
-            Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
+        <div class="tab-pane fade" id="angsuran-justified" role="tabpanel" aria-labelledby="angsuran-tab">
+          <div style="margin-top:35px">
+            <table class="table table-striped">
+              <thead>
+                <th> No </th>
+                <th> Tanggal Pembayaran </th>
+                <th> Bank </th>
+                <th> Jumlah </th>
+                <th> Bukti </th>
+                <th> Status </th>
+              </thead>
+              <tbody>
+              @foreach ($pembayaran as $p )
+                <tr>
+                  <td> {{ $loop->iteration }} </td>
+                  <td> {{ date('d M Y',strtotime($p->tgl)) }} </td>
+                  <td> @if ($p->bank == 'bri') BRI
+                          @else Mandiri
+                        @endif
+                  </td>
+                  <td> {{ $p->formatRupiah('jumlah') }}</td>
+                  
+                  <td><button type="button" class="btn btn-primary btn-sm"> <a href="/bukti/{{ $p->id }}"style="color:white;"> Lihat </a></button></td>
+                  
+                  <td> @if ( $p->status == "menunggu")
+                          <button type="button" class="btn btn-success btn-sm">Valid</button>
+                          <button type="button" class="btn btn-danger btn-sm">Tidak Valid</button>
+                        @elseif( $p->status == "valid") <span class="badge bg-success">Valid</span>
+                        @else <span class="badge bg-danger">Tidak Valid</span>
+                      
+                  @endif</td>
+                </tr>
+              @endforeach
+                <tr>
+                  <th colspan="3">Total Pembayaran</th>
+                  <th>Rp. {{ number_format($totpembayaran,0,',','.' )}}</th>
+                </tr>
+                <tr>
+                  <th colspan="3">Sisa Tagihan</th>
+                  <th>Rp. {{ number_format($sum - $totpembayaran,0,',','.') }}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="tab-pane fade" id="contact-justified" role="tabpanel" aria-labelledby="contact-tab">
             Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
         </div>
+      
+      
       </div>
+
+      
+        
+      
     </div>
   </div>
 

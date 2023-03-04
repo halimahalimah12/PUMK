@@ -40,13 +40,7 @@
                   <th scope="col">No</th>
                   <th> Tanggal</th>
                   <th scope="col">Status</th>
-                  <?php if($pengajuan == NULL): ?>
-                  <?php else: ?>
-                      <?php if($ket->ket != NULL): ?>
-                          <th >Keterangan</th>
-                        <?php else: ?>
-                      <?php endif; ?>
-                  <?php endif; ?>
+                  <th >Keterangan</th>
                   <th scope="col">Aksi</th>
                 </tr>
               </thead>
@@ -66,11 +60,7 @@
                         <span class="badge bg-danger">Pengajuan Ditolak</span>
                       <?php endif; ?>
                     </td>
-                    <?php if($ket->ket == NULL): ?>
-                        
-                      <?php elseif( $ket->ket != NULL): ?>
-                      <td style="width:420px"><?php echo e($p->ket); ?> </td>
-                    <?php endif; ?>
+                    <td style="width:320px"><?php echo e($p->ket); ?> </td>
                     <td>
                       <a href="/show/<?php echo e($p->id); ?>" class="bi bi-file-earmark-text" ></a>
                       <a href="/cetak/<?php echo e($p->id); ?>" class="bi bi-printer"> </a>

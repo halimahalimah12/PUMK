@@ -15,15 +15,12 @@ class CreatePembayaransTable extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('proposal_id');
-            $table->foreignId('kartu_piutang_id');
-            $table->enum('bank',['mandiri','bri']);
-            $table->date('tgl');
-            $table->string('bulan',20);
+            $table->foreignId('kartu_piutang_id')->nullable();
+            $table->enum('bank',['mandiri','bri'])->nullable();
+            $table->date('tgl')->nullable();
             $table->string('foto');
             $table->integer('jumlah');
-            $table->integer('status')->nullable();
+            $table->enum('status',['menunggu','valid','tidak'])->default('menunggu');
             $table->string('ket')->nullable();
             $table->integer('total_pem')->nullable();
             // $table->integer('sisa')->nullable();

@@ -83,8 +83,8 @@
           <div class="col-12 hero-text-image">
             <div class="row">
               <div class="col-lg-8 text-center text-lg-start">
-                <h1 data-aos="fade-right">Pendanaan Usaha Mikro Kecil dan  Menengah</h1>
-                <p class="mb-5" data-aos="fade-right" data-aos-delay="100">Pendanaan Usaha Mikro Kecil dan Menengah oleh PT.Angkasa Pura II</p>
+                <h1 data-aos="fade-right">Pendanaan Usaha Mikro Kecil </h1>
+                <p class="mb-5" data-aos="fade-right" data-aos-delay="100">Pendanaan Usaha Mikro Kecil oleh PT.Angkasa Pura II</p>
                 <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500"><a href="/register" class="btn btn-outline-white">Registrasi Sekarang</a></p>
               </div>
               <div class="col-lg-4 iphone-wrap">
@@ -109,7 +109,7 @@
           <div class="container">
           <div class="row align-items-center">
             <div class="col-md-4 ms-auto order-2">
-              <h2 class="mb-4">Pendanaan Usaha Mikro Kecil Menengah (PUMK)</h2>
+              <h2 class="mb-4">Pendanaan Usaha Mikro (PUMK)</h2>
               <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur at reprehenderit optio,
                 laudantium eius quod, eum maxime molestiae porro omnis. Dolores aspernatur delectus impedit incidunt
                 dolore mollitia esse natus beatae.</p>
