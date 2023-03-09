@@ -91,7 +91,7 @@
                 <thead>
                   <tr>
                     <th rowspan="2" valign="middle">ANG ke</th>
-                    <th colspan="2" scope="col">Tajuh Tempo</th>
+                    <th colspan="2" scope="col">Jatuh Tempo</th>
                     <th colspan="3">Rincian Anggaran</th>
                     <th rowspan="2"  width="110px">Saldo</th>
                   </tr>

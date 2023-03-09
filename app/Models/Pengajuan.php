@@ -85,6 +85,8 @@ class Pengajuan extends Model
         'modal',
         'investasi',
         'bsr_pinjaman',
+        'ksg_bayar',
+        'bsr_usulan',
         'kk',
         'bkt_keseriusan', 
         'surat_blmbina', 

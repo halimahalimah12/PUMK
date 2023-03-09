@@ -27,7 +27,9 @@ class CreatePengajuansTable extends Migration
             $table->integer('modal');
             $table->integer('investasi'); 
             $table->integer('bsr_pinjaman');
-
+            $table->integer('ksg_bayar')->nullable();
+            $table->integer('bsr_usulan')->nullable();
+        
             $table->string('kk',100);//scan kk
             $table->string('bkt_keseriusan',100); //bukti keseriusan
             $table->string('surat_blmbina',100); //surat belum dibina bumn

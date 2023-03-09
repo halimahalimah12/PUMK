@@ -13,6 +13,7 @@ use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\KrtpiutangController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\LaporanController;
 
 
 /*
@@ -80,3 +81,9 @@ Route::post('/pembayaran',[PembayaranController::class,'store'])->middleware('au
 Route::get('/bukti/{id}',[KrtpiutangController::class,'buktipembayaran'])->middleware('auth');
 Route::get('/pembayaran/valid/{id}',[PembayaranController::class,'valid'])->middleware('auth');
 Route::get('/pembayaran/tidak-valid/{id}',[PembayaranController::class,'tidak_valid'])->middleware('auth');
+//LAPORAN
+Route::get('/laporan-survei',[LaporanController::class,'index'])->middleware('auth');
+Route::get('/laporan-angsuran',[LaporanController::class,'angsuran'])->middleware('auth');
+Route::get('/cetak-laporan-survei',[LaporanController::class,'cetak_survei'])->middleware('auth');
+Route::get('/cetak-laporan-angsuran',[LaporanController::class,'cetak_angsuran'])->middleware('auth');
+

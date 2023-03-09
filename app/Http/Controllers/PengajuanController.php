@@ -736,6 +736,8 @@ class PengajuanController extends Controller
         $status = ([
             'status' => $request->status,
             'ket' => $request->ket,
+            'ksg_bayar' => str_replace(",", "",$request->ksg_bayar),
+            'bsr_usulan' => str_replace(",", "",$request->bsr_usulan)
         ]);
         $pengajuan1->update($status);
         if( $request->bsrpemin != NULL ) {

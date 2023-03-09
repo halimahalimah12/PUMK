@@ -96,13 +96,30 @@
               <span>Approve Pembayaran</span>
             </a>
           </li>
-          <!-- F.A.Q Page Nav -->
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-faq.html">
+
+          {{-- <li class="nav-item">
+            <a class="nav-link collapsed" href="/laporan-angsuran">
               <i class="bi bi-file-earmark-bar-graph-fill"></i>
-              {{-- <i class="bi bi-question-circle"></i> --}}
               <span>Laporan</span>
             </a>
+          </li> --}}
+          <!-- F.A.Q Page Nav -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+              <i class="bi bi-file-earmark-bar-graph-fill"></i><span>Laporan</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+              <li>
+                <a href="/laporan-survei">
+                  <i class="bi bi-circle"></i><span>Survei</span>
+                </a>
+              </li>
+              <li>
+                <a href="/laporan-angsuran">
+                  <i class="bi bi-circle"></i><span>Angsuran Mitra</span>
+                </a>
+              </li> 
+            </ul>
           </li>
         @endcan
     @endif

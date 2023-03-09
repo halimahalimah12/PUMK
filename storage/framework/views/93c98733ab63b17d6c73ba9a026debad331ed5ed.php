@@ -155,8 +155,22 @@
                           <div class="input-group mb-3">
                             <span class="input-group-text rp">Rp.</span>
                             <input type="text" class="rupiah form-control hide" name="bsrpemin"  id="bsrpemin">
+                          </div> 
                         </div> 
-                        </div> 
+                        <div class="col-12 ">
+                          <label for="ksg_bayar" class="form-label" id="lebksg_bayar">Kesanggupan Bayar Pinjaman </label>
+                          <div class="input-group mb-3">
+                            <span class="input-group-text rp1">Rp.</span>
+                            <input type="text" class="rupiah form-control hide" name="ksg_bayar" id="ksg_bayar">
+                          </div>
+                        </div>
+                        <div class="col-12 ">
+                          <label for="bsr_usulan" class="form-label" id="lebbsr_usulan">Besar Usulan Pinjaman dari Tim Survei </label>
+                          <div class="input-group mb-3">
+                            <span class="input-group-text rp2">Rp.</span>
+                            <input type="text" class="rupiah form-control hide" name="bsr_usulan" id="bsr_usulan">
+                          </div> 
+                        </div>
                         <div class="col-12 ">
                           <label for="ket" class="form-label" id="lebket">Keterangan </label>
                           <input type="text" class="form-control hide" name="ket" id="ket">
@@ -189,6 +203,13 @@
         $('.rp').hide();
         $('#lebket').hide();
         $('#ket').hide();
+        $('.rp1').hide();
+        $('.rp2').hide();
+        $('#bsrpin').hide();
+        $('#lebksg_bayar').hide();
+        $('#ksg_bayar').hide();
+        $('#lebbsr_usulan').hide();
+        $('#bsr_usulan').hide();
       });
     $('#status').on('change', function(e){
       console.log(e);
@@ -196,15 +217,39 @@
       if (status == "lulus"){
         $('#bsrpin').show();
         $('.rp').show();
+        $('.rp1').hide();
+        $('.rp2').hide();
+        $('#lebksg_bayar').hide();
+        $('#ksg_bayar').hide();
+        $('#lebbsr_usulan').hide();
+        $('#bsr_usulan').hide();
         $('#bsrpemin').show();
         $('#lebket').show();
         $('#ket').show();
       } else if ( status == "menunggu"){
         $('#bsrpemin').hide();
         $('.rp').hide();
+        $('.rp1').hide();
+        $('.rp2').hide();
         $('#bsrpin').hide();
+        $('#lebksg_bayar').hide();
+        $('#ksg_bayar').hide();
+        $('#lebbsr_usulan').hide();
+        $('#bsr_usulan').hide();
         $('#lebket').hide();
         $('#ket').hide();
+      } else if ( status == "lulus_survei"){
+        $('#bsrpemin').hide();
+        $('.rp').hide();
+        $('.rp1').show();
+        $('.rp2').show();
+        $('#bsrpin').hide();
+        $('#lebksg_bayar').show();
+        $('#ksg_bayar').show();
+        $('#lebbsr_usulan').show();
+        $('#bsr_usulan').show();
+        $('#lebket').show();
+        $('#ket').show();
       }
       else{
         $('#bsrpemin').hide();

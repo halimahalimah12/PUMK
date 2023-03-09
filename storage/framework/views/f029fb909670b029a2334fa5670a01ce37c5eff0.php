@@ -19,7 +19,7 @@
           <button class="nav-link w-100" id="angsuran-tab" data-bs-toggle="tab" data-bs-target="#angsuran-justified" type="button" role="tab" aria-controls="angsuran" aria-selected="false">Angsuran</button>
         </li>
         <li class="nav-item flex-fill" role="presentation">
-          <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-justified" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+          <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-justified" type="button" role="tab" aria-controls="contact" aria-selected="false">Detail Angsuran</button>
         </li>
       </ul>
 
@@ -163,26 +163,17 @@ unset($__errorArgs, $__bag); ?>
                 </thead>
                 <tbody>
                   <tr>
+                    <?php for( $n=0 ; $n<6 ; $n++): ?>
                     <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
+                    <?php endfor; ?>
                     <td><?php echo e($kp->formatRupiah('pinjaman')); ?></td>
                   </tr>
                     <?php for( 
                       $i =1,
-                      $sumpokok = 0,
-                      $sumjasa = 0,
+                      $sumjasa =0,
                       $sum = 0,
-                      $saldoawal = $kp->pinjaman,
-                      $saldo = $kp->pinjaman,
-                      $sb_bln = $kp->sb_bln/100,
-                      $waktu = $kp->waktu,
-                      $pokok = $saldoawal/$waktu,
-                      $jasa = $saldoawal*$sb_bln,
-                      $jasa1= $jasa/2;
+                      $sumpokok =0,
+                      $saldo = $kp->pinjaman;
                       $i <= 24  ; $i++): ?>
                         <tr>
                         <td scope="row"><?php echo e($i); ?></td>
@@ -199,7 +190,7 @@ unset($__errorArgs, $__bag); ?>
                             <td>Rp. <?php echo e(number_format(round($jasa1), 0, ',','.')); ?> </td>
                             <td>Rp. <?php echo e(number_format(round($jumlah = $pokok+$jasa1), 0, ',','.')); ?> </td>
                             <?php  $sumjasa += $jasa1; 
-                                    $sum += $jumlah;
+                                  $sum += $jumlah;
                             ?>
                         <?php endif; ?>
                         <td>Rp.<?php echo e(number_format(round($saldo = $saldo-$pokok), 0, ',','.')); ?></td>
@@ -266,7 +257,115 @@ unset($__errorArgs, $__bag); ?>
           </div>
         </div>
         <div class="tab-pane fade" id="contact-justified" role="tabpanel" aria-labelledby="contact-tab">
-            Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+          <div style="padding-top:25px; overflow-x:auto"> 
+              <table class="table table-bordered" style="text-align:center">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Jumlah Bayar</th>
+                    <th>Pokok</th>
+                    <th>Jasa Pinj 0.25%</th>
+                    <th>Sisa Pinjaman</th>
+                    <th>Ket</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <?php  ?>
+                    <tr>
+                    <?php for( $n=0 ; $n<5 ; $n++): ?>
+                    <td>0</td>
+                    <?php endfor; ?>
+                    <td><?php echo e(number_format($sum,0,',','.')); ?></td>
+                  </tr>
+                    <?php for(  $n=1,$jmlhpokok=0 ,$jmlh=0,$j=0,$po=0, $pk=0,$pk1=0 ,$jmlhjasa=0,$js=0,$js1=0 ,$jmlh1=0 , $jumlahbayar=0  ; $n<=1 ; $n++): ?>
+                        <?php $__currentLoopData = $pembayaranvalid; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <tr>
+                        <td><?php echo e($loop->iteration); ?></td>
+                          <td><?php echo e($p->tgl); ?></td>
+                          <td><?php echo e(number_format($p->jumlah,0,',','.')); ?></td>
+                              <?php $jumlahbayar += $p->jumlah ?> 
+                        <?php if($loop->iteration <= 1 ): ?>
+                            <?php if( $p->jumlah < $pokok): ?>
+                                  <td><?php echo e(number_format($p->jumlah,0,',','.')); ?></td>
+                                  <?php $pk += $p->jumlah ?> 
+                                  <td></td> 
+                              <?php elseif($p->jumlah >= $pokok  ): ?> 
+                                  
+                                  <?php if( $p->jumlah >= str_replace(",", "",$sum)): ?>
+                                      <td><?php echo e(number_format($po = $sumpokok - $jmlh,0,',','.')); ?></td>
+                                    <?php else: ?>
+                                      <td><?php echo e(number_format($pokok ,0,',','.')); ?></td>
+                                      <?php $pk1 += $pokok ?> 
+                                  <?php endif; ?>
+                                  
+                                  <?php if( $p->jumlah >= str_replace(",", "",$sum)): ?>
+                                      <td><?php echo e(number_format($j = $sumjasa - $jmlh1,0,',','.')); ?></td>
+                                    <?php else: ?>
+                                      <?php if($sisa = $p->jumlah - $pokok <= $jasa ): ?>
+                                          <td><?php echo e(number_format($sisa = $p->jumlah - $pokok,0,',','.')); ?></td>
+                                          <?php $js += $sisa ?> 
+                                        <?php else: ?>
+                                          <td><?php echo e(number_format($jasa,0,',','.')); ?></td>
+                                      <?php $js1 += $jasa ?> 
+                                      <?php endif; ?>
+                                  <?php endif; ?>
+                            <?php endif; ?>
+                          <?php else: ?>
+                            <?php if( $p->jumlah < $pokok): ?>
+                                  <td><?php echo e(number_format($p->jumlah,0,',','.')); ?></td>
+                                  <?php $pk += $p->jumlah ?> 
+                                  <td></td> 
+                              <?php elseif($p->jumlah >= $pokok  ): ?> 
+                                  
+                                  <?php if( $p->jumlah >= str_replace(",", "",$sum)): ?>
+                                      <td><?php echo e(number_format( $po= $sumpokok - $jmlh,0,',','.')); ?></td>
+                                    <?php else: ?>
+                                      <td><?php echo e(number_format($pokok,0,',','.')); ?></td>
+                                      <?php $pk1 += $pokok ?> 
+                                  <?php endif; ?>
+                                  
+                                  <?php if( $p->jumlah >= str_replace(",", "",$sum)): ?>
+                                      <td><?php echo e(number_format($j = $sumjasa - $jmlh1,0,',','.')); ?></td>
+                                    <?php else: ?>
+                                      <?php if($sisa = $p->jumlah - $pokok <= $jasa1 ): ?>
+                                        <td><?php echo e(number_format($sisa = $p->jumlah - $pokok,0,',','.')); ?></td>
+                                          <?php $js += $sisa ?> 
+                                        <?php else: ?>
+                                      <td><?php echo e(number_format($jasa1,0,',','.')); ?></td>
+                                      <?php $js1 += $jasa1 ?> 
+                                      <?php endif; ?>
+                                  <?php endif; ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                          <td><?php echo e(number_format($sum=$sum - $p->jumlah ,0,',','.')); ?></td>
+                        
+                          <td><?php if($p->bank == 'bri'): ?> BRI
+                              <?php else: ?> Mandiri
+                              <?php endif; ?>
+                          </td>
+
+                    </tr>
+                        <?php $jmlh = $pk+$pk1;
+                              $jmlh1 = $js+$js1;
+                        ?> 
+                        
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php endfor; ?>
+                    <tr>
+                      <th colspan="2"> Jumlah </th>
+                      <th >  <?php echo e(number_format($jumlahbayar,0,',','.')); ?></th>
+                      <th > <?php echo e(number_format($jmlhpokok = $jmlh+$po,0,',','.')); ?> </th>
+                      <th > <?php echo e(number_format($jmlhjasa = $jmlh1+$j  ,0,',','.')); ?> </th>
+                      <th colspan="2" > Uang Lebih: <?php echo e(number_format(abs($sum) ,0,',','.')); ?> </th>
+                    </tr>
+                  
+
+                  
+                    
+                </tbody>
+              </table>
+            </div>
         </div>
       
       

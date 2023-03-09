@@ -18,7 +18,7 @@
           <button class="nav-link w-100" id="angsuran-tab" data-bs-toggle="tab" data-bs-target="#angsuran-justified" type="button" role="tab" aria-controls="angsuran" aria-selected="false">Angsuran</button>
         </li>
         <li class="nav-item flex-fill" role="presentation">
-          <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-justified" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+          <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-justified" type="button" role="tab" aria-controls="contact" aria-selected="false">Detail Angsuran</button>
         </li>
       </ul>
 
@@ -92,26 +92,17 @@
                 </thead>
                 <tbody>
                   <tr>
+                    @for( $n=0 ; $n<6 ; $n++)
                     <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
+                    @endfor
                     <td>{{ $kp->formatRupiah('pinjaman') }}</td>
                   </tr>
                     @for ( 
                       $i =1,
-                      $sumpokok = 0,
-                      $sumjasa = 0,
+                      $sumjasa =0,
                       $sum = 0,
-                      $saldoawal = $kp->pinjaman,
-                      $saldo = $kp->pinjaman,
-                      $sb_bln = $kp->sb_bln/100,
-                      $waktu = $kp->waktu,
-                      $pokok = $saldoawal/$waktu,
-                      $jasa = $saldoawal*$sb_bln,
-                      $jasa1= $jasa/2;
+                      $sumpokok =0,
+                      $saldo = $kp->pinjaman;
                       $i <= 24  ; $i++)
                         <tr>
                         <td scope="row">{{ $i}}</td>
@@ -128,7 +119,7 @@
                             <td>Rp. {{ number_format(round($jasa1), 0, ',','.') }} </td>
                             <td>Rp. {{ number_format(round($jumlah = $pokok+$jasa1), 0, ',','.') }} </td>
                             <?php  $sumjasa += $jasa1; 
-                                    $sum += $jumlah;
+                                  $sum += $jumlah;
                             ?>
                         @endif
                         <td>Rp.{{ number_format(round($saldo = $saldo-$pokok), 0, ',','.') }}</td>
@@ -170,16 +161,14 @@
                         @endif
                   </td>
                   <td> {{ $p->formatRupiah('jumlah') }}</td>
-                  
                   <td><button type="button" class="btn btn-primary btn-sm"> <a href="/bukti/{{ $p->id }}"style="color:white;"> Lihat </a></button></td>
-                  
                   <td> @if ( $p->status == "menunggu")
                           <button type="button" class="btn btn-success btn-sm">Valid</button>
                           <button type="button" class="btn btn-danger btn-sm">Tidak Valid</button>
                         @elseif( $p->status == "valid") <span class="badge bg-success">Valid</span>
                         @else <span class="badge bg-danger">Tidak Valid</span>
-                      
-                  @endif</td>
+                      @endif
+                  </td>
                 </tr>
               @endforeach
                 <tr>
@@ -195,25 +184,118 @@
           </div>
         </div>
         <div class="tab-pane fade" id="contact-justified" role="tabpanel" aria-labelledby="contact-tab">
-            Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+          <div style="padding-top:25px; overflow-x:auto"> 
+              <table class="table table-bordered" style="text-align:center">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Jumlah Bayar</th>
+                    <th>Pokok</th>
+                    <th>Jasa Pinj 0.25%</th>
+                    <th>Sisa Pinjaman</th>
+                    <th>Ket</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <?php  ?>
+                  <tr>
+                    @for( $n=0 ; $n<5 ; $n++)
+                      <td>0</td>
+                    @endfor
+                    <td>{{ number_format($sum,0,',','.')}}</td>
+                  </tr>
+                    @for(  $n=1,$jmlhpokok=0 ,$jmlh=0,$j=0,$po=0, $pk=0,$pk1=0 ,$jmlhjasa=0,$js=0,$js1=0 ,$jmlh1=0 , $jumlahbayar=0  ; $n<=1 ; $n++)
+                        @foreach ( $pembayaranvalid as $p )
+                          <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $p->tgl }}</td>
+                            <td>{{ number_format($p->jumlah,0,',','.') }}</td>
+                                <?php $jumlahbayar += $p->jumlah ?> 
+                            @if($loop->iteration <= 1 )
+                                @if( $p->jumlah < $pokok)
+                                      <td>{{ number_format($p->jumlah,0,',','.') }}</td>
+                                      <?php $pk += $p->jumlah ?> 
+                                      <td></td> 
+                                  @elseif($p->jumlah >= $pokok  ) 
+                                      {{-- Pokok Jika di BOOM sebelum 1 tahun --}}
+                                      @if ( $p->jumlah >= str_replace(",", "",$sum))
+                                          <td>{{ number_format($po = $sumpokok - $jmlh,0,',','.') }}</td>
+                                        @else
+                                          <td>{{ number_format($pokok ,0,',','.') }}</td>
+                                          <?php $pk1 += $pokok ?> 
+                                      @endif
+                                      {{-- Jasa Jika di BOOM sebelum 1 tahun --}}
+                                      @if( $p->jumlah >= str_replace(",", "",$sum))
+                                          <td>{{ number_format($j = $sumjasa - $jmlh1,0,',','.') }}</td>
+                                        @else
+                                          @if($sisa = $p->jumlah - $pokok <= $jasa )
+                                              <td>{{ number_format($sisa = $p->jumlah - $pokok,0,',','.') }}</td>
+                                              <?php $js += $sisa ?> 
+                                            @else
+                                              <td>{{ number_format($jasa,0,',','.') }}</td>
+                                          <?php $js1 += $jasa ?> 
+                                          @endif
+                                      @endif
+                                @endif
+                              @else
+                                @if( $p->jumlah < $pokok)
+                                      <td>{{ number_format($p->jumlah,0,',','.') }}</td>
+                                      <?php $pk += $p->jumlah ?> 
+                                      <td></td> 
+                                  @elseif($p->jumlah >= $pokok  ) 
+                                      {{-- Pokok Jika di BOOM setelah 1 tahun --}}
+                                      @if ( $p->jumlah >= str_replace(",", "",$sum))
+                                          <td>{{ number_format( $po= $sumpokok - $jmlh,0,',','.') }}</td>
+                                        @else
+                                          <td>{{ number_format($pokok,0,',','.') }}</td>
+                                          <?php $pk1 += $pokok ?> 
+                                      @endif
+                                      {{-- Jasa Jika di BOOM setelah 1 tahun --}}
+                                      @if( $p->jumlah >= str_replace(",", "",$sum))
+                                          <td>{{ number_format($j = $sumjasa - $jmlh1,0,',','.') }}</td>
+                                        @else
+                                          @if($sisa = $p->jumlah - $pokok <= $jasa1 )
+                                            <td>{{ number_format($sisa = $p->jumlah - $pokok,0,',','.') }}</td>
+                                              <?php $js += $sisa ?> 
+                                            @else
+                                          <td>{{ number_format($jasa1,0,',','.') }}</td>
+                                          <?php $js1 += $jasa1 ?> 
+                                          @endif
+                                      @endif
+                                @endif
+                            @endif
+                            <td>{{ number_format($sum=$sum - $p->jumlah ,0,',','.') }}</td>
+                            <td>@if ($p->bank == 'bri') BRI
+                                @else Mandiri
+                                @endif
+                            </td>
+                          </tr>
+                          <?php $jmlh = $pk+$pk1; $jmlh1 = $js+$js1;?> 
+                        @endforeach
+                    @endfor
+                    <tr>
+                      <th colspan="2"> Jumlah </th>
+                      <th >  {{ number_format($jumlahbayar,0,',','.') }}</th>
+                      <th > {{ number_format($jmlhpokok = $jmlh+$po,0,',','.') }} </th>
+                      <th > {{ number_format($jmlhjasa = $jmlh1+$j  ,0,',','.') }} </th>
+                      <th colspan="2" > Uang Lebih: {{ number_format(abs($sum) ,0,',','.') }} </th>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
         </div>
-      
-      
       </div>
-
-      
-        
-      
     </div>
   </div>
 
     <script type='text/javascript'>
-    function bagi(){
-      var sb_thn = document.getElementById('sb_thn').value; 
-      var result = parseFloat(sb_thn)/12;
-      if (!isNaN(result)){
-        document.getElementById('sb_bln').value=result;
+      function bagi(){
+        var sb_thn = document.getElementById('sb_thn').value; 
+        var result = parseFloat(sb_thn)/12;
+        if (!isNaN(result)){
+          document.getElementById('sb_bln').value=result;
+        }
       }
-    }
     </script>
 @endsection

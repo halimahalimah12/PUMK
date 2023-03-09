@@ -103,8 +103,14 @@ class KrtpiutangController extends Controller
         $pembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)->get();
         $totpembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)
                         ->where('status','=','valid')->sum('jumlah');
+        $pembayaranvalid = Pembayaran::where('kartu_piutang_id',$kp->id)
+                        ->where('status','=','valid')->get();
+                
+        $jasa = $this->hitungjasa($id);
+        $jasa1 = $this->hitungjasa1($id);
+        $pokok = $this->hitungpokok($id);
 
-        return view('dashboard.kartu_piutang.view' ,compact('user','kp','pembayaran','totpembayaran') );
+        return view('dashboard.kartu_piutang.view' ,compact('user','pembayaranvalid','kp','jasa1','jasa','pokok','pembayaran','totpembayaran') );
     }
 
     /**
@@ -154,4 +160,44 @@ class KrtpiutangController extends Controller
         $pembayaran = Pembayaran::find($id);
         return view('dashboard.pembayaran.bukti',compact('pembayaran'));
     }
+    public function hitungjasa($id){
+        $kp = Kartu_piutang::find($id);
+        $i=1;
+        $saldoawal = $kp->pinjaman;
+        $sb_bln = $kp->sb_bln/100;
+        $jasa = $saldoawal*$sb_bln;
+        return $jasa;
+    }
+    public function hitungjasa1($id){
+        $jasa = $this->hitungjasa($id);
+        $jasa1= $jasa/2;
+        return $jasa1;
+    }
+
+    public function hitungpokok($id){
+        $kp = Kartu_piutang::find($id);
+        $saldoawal = $kp->pinjaman;
+        $waktu = $kp->waktu;
+        $pokok = $saldoawal/$waktu;
+        return $pokok;
+    }
+
+    public function pokok($id){
+        $pembayaran = Pembayaran::find($id);
+        $jumlah = $pembayaran->jumlah;
+        $pokok = $this->hitungpokok($id);
+        $pokokbayar =   $pokok - $jumlah;
+        return $pokokbayar;
+    }
+
+    public function sisapinjaman($id){
+        $kp = Kartu_piutang::find($id);
+        $pembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)
+            ->where('status','=','valid')->sum('jumlah');
+        $pinjaman = $kp->pinjaman;
+        $sisapinjaman = $pinjaman - $pembayaran;
+        return $sisapinjaman;
+    }
+    
+
 }
