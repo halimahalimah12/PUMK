@@ -172,7 +172,7 @@
                   </td>
                 </tr>
               @endforeach
-                <p>{{ $uanglebih = $sum-$totpembayaran }}</p>
+                <p style="visibility: hidden;display: none;">{{ $uanglebih = $sum-$totpembayaran }}</p>
                 <tr>
                   <th colspan="3">Total Pembayaran</th>
                   <th>Rp. {{ number_format($totpembayaran,0,',','.' )}}</th>
@@ -185,10 +185,12 @@
                       <th>Rp. {{ number_format($sisatagihan= $sum-$totpembayaran - $uanglebih,0,',','.') }}</th>
                   @endif
                 </tr>
-                <tr>
-                  <th colspan="3">Uang Lebih</th>
-                  <th>Rp. {{ number_format(abs($uanglebih),0,',','.') }}</th>
-                </tr>
+                  @if($totpembayaran > $sum )
+                    <tr>
+                      <th colspan="3">Uang Lebih</th>
+                      <th>Rp. {{ number_format(abs($uanglebih),0,',','.') }}</th>
+                    </tr>
+                  @endif
               </tbody>
             </table>
           </div>
@@ -214,6 +216,7 @@
                       <td>0</td>
                     @endfor
                     <td>{{ number_format($sum,0,',','.')}}</td>
+                      <td></td>
                   </tr>
                     @for(  $n=1,$jmlhpokok=0 ,$jmlh=0,$j=0,$po=0, $pk=0,$pk1=0 ,$jmlhjasa=0,$js=0,$js1=0 ,$jmlh1=0 , $jumlahbayar=0  ; $n<=1 ; $n++)
                         @foreach ( $pembayaranvalid as $p )
@@ -275,7 +278,11 @@
                                       @endif
                                 @endif
                             @endif
-                            <td>{{ number_format($sum=$sum - $p->jumlah ,0,',','.') }}</td>
+                            @if ( $sum > $p->jumlah)
+                                <td>{{ number_format($sum=$sum - $p->jumlah ,0,',','.') }}</td>
+                              @else 
+                                <td>{{ number_format($sum=$sum - $p->jumlah-$uanglebih ,0,',','.') }}</td>
+                            @endif
                             <td>@if ($p->bank == 'bri') BRI
                                 @else Mandiri
                                 @endif
@@ -289,7 +296,9 @@
                       <th >  {{ number_format($jumlahbayar,0,',','.') }}</th>
                       <th > {{ number_format($jmlhpokok = $jmlh+$po,0,',','.') }} </th>
                       <th > {{ number_format($jmlhjasa = $jmlh1+$j  ,0,',','.') }} </th>
-                      <th colspan="2" > Uang Lebih: {{ number_format(abs($sum) ,0,',','.') }} </th>
+                      @if($p->jumlah > $sum)
+                        <th colspan="2" > Uang Lebih: {{ number_format(abs($uanglebih) ,0,',','.') }} </th>
+                      @endif
                     </tr>
                 </tbody>
               </table>
