@@ -28,14 +28,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($pengajuan as $p )
+                  @foreach ($kp as $p )
                     <tr>
                       <td>{{ $loop->iteration }}</td>
-                      <td>{{ ucwords($p->data_mitra->nm)}}</td>
-                      <td>{{ $p->data_mitra->data_ush->jnsush}}</td>
+                      <td>{{ ucwords($p->pengajuan->data_mitra->nm)}}</td>
+                      <td>{{ $p->pengajuan->data_mitra->data_ush->jnsush}}</td>
                       <td></td>
                       <td></td>
-                      <td></td>
+                      <td>{{ $totpembayaran }}</td>
 
 
                     </tr>

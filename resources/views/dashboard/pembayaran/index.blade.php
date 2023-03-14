@@ -12,6 +12,42 @@
             </div>
       @endif 
           <div calss="card">
+
+            <p style="visibility: hidden;display: none;"> 
+                @for ( 
+                      $sum =0,
+                      $sumpokok = 0,
+                      $sumjasa = 0,
+                      $i =1,
+                      $saldoawal = $kp->pinjaman,
+                      $sb_bln = $kp->sb_bln/100,
+                      $waktu = $kp->waktu,
+                      $pokok = $saldoawal/$waktu,
+                      $jasa = $saldoawal*$sb_bln,
+                      $jasa1= $jasa/2;
+                      $i <= 24  ; $i++)
+                        @if($i <= 12 )
+                            {{ number_format(round($jasa), 0, ',','.') }}
+                            {{ number_format(round($jumlah = $pokok+$jasa), 0, ',','.') }}
+                            <?php  
+                                  $sumjasa += $jasa; 
+                                  $sum += $jumlah;
+                            ?>
+                          @else 
+                            {{ number_format(round($jasa1), 0, ',','.') }}  
+                            {{ number_format(round($jumlah = $pokok+$jasa1), 0, ',','.') }} 
+                            <?php 
+                              $sum += $jumlah;
+                              $sumjasa += $jasa1;
+                            ?>
+                        @endif
+                      <?php $sumpokok += $pokok; ?>
+                @endfor
+                </p>
+                  <input type="hidden" class="form-control "  id="getpokok"  value="{{  $pokok }}">
+                  <input type="hidden" class="form-control "  id="getsumjasa"  value="{{  $sumjasa }}">
+                  <input type="hidden" class="form-control "  id="getsumpokok"  value="{{  $sumpokok }}">
+                
             <form class="row g-3  contact-form" action="/pembayaran"  method="POST" enctype="multipart/form-data"  >
               @csrf
               <input type="hidden"  name="idkp" value="{{ $kp->id }}">
@@ -38,11 +74,13 @@
                 <div class="col-sm-9">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="form-control rupiah @error('jumlah') is-invalid @enderror" name="jumlah"  >
+                  <input type="text" class="form-control rupiah  @error('jumlah') is-invalid @enderror" name="jumlah" id="jumlah" onkeyup="sum();" >
                   @error('jumlah')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 </div>
               </div>
+                  <input type="hidden" class="form-control " name="pokok" id="pokok"  readonly>
+                  <input type="hidden" class="form-control " name="jasa" id="jasa" readonly >
               <div class="row mb-3">
                 <label for="foto" class="col-sm-3 col-form-label">Bukti Pembayaran</label>
                 <div class="col-sm-9">
@@ -82,33 +120,11 @@
                   <th colspan="3" style="text-align:center">Total Pembayaran</th>
                   <th>Rp. {{ number_format($totpembayaran,0,',','.' )}}</th>
                 </tr>
-                <p style="visibility: hidden;display: none;"> 
-                @for ( 
-                      $sum =0,
-                      $i =1,
-                      $saldoawal = $kp->pinjaman,
-                      $sb_bln = $kp->sb_bln/100,
-                      $waktu = $kp->waktu,
-                      $pokok = $saldoawal/$waktu,
-                      $jasa = $saldoawal*$sb_bln,
-                      $jasa1= $jasa/2;
-                      $i <= 24  ; $i++)
-                        @if($i <= 12 )
-                            Rp. {{ number_format(round($jumlah = $pokok+$jasa), 0, ',','.') }}
-                            <?php  
-                                  $sum += $jumlah;
-                            ?>
-                          @else 
-                            Rp. {{ number_format(round($jumlah = $pokok+$jasa1), 0, ',','.') }} 
-                            <?php 
-                            $sum += $jumlah;
-                            ?>
-                        @endif
-                @endfor
-                </p>
+                
                 <tr>
                   <th colspan="3" style="text-align:center">Sisa Tagihan</th>
                   <th>Rp. {{ number_format($sum - $totpembayaran,0,',','.') }}</th>
+                  <th>Rp. {{ number_format($pokok,0,',','.') }}</th>
                 </tr>
               </tbody>
             </table>
@@ -120,8 +136,8 @@
               {{ session ('success') }}
             </div>
           @endif 
-            <div style="margin-top:35px">
-            <table class="table table-striped">
+            <div style="margin-top:35px;overflow-x:auto">
+            <table class="table table-striped" id="datatable" >
               <thead>
                 <th> No </th>
                 <th> Tanggal Pembayaran </th>
@@ -158,4 +174,85 @@
           </div>
           @endcan
       @endif 
+  
+  <script type='text/javascript'>
+    function sum(){
+      var jumlahValue  = document.getElementById('jumlah').value;;
+      var pokokValue = document.getElementById('getpokok').value;
+      var sumjasaValue  = document.getElementById('getsumjasa').value;
+      var sumpokokValue  = document.getElementById('getsumpokok').value;
+
+        var test1 = jumlahValue.replaceAll(",","");
+        var test2 = parseInt(pokokValue);
+        var test4 = parseInt(sumpokokValue);
+        var test5 = sumjasaValue/24;
+
+
+      {{-- if( test1 <  test2 ) {
+        document.getElementById('pokok').value=jumlahValue;
+        document.getElementById('jasa').value=0;
+      }  else  {
+        var jasa = test1-test2;
+        
+        var test3 = test2;
+        
+        if (jasa < test2){
+          document.getElementById('pokok').value=test2;
+          document.getElementById('jasa').value=jasa;
+        } else {
+          for( var i = 1; jasa > test2  ; i++){ 
+              if( i <= 2){
+                test2 = test2 * i;
+                document.getElementById('pokok').value=test2;
+              }else{
+                test2 = test2 + test3;
+                document.getElementById('pokok').value=test2;
+              }
+          }
+          jasa= test1-test2;
+
+          document.getElementById('jasa').value=jasa;
+
+        }
+      } --}}
+      
+      if( test1 <  test2 ) {
+        document.getElementById('pokok').value=jumlahValue;
+        document.getElementById('jasa').value=0;
+      }  else  {
+        var jasa = test1-test2;
+
+        var test3 = test2;
+        var test6 = test5;
+        
+        if (jasa < test2){          
+          document.getElementById('jasa').value=test5;
+          jasa=jasa-test5;
+          test2 = test2+jasa;
+          document.getElementById('pokok').value=test2;
+        } else {
+          for( var i = 1; jasa > test2  ; i++){ 
+              if( i <= 2){
+                test2 = test2 * i;
+                test5 = test5 * i;
+                var  j = test1-test2-test5;
+                var pk = test2+j;
+
+                document.getElementById('pokok').value=pk;
+                document.getElementById('jasa').value=test5;
+              }else{
+                test2 = test2 + test3;
+                test5 = test5 + test6;
+                jasa= test1-test2-test5;
+                var pokok= test2+jasa;
+                document.getElementById('pokok').value=pokok;
+                document.getElementById('jasa').value=test5;
+              }
+          }
+          
+        }
+      }
+    }
+  </script>
+
 @endsection

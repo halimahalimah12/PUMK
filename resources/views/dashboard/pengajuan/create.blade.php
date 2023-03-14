@@ -11,30 +11,30 @@
           @csrf    
           <div class="col-12 ">
             <label for="nm_ush" class="form-label" style="margin-top:10px;">Nama Usaha</label>
-            <input type="text" class="form-control" name="nm_ush" id="nm_ush" value="{{ old('nmush', ucwords($ush->nama_ush)) }}" disabled>
+            <input type="text" class="form-control" name="nm_ush" id="nm_ush" value="{{ ucwords($ush->nama_ush) }}" disabled>
           </div> 
           <div class="col-12 ">
             <label for="nm_pjstu" class="form-label" >Nama Penanggung Jawab Satu</label>
-            <input type="text" class="form-control" name="nm_pjstu" id="nm_pjstu" value="{{ old('nama', ucwords($mitra->nm)) }}" disabled>
+            <input type="text" class="form-control" name="nm_pjstu" id="nm_pjstu" value="{{ ucwords($mitra->nm) }}" disabled>
           </div>
           {{-- Data Diri Penanggung Jawab Berikutnya --}}
           <div class="card-body">
             <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Biodata Penanggung Jawab Berikutnya</h5>
               <div class="col-12 "> 
                 <label for="nm_pjb" class="form-label" >Nama  </label>
-                <input type="text" class="form-control " name="nm_pjb" id="nm_pjb" value="{{ old('nm_pjb') }}"  >
+                <input type="text" class="form-control " name="nm_pjb" id="nm_pjb" value="{{ old('nm_pjb',ucwords($last->pjb->nm)) }}"  >
                 <span class="text-danger error-text nm_pjb_error"> </span>
               </div>
               <div class="row gx-3 gy-0">
                 <div class="col-lg-6 col-12  form-group clearfix ">
                   <label for="tpt_lhr" class="form-label">Tempat Lahir</label>
-                  <input type="text" class="form-control "  id="tpt_lhr" name="tpt_lhr" value="{{ old('tpt_lhr') }}" >
+                  <input type="text" class="form-control "  id="tpt_lhr" name="tpt_lhr" value="{{ old('tpt_lhr',$last->pjb->tpt_lhr) }}" >
                   <span class="text-danger error-text tpt_lhr_error"> </span>
                 </div>
                 <div class="col-lg-6 col-12 form-group clearfix">
                   <label for="tgl_lhr" class="form-label">Tanggal Lahir</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control " id="tgl_lhr"  name="tgl_lhr" value="{{ old('tgl_lhr') }}">
+                    <input type="date" class="form-control " id="tgl_lhr"  name="tgl_lhr" value="{{ old('tgl_lhr',$last->pjb->tgl_lhr) }}">
                     <span class="text-danger error-text tgl_lhr_error"> </span>
                   </div>
                 </div>
@@ -44,11 +44,11 @@
                   <label for="gender" class="form-label">Jenis Kelamin</label>
                   <div>
                     <div class="form-check form-check-inline" >
-                      <input class="form-check-input" type="radio" name="gender" id="gender" value="L" {{  old('gender') == 'L' ? 'checked':'' }}>
+                      <input class="form-check-input" type="radio" name="gender" id="gender" value="L" {{  old('gender',$last->pjb->jk) == 'L' ? 'checked':'' }}>
                       <label class="form-check-label" for="gender">Laki-Laki</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="gender" id="gender" value="P"  {{ old('gender') == 'P' ? 'checked':'' }}>
+                      <input class="form-check-input" type="radio" name="gender" id="gender" value="P"  {{ old('gender',$last->pjb->jk) == 'P' ? 'checked':'' }}>
                       <label class="form-check-label" for="gender">Perempuan</label>
                     </div>                                  
                     <span class="text-danger error-text gender_error"> </span>
@@ -56,19 +56,19 @@
                 </div>
                 <div class="col-lg-6 col-12 form-group clearfix">
                   <label for="hub" class="form-label">Status Hubungan dengan Penanggung Jawab Usaha </label>
-                  <input type="text" class="form-control" id="hub" name="hub" value="{{ old('hub') }}">
+                  <input type="text" class="form-control" id="hub" name="hub" value="{{ old('hub',$last->pjb->hub) }}">
                   <span class="text-danger error-text hub_error"> </span>
                 </div>
               </div>
               <div class="row gx-3 gy-0">
                 <div class="col-12 col-lg-6 form-group clearfix" >
                   <label for="pekerjaan" class="form-label">Pekerjaan</label>
-                  <input type="text" class="form-control" id="pekerjaan" name="pekerjaan"value="{{ old('pekerjaan') }}">
+                  <input type="text" class="form-control" id="pekerjaan" name="pekerjaan"value="{{ old('pekerjaan',$last->pjb->pekerjaan) }}">
                   <span class="text-danger error-text pekerjaan_error"> </span>
                 </div>
                 <div class="col-12 col-lg-6 form-group clearfix" >
                   <label for="almt" class="form-label">Alamat</label>
-                    <textarea class="form-control  @error('almt') is-invalid  @enderror" id="almt" name="almt" value="{{ old('almt')}}" style="height: 100px"></textarea>
+                    <textarea class="form-control  @error('almt') is-invalid  @enderror" id="almt" name="almt" value="{{ old('almt')}}" style="height: 100px">{{ ucwords($last->pjb->almt) }}</textarea>
                     <span class="text-danger error-text almt_error"> </span>
                 </div>
               </div>
@@ -79,18 +79,18 @@
               <div class="row gx-3 gy-0">
                 <div class="col-lg-4 col-12 form-group clearfix">
                   <label for="no_hp" class="form-label">No Telephone</label>
-                  <input type="text" class="form-control"  id="no_hp" name="no_hp" value="{{ old('no_hp') }}">
+                  <input type="text" class="form-control"  id="no_hp" name="no_hp" value="{{ old('no_hp',$last->pjb->no_hp) }}">
                   <span class="text-danger error-text no_hp_error"> </span>
                 </div>
                 <div class="col-lg-4 col-12 form-group clearfix">
                   <label for="no_ktp" class="form-label">No KTP </label>
-                  <input type="text" class="form-control" id="no_ktp" name="no_ktp" value="{{ old('no_ktp') }}">
+                  <input type="text" class="form-control" id="no_ktp" name="no_ktp" value="{{ old('no_ktp',$last->pjb->no_ktp) }}">
                   <span class="text-danger error-text no_ktp_error"> </span>
                 </div>
                 <div class="col-lg-4 col-12 form-group clearfix">
                   <label for="tgl_ktp" class="form-label">Tanggal KTP</label>
                   <div class="col-sm-12">
-                    <input type="date" class="form-control"  id="tgl_ktp"  name="tgl_ktp" value="{{ old('tgl_ktp') }}">
+                    <input type="date" class="form-control"  id="tgl_ktp"  name="tgl_ktp" value="{{ old('tgl_ktp',$last->pjb->tgl_ktp) }}">
                     <span class="text-danger error-text tgl_ktp_error"> </span>
                   </div>
                 </div>
@@ -101,27 +101,27 @@
                     <select class="form-select" name="pddk" id="pddk" aria-label="Default select example">
                       <div class="col-sm-6">
                         <option value = "" >- Pilih -</option>
-                        <option value="SD" {{ old('pddk') =="SD" ? 'selected' : ''}} name="pddk" id="pddk" >SD</option>
-                        <option value="SMP" {{ old('pddk') =="SMP" ? 'selected' : ''}} name="pddk" id="pddk">SMP</option>
-                        <option value="SMA" {{ old('pddk') =="SMA" ? 'selected' : ''}} name="pddk" id="pddk">SMA</option>
-                        <option value="D1" {{ old('pddk') =="D1" ? 'selected' : ''}} name="pddk" id="pddk">D1</option>
-                        <option value="D1" {{ old('pddk') =="D2" ? 'selected' : ''}} name="pddk" id="pddk">D2</option>
-                        <option value="D3" {{ old('pddk') =="D3" ? 'selected' : ''}} name="pddk" id="pddk">D3</option>
-                        <option value="S1" {{ old('pddk') =="S1" ? 'selected' : ''}} name="pddk" id="pddk">S1</option>
-                        <option value="S2" {{ old('pddk') =="S2" ? 'selected' : ''}} name="pddk" id="pddk">S2</option>
-                        <option value="S3" {{ old('pddk') =="S3" ? 'selected' : ''}}  name="pddk" id="pddk">S3</option>
+                        <option value="SD" {{ old('pddk',$last->pjb->pddk) =="SD" ? 'selected' : ''}} name="pddk" id="pddk" >SD</option>
+                        <option value="SMP" {{ old('pddk',$last->pjb->pddk) =="SMP" ? 'selected' : ''}} name="pddk" id="pddk">SMP</option>
+                        <option value="SMA" {{ old('pddk',$last->pjb->pddk) =="SMA" ? 'selected' : ''}} name="pddk" id="pddk">SMA</option>
+                        <option value="D1" {{ old('pddk',$last->pjb->pddk) =="D1" ? 'selected' : ''}} name="pddk" id="pddk">D1</option>
+                        <option value="D1" {{ old('pddk',$last->pjb->pddk) =="D2" ? 'selected' : ''}} name="pddk" id="pddk">D2</option>
+                        <option value="D3" {{ old('pddk',$last->pjb->pddk) =="D3" ? 'selected' : ''}} name="pddk" id="pddk">D3</option>
+                        <option value="S1" {{ old('pddk',$last->pjb->pddk) =="S1" ? 'selected' : ''}} name="pddk" id="pddk">S1</option>
+                        <option value="S2" {{ old('pddk',$last->pjb->pddk) =="S2" ? 'selected' : ''}} name="pddk" id="pddk">S2</option>
+                        <option value="S3" {{ old('pddk',$last->pjb->pddk) =="S3" ? 'selected' : ''}}  name="pddk" id="pddk">S3</option>
                       </div>
                     </select>
                     <span class="text-danger error-text pddk_error"> </span>
                 </div>
                 <div class="col-lg-4 col-12 form-group clearfix">
                   <label for="kursus" class="form-label">Kursus </label>
-                  <input type="text" class="form-control"  id="kursus" name="kursus" value="{{ old('kursus') }}">
+                  <input type="text" class="form-control"  id="kursus" name="kursus" value="{{ old('kursus',$last->pjb->kursus) }}">
                   <p>* Jika tidak ada, beri tanda strip(-) </p>
                 </div>
                 <div class="col-lg-4 col-12 form-group clearfix">
                   <label for="jbt" class="form-label">Jabatan</label>
-                  <input type="text" class="form-control"  id="jbt" name="jbt" value="{{ old('jbt') }}">
+                  <input type="text" class="form-control"  id="jbt" name="jbt" value="{{ old('jbt',$last->pjb->jbt) }}">
                   <span class="text-danger error-text jbt_error"> </span>
                 </div> 
               </div>
@@ -153,7 +153,7 @@
                 <div class="col-sm-10">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Rp.</span>
-                        <input type="text" class="rupiah  form-control" name="tanah" id="tanah"  onkeyup="sum();" value="{{ old('tanah') }}" >
+                        <input type="text" class="rupiah  form-control" name="tanah" id="tanah"  onkeyup="sum();" value="{{ old('tanah',$last->aset->tanah) }}" >
                     </div>
                     <span class="text-danger error-text tanah_error"> </span>
                 </div>
@@ -163,7 +163,7 @@
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah  form-control" name="bangunan" id="bangunan" onkeyup="sum();" value="{{ old('bangunan') }}">
+                    <input type="text" class="rupiah  form-control" name="bangunan" id="bangunan" onkeyup="sum();" value="{{ old('bangunan',$last->aset->bangunan) }}">
                   </div>
                   <span class="text-danger error-text bangunan_error"> </span>
                 </div>
@@ -173,7 +173,7 @@
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah  form-control" name="persediaan" id="persediaan" onkeyup="sum();" value="{{ old('persediaan') }}">
+                    <input type="text" class="rupiah  form-control" name="persediaan" id="persediaan" onkeyup="sum();" value="{{ old('persediaan',$last->aset->persediaan) }}">
                   </div>
                   <span class="text-danger error-text persediaan_error"> </span>
                 </div>
@@ -183,7 +183,7 @@
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah  form-control" name="alat" id="alat" onkeyup="sum();" value="{{ old('alat') }}">
+                    <input type="text" class="rupiah  form-control" name="alat" id="alat" onkeyup="sum();" value="{{ old('alat',$last->aset->alat) }}">
                   </div>
                   <span class="text-danger error-text alat_error"> </span>
                 </div>
@@ -193,7 +193,7 @@
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah form-control" name="kas" id="kas" onkeyup="sum();" value="{{ old('kas') }}">
+                    <input type="text" class="rupiah form-control" name="kas" id="kas" onkeyup="sum();" value="{{ old('kas',$last->aset->kas) }}">
                   </div>
                   <span class="text-danger error-text kas_error"> </span>
                 </div>
@@ -203,7 +203,7 @@
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                       <span class="input-group-text">Rp.</span>
-                      <input type="text" class=" rupiah form-control" name="piutang" id="piutang" onkeyup="sum();" value="{{ old('piutang') }}">
+                      <input type="text" class=" rupiah form-control" name="piutang" id="piutang" onkeyup="sum();" value="{{ old('piutang',$last->aset->piutang) }}">
                     </div>
                     <span class="text-danger error-text piutang_error"> </span>
                 </div>
@@ -213,7 +213,7 @@
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class=" rupiah form-control" name="peralatan" id="peralatan" onkeyup="sum();" value="{{ old('peralatan') }}">
+                    <input type="text" class=" rupiah form-control" name="peralatan" id="peralatan" onkeyup="sum();" value="{{ old('peralatan',$last->aset->peralatan) }}">
                   </div>
                   <span class="text-danger error-text peralatan_error"> </span>
                 </div>
@@ -223,7 +223,7 @@
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah form-control" name="totaset" id="totaset" style="padding-bottom:5px" value="{{ old('totaset') }}">
+                    <input type="text" class="rupiah form-control" name="totaset" id="totaset" style="padding-bottom:5px;background-color: #e9ecef; cursor:auto;" value="{{ old('totaset',$last->aset->totaset) }}" readonly>
                   </div>
                 </div>
               </div>
@@ -242,12 +242,23 @@
                   </tr>
                 </thead>
                 <tbody id="alats" class="alats">
-                  <tr>
-                    <td> <input type="text" name="nm_brg[]" class="form-control" value="{{ old('nm_brg[]') }}"></td>
-                    <td> <input type="text" name="hrg_satuan[]" class="rupiah form-control" value="{{ old('hrg_satuan[]') }}"> </td>
-                    <td> <input type="text" name="jmlh[]" class="rupiah form-control" id="jmlh" value="{{ old('jmlh[]') }}"> </td>
-                    <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
-                  </tr>
+                  @if($last == NULL)
+                      <tr>
+                        <td> <input type="text" name="nm_brg[]" class="form-control" value="{{ old('nm_brg[]') }}"></td>
+                        <td> <input type="text" name="hrg_satuan[]" class="rupiah form-control" value="{{ old('hrg_satuan[]') }}"> </td>
+                        <td> <input type="text" name="jmlh[]" class="rupiah form-control" id="jmlh" value="{{ old('jmlh[]') }}"> </td>
+                        <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
+                      </tr>
+                    @else
+                      @foreach ($lastalat as  $x)
+                          <tr>        
+                            <td> <input type="text" name="nm_brg[]" class="form-control " value="{{ old('nm_brg[]', $x->nm_brg) }}">    </td>  
+                            <td> <input type="text" name=" hrg_satuan[]"  class="rupiah form-control" value="{{ old('hrg_satuan[]', $x->hrg_satuan) }}"> </td>
+                            <td> <input type="text" name="jmlh[]" class="rupiah form-control" value="{{ old('jmlh[]', $x->jmlh) }}"> </td>
+                            <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
+                          </tr>
+                      @endforeach
+                    @endif
                 </tbody>
               </table> 
             </div>
@@ -266,12 +277,23 @@
                   </tr>
                 </thead>
                 <tbody id="tngkerja" class="tngkerja">
-                  <tr>
-                    <td> <input type="text" name="nmkry[]" class="form-control " value="{{ old('nmkry[]') }}"></td>
-                    <td> <input type="text" name="jbtkry[]" class="form-control " value="{{ old('jbtkry[]') }}"></td>
-                    <td> <input type="text" name="gaji[]" class="rupiah form-control " value="{{ old('gaji[]') }}"></td>
-                    <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
-                  </tr>
+                    @if($last == NULL)
+                        <tr>
+                          <td> <input type="text" name="nmkry[]" class="form-control " value="{{ old('nmkry[]') }}"></td>
+                          <td> <input type="text" name="jbtkry[]" class="form-control " value="{{ old('jbtkry[]') }}"></td>
+                          <td> <input type="text" name="gaji[]" class="rupiah form-control " value="{{ old('gaji[]') }}"></td>
+                          <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
+                        </tr>
+                      @else
+                        @foreach ($lasttk as  $x)
+                          <tr>
+                            <td > <input type="text" name="nmkry[]" class="form-control" value="{{ old('nmkry[]', $x->nm_tngk) }}"> </td>
+                            <td > <input type="text" name="jbtkry[]" class="form-control" value="{{ old('jbtkry[]', $x->jbt) }}"> </td>
+                            <td > <input type="text" name="gaji[]" class="rupiah form-control" value="{{ old('gaji[]', $x->gaji) }}"> </td>
+                            <td > <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
+                          </tr>
+                        @endforeach
+                    @endif
                 </tbody >
               </table> 
             </div>
@@ -284,7 +306,7 @@
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="transport" id="transport" onkeyup="sum1();" value="{{ old('transport') }}">
+                  <input type="text" class="rupiah form-control" name="transport" id="transport" onkeyup="sum1();" value="{{ old('transport',$last->oprasional->transport) }}">
                 </div>
                 <span class="text-danger error-text transport_error"> </span>
               </div>
@@ -294,7 +316,7 @@
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="listrik" id="listrik" onkeyup="sum1();" value="{{ old('listrik') }}" >
+                  <input type="text" class="rupiah form-control" name="listrik" id="listrik" onkeyup="sum1();" value="{{ old('listrik',$last->oprasional->listrik) }}" >
                 </div>
                 <span class="text-danger error-text listrik_error"> </span>                    
               </div>
@@ -304,7 +326,7 @@
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="telp" id="telp" onkeyup="sum1();" value="{{ old('telp') }}">
+                  <input type="text" class="rupiah form-control" name="telp" id="telp" onkeyup="sum1();" value="{{ old('telp',$last->oprasional->telpon) }}">
                 </div>
                 <span class="text-danger error-text telp_error"> </span>
               </div>
@@ -314,7 +336,7 @@
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="atk" id="atk" onkeyup="sum1();" value="{{ old('atk') }}">
+                  <input type="text" class="rupiah form-control" name="atk" id="atk" onkeyup="sum1();" value="{{ old('atk',$last->oprasional->atk) }}">
                 </div>
                 <span class="text-danger error-text atk_error"> </span>
               </div>
@@ -324,7 +346,7 @@
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="lain" id="lain" onkeyup="sum1();" value="{{ old('lain') }}">
+                  <input type="text" class="rupiah form-control" name="lain" id="lain" onkeyup="sum1();" value="{{ old('lain',$last->oprasional->lain) }}">
                 </div>
                 <span class="text-danger error-text lain_error"> </span>
               </div>
@@ -334,7 +356,7 @@
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="totop" id="totop" style="padding-bottom:5px" value="{{ old('totop') }}">
+                  <input type="text" class="rupiah form-control" name="totop" id="totop" style="padding-bottom:5px;background-color: #e9ecef; cursor:auto;" value="{{ old('totop',$last->oprasional->totop) }}" readonly>
                 </div>
               </div>
             </div>
@@ -353,12 +375,23 @@
                     </tr>
                   </thead>
                   <tbody id="omzet" class="omzet">
-                    <tr>
-                      <td> <input type="text" name="nmomzet[]" class="form-control " >  </td>
-                      <td> <input type="text" name="hrgomzet[]" class="rupiah form-control" > </td>
-                      <td> <input type="text" name="jmlhomzet[]" class="rupiah form-control" > </td>
-                      <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
-                    </tr>
+                        @if($last == NULL)
+                            <tr>
+                              <td> <input type="text" name="nmomzet[]" class="form-control " >  </td>
+                              <td> <input type="text" name="hrgomzet[]" class="rupiah form-control" > </td>
+                              <td> <input type="text" name="jmlhomzet[]" class="rupiah form-control" > </td>
+                              <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
+                            </tr>
+                          @else
+                            @foreach ( $lastomzet as $x )
+                              <tr>
+                                <td> <input type="text" name="nmomzet[]" class="form-control" value="{{ old('nmomzet[]',$x->nm_brg) }}"> </td>
+                                <td> <input type="text" name="hrgomzet[]" class="rupiah form-control" value="{{ old('hrgomzet[]',$x->hrg_satuan) }}"> </td>
+                                <td> <input type="text" name="jmlhomzet[]" class="rupiah form-control" value="{{ old('jmlhomzet[]',$x->jmlh) }}" onkeyup="getItems()"> </td>
+                                <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
+                              </tr>
+                            @endforeach
+                        @endif
                   </tbody> 
                 </table> 
               </div>
@@ -370,7 +403,7 @@
               <label for="modal" class="form-label"> Modal Usaha</label>
               <div class="input-group mb-3">
                 <span class="input-group-text">Rp.</span>
-                <input type="text" class="rupiah form-control " name="modal" id="modal" onkeyup="sum_modal();" value="{{ old('modal') }}">
+                <input type="text" class="rupiah form-control " name="modal" id="modal" onkeyup="sum_modal();" value="{{ old('modal',$last->modal) }}">
               </div>  
               <span class="text-danger error-text modal_error"> </span>
             </div>
@@ -378,14 +411,14 @@
               <label for="invst" class="form-label"> Investasi Usaha</label>
               <div class="input-group mb-3">
                 <span class="input-group-text">Rp.</span>
-                <input type="text" class="rupiah form-control " name="invest" id="invest" onkeyup="sum_modal();" value="{{ old('invest') }}">
+                <input type="text" class="rupiah form-control " name="invest" id="invest" onkeyup="sum_modal();" value="{{ old('invest',$last->investasi) }}">
               </div>
             </div>
             <div class="col-12 ">
               <label for="bsr_pjm" class="form-label">Besar Pinjaman yang Diajukan </label>
               <div class="input-group mb-3">
                 <span class="input-group-text">Rp.</span>
-                <input type="text" class="rupiah form-control " name="bsr_pjm" id="bsr_pjm" value="{{ old('bsr_pjm') }}">
+                <input type="text" class="rupiah form-control " name="bsr_pjm" id="bsr_pjm" value="{{ old('bsr_pjm',$last->bsr_pinjaman) }}"style="background-color: #e9ecef; cursor:auto;" readonly>
               </div>
               <span class="text-danger error-text bsr_pjm_error"> </span>
             </div>
@@ -401,10 +434,19 @@
                 </tr>
               </thead>
               <tbody id="manfaat" class="manfaat">
-                <tr>
-                  <td> <input type="text" name="manfaat[]" class="form-control" value="{{ old('manfaat[]') }}"> </td>
-                  <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
-                </tr>
+                @if($last == NULL)
+                    <tr>
+                      <td> <input type="text" name="manfaat[]" class="form-control" value="{{ old('manfaat[]') }}"> </td>
+                      <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
+                    </tr>
+                  @else
+                    @foreach ( $lastmanfaat as $x )
+                      <tr>
+                        <td > <input type="text" name="manfaat[]" class="form-control" value="{{ old('manfaat[]', $x->manfaat) }}" > </td>
+                        <td > <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
+                      </tr>
+                    @endforeach
+                  @endif
               </tbody>
             </table>              
           </div>

@@ -19,6 +19,8 @@ class Pembayaran extends Model
         'bank',
         'foto',
         'jumlah',
+        'pokok',
+        'jasa',
         'status',
         'created_at',
         'updated_at',

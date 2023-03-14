@@ -227,7 +227,7 @@
                     <div class="col-sm-10">
                       <div class="input-group mb-3">
                         <span class="input-group-text">Rp.</span>
-                        <input type="text" class="rupiah form-control @error('totaset') is-invalid @enderror" name="totaset" id="totaset" style="padding-bottom:5px" value="{{ old('totaset', $pengajuan->aset->totaset) }}" >
+                        <input type="text" class="rupiah form-control @error('totaset') is-invalid @enderror" name="totaset" id="totaset" readonly style="padding-bottom:5px;background-color: #e9ecef; cursor:auto;" value="{{ old('totaset', $pengajuan->aset->totaset) }}" >
                           @error('totaset') <div class="invalid-feedback">{{ $message }}</div> @enderror
                       </div>
                     </div>
@@ -289,7 +289,7 @@
                   <div class="col-sm-10">
                     <div class="input-group mb-3">
                       <span class="input-group-text">Rp.</span>
-                      <input type="text" class=" rupiah form-control @error('transport') is-invalid @enderror" name="transport" id="transport" onkeyup="sum1();"value="{{ old('transport',$pengajuan->oprasional->transport) }}">
+                      <input type="text" class=" rupiah form-control @error('transport') is-invalid @enderror" name="transport" id="transport" onkeyup="sum1();" value="{{ old('transport',$pengajuan->oprasional->transport) }}">
                         @error('transport') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
                   </div>
@@ -339,7 +339,7 @@
                   <div class="col-sm-10">
                     <div class="input-group mb-3">
                       <span class="input-group-text">Rp.</span>
-                      <input type="text" class="rupiah form-control @error('totop') is-invalid @enderror" name="totop" id="totop" style="padding-bottom:5px" value="{{ $pengajuan->oprasional->totop }}">
+                      <input type="text" class="rupiah form-control @error('totop') is-invalid @enderror" name="totop" id="totop" style="padding-bottom:5px;background-color: #e9ecef; cursor:auto;"  readonly value="{{ $pengajuan->oprasional->totop }}">
                         @error('totop') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
                   </div>
@@ -393,7 +393,7 @@
                   <label for="bsr_pjm" class="form-label">Besar Pinjaman yang Diajukan </label>
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah form-control @error('bsr_pjm') is-invalid @enderror" name="bsr_pjm" id="bsr_pjm" value="{{ $pengajuan->bsr_pinjaman }}">
+                    <input type="text" class="rupiah form-control @error('bsr_pjm') is-invalid @enderror" name="bsr_pjm" id="bsr_pjm" style=" background-color: #e9ecef; cursor:auto;"readonly value="{{ $pengajuan->bsr_pinjaman }}">
                       @error('bsr_pjm') <div class="invalid-feedback">{{ $message }}</div>@enderror
                   </div>
                 </div>

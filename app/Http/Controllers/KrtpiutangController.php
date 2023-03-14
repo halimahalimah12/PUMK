@@ -109,8 +109,11 @@ class KrtpiutangController extends Controller
         $jasa = $this->hitungjasa($id);
         $jasa1 = $this->hitungjasa1($id);
         $pokok = $this->hitungpokok($id);
+        $jumlah = $this->jumlah($id);
+        $jumlah1 = $this->jumlah1($id);
 
-        return view('dashboard.kartu_piutang.view' ,compact('user','pembayaranvalid','kp','jasa1','jasa','pokok','pembayaran','totpembayaran') );
+
+        return view('dashboard.kartu_piutang.view' ,compact('user','pembayaranvalid','kp','jasa1','jasa','pokok','pembayaran','totpembayaran','jumlah','jumlah1') );
     }
 
     /**
@@ -197,6 +200,28 @@ class KrtpiutangController extends Controller
         $pinjaman = $kp->pinjaman;
         $sisapinjaman = $pinjaman - $pembayaran;
         return $sisapinjaman;
+    }
+    public function jumlah($id){
+        $jumlah = 0;
+        $pokok = $this->hitungpokok($id);
+        $jasa  = $this->hitungjasa($id);
+        $jumlah = $pokok+$jasa;
+        return $jumlah; 
+    }
+    public function jumlah1($id){
+        $jumlah = 0;
+        $pokok = $this->hitungpokok($id);
+        $jasa  = $this->hitungjasa1($id);
+        $jumlah = $pokok+$jasa;
+        return $jumlah; 
+    }
+   
+    
+    //Total pinjaman = pokok+jasa
+    public function totpinjaman($id){
+        $sum = 0;
+        $jumlah = $this->hitungjasa($id);
+        
     }
     
 

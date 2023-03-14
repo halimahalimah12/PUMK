@@ -535,7 +535,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="totaset" id="totaset" style="padding-bottom:5px" value="<?php echo e(old('totaset', $pengajuan->aset->totaset)); ?>" >
+unset($__errorArgs, $__bag); ?>" name="totaset" id="totaset" readonly style="padding-bottom:5px;background-color: #e9ecef; cursor:auto;" value="<?php echo e(old('totaset', $pengajuan->aset->totaset)); ?>" >
                           <?php $__errorArgs = ['totaset'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -611,7 +611,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="transport" id="transport" onkeyup="sum1();"value="<?php echo e(old('transport',$pengajuan->oprasional->transport)); ?>">
+unset($__errorArgs, $__bag); ?>" name="transport" id="transport" onkeyup="sum1();" value="<?php echo e(old('transport',$pengajuan->oprasional->transport)); ?>">
                         <?php $__errorArgs = ['transport'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -731,7 +731,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="totop" id="totop" style="padding-bottom:5px" value="<?php echo e($pengajuan->oprasional->totop); ?>">
+unset($__errorArgs, $__bag); ?>" name="totop" id="totop" style="padding-bottom:5px;background-color: #e9ecef; cursor:auto;"  readonly value="<?php echo e($pengajuan->oprasional->totop); ?>">
                         <?php $__errorArgs = ['totop'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -813,7 +813,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="bsr_pjm" id="bsr_pjm" value="<?php echo e($pengajuan->bsr_pinjaman); ?>">
+unset($__errorArgs, $__bag); ?>" name="bsr_pjm" id="bsr_pjm" style=" background-color: #e9ecef; cursor:auto;"readonly value="<?php echo e($pengajuan->bsr_pinjaman); ?>">
                       <?php $__errorArgs = ['bsr_pjm'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

@@ -61,8 +61,15 @@ class PengajuanController extends Controller
         $user      = User::where('id', Auth::user()->id)->first();
         $ush       = Data_Ush::where('user_id',$user->id)->first();
         $mitra     = Data_Mitra::where('data_ush_id',$ush->id)->first();
-        $last      = DB::table('pengajuans')->latest('id')->first();
-        return view('dashboard.pengajuan.create',compact('mitra','ush','user','last') );
+        $last      = Pengajuan::where('user_id',$user->id)->latest('id')->first();
+        $lastalat  = Alat::where('pengajuan_id', $last->id)->latest('id')->get();
+        $lasttk    = Tenagakerja::where('pengajuan_id', $last->id)->latest('id')->get();
+        $lastomzet = Omzet::where('pengajuan_id', $last->id)->latest('id')->get();
+        $lastmanfaat = Manfaat::where('pengajuan_id', $last->id)->latest('id')->get();
+
+        
+        
+        return view('dashboard.pengajuan.create',compact('mitra','ush','user','last','lastalat','lasttk','lastomzet','lastmanfaat') );
     }
     /**
      * Store a newly created resource in storage.

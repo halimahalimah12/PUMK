@@ -65,7 +65,7 @@
               <div class="row mb-3">
                 <label for="sbbln" class="col-sm-3 col-form-label">Suku Bunga Efektif /Bulan (%)</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control  @error('sb_bln') is-invalid  @enderror" name="sb_bln" id="sb_bln"  value=" {{ old('sb_bln',$kp->sb_bln) }}" >
+                  <input type="text" class="form-control  @error('sb_bln') is-invalid  @enderror" name="sb_bln" id="sb_bln"style="background-color: #e9ecef; cursor:auto;"  value=" {{ old('sb_bln',$kp->sb_bln) }}" readonly>
                     @error('sb_bln')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
               </div>
@@ -101,6 +101,7 @@
                       $i =1,
                       $sumjasa =0,
                       $sum = 0,
+                      $uanglebih = 0,
                       $sumpokok =0,
                       $saldo = $kp->pinjaman;
                       $i <= 24  ; $i++)
@@ -111,15 +112,15 @@
                         <td>Rp.{{ number_format(round($pokok), 0, ',','.') }} </td>
                         @if($i <= 12 )
                             <td>Rp. {{ number_format(round($jasa), 0, ',','.') }} </td>
-                            <td>Rp. {{ number_format(round($jumlah = $pokok+$jasa), 0, ',','.') }} </td>
+                            <td>Rp. {{ number_format(round($jumlah ), 0, ',','.') }} </td>
                             <?php  $sumjasa += $jasa; 
                                   $sum += $jumlah;
                             ?>
                           @else 
                             <td>Rp. {{ number_format(round($jasa1), 0, ',','.') }} </td>
-                            <td>Rp. {{ number_format(round($jumlah = $pokok+$jasa1), 0, ',','.') }} </td>
+                            <td>Rp. {{ number_format(round($jumlah1), 0, ',','.') }} </td>
                             <?php  $sumjasa += $jasa1; 
-                                  $sum += $jumlah;
+                                  $sum += $jumlah1;
                             ?>
                         @endif
                         <td>Rp.{{ number_format(round($saldo = $saldo-$pokok), 0, ',','.') }}</td>
@@ -171,13 +172,22 @@
                   </td>
                 </tr>
               @endforeach
+                <p>{{ $uanglebih = $sum-$totpembayaran }}</p>
                 <tr>
                   <th colspan="3">Total Pembayaran</th>
                   <th>Rp. {{ number_format($totpembayaran,0,',','.' )}}</th>
                 </tr>
                 <tr>
                   <th colspan="3">Sisa Tagihan</th>
-                  <th>Rp. {{ number_format($sum - $totpembayaran,0,',','.') }}</th>
+                  @if($totpembayaran  < $sum )
+                      <th>Rp. {{ number_format($sisatagihan= $sum-$totpembayaran,0,',','.') }}</th>
+                    @else 
+                      <th>Rp. {{ number_format($sisatagihan= $sum-$totpembayaran - $uanglebih,0,',','.') }}</th>
+                  @endif
+                </tr>
+                <tr>
+                  <th colspan="3">Uang Lebih</th>
+                  <th>Rp. {{ number_format(abs($uanglebih),0,',','.') }}</th>
                 </tr>
               </tbody>
             </table>

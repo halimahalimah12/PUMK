@@ -32,7 +32,7 @@ class PembayaranController extends Controller
             return view ('dashboard.pembayaran.index',compact('user','mitra','kp','pengajuan','pembayaran','totpembayaran'));
         }else{
             $kp = Kartu_piutang::first();
-            $pembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)->get();
+            $pembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)->orderByDesc('id')->get();
             return view ('dashboard.pembayaran.index',compact('user','kp','pembayaran'));
 
         }
@@ -46,12 +46,14 @@ class PembayaranController extends Controller
             'jumlah' =>'required',
             'foto'  =>'required',
         ]);
-        // Pembayaran::create($validateData);
         $pembayaran = new Pembayaran;
         $pembayaran->kartu_piutang_id = $request->idkp;
         $pembayaran->tgl = $validateData['tgl'];
         $pembayaran->bank = $validateData['bank'];
         $pembayaran->jumlah = str_replace(",", "",$validateData['jumlah']);
+        $pembayaran->pokok = $request->pokok;
+        $pembayaran->jasa = $request->jasa;
+
 
         if  ($request->file('foto')){
             $file           =   $request->file('foto');
