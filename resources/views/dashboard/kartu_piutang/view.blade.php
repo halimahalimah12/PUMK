@@ -225,21 +225,21 @@
                             <td>{{ $p->tgl }}</td>
                             <td>{{ number_format($p->jumlah,0,',','.') }}</td>
                                 <?php $jumlahbayar += $p->jumlah ?> 
-                            @if($loop->iteration <= 1 )
+                            @if($loop->iteration <= 12 )
                                 @if( $p->jumlah < $pokok)
                                       <td>{{ number_format($p->jumlah,0,',','.') }}</td>
                                       <?php $pk += $p->jumlah ?> 
                                       <td></td> 
-                                  @elseif($p->jumlah >= $pokok  ) 
+                                  @else
                                       {{-- Pokok Jika di BOOM sebelum 1 tahun --}}
-                                      @if ( $p->jumlah >= str_replace(",", "",$sum))
+                                      {{-- @if ( $p->jumlah >= str_replace(",", "",$sum))
                                           <td>{{ number_format($po = $sumpokok - $jmlh,0,',','.') }}</td>
                                         @else
-                                          <td>{{ number_format($pokok ,0,',','.') }}</td>
+                                            <td>{{ number_format($pokok ,0,',','.') }}</td>
                                           <?php $pk1 += $pokok ?> 
-                                      @endif
+                                      @endif --}}
                                       {{-- Jasa Jika di BOOM sebelum 1 tahun --}}
-                                      @if( $p->jumlah >= str_replace(",", "",$sum))
+                                      {{-- @if( $p->jumlah >= str_replace(",", "",$sum))
                                           <td>{{ number_format($j = $sumjasa - $jmlh1,0,',','.') }}</td>
                                         @else
                                           @if($sisa = $p->jumlah - $pokok <= $jasa )
@@ -249,7 +249,8 @@
                                               <td>{{ number_format($jasa,0,',','.') }}</td>
                                           <?php $js1 += $jasa ?> 
                                           @endif
-                                      @endif
+                                      @endif --}}
+                                      
                                 @endif
                               @else
                                 @if( $p->jumlah < $pokok)

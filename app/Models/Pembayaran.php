@@ -21,6 +21,7 @@ class Pembayaran extends Model
         'jumlah',
         'pokok',
         'jasa',
+        'bulan',
         'status',
         'created_at',
         'updated_at',

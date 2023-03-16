@@ -296,31 +296,18 @@ unset($__errorArgs, $__bag); ?>
                             <td><?php echo e($p->tgl); ?></td>
                             <td><?php echo e(number_format($p->jumlah,0,',','.')); ?></td>
                                 <?php $jumlahbayar += $p->jumlah ?> 
-                            <?php if($loop->iteration <= 1 ): ?>
+                            <?php if($loop->iteration <= 12 ): ?>
                                 <?php if( $p->jumlah < $pokok): ?>
                                       <td><?php echo e(number_format($p->jumlah,0,',','.')); ?></td>
                                       <?php $pk += $p->jumlah ?> 
                                       <td></td> 
-                                  <?php elseif($p->jumlah >= $pokok  ): ?> 
+                                  <?php else: ?>
                                       
-                                      <?php if( $p->jumlah >= str_replace(",", "",$sum)): ?>
-                                          <td><?php echo e(number_format($po = $sumpokok - $jmlh,0,',','.')); ?></td>
-                                        <?php else: ?>
-                                          <td><?php echo e(number_format($pokok ,0,',','.')); ?></td>
-                                          <?php $pk1 += $pokok ?> 
-                                      <?php endif; ?>
                                       
-                                      <?php if( $p->jumlah >= str_replace(",", "",$sum)): ?>
-                                          <td><?php echo e(number_format($j = $sumjasa - $jmlh1,0,',','.')); ?></td>
-                                        <?php else: ?>
-                                          <?php if($sisa = $p->jumlah - $pokok <= $jasa ): ?>
-                                              <td><?php echo e(number_format($sisa = $p->jumlah - $pokok,0,',','.')); ?></td>
-                                              <?php $js += $sisa ?> 
-                                            <?php else: ?>
-                                              <td><?php echo e(number_format($jasa,0,',','.')); ?></td>
-                                          <?php $js1 += $jasa ?> 
-                                          <?php endif; ?>
-                                      <?php endif; ?>
+                                      
+                                      
+                                          <td><?php echo e(number_format($p->pokok,0,',','.')); ?></td>
+                                          <td><?php echo e(number_format($p->jasa,0,',','.')); ?></td>
                                 <?php endif; ?>
                               <?php else: ?>
                                 <?php if( $p->jumlah < $pokok): ?>

@@ -29,7 +29,10 @@ class PembayaranController extends Controller
             $totpembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)
                             ->where('status', '=', 'valid')
                             ->sum('jumlah');
-            return view ('dashboard.pembayaran.index',compact('user','mitra','kp','pengajuan','pembayaran','totpembayaran'));
+            $totbulan = Pembayaran::where('kartu_piutang_id',$kp->id)
+                            ->where('status', '=', 'valid')
+                            ->sum('bulan');
+            return view ('dashboard.pembayaran.index',compact('user','totbulan','mitra','kp','pengajuan','pembayaran','totpembayaran'));
         }else{
             $kp = Kartu_piutang::first();
             $pembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)->orderByDesc('id')->get();
@@ -53,6 +56,7 @@ class PembayaranController extends Controller
         $pembayaran->jumlah = str_replace(",", "",$validateData['jumlah']);
         $pembayaran->pokok = $request->pokok;
         $pembayaran->jasa = $request->jasa;
+        $pembayaran->bulan = $request->bulan;
 
 
         if  ($request->file('foto')){

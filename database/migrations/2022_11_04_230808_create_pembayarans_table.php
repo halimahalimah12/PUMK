@@ -22,6 +22,7 @@ class CreatePembayaransTable extends Migration
             $table->integer('jumlah');
             $table->integer('pokok');
             $table->integer('jasa');
+            $table->integer('bulan');
             $table->enum('status',['menunggu','valid','tidak'])->default('menunggu');
             $table->string('ket')->nullable();
             $table->integer('total_pem')->nullable();

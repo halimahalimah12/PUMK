@@ -43,11 +43,12 @@
                         @endif
                       <?php $sumpokok += $pokok; ?>
                 @endfor
-                </p>
+              </p>
                   <input type="hidden" class="form-control "  id="getpokok"  value="{{  $pokok }}">
-                  <input type="hidden" class="form-control "  id="getsumjasa"  value="{{  $sumjasa }}">
-                  <input type="hidden" class="form-control "  id="getsumpokok"  value="{{  $sumpokok }}">
-                
+                  <input type="text" class="form-control "  id="getjasa"  value="{{  $jasa }}">
+                  <input type="text" class="form-control "  id="getjasa1"  value="{{  $jasa1 }}">
+                  <input type="text" class="form-control "  id="getbulan"  value="{{  $totbulan }}">
+
             <form class="row g-3  contact-form" action="/pembayaran"  method="POST" enctype="multipart/form-data"  >
               @csrf
               <input type="hidden"  name="idkp" value="{{ $kp->id }}">
@@ -79,8 +80,11 @@
                 </div>
                 </div>
               </div>
-                  <input type="hidden" class="form-control " name="pokok" id="pokok"  readonly>
-                  <input type="hidden" class="form-control " name="jasa" id="jasa" readonly >
+                  <input type="text" class="form-control " name="pokok" id="pokok"  readonly>
+                  <input type="text" class="form-control " name="jasa" id="jasa" readonly >
+                  <input type="text" class="form-control " name="bulan" id="bulan" readonly >
+                  <input type="text" class="form-control " name="sumbulan" id="sumbulan" readonly >
+
               <div class="row mb-3">
                 <label for="foto" class="col-sm-3 col-form-label">Bukti Pembayaran</label>
                 <div class="col-sm-9">
@@ -124,7 +128,6 @@
                 <tr>
                   <th colspan="3" style="text-align:center">Sisa Tagihan</th>
                   <th>Rp. {{ number_format($sum - $totpembayaran,0,',','.') }}</th>
-                  <th>Rp. {{ number_format($pokok,0,',','.') }}</th>
                 </tr>
               </tbody>
             </table>
@@ -179,79 +182,81 @@
     function sum(){
       var jumlahValue  = document.getElementById('jumlah').value;;
       var pokokValue = document.getElementById('getpokok').value;
-      var sumjasaValue  = document.getElementById('getsumjasa').value;
-      var sumpokokValue  = document.getElementById('getsumpokok').value;
+      var jasaValue  = document.getElementById('getjasa').value;
+      var jasa1Value  = document.getElementById('getjasa1').value;
+      var sumbulanValue  = document.getElementById('getbulan').value;
 
-        var test1 = jumlahValue.replaceAll(",","");
-        var test2 = parseInt(pokokValue);
-        var test4 = parseInt(sumpokokValue);
-        var test5 = sumjasaValue/24;
-
-
-      {{-- if( test1 <  test2 ) {
-        document.getElementById('pokok').value=jumlahValue;
-        document.getElementById('jasa').value=0;
-      }  else  {
-        var jasa = test1-test2;
+      var test1 = jumlahValue.replaceAll(",","");
+      var test2 = parseInt(pokokValue);
         
-        var test3 = test2;
-        
-        if (jasa < test2){
-          document.getElementById('pokok').value=test2;
-          document.getElementById('jasa').value=jasa;
-        } else {
-          for( var i = 1; jasa > test2  ; i++){ 
-              if( i <= 2){
-                test2 = test2 * i;
-                document.getElementById('pokok').value=test2;
-              }else{
-                test2 = test2 + test3;
-                document.getElementById('pokok').value=test2;
-              }
-          }
-          jasa= test1-test2;
-
-          document.getElementById('jasa').value=jasa;
-
-        }
-      } --}}
-      
       if( test1 <  test2 ) {
         document.getElementById('pokok').value=jumlahValue;
         document.getElementById('jasa').value=0;
       }  else  {
         var jasa = test1-test2;
-
         var test3 = test2;
-        var test6 = test5;
+        var test8 = parseInt(sumbulanValue)+1;
         
-        if (jasa < test2){          
-          document.getElementById('jasa').value=test5;
-          jasa=jasa-test5;
+        if (jasa < test2){         
+          if (test8  <= 12 ){
+            jasa=jasa-jasaValue;
+            document.getElementById('jasa').value=jasaValue;
+          } else {
+            jasa=jasa-jasa1Value;
+            document.getElementById('jasa').value=jasa1Value;
+          }
           test2 = test2+jasa;
           document.getElementById('pokok').value=test2;
+          document.getElementById('bulan').value=1;
         } else {
+        var test6 = parseInt(jasaValue);
+        var test7 = parseInt(jasa1Value);
           for( var i = 1; jasa > test2  ; i++){ 
-              if( i <= 2){
-                test2 = test2 * i;
-                test5 = test5 * i;
-                var  j = test1-test2-test5;
-                var pk = test2+j;
-
-                document.getElementById('pokok').value=pk;
-                document.getElementById('jasa').value=test5;
-              }else{
-                test2 = test2 + test3;
-                test5 = test5 + test6;
-                jasa= test1-test2-test5;
-                var pokok= test2+jasa;
-                document.getElementById('pokok').value=pokok;
-                document.getElementById('jasa').value=test5;
-              }
+            var test9 =  parseInt(sumbulanValue);
+            var pokok1 = parseInt(pokokValue);
+              //HITUNG POKOK
+                if( i <= 2){
+                  test2 = test2 * i;
+                }else{
+                  test2 = test2 + pokok1;
+                }
+                if(test9 < 12){
+                    test9 =  test9 + i;
+                    var test10 = parseInt(sumbulanValue);
+                    if ( test9 >= 12 ){
+                      var test12 = test9 - 12;
+                      var test11 = test9 - test12 ;
+                      var test13 = test11 - test10;
+                      if ( test11 <= 12 ){
+                          var jv2= jasaValue * test13;
+                          if (test12 < test9 ){
+                            var jv3 = jasa1Value * test12;
+                          }
+                          var hasiljasa = jv2+jv3;
+                          var  j = test1-test2-hasiljasa;
+                          var pk = test2+j; 
+                          document.getElementById('pokok').value=pk;
+                          document.getElementById('jasa').value=hasiljasa;
+                      }                      
+                    }else {
+                      var hasiljasa = jasaValue * i;
+                      var sisa = test1-test2-hasiljasa;
+                      var pokok= test2+sisa;
+                      document.getElementById('pokok').value=pokok;
+                      document.getElementById('jasa').value=hasiljasa;
+                    }
+                }else{
+                  var hasiljasa = jasa1Value * i;
+                  var sisa = test1-test2-hasiljasa;
+                  var pokok= test2+sisa;
+                  document.getElementById('pokok').value=pokok;
+                  document.getElementById('jasa').value=hasiljasa;
+                  
+                }
           }
-          
         }
       }
+      
     }
   </script>
 
