@@ -36,4 +36,5 @@ class Pembayaran extends Model
         return $this->belongsTo(Kartu_piutang::class);
     }
     
+    
 }

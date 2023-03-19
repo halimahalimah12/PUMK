@@ -59,20 +59,16 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
+                              @for( $n=0 ; $n<6 ; $n++)
+                                <td>0</td>
+                              @endfor
                               <td>{{ $kp->formatRupiah('pinjaman') }}</td>
                             </tr>
-                            <?php $sumpokok = 0;
-                                  $sumjasa = 0;
-                                  $sum = 0;
-                            ?>
                             @for ( 
                               $i =1,
+                              $sumpokok = 0,
+                              $sumjasa = 0,
+                              $sum = 0,
                               $saldoawal = $kp->pinjaman,
                               $saldo = $kp->pinjaman,
                               $sb_bln = $kp->sb_bln/100,
@@ -101,9 +97,7 @@
                                 @endif
                                 <td>Rp.{{ number_format(round($saldo = $saldo-$pokok), 0, ',','.') }}</td>
                               </tr>
-                              <?php 
-                                $sumpokok += $pokok;
-                              ?>
+                              <?php $sumpokok += $pokok; ?>
                             @endfor
                               <tr>
                                 <th colspan="3">Jumlah </th>

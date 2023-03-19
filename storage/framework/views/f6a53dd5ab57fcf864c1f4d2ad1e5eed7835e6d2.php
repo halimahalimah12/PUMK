@@ -59,20 +59,16 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
-                              <td>0</td>
+                              <?php for( $n=0 ; $n<6 ; $n++): ?>
+                                <td>0</td>
+                              <?php endfor; ?>
                               <td><?php echo e($kp->formatRupiah('pinjaman')); ?></td>
                             </tr>
-                            <?php $sumpokok = 0;
-                                  $sumjasa = 0;
-                                  $sum = 0;
-                            ?>
                             <?php for( 
                               $i =1,
+                              $sumpokok = 0,
+                              $sumjasa = 0,
+                              $sum = 0,
                               $saldoawal = $kp->pinjaman,
                               $saldo = $kp->pinjaman,
                               $sb_bln = $kp->sb_bln/100,
@@ -101,9 +97,7 @@
                                 <?php endif; ?>
                                 <td>Rp.<?php echo e(number_format(round($saldo = $saldo-$pokok), 0, ',','.')); ?></td>
                               </tr>
-                              <?php 
-                                $sumpokok += $pokok;
-                              ?>
+                              <?php $sumpokok += $pokok; ?>
                             <?php endfor; ?>
                               <tr>
                                 <th colspan="3">Jumlah </th>

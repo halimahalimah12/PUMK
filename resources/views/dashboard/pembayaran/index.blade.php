@@ -45,9 +45,9 @@
                 @endfor
               </p>
                   <input type="hidden" class="form-control "  id="getpokok"  value="{{  $pokok }}">
-                  <input type="text" class="form-control "  id="getjasa"  value="{{  $jasa }}">
-                  <input type="text" class="form-control "  id="getjasa1"  value="{{  $jasa1 }}">
-                  <input type="text" class="form-control "  id="getbulan"  value="{{  $totbulan }}">
+                  <input type="hidden" class="form-control "  id="getjasa"  value="{{  $jasa }}">
+                  <input type="hidden" class="form-control "  id="getjasa1"  value="{{  $jasa1 }}">
+                  <input type="hidden" class="form-control "  id="getbulan"  value="{{  $totbulan }}">
 
             <form class="row g-3  contact-form" action="/pembayaran"  method="POST" enctype="multipart/form-data"  >
               @csrf
@@ -80,10 +80,9 @@
                 </div>
                 </div>
               </div>
-                  <input type="text" class="form-control " name="pokok" id="pokok"  readonly>
-                  <input type="text" class="form-control " name="jasa" id="jasa" readonly >
-                  <input type="text" class="form-control " name="bulan" id="bulan" readonly >
-                  <input type="text" class="form-control " name="sumbulan" id="sumbulan" readonly >
+                  <input type="hidden" class="form-control " name="pokok" id="pokok"  readonly>
+                  <input type="hidden" class="form-control " name="jasa" id="jasa" readonly >
+                  <input type="hidden" class="form-control " name="bulan" id="bulan" readonly >
 
               <div class="row mb-3">
                 <label for="foto" class="col-sm-3 col-form-label">Bukti Pembayaran</label>
@@ -117,7 +116,11 @@
                   </td>
                   <td> {{ $p->formatRupiah('jumlah') }}</td>
                   <td><button type="button" class="btn btn-primary btn-sm"> <a href="/bukti/{{ $p->id }}"style="color:white;"> Lihat </a></button></td>
-                  <td> {{ $p->status }}</td>
+                  <td> @if ($p->status == "valid") <span class="badge bg-success">Valid</span>
+                        @elseif( $p->status == "tidak") <span class="badge bg-danger">Tidak Valid</span>
+                        @else <span class="badge bg-secondary">Menunggu</span>
+                      @endif
+                  </td>
                 </tr>
               @endforeach
                 <tr>
@@ -237,11 +240,13 @@
                           var pk = test2+j; 
                           document.getElementById('pokok').value=pk;
                           document.getElementById('jasa').value=hasiljasa;
+                          document.getElementById('bulan').value=i;
                       }                      
                     }else {
                       var hasiljasa = jasaValue * i;
                       var sisa = test1-test2-hasiljasa;
                       var pokok= test2+sisa;
+                      document.getElementById('bulan').value=i;
                       document.getElementById('pokok').value=pokok;
                       document.getElementById('jasa').value=hasiljasa;
                     }
@@ -249,6 +254,7 @@
                   var hasiljasa = jasa1Value * i;
                   var sisa = test1-test2-hasiljasa;
                   var pokok= test2+sisa;
+                  document.getElementById('bulan').value=i;
                   document.getElementById('pokok').value=pokok;
                   document.getElementById('jasa').value=hasiljasa;
                   

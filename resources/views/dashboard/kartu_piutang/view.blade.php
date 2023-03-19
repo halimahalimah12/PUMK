@@ -203,6 +203,7 @@
                     <th>No</th>
                     <th>Tanggal</th>
                     <th>Jumlah Bayar</th>
+                    <th>Jumlah Bulan</th>
                     <th>Pokok</th>
                     <th>Jasa Pinj 0.25%</th>
                     <th>Sisa Pinjaman</th>
@@ -210,75 +211,26 @@
                   </tr>
                 </thead>
                 <tbody>
-                <?php  ?>
                   <tr>
-                    @for( $n=0 ; $n<5 ; $n++)
+                    @for( $n=0 ; $n<6 ; $n++)
                       <td>0</td>
                     @endfor
                     <td>{{ number_format($sum,0,',','.')}}</td>
                       <td></td>
                   </tr>
-                    @for(  $n=1,$jmlhpokok=0 ,$jmlh=0,$j=0,$po=0, $pk=0,$pk1=0 ,$jmlhjasa=0,$js=0,$js1=0 ,$jmlh1=0 , $jumlahbayar=0  ; $n<=1 ; $n++)
+                    @for(  $n=1,$jmlhpokok=0 ,$jmlhjasa=0, $jumlahbayar=0 , $jmlhbulan=0 ; $n<=1 ; $n++)
                         @foreach ( $pembayaranvalid as $p )
                           <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $p->tgl }}</td>
                             <td>{{ number_format($p->jumlah,0,',','.') }}</td>
                                 <?php $jumlahbayar += $p->jumlah ?> 
-                            @if($loop->iteration <= 12 )
-                                @if( $p->jumlah < $pokok)
-                                      <td>{{ number_format($p->jumlah,0,',','.') }}</td>
-                                      <?php $pk += $p->jumlah ?> 
-                                      <td></td> 
-                                  @else
-                                      {{-- Pokok Jika di BOOM sebelum 1 tahun --}}
-                                      {{-- @if ( $p->jumlah >= str_replace(",", "",$sum))
-                                          <td>{{ number_format($po = $sumpokok - $jmlh,0,',','.') }}</td>
-                                        @else
-                                            <td>{{ number_format($pokok ,0,',','.') }}</td>
-                                          <?php $pk1 += $pokok ?> 
-                                      @endif --}}
-                                      {{-- Jasa Jika di BOOM sebelum 1 tahun --}}
-                                      {{-- @if( $p->jumlah >= str_replace(",", "",$sum))
-                                          <td>{{ number_format($j = $sumjasa - $jmlh1,0,',','.') }}</td>
-                                        @else
-                                          @if($sisa = $p->jumlah - $pokok <= $jasa )
-                                              <td>{{ number_format($sisa = $p->jumlah - $pokok,0,',','.') }}</td>
-                                              <?php $js += $sisa ?> 
-                                            @else
-                                              <td>{{ number_format($jasa,0,',','.') }}</td>
-                                          <?php $js1 += $jasa ?> 
-                                          @endif
-                                      @endif --}}
-                                      
-                                @endif
-                              @else
-                                @if( $p->jumlah < $pokok)
-                                      <td>{{ number_format($p->jumlah,0,',','.') }}</td>
-                                      <?php $pk += $p->jumlah ?> 
-                                      <td></td> 
-                                  @elseif($p->jumlah >= $pokok  ) 
-                                      {{-- Pokok Jika di BOOM setelah 1 tahun --}}
-                                      @if ( $p->jumlah >= str_replace(",", "",$sum))
-                                          <td>{{ number_format( $po= $sumpokok - $jmlh,0,',','.') }}</td>
-                                        @else
-                                          <td>{{ number_format($pokok,0,',','.') }}</td>
-                                          <?php $pk1 += $pokok ?> 
-                                      @endif
-                                      {{-- Jasa Jika di BOOM setelah 1 tahun --}}
-                                      @if( $p->jumlah >= str_replace(",", "",$sum))
-                                          <td>{{ number_format($j = $sumjasa - $jmlh1,0,',','.') }}</td>
-                                        @else
-                                          @if($sisa = $p->jumlah - $pokok <= $jasa1 )
-                                            <td>{{ number_format($sisa = $p->jumlah - $pokok,0,',','.') }}</td>
-                                              <?php $js += $sisa ?> 
-                                            @else
-                                          <td>{{ number_format($jasa1,0,',','.') }}</td>
-                                          <?php $js1 += $jasa1 ?> 
-                                          @endif
-                                      @endif
-                                @endif
-                            @endif
+                            <td>{{ $p->bulan }}</td>
+                                <?php $jmlhbulan += $p->bulan ?> 
+                            <td>{{ number_format($p->pokok,0,',','.') }}</td>
+                                <?php $jmlhpokok += $p->pokok ?> 
+                            <td>{{ number_format($p->jasa,0,',','.') }}</td>
+                                <?php $jmlhjasa += $p->jasa ?> 
                             @if ( $sum > $p->jumlah)
                                 <td>{{ number_format($sum=$sum - $p->jumlah ,0,',','.') }}</td>
                               @else 
@@ -289,14 +241,14 @@
                                 @endif
                             </td>
                           </tr>
-                          <?php $jmlh = $pk+$pk1; $jmlh1 = $js+$js1;?> 
                         @endforeach
                     @endfor
                     <tr>
                       <th colspan="2"> Jumlah </th>
                       <th >  {{ number_format($jumlahbayar,0,',','.') }}</th>
-                      <th > {{ number_format($jmlhpokok = $jmlh+$po,0,',','.') }} </th>
-                      <th > {{ number_format($jmlhjasa = $jmlh1+$j  ,0,',','.') }} </th>
+                      <th > {{ number_format($jmlhbulan,0,',','.') }} </th>
+                      <th > {{ number_format($jmlhpokok,0,',','.') }} </th>
+                      <th > {{ number_format($jmlhjasa ,0,',','.') }} </th>
                       @if($p->jumlah > $sum)
                         <th colspan="2" > Uang Lebih: {{ number_format(abs($uanglebih) ,0,',','.') }} </th>
                       @endif
