@@ -40,43 +40,49 @@
                     <tr>
                     </thead>
                     <tbody>
-                    @foreach ( $kp as $p=> $kartupiutang )
+                    @foreach ( $kp as $p=>$kps)
                         <tr>
                             <th colspan="7">{{ $p }}</th>
                         <tr>
-                        @foreach ( $kartupiutang as $kp3 )
-                            <tr>
-                                <td >{{ $loop->iteration }} </td>
-                                <td > {{ $tanggal->tgl }}   </td>
-                                <td>{{ ucwords($kp3->pengajuan->data_mitra->nm) }} </td>
-                                <td >{{ ucwords($kp3->pengajuan->data_mitra->data_ush->sektorush) }}</td>
-                                <td >{{ number_format($totpokok,0,',','.')}}  </td>
-                                <td >{{ number_format($totjasa,0,',','.') }} </td>
-                                <td >{{ number_format($totpembayaran,0,',','.') }} </td>
+                         <tr>
+                                
+                               
+                        @foreach ( $kps as $kp3 )
+                                <td>{{ $loop->iteration }} </td>
+                                <td>{{ $tanggal }}  </td>
+                                <td>{{ ucwords($kp3->pengajuan->data_mitra->nm)}}</td>
+                                <td>{{ ucwords($kp3->pengajuan->data_mitra->data_ush->jnsush)}}</td>
+                            @foreach ($byr as $byrs  )
+                                @if($kp3->id == $byrs->kartu_piutang_id)
+                                    <td>{{ $byrs->formatRupiah('pokok')}}</td>
+                                    <td>{{ $byrs->formatRupiah('jasa')}}</td>
+                                    <td>{{ $byrs->formatRupiah('jumlah')}}</td>
+                                @endif
+                            @endforeach  
                             </tr>
-                            <?php 
+                            {{-- <?php 
                                 $sumpokok=0;
                                 $sumjasa=0;
                                 $sum=0;
                                 $sumpokok += $totpokok;
                                 $sumjasa += $totjasa;
                                 $sum += $totpembayaran;
-                            ?>
+                            ?> --}}
                         @endforeach
-                        <tr>
+                        {{-- <tr>
                             <th colspan="4"> Total Tahun {{ $p }}</th>
                             <th >{{ number_format($sumpokok,0,',','.')  }} </th>
                             <th >{{ number_format($sumjasa,0,',','.') }} </th>
                             <th >{{ number_format($sum,0,',','.') }} </th>
-                        <tr>
+                        <tr> --}}
                     @endforeach
                     
-                    <tr>
+                    {{-- <tr>
                             <th colspan="4">Total Jumlah Piutang </th>
                             <th >{{ number_format($sumpokok,0,',','.')  }} </th>
                             <th >{{ number_format($sumjasa,0,',','.') }} </th>
                             <th >{{ number_format($sum,0,',','.') }} </th>
-                    </tr>
+                    </tr> --}}
                     </tbody>
                 </table>
                 </div>

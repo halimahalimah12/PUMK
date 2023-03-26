@@ -41,7 +41,6 @@
               
             </div>
             </div>  
-          {{--  --}}
           </div>
           <hr>
             <div style="overflow-x:auto">
@@ -57,16 +56,35 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($kp as $p )
-                    <tr>
+                @foreach ( $kp as $kp  )
+                <tr>
                       <td>{{ $loop->iteration }}</td>
-                      <td>{{ ucwords($p->pengajuan->data_mitra->nm)}}</td>
-                      <td>{{ $p->pengajuan->data_mitra->data_ush->jnsush}}</td>
-                      <td>{{ number_format($totpokok, 0, ',','.') }}</td>
-                      <td>{{ number_format($totjasa, 0, ',','.') }}</td>
-                      <td>{{ number_format($totpembayaran , 0, ',','.')}}</td>
-                    </tr>
-                  @endforeach                  
+                      <td>{{ $kp->pengajuan->data_mitra->nm }}</td>
+                      <td>{{ $kp->pengajuan->data_mitra->data_ush->jnsush }}</td>
+                  
+                  @foreach ($byr as $p  )
+                    @if( request()->start_date == NULL )
+                        @if($p->kartu_piutang_id == $kp->id)
+                          <td>{{ number_format($p->pokok, 0, ',','.') }}</td>
+                          <td>{{ number_format($p->jasa, 0, ',','.') }}</td> 
+                          <td>{{ number_format($p->jumlah, 0, ',','.') }}</td> 
+                        @endif
+                      @else
+                      @if($p->kartu_piutang_id == $kp->id)
+                          <td>{{ number_format($p->pokok, 0, ',','.') }}</td>
+                          <td>{{ number_format($p->jasa, 0, ',','.') }}</td> 
+                          <td>{{ number_format($p->jumlah, 0, ',','.') }}</td> 
+                          @else
+                          @for($i=1; $i<=3;$i++)
+                          <td>0</td> 
+                        @endfor
+                        @endif
+                        
+                    @endif
+                    
+                  @endforeach  
+                  </tr>
+                  @endforeach             
 
                 </tbody>
               </table>
