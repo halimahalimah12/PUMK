@@ -40,49 +40,103 @@
                     <tr>
                     </thead>
                     <tbody>
-                    @foreach ( $kp as $p=>$kps)
+                    {{-- @foreach ( $kp as $p=>$kps)
                         <tr>
                             <th colspan="7">{{ $p }}</th>
+                        </tr>
                         <tr>
-                         <tr>
+                            @foreach ( $kps as $kp3 )
+                                    <td>{{ $loop->iteration }} </td>
+                                    @foreach ( $tanggal as $tgl )
+                                        @if($tgl->tgl != NULL)
+                                                @if($kp3->id == $tgl->kartu_piutang_id)
+                                                    <td>{{ Carbon\Carbon::parse($tgl->tgl)->format("d-m-Y") }}  </td>
+                                                @endif 
+                                            @else
+                                            <td>-</td>
+                                        @endif
+                                    @endforeach
+                                    <td>{{ ucwords($kp3->pengajuan->data_mitra->nm)}}</td>
+                                    <td>{{ ucwords($kp3->pengajuan->data_mitra->data_ush->jnsush)}}</td>
+                                @foreach ($byr as $byrs  )
+                                        @if($kp3->id == $byrs->kartu_piutang_id)
+                                            <td>{{ $byrs->formatRupiah('pokok')}}</td>
+                                            <td>{{ $byrs->formatRupiah('jasa')}}</td>
+                                            <td>{{ $byrs->formatRupiah('jumlah')}}</td>
+                                            <?php 
+                                                $sumpokok=0;
+                                                $sumjasa=0;
+                                                $sum=0;
+                                                $sumpokok += $byrs->pokok;
+                                                $sumjasa += $byrs->jasa;
+                                                $sum += $byrs->jumlah;
+                                            ?>
+                                        @endif
+                                @endforeach  
                                 
-                               
-                        @foreach ( $kps as $kp3 )
-                                <td>{{ $loop->iteration }} </td>
-                                <td>{{ $tanggal }}  </td>
-                                <td>{{ ucwords($kp3->pengajuan->data_mitra->nm)}}</td>
-                                <td>{{ ucwords($kp3->pengajuan->data_mitra->data_ush->jnsush)}}</td>
-                            @foreach ($byr as $byrs  )
-                                @if($kp3->id == $byrs->kartu_piutang_id)
-                                    <td>{{ $byrs->formatRupiah('pokok')}}</td>
-                                    <td>{{ $byrs->formatRupiah('jasa')}}</td>
-                                    <td>{{ $byrs->formatRupiah('jumlah')}}</td>
-                                @endif
-                            @endforeach  
-                            </tr>
-                            {{-- <?php 
-                                $sumpokok=0;
-                                $sumjasa=0;
-                                $sum=0;
-                                $sumpokok += $totpokok;
-                                $sumjasa += $totjasa;
-                                $sum += $totpembayaran;
-                            ?> --}}
-                        @endforeach
-                        {{-- <tr>
+                        </tr>
+                            @endforeach
+                        <tr>
                             <th colspan="4"> Total Tahun {{ $p }}</th>
                             <th >{{ number_format($sumpokok,0,',','.')  }} </th>
                             <th >{{ number_format($sumjasa,0,',','.') }} </th>
-                            <th >{{ number_format($sum,0,',','.') }} </th>
-                        <tr> --}}
-                    @endforeach
-                    
-                    {{-- <tr>
+                            <th >{{ number_format($sum,0,',','.') }} </th> 
+                        </tr>
+                    @endforeach --}}
+                    @foreach ($byr as $byrs  )
+                        @foreach ( $kp as $p=>$kps)
+                            @foreach ( $kps as $kp3 )
+                                @if($kp3->id == $byrs->kartu_piutang_id)
+                                    <tr>
+                                        <th colspan="7">{{ $p }}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ $loop->iteration }} </td>
+                                        @foreach ( $tanggal as $tgl )
+                                            @if($tgl->tgl != NULL)
+                                                    @if($kp3->id == $tgl->kartu_piutang_id)
+                                                        <td>{{ Carbon\Carbon::parse($tgl->tgl)->format("d-m-Y") }}  </td>
+                                                    @endif 
+                                                @else
+                                                <td>-</td>
+                                            @endif
+                                        @endforeach  
+                                        <td>{{ ucwords($kp3->pengajuan->data_mitra->nm)}}</td>
+                                        <td>{{ ucwords($kp3->pengajuan->data_mitra->data_ush->jnsush)}}</td>               
+                                        <td>{{ $byrs->formatRupiah('pokok')}}</td>
+                                        <td>{{ $byrs->formatRupiah('jasa')}}</td>
+                                        <td>{{ $byrs->formatRupiah('jumlah')}}</td>
+                                        <?php 
+                                            $sumpokok=0;
+                                            $sumjasa=0;
+                                            $sum=0;
+                                            $sumpokok += $byrs->pokok;
+                                            $sumjasa += $byrs->jasa;
+                                            $sum += $byrs->jumlah;
+                                        ?>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        @endforeach
+                        <tr>
+                            <th colspan="4"> Total Tahun {{ $p }}</th>
+                            <th >{{ number_format($sumpokok,0,',','.')  }} </th>
+                            <th >{{ number_format($sumjasa,0,',','.') }} </th>
+                            <th >{{ number_format($sum,0,',','.') }} </th> 
+                        </tr>
+                        <?php 
+                                            $sumpokok += $sumpokok;
+                                            $sumjasa += $sumjasa;
+                                            $sum += $sum;
+                                        ?>
+                    @endforeach  
+
+                    <tr>
                             <th colspan="4">Total Jumlah Piutang </th>
                             <th >{{ number_format($sumpokok,0,',','.')  }} </th>
                             <th >{{ number_format($sumjasa,0,',','.') }} </th>
                             <th >{{ number_format($sum,0,',','.') }} </th>
-                    </tr> --}}
+                    </tr>
                     </tbody>
                 </table>
                 </div>

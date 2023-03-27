@@ -44,7 +44,7 @@ class LaporanController extends Controller
                     ->get();
             return view('dashboard.laporan.lp_angsuran' , compact('user','kp','byr','start_date','end_date'));
         } else {
-            $byr = Pembayaran ::selectRaw('kartu_piutang_id')
+            $byr = Pembayaran ::select('kartu_piutang_id')
                     ->selectRaw("SUM(pokok) as pokok")
                     ->selectRaw("SUM(jasa) as jasa")
                     ->selectRaw("SUM(jumlah) as jumlah")
@@ -69,9 +69,6 @@ class LaporanController extends Controller
     }
 
     function cetak_angsuran(){
-        $pengajuan= Pengajuan::first();
-        $kp1 = Kartu_piutang::first();
-        $pengajuan =Pengajuan::get();
         $kp = Kartu_piutang::get()
         ->groupBy(function ($val) {
             return Carbon::parse($val->tgl_penyaluran)->format('Y');
@@ -90,10 +87,13 @@ class LaporanController extends Controller
             ->selectRaw("SUM(jumlah) as jumlah")
             ->groupBy('pembayarans.kartu_piutang_id')
             ->get();
-            $tanggal = Pembayaran::where('kartu_piutang_id',$kp1->id)
-            ->where('status', '=', 'valid')
+            $tanggal = Pembayaran::select('kartu_piutang_id')
+            ->where('pembayarans.status','=','valid')
             ->whereBetween('tgl',[$start_date,$end_date])
-            ->latest('id')->first();
+            ->selectRaw("MAX(tgl) as tgl")
+            ->groupBy('pembayarans.kartu_piutang_id')
+            ->get();
+            $pdf = PDF::loadview('dashboard.laporan.cetak_angsuran', compact('kp','byr','tanggal','start_date','end_date'))->setOptions(['defaultFont'=>'sans-serif']);
             
         } else {
             $byr = Pembayaran ::selectRaw('kartu_piutang_id')
@@ -103,12 +103,14 @@ class LaporanController extends Controller
             ->selectRaw("SUM(jumlah) as jumlah")
             ->groupBy('pembayarans.kartu_piutang_id')
             ->get();
-            $tanggal = Pembayaran::groupBy('kartu_piutang_id')
-            ->where('status', '=', 'valid')
-            ->latest('id')->first();
-            
+            $tanggal = Pembayaran::select('kartu_piutang_id')
+            ->where('pembayarans.status','=','valid')
+            ->selectRaw("MAX(tgl) as tgl")
+            ->groupBy('pembayarans.kartu_piutang_id')
+            ->get();
+            $pdf = PDF::loadview('dashboard.laporan.cetak_angsuran', compact('kp','byr','tanggal'))->setOptions(['defaultFont'=>'sans-serif']);
         }
-        $pdf = PDF::loadview('dashboard.laporan.cetak_angsuran', compact('kp','kp1','byr','tanggal'))->setOptions(['defaultFont'=>'sans-serif']);
+        
         return $pdf->setPaper('a4','potrait')->stream('laporan-angsuran.pdf');
     }
 }

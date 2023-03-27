@@ -56,35 +56,35 @@
                   </tr>
                 </thead>
                 <tbody>
-                @foreach ( $kp as $kp  )
-                <tr>
-                      <td>{{ $loop->iteration }}</td>
-                      <td>{{ $kp->pengajuan->data_mitra->nm }}</td>
-                      <td>{{ $kp->pengajuan->data_mitra->data_ush->jnsush }}</td>
-                  
+                
                   @foreach ($byr as $p  )
-                    @if( request()->start_date == NULL )
-                        @if($p->kartu_piutang_id == $kp->id)
-                          <td>{{ number_format($p->pokok, 0, ',','.') }}</td>
-                          <td>{{ number_format($p->jasa, 0, ',','.') }}</td> 
-                          <td>{{ number_format($p->jumlah, 0, ',','.') }}</td> 
+                    @foreach ( $kp as $kps=> $kp1 )
+                      @if( request()->start_date == NULL && request()->start_date==NULL )
+                          @if($kp1->id == $p->kartu_piutang_id)
+                          <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $kp1->pengajuan->data_mitra->nm }}</td>
+                            <td>{{ $kp1->pengajuan->data_mitra->data_ush->jnsush }}</td>
+                            <td>{{ number_format($p->pokok, 0, ',','.') }}</td>
+                            <td>{{ number_format($p->jasa, 0, ',','.') }}</td> 
+                            <td>{{ number_format($p->jumlah, 0, ',','.') }}</td>
+                          </tr> 
+                          @endif
+                        @else
+                        @if($p->kartu_piutang_id == $kp1->id)
+                          <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $kp1->pengajuan->data_mitra->nm }}</td>
+                            <td>{{ $kp1->pengajuan->data_mitra->data_ush->jnsush }}</td>
+                            <td>{{ number_format($p->pokok, 0, ',','.') }}</td>
+                            <td>{{ number_format($p->jasa, 0, ',','.') }}</td> 
+                            <td>{{ number_format($p->jumlah, 0, ',','.') }}</td> 
+                          </tr> 
                         @endif
-                      @else
-                      @if($p->kartu_piutang_id == $kp->id)
-                          <td>{{ number_format($p->pokok, 0, ',','.') }}</td>
-                          <td>{{ number_format($p->jasa, 0, ',','.') }}</td> 
-                          <td>{{ number_format($p->jumlah, 0, ',','.') }}</td> 
-                          @else
-                          @for($i=1; $i<=3;$i++)
-                          <td>0</td> 
-                        @endfor
-                        @endif
-                        
-                    @endif
-                    
+                      @endif
+                    @endforeach
                   @endforeach  
-                  </tr>
-                  @endforeach             
+                            
 
                 </tbody>
               </table>
