@@ -110,12 +110,14 @@
                                             $sumpokok=0;
                                             $sumjasa=0;
                                             $sum=0;
+                                            $totjmlh=0;
                                             $sumpokok += $byrs->pokok;
                                             $sumjasa += $byrs->jasa;
                                             $sum += $byrs->jumlah;
                                         ?>
                                     </tr>
                                 @endif
+                                
                             @endforeach
                         @endforeach
                         <tr>
@@ -124,18 +126,14 @@
                             <th >{{ number_format($sumjasa,0,',','.') }} </th>
                             <th >{{ number_format($sum,0,',','.') }} </th> 
                         </tr>
-                        <?php 
-                                            $sumpokok += $sumpokok;
-                                            $sumjasa += $sumjasa;
-                                            $sum += $sum;
-                                        ?>
-                    @endforeach  
-
+                    @endforeach        
                     <tr>
+                        @foreach ( $tot as $total )
                             <th colspan="4">Total Jumlah Piutang </th>
-                            <th >{{ number_format($sumpokok,0,',','.')  }} </th>
-                            <th >{{ number_format($sumjasa,0,',','.') }} </th>
-                            <th >{{ number_format($sum,0,',','.') }} </th>
+                            <th >{{ number_format($total->pokok,0,',','.')  }} </th>
+                            <th >{{ number_format($total->jasa,0,',','.') }} </th>
+                            <th >{{ number_format($total->jumlah,0,',','.') }} </th>
+                        @endforeach
                     </tr>
                     </tbody>
                 </table>

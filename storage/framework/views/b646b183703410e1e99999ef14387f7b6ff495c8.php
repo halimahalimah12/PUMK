@@ -230,7 +230,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah form-control" name="totaset" id="totaset" style="padding-bottom:5px" value="<?php echo e(old('totaset',$last->aset->totaset)); ?>">
+                    <input type="text" class="rupiah form-control" name="totaset" id="totaset" style="padding-bottom:5px;background-color: #e9ecef; cursor:auto;" value="<?php echo e(old('totaset',$last->aset->totaset)); ?>" readonly>
                   </div>
                 </div>
               </div>
@@ -363,7 +363,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="totop" id="totop" style="padding-bottom:5px" value="<?php echo e(old('totop',$last->oprasional->totop)); ?>" readonly>
+                  <input type="text" class="rupiah form-control" name="totop" id="totop" style="padding-bottom:5px;background-color: #e9ecef; cursor:auto;" value="<?php echo e(old('totop',$last->oprasional->totop)); ?>" readonly>
                 </div>
               </div>
             </div>
@@ -425,7 +425,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               <label for="bsr_pjm" class="form-label">Besar Pinjaman yang Diajukan </label>
               <div class="input-group mb-3">
                 <span class="input-group-text">Rp.</span>
-                <input type="text" class="rupiah form-control " name="bsr_pjm" id="bsr_pjm" value="<?php echo e(old('bsr_pjm',$last->bsr_pinjaman)); ?>">
+                <input type="text" class="rupiah form-control " name="bsr_pjm" id="bsr_pjm" value="<?php echo e(old('bsr_pjm',$last->bsr_pinjaman)); ?>"style="background-color: #e9ecef; cursor:auto;" readonly>
               </div>
               <span class="text-danger error-text bsr_pjm_error"> </span>
             </div>
@@ -709,8 +709,8 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
         e.preventDefault();
         var form = this;
         $.ajax({
-          url: "<?php echo e(route('pengajuan.store')); ?>",
-          method:$(form).attr('method'),
+          url: "/simpanpengajuan",
+          method:"POST",
           data:new FormData(form),
           processData:false,
           dataType:'json',

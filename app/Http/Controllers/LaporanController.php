@@ -74,8 +74,6 @@ class LaporanController extends Controller
             return Carbon::parse($val->tgl_penyaluran)->format('Y');
         });
         
-
-        
         if (request()->start_date || request()->end_date) {
             $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
             $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
@@ -87,14 +85,20 @@ class LaporanController extends Controller
             ->selectRaw("SUM(jumlah) as jumlah")
             ->groupBy('pembayarans.kartu_piutang_id')
             ->get();
+            $tot = Pembayaran ::where('pembayarans.status','=','valid')
+            ->whereBetween('tgl',[$start_date,$end_date])
+            ->selectRaw("SUM(pokok) as pokok")
+            ->selectRaw("SUM(jasa) as jasa")
+            ->selectRaw("SUM(jumlah) as jumlah")
+            ->get();
             $tanggal = Pembayaran::select('kartu_piutang_id')
             ->where('pembayarans.status','=','valid')
             ->whereBetween('tgl',[$start_date,$end_date])
             ->selectRaw("MAX(tgl) as tgl")
             ->groupBy('pembayarans.kartu_piutang_id')
             ->get();
-            $pdf = PDF::loadview('dashboard.laporan.cetak_angsuran', compact('kp','byr','tanggal','start_date','end_date'))->setOptions(['defaultFont'=>'sans-serif']);
             
+            $pdf = PDF::loadview('dashboard.laporan.cetak_angsuran', compact('kp','byr','tanggal','tot','start_date','end_date'))->setOptions(['defaultFont'=>'sans-serif']);
         } else {
             $byr = Pembayaran ::selectRaw('kartu_piutang_id')
             ->where('pembayarans.status','=','valid')
@@ -108,7 +112,12 @@ class LaporanController extends Controller
             ->selectRaw("MAX(tgl) as tgl")
             ->groupBy('pembayarans.kartu_piutang_id')
             ->get();
-            $pdf = PDF::loadview('dashboard.laporan.cetak_angsuran', compact('kp','byr','tanggal'))->setOptions(['defaultFont'=>'sans-serif']);
+            $tot = Pembayaran ::where('pembayarans.status','=','valid')
+            ->selectRaw("SUM(pokok) as pokok")
+            ->selectRaw("SUM(jasa) as jasa")
+            ->selectRaw("SUM(jumlah) as jumlah")
+            ->get();
+            $pdf = PDF::loadview('dashboard.laporan.cetak_angsuran', compact('kp','byr','tanggal','tot'))->setOptions(['defaultFont'=>'sans-serif']);
         }
         
         return $pdf->setPaper('a4','potrait')->stream('laporan-angsuran.pdf');

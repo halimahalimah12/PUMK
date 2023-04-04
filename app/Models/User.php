@@ -6,6 +6,7 @@ use App\Models\Survei;
 use App\Models\Data_ush;
 use App\Models\Pengajuan;
 use App\Models\Data_mitra;
+use App\Models\Notifikasi;
 use App\Models\Pembayaran;
 use Illuminate\Support\Carbon;
 use Laravel\Sanctum\HasApiTokens;
@@ -63,5 +64,8 @@ class User extends Authenticatable
     public function pembayaran(){
         return $this->hasMany(Pembayaran::class);
     }
-
+    
+    public function notifikasi(){
+        return $this->hasOne(Notifikasi::class);
+    }
 }

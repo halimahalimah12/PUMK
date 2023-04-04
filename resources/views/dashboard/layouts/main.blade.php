@@ -43,7 +43,7 @@
     {{-- <div class="fixed-bottom"> --}}
     <footer id="footer" class="footer">
       <div class="copyright">
-        &copy; Copyright <strong><span>Halimah</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>PT. Angkasa Pura II  </span></strong>. All Rights Reserved
       </div>
     </footer>
 {{-- </div> --}}

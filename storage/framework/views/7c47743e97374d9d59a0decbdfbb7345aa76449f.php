@@ -3,7 +3,6 @@
   <!-- Logo -->
   <div class="d-flex align-items-center justify-content-between">
     <a href="index.html" class="logo d-flex align-items-center">
-      <img src="assets/img/logo.png" alt="">
       <span class="d-none d-lg-block">PUMK</span>
     </a>
     <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -16,7 +15,7 @@
         <!-- Notification Icon -->
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
-          <span class="badge bg-primary badge-number">4</span>
+          
         </a>
         <!-- Notification Dropdown Items -->
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
@@ -79,10 +78,7 @@
       <!--Messages Nav -->
       <li class="nav-item dropdown">
         <!--  Messages Icon -->
-        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-          <i class="bi bi-chat-left-text"></i>
-          <span class="badge bg-success badge-number">3</span>
-        </a>
+        
         <!-- Messages Dropdown Items -->
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
           <li class="dropdown-header">
