@@ -60,7 +60,7 @@
                         <span class="badge bg-danger">Pengajuan Ditolak</span>
                       <?php endif; ?>
                     </td>
-                    <td style="width:320px"><?php echo e($p->ket); ?> </td>
+                    <td style="width:280px"><?php echo e($p->ket); ?> </td>
                     <td>
                       <a href="/show/<?php echo e($p->id); ?>" class="bi bi-file-earmark-text" ></a>
                       <a href="/cetak/<?php echo e($p->id); ?>" class="bi bi-printer"> </a>

@@ -41,7 +41,7 @@
             <li><a href="#Tentang_Kami">Tentang Kami </a></li>
             <li><a href="#Alur">Alur</a></li>
             
-            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="#kontak">Contact Us</a></li>
             <a href="/login"> <li class="bi bi-box-arrow-in-right" > </li> Login</a>
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
@@ -112,9 +112,7 @@
         <div class="row align-items-center">
           <div class="col-md-4 me-auto">
             <h2 class="mb-4">Langkah 1</h2>
-            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur at reprehenderit optio,
-              laudantium eius quod, eum maxime molestiae porro omnis. Dolores aspernatur delectus impedit incidunt
-              dolore mollitia esse natus beatae.</p>
+            <p class="mb-4">Login bagi mitra yang telah memiliki akun, bagi mitra yang tidak memiliki akun silahkan registrasi terlebih dahulu</p>
           </div>
           <div class="col-md-6" data-aos="fade-left">
             <img src="assets/img/undraw_svg_2.svg" alt="Image" class="img-fluid">
@@ -124,9 +122,7 @@
         <div class="row align-items-center">
           <div class="col-md-4 ms-auto order-2">
             <h2 class="mb-4">Langkah 2</h2>
-            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur at reprehenderit optio,
-              laudantium eius quod, eum maxime molestiae porro omnis. Dolores aspernatur delectus impedit incidunt
-              dolore mollitia esse natus beatae.</p>
+            <p class="mb-4">Lakukan Pengajuan dengan mengisi data yang tertera pada halaman pengajuan. </p>
             
           </div>
           <div class="col-md-6" data-aos="fade-right">
@@ -137,9 +133,7 @@
         <div class="row align-items-center">
           <div class="col-md-4 me-auto">
             <h2 class="mb-4">Langkah 3</h2>
-            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur at reprehenderit optio,
-              laudantium eius quod, eum maxime molestiae porro omnis. Dolores aspernatur delectus impedit incidunt
-              dolore mollitia esse natus beatae.</p>
+            <p class="mb-4">Tunggu pengajuan hingga pengajuan di verifikasi oleh admin. Terdapat pemberitahuan ke gmail bahwa pengajuan anda diterima atau tidak diterima. </p>
               <p><a href="#" class="btn btn-primary">Registrasi Sekarang</a></p>
           </div>
             <div class="col-md-6" data-aos="fade-left">
@@ -237,19 +231,75 @@
           </div>
         </div>
       </section>
-      <!-- ======= CTA Section ======= -->
-      <section class="section cta-section">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-6 me-auto text-center text-md-start mb-5 mb-md-0">
-              <h2>Starts Publishing Your Apps</h2>
-            </div>
-            <div class="col-md-5 text-center text-md-end">
-              <p><a href="#" class="btn d-inline-flex align-items-center"><i class="bx bxl-apple"></i><span>App store</span></a> <a href="#" class="btn d-inline-flex align-items-center"><i class="bx bxl-play-store"></i><span>Google play</span></a></p>
-            </div>
+      
+      <section class="section" id="kontak">
+      <div class="container">
+        <div class="row mb-5 align-items-end">
+          <div class="col-md-6" data-aos="fade-up">
+
+            <h2>Contact Form</h2>
+            <p class="mb-0">Jika terdapat saran dan keritikan atau bahkan ingin meminta bantuan silahkan hubungi kami dengan mengisi formulir dibawah ini atau bisa hubungi kami di nomor yang tertera dibawah ini. </p>
           </div>
+
         </div>
-      </section>
+
+        <div class="row">
+          <div class="col-md-4 ms-auto order-2" data-aos="fade-up">
+            <ul class="list-unstyled">
+              <li class="mb-3">
+                <strong class="d-block mb-1">Address</strong>
+                <span>203 Fake St. Mountain View, San Francisco, California, USA</span>
+              </li>
+              <li class="mb-3">
+                <strong class="d-block mb-1">Phone</strong>
+                <span>+1 232 3235 324</span>
+              </li>
+              <li class="mb-3">
+                <strong class="d-block mb-1">Email</strong>
+                <span>youremail@domain.com</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-up">
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="name">Name</label>
+                  <input type="text" name="name" class="form-control" id="name" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <label for="name">Email</label>
+                  <input type="email" class="form-control" name="email" id="email" required>
+                </div>
+                <div class="col-md-12 form-group mt-3">
+                  <label for="name">Subject</label>
+                  <input type="text" class="form-control" name="subject" id="subject" required>
+                </div>
+                <div class="col-md-12 form-group mt-3">
+                  <label for="name">Message</label>
+                  <textarea class="form-control" name="message" required></textarea>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                </div>
+
+                <div class="col-md-6 form-group">
+                  <input type="submit" class="btn btn-primary d-block w-100" value="Send Message">
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+      
     </main>
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -300,10 +350,8 @@
         </div>
         <div class="row justify-content-center text-center">
           <div class="col-md-7">
-            <p class="copyright">&copy; Copyright SoftLand. All Rights Reserved</p>
-            <div class="credits">
-              Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-            </div>
+            <p class="copyright">&copy; Copyright PT. Angkasa Pura II . All Rights Reserved</p>
+          
           </div>
         </div>
 

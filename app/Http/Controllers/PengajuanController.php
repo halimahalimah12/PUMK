@@ -14,6 +14,7 @@ use App\Models\Data_mitra;
 use App\Models\Oprasional;
 use App\Models\Tenagakerja;
 use Illuminate\Http\Request;
+use App\Models\Notification;
 use App\Models\Kartu_piutang;
 use App\Traits\HasFormatRupiah; 
 use App\Notifications\Notifikasi;
@@ -48,7 +49,9 @@ class PengajuanController extends Controller
             return view('dashboard.pengajuan.index' ,compact('pengajuan','user','last','mitra','ush') );
         }else{
             $pengajuan1 = Pengajuan::orderByDesc('id')->get();
-            return view('dashboard.pengajuan.index' ,compact('pengajuan1','user') );
+            $notification= Notification::where('id_tujuan','=','1')->get();
+            $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
+            return view('dashboard.pengajuan.index' ,compact('pengajuan1','user','notification','countnotifikasi') );
         }
         
     }
@@ -62,15 +65,16 @@ class PengajuanController extends Controller
         $user      = User::where('id', Auth::user()->id)->first();
         $ush       = Data_Ush::where('user_id',$user->id)->first();
         $mitra     = Data_Mitra::where('data_ush_id',$ush->id)->first();
-        $last      = Pengajuan::where('user_id',$user->id)->latest('id')->first();
-        $lastalat  = Alat::where('pengajuan_id', $last->id)->latest('id')->get();
-        $lasttk    = Tenagakerja::where('pengajuan_id', $last->id)->latest('id')->get();
-        $lastomzet = Omzet::where('pengajuan_id', $last->id)->latest('id')->get();
-        $lastmanfaat = Manfaat::where('pengajuan_id', $last->id)->latest('id')->get();
-
-        
-        
-        return view('dashboard.pengajuan.create',compact('mitra','ush','user','last','lastalat','lasttk','lastomzet','lastmanfaat') );
+        $pengajuan = Pengajuan::where('user_id', $user->id)->first();
+        if ( $pengajuan != NULL ){
+            $last      = Pengajuan::where('user_id',$user->id)->latest('id')->first();
+            $lastalat  = Alat::where('pengajuan_id', $last->id)->latest('id')->get();
+            $lasttk    = Tenagakerja::where('pengajuan_id', $last->id)->latest('id')->get();
+            $lastomzet = Omzet::where('pengajuan_id', $last->id)->latest('id')->get();
+            $lastmanfaat = Manfaat::where('pengajuan_id', $last->id)->latest('id')->get();
+        return view('dashboard.pengajuan.create',compact('mitra','ush','user','last','lastalat','pengajuan','lasttk','lastomzet','lastmanfaat') );
+        }
+        return view('dashboard.pengajuan.create',compact('mitra','ush','pengajuan','user') );
     }
     /**
      * Store a newly created resource in storage.
@@ -80,7 +84,7 @@ class PengajuanController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
+        
         $user      = User::where('id', Auth::user()->id)->first();
         $mitra     = Data_Mitra::where('user_id',$user->id)->first();
         
@@ -132,7 +136,7 @@ class PengajuanController extends Controller
         if (!$validateData->passes()) {
             return response()->json(['code'=>0,'error'=>$validateData->errors()->toArray()]);
         } else {
-            
+
             $pjb = new Pjb;
             $pjb->nm        =   $request->nm_pjb;
             $pjb->jk        =   $request->gender;
@@ -163,7 +167,7 @@ class PengajuanController extends Controller
                 $file           ->  move('storage/dokumen',$namafile);
                 $pjb['scanktp'] = $namafile;
             }
-                
+            
             $pjb->save();
     
             $aset = new Aset;
@@ -298,8 +302,14 @@ class PengajuanController extends Controller
                 $manfaat->manfaat      =    $faat[$no];
                 $manfaat->save();
             }
+
+            $notifikasi= new Notification;
+            $notifikasi->type = $request->typenotifikasi;
+            $notifikasi->id_tujuan = $request->tujuan;
+            $notifikasi->data = $request->pesan;
+            $notifikasi->save();
             
-            if ( $pjb  && $aset && $oprasional && $pengajuan && $alat && $tenagakerja && $omzet && $manfaat ){
+            if ( $pjb  && $aset && $oprasional && $pengajuan && $alat && $tenagakerja && $omzet && $manfaat && $notifikasi){
                 return response()->json(['code'=>1, 'msg' => 'Berhasil ditambahkan']);
             }
         }
@@ -331,8 +341,10 @@ class PengajuanController extends Controller
             $totalat      = Alat::where('pengajuan_id',$pengajuan->id)->sum('jmlh');
             $totgaji     = Tenagakerja::where('pengajuan_id',$pengajuan->id)->sum('gaji');
             $totomzet     = Omzet::where('pengajuan_id',$pengajuan->id)->sum('jmlh');
+            $notification= Notification::where('id_tujuan','=','1')->get();
+            $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
         
-        return view('dashboard.pengajuan.detail' ,compact('pengajuan','user','alat','tenaga','omzet' ,'totomzet','totalat','totgaji') );
+        return view('dashboard.pengajuan.detail' ,compact('pengajuan','user','alat','tenaga','omzet' ,'totomzet','totalat','totgaji','notification','countnotifikasi') );
         }
     }
 
@@ -384,8 +396,10 @@ class PengajuanController extends Controller
         $tenaga     = Tenagakerja::where('pengajuan_id',$pengajuan->id)->get();
         $omzet      = Omzet::where('pengajuan_id',$pengajuan->id)->get();
         $manfaat      = Manfaat::where('pengajuan_id',$pengajuan->id)->get();
+        $notification= Notification::where('id_tujuan','=','1')->get();
+        $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
 
-        return view ('dashboard.pengajuan.edit',compact('pengajuan','user','alat','tenaga','omzet' ,'manfaat'));
+        return view ('dashboard.pengajuan.edit',compact('pengajuan','user','alat','tenaga','omzet' ,'manfaat','notification','countnotifikasi'));
     }
 
     /**

@@ -15,6 +15,9 @@
         <!-- Notification Icon -->
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
+          <?php if( $user->is_admin ==1 ): ?>
+          <span class="badge bg-primary badge-number"><?php echo e($countnotifikasi); ?></span>
+          <?php endif; ?>
           
         </a>
         <!-- Notification Dropdown Items -->
@@ -26,47 +29,21 @@
           <li>
             <hr class="dropdown-divider">
           </li>
-          <li class="notification-item">
-            <i class="bi bi-exclamation-circle text-warning"></i>
-            <div>
-              <h4>Lorem Ipsum</h4>
-              <p>Quae dolorem earum veritatis oditseno</p>
-              <p>30 min. ago</p>
-            </div>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li class="notification-item">
-            <i class="bi bi-x-circle text-danger"></i>
-            <div>
-              <h4>Atque rerum nesciunt</h4>
-              <p>Quae dolorem earum veritatis oditseno</p>
-              <p>1 hr. ago</p>
-            </div>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li class="notification-item">
-            <i class="bi bi-check-circle text-success"></i>
-            <div>
-              <h4>Sit rerum fuga</h4>
-              <p>Quae dolorem earum veritatis oditseno</p>
-              <p>2 hrs. ago</p>
-            </div>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
+          <?php if($user->is_admin == 1 ): ?>
+            <?php $__currentLoopData = $notification; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notif): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
           <li class="notification-item">
             <i class="bi bi-info-circle text-primary"></i>
-            <div>
-              <h4>Dicta reprehenderit</h4>
-              <p>Quae dolorem earum veritatis oditseno</p>
-              <p>4 hrs. ago</p>
-            </div>
+              <div>
+                <h4><?php echo e($notif->type); ?></h4>
+                <p><?php echo e($notif->data); ?></p>
+              </div>  
           </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+          <?php endif; ?>
           <li>
             <hr class="dropdown-divider">
           </li>

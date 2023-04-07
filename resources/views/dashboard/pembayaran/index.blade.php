@@ -83,7 +83,9 @@
                   <input type="hidden" class="form-control " name="pokok" id="pokok"  readonly>
                   <input type="hidden" class="form-control " name="jasa" id="jasa" readonly >
                   <input type="hidden" class="form-control " name="bulan" id="bulan" readonly >
-
+                  <input type="text" class="form-control " name="typenotifikasi" value="Pembayaran" >
+                  <input type="text" class="form-control " name="tujuan" value="1" >
+                  <input type="text" class="form-control " name="pesan" value="Pembayaran Angsuran oleh {{ $mitra->nm }}" >
               <div class="row mb-3">
                 <label for="foto" class="col-sm-3 col-form-label">Bukti Pembayaran</label>
                 <div class="col-sm-9">
@@ -146,6 +148,7 @@
             <table class="table table-striped" id="datatable" >
               <thead>
                 <th> No </th>
+                <th> Nama Mitra </th>
                 <th> Tanggal Pembayaran </th>
                 <th> Bank </th>
                 <th> Jumlah </th>
@@ -156,6 +159,7 @@
               @foreach ($pembayaran as $p )
                 <tr>
                   <td> {{ $loop->iteration }} </td>
+                  <td> {{ $p->Kartu_piutang->Pengajuan->Data_mitra->nm }}</td>
                   <td> {{ date('d M Y',strtotime($p->tgl)) }} </td>
                   <td> @if ($p->bank == 'bri') BRI
                           @else Mandiri

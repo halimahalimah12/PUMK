@@ -7,6 +7,7 @@ use App\Models\Data_mitra;
 use App\Models\Pengajuan;
 use App\Models\Kartu_piutang;
 use App\Models\Pembayaran;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -26,6 +27,7 @@ class KrtpiutangController extends Controller
     public function index()
     {
         $user = User::where('id', Auth::user()->id)->first();
+        
         // halamaan  user
         if($user->is_admin ==0 )
         {
@@ -38,7 +40,9 @@ class KrtpiutangController extends Controller
             return view('dashboard.kartu_piutang.index' ,compact('user','pengajuan','mitra') );
         } else {
             $kp = Kartu_piutang::get();
-            return view('dashboard.kartu_piutang.index' ,compact('user','kp') );
+            $notification= Notification::where('id_tujuan','=','1')->get();
+            $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
+            return view('dashboard.kartu_piutang.index' ,compact('user','kp','notification','countnotifikasi') );
         }
     }
 
@@ -111,9 +115,11 @@ class KrtpiutangController extends Controller
         $pokok = $this->hitungpokok($id);
         $jumlah = $this->jumlah($id);
         $jumlah1 = $this->jumlah1($id);
+        $notification= Notification::where('id_tujuan','=','1')->get();
+        $countnotifikasi = Notification::where('id_tujuan','=','1')->count();   
 
 
-        return view('dashboard.kartu_piutang.view' ,compact('user','pembayaranvalid','kp','jasa1','jasa','pokok','pembayaran','totpembayaran','jumlah','jumlah1') );
+        return view('dashboard.kartu_piutang.view' ,compact('user','pembayaranvalid','kp','jasa1','jasa','pokok','pembayaran','totpembayaran','jumlah','jumlah1','notification','countnotifikasi') );
     }
 
     /**

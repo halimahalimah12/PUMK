@@ -59,7 +59,7 @@
                         <span class="badge bg-danger">Pengajuan Ditolak</span>
                       @endif
                     </td>
-                    <td style="width:320px">{{ $p->ket }} </td>
+                    <td style="width:280px">{{ $p->ket }} </td>
                     <td>
                       <a href="/show/{{ $p->id }}" class="bi bi-file-earmark-text" ></a>
                       <a href="/cetak/{{ $p->id }}" class="bi bi-printer"> </a>

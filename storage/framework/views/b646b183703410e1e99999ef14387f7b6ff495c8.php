@@ -7,8 +7,10 @@
         <h5>Pengajuan Form</h5>
       </div>
       <div class="card-body">
-        <form class="row contact-form" method="POST" enctype="multipart/form-data" id="form"  name="form"  >
+        <form  class="row contact-form" method="POST" enctype="multipart/form-data" id="form"  name="form"  >
           <?php echo csrf_field(); ?>    
+          <?php echo e(method_field('post')); ?>
+
           <div class="col-12 ">
             <label for="nm_ush" class="form-label" style="margin-top:10px;">Nama Usaha</label>
             <input type="text" class="form-control" name="nm_ush" id="nm_ush" value="<?php echo e(ucwords($ush->nama_ush)); ?>" disabled>
@@ -22,19 +24,19 @@
             <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Biodata Penanggung Jawab Berikutnya</h5>
               <div class="col-12 "> 
                 <label for="nm_pjb" class="form-label" >Nama  </label>
-                <input type="text" class="form-control " name="nm_pjb" id="nm_pjb" value="<?php echo e(old('nm_pjb',ucwords($last->pjb->nm))); ?>"  >
+                <input type="text" class="form-control " name="nm_pjb" id="nm_pjb" value="<?php echo e(old('nm_pjb')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->pjb->nm)); ?> <?php endif; ?> "   >
                 <span class="text-danger error-text nm_pjb_error"> </span>
               </div>
               <div class="row gx-3 gy-0">
                 <div class="col-lg-6 col-12  form-group clearfix ">
                   <label for="tpt_lhr" class="form-label">Tempat Lahir</label>
-                  <input type="text" class="form-control "  id="tpt_lhr" name="tpt_lhr" value="<?php echo e(old('tpt_lhr',$last->pjb->tpt_lhr)); ?>" >
+                  <input type="text" class="form-control "  id="tpt_lhr" name="tpt_lhr" value="<?php echo e(old('tpt_lhr')); ?><?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->pjb->tpt_lhr)); ?> <?php endif; ?> " >
                   <span class="text-danger error-text tpt_lhr_error"> </span>
                 </div>
                 <div class="col-lg-6 col-12 form-group clearfix">
                   <label for="tgl_lhr" class="form-label">Tanggal Lahir</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control " id="tgl_lhr"  name="tgl_lhr" value="<?php echo e(old('tgl_lhr',$last->pjb->tgl_lhr)); ?>">
+                    <input type="date" class="form-control " id="tgl_lhr"  name="tgl_lhr" value="<?php echo e(old('tgl_lhr')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->pjb->tgl_lhr); ?> <?php endif; ?> ">
                     <span class="text-danger error-text tgl_lhr_error"> </span>
                   </div>
                 </div>
@@ -44,11 +46,11 @@
                   <label for="gender" class="form-label">Jenis Kelamin</label>
                   <div>
                     <div class="form-check form-check-inline" >
-                      <input class="form-check-input" type="radio" name="gender" id="gender" value="L" <?php echo e(old('gender',$last->pjb->jk) == 'L' ? 'checked':''); ?>>
+                      <input class="form-check-input" type="radio" name="gender" id="gender" value="L" <?php echo e(old('gender') == 'L' ? 'checked':''); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->pjb->jk == 'L' ? 'checked':''); ?> <?php endif; ?>>
                       <label class="form-check-label" for="gender">Laki-Laki</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="gender" id="gender" value="P"  <?php echo e(old('gender',$last->pjb->jk) == 'P' ? 'checked':''); ?>>
+                      <input class="form-check-input" type="radio" name="gender" id="gender" value="P"  <?php echo e(old('gender') == 'P' ? 'checked':''); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->pjb->jk == 'P' ? 'checked':''); ?> <?php endif; ?>}>
                       <label class="form-check-label" for="gender">Perempuan</label>
                     </div>                                  
                     <span class="text-danger error-text gender_error"> </span>
@@ -56,14 +58,14 @@
                 </div>
                 <div class="col-lg-6 col-12 form-group clearfix">
                   <label for="hub" class="form-label">Status Hubungan dengan Penanggung Jawab Usaha </label>
-                  <input type="text" class="form-control" id="hub" name="hub" value="<?php echo e(old('hub',$last->pjb->hub)); ?>">
+                  <input type="text" class="form-control" id="hub" name="hub" value="<?php echo e(old('hub')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->pjb->hub)); ?> <?php endif; ?>">
                   <span class="text-danger error-text hub_error"> </span>
                 </div>
               </div>
               <div class="row gx-3 gy-0">
                 <div class="col-12 col-lg-6 form-group clearfix" >
                   <label for="pekerjaan" class="form-label">Pekerjaan</label>
-                  <input type="text" class="form-control" id="pekerjaan" name="pekerjaan"value="<?php echo e(old('pekerjaan',$last->pjb->pekerjaan)); ?>">
+                  <input type="text" class="form-control" id="pekerjaan" name="pekerjaan"value="<?php echo e(old('pekerjaan')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->pjb->pekerjaan)); ?> <?php endif; ?>">
                   <span class="text-danger error-text pekerjaan_error"> </span>
                 </div>
                 <div class="col-12 col-lg-6 form-group clearfix" >
@@ -75,7 +77,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid  <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('almt')); ?>" style="height: 100px"><?php echo e(ucwords($last->pjb->almt)); ?></textarea>
+unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('almt')); ?>" style="height: 100px"><?php if($pengajuan != NULL ): ?><?php echo e(ucwords($last->pjb->almt)); ?><?php endif; ?></textarea>
                     <span class="text-danger error-text almt_error"> </span>
                 </div>
               </div>
@@ -86,18 +88,18 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               <div class="row gx-3 gy-0">
                 <div class="col-lg-4 col-12 form-group clearfix">
                   <label for="no_hp" class="form-label">No Telephone</label>
-                  <input type="text" class="form-control"  id="no_hp" name="no_hp" value="<?php echo e(old('no_hp',$last->pjb->no_hp)); ?>">
+                  <input type="text" class="form-control"  id="no_hp" name="no_hp" value="<?php echo e(old('no_hp')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->pjb->no_hp)); ?> <?php endif; ?>">
                   <span class="text-danger error-text no_hp_error"> </span>
                 </div>
                 <div class="col-lg-4 col-12 form-group clearfix">
                   <label for="no_ktp" class="form-label">No KTP </label>
-                  <input type="text" class="form-control" id="no_ktp" name="no_ktp" value="<?php echo e(old('no_ktp',$last->pjb->no_ktp)); ?>">
+                  <input type="text" class="form-control" id="no_ktp" name="no_ktp" value="<?php echo e(old('no_ktp')); ?><?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->pjb->no_ktp)); ?> <?php endif; ?>">
                   <span class="text-danger error-text no_ktp_error"> </span>
                 </div>
                 <div class="col-lg-4 col-12 form-group clearfix">
                   <label for="tgl_ktp" class="form-label">Tanggal KTP</label>
                   <div class="col-sm-12">
-                    <input type="date" class="form-control"  id="tgl_ktp"  name="tgl_ktp" value="<?php echo e(old('tgl_ktp',$last->pjb->tgl_ktp)); ?>">
+                    <input type="date" class="form-control"  id="tgl_ktp"  name="tgl_ktp" value="<?php echo e(old('tgl_ktp')); ?><?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->pjb->tgl_ktp)); ?> <?php endif; ?>">
                     <span class="text-danger error-text tgl_ktp_error"> </span>
                   </div>
                 </div>
@@ -108,27 +110,27 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                     <select class="form-select" name="pddk" id="pddk" aria-label="Default select example">
                       <div class="col-sm-6">
                         <option value = "" >- Pilih -</option>
-                        <option value="SD" <?php echo e(old('pddk',$last->pjb->pddk) =="SD" ? 'selected' : ''); ?> name="pddk" id="pddk" >SD</option>
-                        <option value="SMP" <?php echo e(old('pddk',$last->pjb->pddk) =="SMP" ? 'selected' : ''); ?> name="pddk" id="pddk">SMP</option>
-                        <option value="SMA" <?php echo e(old('pddk',$last->pjb->pddk) =="SMA" ? 'selected' : ''); ?> name="pddk" id="pddk">SMA</option>
-                        <option value="D1" <?php echo e(old('pddk',$last->pjb->pddk) =="D1" ? 'selected' : ''); ?> name="pddk" id="pddk">D1</option>
-                        <option value="D1" <?php echo e(old('pddk',$last->pjb->pddk) =="D2" ? 'selected' : ''); ?> name="pddk" id="pddk">D2</option>
-                        <option value="D3" <?php echo e(old('pddk',$last->pjb->pddk) =="D3" ? 'selected' : ''); ?> name="pddk" id="pddk">D3</option>
-                        <option value="S1" <?php echo e(old('pddk',$last->pjb->pddk) =="S1" ? 'selected' : ''); ?> name="pddk" id="pddk">S1</option>
-                        <option value="S2" <?php echo e(old('pddk',$last->pjb->pddk) =="S2" ? 'selected' : ''); ?> name="pddk" id="pddk">S2</option>
-                        <option value="S3" <?php echo e(old('pddk',$last->pjb->pddk) =="S3" ? 'selected' : ''); ?>  name="pddk" id="pddk">S3</option>
+                        <option value="SD" <?php echo e(old('pddk') =="SD" ? 'selected' : ''); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->pjb->pddk =="SD" ? 'selected' : ''); ?> <?php endif; ?> name="pddk" id="pddk" >SD</option>
+                        <option value="SMP" <?php echo e(old('pddk') =="SMP" ? 'selected' : ''); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->pjb->pddk =="SMP" ? 'selected' : ''); ?> <?php endif; ?> name="pddk" id="pddk">SMP</option>
+                        <option value="SMA" <?php echo e(old('pddk') =="SMA" ? 'selected' : ''); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->pjb->pddk =="SMA" ? 'selected' : ''); ?> <?php endif; ?> name="pddk" id="pddk">SMA</option>
+                        <option value="D1" <?php echo e(old('pddk') =="D1" ? 'selected' : ''); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->pjb->pddk =="D1" ? 'selected' : ''); ?> <?php endif; ?> name="pddk" id="pddk">D1</option>
+                        <option value="D1" <?php echo e(old('pddk') =="D2" ? 'selected' : ''); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->pjb->pddk =="D2" ? 'selected' : ''); ?> <?php endif; ?> name="pddk" id="pddk">D2</option>
+                        <option value="D3" <?php echo e(old('pddk') =="D3" ? 'selected' : ''); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->pjb->pddk =="D3" ? 'selected' : ''); ?> <?php endif; ?> name="pddk" id="pddk">D3</option>
+                        <option value="S1" <?php echo e(old('pddk') =="S1" ? 'selected' : ''); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->pjb->pddk =="S1" ? 'selected' : ''); ?> <?php endif; ?> name="pddk" id="pddk">S1</option>
+                        <option value="S2" <?php echo e(old('pddk') =="S2" ? 'selected' : ''); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->pjb->pddk =="S2" ? 'selected' : ''); ?> <?php endif; ?> name="pddk" id="pddk">S2</option>
+                        <option value="S3" <?php echo e(old('pddk') =="S3" ? 'selected' : ''); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->pjb->pddk =="S3" ? 'selected' : ''); ?> <?php endif; ?>  name="pddk" id="pddk">S3</option>
                       </div>
                     </select>
                     <span class="text-danger error-text pddk_error"> </span>
                 </div>
                 <div class="col-lg-4 col-12 form-group clearfix">
                   <label for="kursus" class="form-label">Kursus </label>
-                  <input type="text" class="form-control"  id="kursus" name="kursus" value="<?php echo e(old('kursus',$last->pjb->kursus)); ?>">
+                  <input type="text" class="form-control"  id="kursus" name="kursus" value="<?php echo e(old('kursus')); ?><?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->pjb->kursus)); ?> <?php endif; ?>">
                   <p>* Jika tidak ada, beri tanda strip(-) </p>
                 </div>
                 <div class="col-lg-4 col-12 form-group clearfix">
                   <label for="jbt" class="form-label">Jabatan</label>
-                  <input type="text" class="form-control"  id="jbt" name="jbt" value="<?php echo e(old('jbt',$last->pjb->jbt)); ?>">
+                  <input type="text" class="form-control"  id="jbt" name="jbt" value="<?php echo e(old('jbt')); ?><?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->pjb->jbt)); ?> <?php endif; ?>">
                   <span class="text-danger error-text jbt_error"> </span>
                 </div> 
               </div>
@@ -160,7 +162,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                 <div class="col-sm-10">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Rp.</span>
-                        <input type="text" class="rupiah  form-control" name="tanah" id="tanah"  onkeyup="sum();" value="<?php echo e(old('tanah',$last->aset->tanah)); ?>" >
+                        <input type="text" class="rupiah  form-control" name="tanah" id="tanah"  onkeyup="sum();" value="<?php echo e(old('tanah')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->aset->tanah)); ?> <?php endif; ?>" >
                     </div>
                     <span class="text-danger error-text tanah_error"> </span>
                 </div>
@@ -170,7 +172,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah  form-control" name="bangunan" id="bangunan" onkeyup="sum();" value="<?php echo e(old('bangunan',$last->aset->bangunan)); ?>">
+                    <input type="text" class="rupiah  form-control" name="bangunan" id="bangunan" onkeyup="sum();" value="<?php echo e(old('bangunan')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->aset->bangunan)); ?> <?php endif; ?>">
                   </div>
                   <span class="text-danger error-text bangunan_error"> </span>
                 </div>
@@ -180,7 +182,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah  form-control" name="persediaan" id="persediaan" onkeyup="sum();" value="<?php echo e(old('persediaan',$last->aset->persediaan)); ?>">
+                    <input type="text" class="rupiah  form-control" name="persediaan" id="persediaan" onkeyup="sum();" value="<?php echo e(old('persediaan')); ?><?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->aset->persediaan)); ?> <?php endif; ?>">
                   </div>
                   <span class="text-danger error-text persediaan_error"> </span>
                 </div>
@@ -190,7 +192,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah  form-control" name="alat" id="alat" onkeyup="sum();" value="<?php echo e(old('alat',$last->aset->alat)); ?>">
+                    <input type="text" class="rupiah  form-control" name="alat" id="alat" onkeyup="sum();" value="<?php echo e(old('alat')); ?><?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->aset->alat)); ?> <?php endif; ?>">
                   </div>
                   <span class="text-danger error-text alat_error"> </span>
                 </div>
@@ -200,7 +202,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah form-control" name="kas" id="kas" onkeyup="sum();" value="<?php echo e(old('kas',$last->aset->kas)); ?>">
+                    <input type="text" class="rupiah form-control" name="kas" id="kas" onkeyup="sum();" value="<?php echo e(old('kas')); ?><?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->aset->kas)); ?> <?php endif; ?>">
                   </div>
                   <span class="text-danger error-text kas_error"> </span>
                 </div>
@@ -210,7 +212,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                       <span class="input-group-text">Rp.</span>
-                      <input type="text" class=" rupiah form-control" name="piutang" id="piutang" onkeyup="sum();" value="<?php echo e(old('piutang',$last->aset->piutang)); ?>">
+                      <input type="text" class=" rupiah form-control" name="piutang" id="piutang" onkeyup="sum();" value="<?php echo e(old('piutang')); ?><?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->aset->piutang)); ?> <?php endif; ?>">
                     </div>
                     <span class="text-danger error-text piutang_error"> </span>
                 </div>
@@ -220,7 +222,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class=" rupiah form-control" name="peralatan" id="peralatan" onkeyup="sum();" value="<?php echo e(old('peralatan',$last->aset->peralatan)); ?>">
+                    <input type="text" class=" rupiah form-control" name="peralatan" id="peralatan" onkeyup="sum();" value="<?php echo e(old('peralatan')); ?><?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->aset->peralatan)); ?> <?php endif; ?>">
                   </div>
                   <span class="text-danger error-text peralatan_error"> </span>
                 </div>
@@ -230,7 +232,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah form-control" name="totaset" id="totaset" style="padding-bottom:5px;background-color: #e9ecef; cursor:auto;" value="<?php echo e(old('totaset',$last->aset->totaset)); ?>" readonly>
+                    <input type="text" class="rupiah form-control" name="totaset" id="totaset" style="padding-bottom:5px;background-color: #e9ecef; cursor:auto;" value="<?php echo e(old('totaset')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->aset->totaset)); ?> <?php endif; ?>" readonly>
                   </div>
                 </div>
               </div>
@@ -249,7 +251,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                   </tr>
                 </thead>
                 <tbody id="alats" class="alats">
-                  <?php if($last == NULL): ?>
+                  <?php if($pengajuan == NULL): ?>
                       <tr>
                         <td> <input type="text" name="nm_brg[]" class="form-control" value="<?php echo e(old('nm_brg[]')); ?>"></td>
                         <td> <input type="text" name="hrg_satuan[]" class="rupiah form-control" value="<?php echo e(old('hrg_satuan[]')); ?>"> </td>
@@ -284,7 +286,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                   </tr>
                 </thead>
                 <tbody id="tngkerja" class="tngkerja">
-                    <?php if($last == NULL): ?>
+                    <?php if($pengajuan == NULL): ?>
                         <tr>
                           <td> <input type="text" name="nmkry[]" class="form-control " value="<?php echo e(old('nmkry[]')); ?>"></td>
                           <td> <input type="text" name="jbtkry[]" class="form-control " value="<?php echo e(old('jbtkry[]')); ?>"></td>
@@ -313,7 +315,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="transport" id="transport" onkeyup="sum1();" value="<?php echo e(old('transport',$last->oprasional->transport)); ?>">
+                  <input type="text" class=" form-control" name="transport" id="transport" onkeyup="sum1();" value="<?php echo e(old('transport')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->oprasional->transport); ?> <?php endif; ?>">
                 </div>
                 <span class="text-danger error-text transport_error"> </span>
               </div>
@@ -323,7 +325,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="listrik" id="listrik" onkeyup="sum1();" value="<?php echo e(old('listrik',$last->oprasional->listrik)); ?>" >
+                  <input type="text" class="rupiah form-control" name="listrik" id="listrik" onkeyup="sum1();" value="<?php echo e(old('listrik')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->oprasional->listrik); ?> <?php endif; ?>" >
                 </div>
                 <span class="text-danger error-text listrik_error"> </span>                    
               </div>
@@ -333,7 +335,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="telp" id="telp" onkeyup="sum1();" value="<?php echo e(old('telp',$last->oprasional->telpon)); ?>">
+                  <input type="text" class="rupiah form-control" name="telp" id="telp" onkeyup="sum1();" value="<?php echo e(old('telp')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->oprasional->telpon); ?> <?php endif; ?>">
                 </div>
                 <span class="text-danger error-text telp_error"> </span>
               </div>
@@ -343,7 +345,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="atk" id="atk" onkeyup="sum1();" value="<?php echo e(old('atk',$last->oprasional->atk)); ?>">
+                  <input type="text" class="rupiah form-control" name="atk" id="atk" onkeyup="sum1();" value="<?php echo e(old('atk')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->oprasional->atk); ?> <?php endif; ?>">
                 </div>
                 <span class="text-danger error-text atk_error"> </span>
               </div>
@@ -353,7 +355,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="lain" id="lain" onkeyup="sum1();" value="<?php echo e(old('lain',$last->oprasional->lain)); ?>">
+                  <input type="text" class="rupiah form-control" name="lain" id="lain" onkeyup="sum1();" value="<?php echo e(old('lain')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->oprasional->lain); ?> <?php endif; ?>">
                 </div>
                 <span class="text-danger error-text lain_error"> </span>
               </div>
@@ -363,7 +365,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="totop" id="totop" style="padding-bottom:5px;background-color: #e9ecef; cursor:auto;" value="<?php echo e(old('totop',$last->oprasional->totop)); ?>" readonly>
+                  <input type="text" class="rupiah form-control" name="totop" id="totop" style="padding-bottom:5px;background-color: #e9ecef; cursor:auto;" value="<?php echo e(old('totop')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->oprasional->totop); ?> <?php endif; ?>" readonly>
                 </div>
               </div>
             </div>
@@ -382,7 +384,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                     </tr>
                   </thead>
                   <tbody id="omzet" class="omzet">
-                        <?php if($last == NULL): ?>
+                        <?php if($pengajuan == NULL): ?>
                             <tr>
                               <td> <input type="text" name="nmomzet[]" class="form-control " >  </td>
                               <td> <input type="text" name="hrgomzet[]" class="rupiah form-control" > </td>
@@ -410,7 +412,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               <label for="modal" class="form-label"> Modal Usaha</label>
               <div class="input-group mb-3">
                 <span class="input-group-text">Rp.</span>
-                <input type="text" class="rupiah form-control " name="modal" id="modal" onkeyup="sum_modal();" value="<?php echo e(old('modal',$last->modal)); ?>">
+                <input type="text" class="rupiah form-control " name="modal" id="modal" onkeyup="sum_modal();" value="<?php echo e(old('modal')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->modal)); ?> <?php endif; ?>">
               </div>  
               <span class="text-danger error-text modal_error"> </span>
             </div>
@@ -418,14 +420,14 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               <label for="invst" class="form-label"> Investasi Usaha</label>
               <div class="input-group mb-3">
                 <span class="input-group-text">Rp.</span>
-                <input type="text" class="rupiah form-control " name="invest" id="invest" onkeyup="sum_modal();" value="<?php echo e(old('invest',$last->investasi)); ?>">
+                <input type="text" class="rupiah form-control " name="invest" id="invest" onkeyup="sum_modal();" value="<?php echo e(old('invest')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->investasi)); ?> <?php endif; ?>">
               </div>
             </div>
             <div class="col-12 ">
               <label for="bsr_pjm" class="form-label">Besar Pinjaman yang Diajukan </label>
               <div class="input-group mb-3">
                 <span class="input-group-text">Rp.</span>
-                <input type="text" class="rupiah form-control " name="bsr_pjm" id="bsr_pjm" value="<?php echo e(old('bsr_pjm',$last->bsr_pinjaman)); ?>"style="background-color: #e9ecef; cursor:auto;" readonly>
+                <input type="text" class="rupiah form-control " name="bsr_pjm" id="bsr_pjm" value="<?php echo e(old('bsr_pjm')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->bsr_pinjaman)); ?> <?php endif; ?>"style="background-color: #e9ecef; cursor:auto;" readonly>
               </div>
               <span class="text-danger error-text bsr_pjm_error"> </span>
             </div>
@@ -441,7 +443,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                 </tr>
               </thead>
               <tbody id="manfaat" class="manfaat">
-                <?php if($last == NULL): ?>
+                <?php if($pengajuan == NULL): ?>
                     <tr>
                       <td> <input type="text" name="manfaat[]" class="form-control" value="<?php echo e(old('manfaat[]')); ?>"> </td>
                       <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
@@ -519,6 +521,9 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
             <input class="form-control" type="file" id="srt_ksglns" name="srt_ksglns">
             <span class="text-danger error-text srt_ksglns_error"> </span>
           </div>
+          <input type="text" class="form-control " name="typenotifikasi" value="Pengajuan Proposal" >
+          <input type="text" class="form-control " name="tujuan" value="1" >
+          <input type="text" class="form-control " name="pesan" value="Pengajuan Proposal PUMK oleh <?php echo e($mitra->nm); ?>" >
           <hr>
           <div class="row">
             <div class="form-group form-navigation">
@@ -708,9 +713,10 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
       $('#form').on('submit',function(e){
         e.preventDefault();
         var form = this;
+        
         $.ajax({
-          url: "/simpanpengajuan",
-          method:"POST",
+          url: "<?php echo e(route('pengajuan.store')); ?>",
+          method:$(form).attr('method'),
           data:new FormData(form),
           processData:false,
           dataType:'json',

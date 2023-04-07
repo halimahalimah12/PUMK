@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Pengajuan;
 use App\Models\Data_mitra;
 use App\Models\Pembayaran;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\Kartu_piutang;
 use Illuminate\Routing\Controller;
@@ -34,9 +35,12 @@ class PembayaranController extends Controller
                             ->sum('bulan');
             return view ('dashboard.pembayaran.index',compact('user','totbulan','mitra','kp','pengajuan','pembayaran','totpembayaran'));
         }else{
-            $kp = Kartu_piutang::first();
+            $notification= Notification::where('id_tujuan','=','1')->get();
+            $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
+            $pengajuan = Pengajuan::first() ;
+            $kp = Kartu_piutang::where('pengajuan_id', $pengajuan->id)->first();
             $pembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)->orderByDesc('id')->get();
-            return view ('dashboard.pembayaran.index',compact('user','kp','pembayaran'));
+            return view ('dashboard.pembayaran.index',compact('user','kp','pembayaran','notification','countnotifikasi'));
 
         }
     }
@@ -57,7 +61,11 @@ class PembayaranController extends Controller
         $pembayaran->pokok = $request->pokok;
         $pembayaran->jasa = $request->jasa;
         $pembayaran->bulan = $request->bulan;
-
+        $notifikasi= new Notification;
+        $notifikasi->type = $request->typenotifikasi;
+        $notifikasi->id_tujuan = $request->tujuan;
+        $notifikasi->data = $request->pesan;
+        $notifikasi->save();
 
         if  ($request->file('foto')){
             $file           =   $request->file('foto');

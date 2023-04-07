@@ -7,8 +7,9 @@
         <h5>Pengajuan Form</h5>
       </div>
       <div class="card-body">
-        <form class="row contact-form" method="POST" enctype="multipart/form-data" id="form"  name="form"  >
+        <form  class="row contact-form" method="POST" enctype="multipart/form-data" id="form"  name="form"  >
           @csrf    
+          {{method_field('post')}}
           <div class="col-12 ">
             <label for="nm_ush" class="form-label" style="margin-top:10px;">Nama Usaha</label>
             <input type="text" class="form-control" name="nm_ush" id="nm_ush" value="{{ ucwords($ush->nama_ush) }}" disabled>
@@ -22,19 +23,19 @@
             <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Biodata Penanggung Jawab Berikutnya</h5>
               <div class="col-12 "> 
                 <label for="nm_pjb" class="form-label" >Nama  </label>
-                <input type="text" class="form-control " name="nm_pjb" id="nm_pjb" value="{{ old('nm_pjb',ucwords($last->pjb->nm)) }}"  >
+                <input type="text" class="form-control " name="nm_pjb" id="nm_pjb" value="{{ old('nm_pjb') }} @if($pengajuan != NULL ) {{ ucwords($last->pjb->nm) }} @endif "   >
                 <span class="text-danger error-text nm_pjb_error"> </span>
               </div>
               <div class="row gx-3 gy-0">
                 <div class="col-lg-6 col-12  form-group clearfix ">
                   <label for="tpt_lhr" class="form-label">Tempat Lahir</label>
-                  <input type="text" class="form-control "  id="tpt_lhr" name="tpt_lhr" value="{{ old('tpt_lhr',$last->pjb->tpt_lhr) }}" >
+                  <input type="text" class="form-control "  id="tpt_lhr" name="tpt_lhr" value="{{ old('tpt_lhr') }}@if($pengajuan != NULL ) {{ ucwords($last->pjb->tpt_lhr) }} @endif " >
                   <span class="text-danger error-text tpt_lhr_error"> </span>
                 </div>
                 <div class="col-lg-6 col-12 form-group clearfix">
                   <label for="tgl_lhr" class="form-label">Tanggal Lahir</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control " id="tgl_lhr"  name="tgl_lhr" value="{{ old('tgl_lhr',$last->pjb->tgl_lhr) }}">
+                    <input type="date" class="form-control " id="tgl_lhr"  name="tgl_lhr" value="{{ old('tgl_lhr') }} @if($pengajuan != NULL ) {{ $last->pjb->tgl_lhr }} @endif ">
                     <span class="text-danger error-text tgl_lhr_error"> </span>
                   </div>
                 </div>
@@ -44,11 +45,11 @@
                   <label for="gender" class="form-label">Jenis Kelamin</label>
                   <div>
                     <div class="form-check form-check-inline" >
-                      <input class="form-check-input" type="radio" name="gender" id="gender" value="L" {{  old('gender',$last->pjb->jk) == 'L' ? 'checked':'' }}>
+                      <input class="form-check-input" type="radio" name="gender" id="gender" value="L" {{  old('gender') == 'L' ? 'checked':'' }} @if($pengajuan != NULL ) {{ $last->pjb->jk == 'L' ? 'checked':''}} @endif>
                       <label class="form-check-label" for="gender">Laki-Laki</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="gender" id="gender" value="P"  {{ old('gender',$last->pjb->jk) == 'P' ? 'checked':'' }}>
+                      <input class="form-check-input" type="radio" name="gender" id="gender" value="P"  {{ old('gender') == 'P' ? 'checked':'' }} @if($pengajuan != NULL ) {{ $last->pjb->jk == 'P' ? 'checked':''}} @endif}>
                       <label class="form-check-label" for="gender">Perempuan</label>
                     </div>                                  
                     <span class="text-danger error-text gender_error"> </span>
@@ -56,19 +57,19 @@
                 </div>
                 <div class="col-lg-6 col-12 form-group clearfix">
                   <label for="hub" class="form-label">Status Hubungan dengan Penanggung Jawab Usaha </label>
-                  <input type="text" class="form-control" id="hub" name="hub" value="{{ old('hub',$last->pjb->hub) }}">
+                  <input type="text" class="form-control" id="hub" name="hub" value="{{ old('hub') }} @if($pengajuan != NULL ) {{ ucwords($last->pjb->hub) }} @endif">
                   <span class="text-danger error-text hub_error"> </span>
                 </div>
               </div>
               <div class="row gx-3 gy-0">
                 <div class="col-12 col-lg-6 form-group clearfix" >
                   <label for="pekerjaan" class="form-label">Pekerjaan</label>
-                  <input type="text" class="form-control" id="pekerjaan" name="pekerjaan"value="{{ old('pekerjaan',$last->pjb->pekerjaan) }}">
+                  <input type="text" class="form-control" id="pekerjaan" name="pekerjaan"value="{{ old('pekerjaan') }} @if($pengajuan != NULL ) {{ ucwords($last->pjb->pekerjaan) }} @endif">
                   <span class="text-danger error-text pekerjaan_error"> </span>
                 </div>
                 <div class="col-12 col-lg-6 form-group clearfix" >
                   <label for="almt" class="form-label">Alamat</label>
-                    <textarea class="form-control  @error('almt') is-invalid  @enderror" id="almt" name="almt" value="{{ old('almt')}}" style="height: 100px">{{ ucwords($last->pjb->almt) }}</textarea>
+                    <textarea class="form-control  @error('almt') is-invalid  @enderror" id="almt" name="almt" value="{{ old('almt')}}" style="height: 100px">@if($pengajuan != NULL ){{ ucwords($last->pjb->almt) }}@endif</textarea>
                     <span class="text-danger error-text almt_error"> </span>
                 </div>
               </div>
@@ -79,18 +80,18 @@
               <div class="row gx-3 gy-0">
                 <div class="col-lg-4 col-12 form-group clearfix">
                   <label for="no_hp" class="form-label">No Telephone</label>
-                  <input type="text" class="form-control"  id="no_hp" name="no_hp" value="{{ old('no_hp',$last->pjb->no_hp) }}">
+                  <input type="text" class="form-control"  id="no_hp" name="no_hp" value="{{ old('no_hp') }} @if($pengajuan != NULL ) {{ ucwords($last->pjb->no_hp) }} @endif">
                   <span class="text-danger error-text no_hp_error"> </span>
                 </div>
                 <div class="col-lg-4 col-12 form-group clearfix">
                   <label for="no_ktp" class="form-label">No KTP </label>
-                  <input type="text" class="form-control" id="no_ktp" name="no_ktp" value="{{ old('no_ktp',$last->pjb->no_ktp) }}">
+                  <input type="text" class="form-control" id="no_ktp" name="no_ktp" value="{{ old('no_ktp') }}@if($pengajuan != NULL ) {{ ucwords($last->pjb->no_ktp) }} @endif">
                   <span class="text-danger error-text no_ktp_error"> </span>
                 </div>
                 <div class="col-lg-4 col-12 form-group clearfix">
                   <label for="tgl_ktp" class="form-label">Tanggal KTP</label>
                   <div class="col-sm-12">
-                    <input type="date" class="form-control"  id="tgl_ktp"  name="tgl_ktp" value="{{ old('tgl_ktp',$last->pjb->tgl_ktp) }}">
+                    <input type="date" class="form-control"  id="tgl_ktp"  name="tgl_ktp" value="{{ old('tgl_ktp') }}@if($pengajuan != NULL ) {{ ucwords($last->pjb->tgl_ktp) }} @endif">
                     <span class="text-danger error-text tgl_ktp_error"> </span>
                   </div>
                 </div>
@@ -101,27 +102,27 @@
                     <select class="form-select" name="pddk" id="pddk" aria-label="Default select example">
                       <div class="col-sm-6">
                         <option value = "" >- Pilih -</option>
-                        <option value="SD" {{ old('pddk',$last->pjb->pddk) =="SD" ? 'selected' : ''}} name="pddk" id="pddk" >SD</option>
-                        <option value="SMP" {{ old('pddk',$last->pjb->pddk) =="SMP" ? 'selected' : ''}} name="pddk" id="pddk">SMP</option>
-                        <option value="SMA" {{ old('pddk',$last->pjb->pddk) =="SMA" ? 'selected' : ''}} name="pddk" id="pddk">SMA</option>
-                        <option value="D1" {{ old('pddk',$last->pjb->pddk) =="D1" ? 'selected' : ''}} name="pddk" id="pddk">D1</option>
-                        <option value="D1" {{ old('pddk',$last->pjb->pddk) =="D2" ? 'selected' : ''}} name="pddk" id="pddk">D2</option>
-                        <option value="D3" {{ old('pddk',$last->pjb->pddk) =="D3" ? 'selected' : ''}} name="pddk" id="pddk">D3</option>
-                        <option value="S1" {{ old('pddk',$last->pjb->pddk) =="S1" ? 'selected' : ''}} name="pddk" id="pddk">S1</option>
-                        <option value="S2" {{ old('pddk',$last->pjb->pddk) =="S2" ? 'selected' : ''}} name="pddk" id="pddk">S2</option>
-                        <option value="S3" {{ old('pddk',$last->pjb->pddk) =="S3" ? 'selected' : ''}}  name="pddk" id="pddk">S3</option>
+                        <option value="SD" {{ old('pddk') =="SD" ? 'selected' : ''}} @if($pengajuan != NULL ) {{ $last->pjb->pddk =="SD" ? 'selected' : ''}} @endif name="pddk" id="pddk" >SD</option>
+                        <option value="SMP" {{ old('pddk') =="SMP" ? 'selected' : ''}} @if($pengajuan != NULL ) {{ $last->pjb->pddk =="SMP" ? 'selected' : ''}} @endif name="pddk" id="pddk">SMP</option>
+                        <option value="SMA" {{ old('pddk') =="SMA" ? 'selected' : ''}} @if($pengajuan != NULL ) {{ $last->pjb->pddk =="SMA" ? 'selected' : ''}} @endif name="pddk" id="pddk">SMA</option>
+                        <option value="D1" {{ old('pddk') =="D1" ? 'selected' : ''}} @if($pengajuan != NULL ) {{ $last->pjb->pddk =="D1" ? 'selected' : ''}} @endif name="pddk" id="pddk">D1</option>
+                        <option value="D1" {{ old('pddk') =="D2" ? 'selected' : ''}} @if($pengajuan != NULL ) {{ $last->pjb->pddk =="D2" ? 'selected' : ''}} @endif name="pddk" id="pddk">D2</option>
+                        <option value="D3" {{ old('pddk') =="D3" ? 'selected' : ''}} @if($pengajuan != NULL ) {{ $last->pjb->pddk =="D3" ? 'selected' : ''}} @endif name="pddk" id="pddk">D3</option>
+                        <option value="S1" {{ old('pddk') =="S1" ? 'selected' : ''}} @if($pengajuan != NULL ) {{ $last->pjb->pddk =="S1" ? 'selected' : ''}} @endif name="pddk" id="pddk">S1</option>
+                        <option value="S2" {{ old('pddk') =="S2" ? 'selected' : ''}} @if($pengajuan != NULL ) {{ $last->pjb->pddk =="S2" ? 'selected' : ''}} @endif name="pddk" id="pddk">S2</option>
+                        <option value="S3" {{ old('pddk') =="S3" ? 'selected' : ''}} @if($pengajuan != NULL ) {{ $last->pjb->pddk =="S3" ? 'selected' : ''}} @endif  name="pddk" id="pddk">S3</option>
                       </div>
                     </select>
                     <span class="text-danger error-text pddk_error"> </span>
                 </div>
                 <div class="col-lg-4 col-12 form-group clearfix">
                   <label for="kursus" class="form-label">Kursus </label>
-                  <input type="text" class="form-control"  id="kursus" name="kursus" value="{{ old('kursus',$last->pjb->kursus) }}">
+                  <input type="text" class="form-control"  id="kursus" name="kursus" value="{{ old('kursus') }}@if($pengajuan != NULL ) {{ ucwords($last->pjb->kursus) }} @endif">
                   <p>* Jika tidak ada, beri tanda strip(-) </p>
                 </div>
                 <div class="col-lg-4 col-12 form-group clearfix">
                   <label for="jbt" class="form-label">Jabatan</label>
-                  <input type="text" class="form-control"  id="jbt" name="jbt" value="{{ old('jbt',$last->pjb->jbt) }}">
+                  <input type="text" class="form-control"  id="jbt" name="jbt" value="{{ old('jbt') }}@if($pengajuan != NULL ) {{ ucwords($last->pjb->jbt) }} @endif">
                   <span class="text-danger error-text jbt_error"> </span>
                 </div> 
               </div>
@@ -153,7 +154,7 @@
                 <div class="col-sm-10">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Rp.</span>
-                        <input type="text" class="rupiah  form-control" name="tanah" id="tanah"  onkeyup="sum();" value="{{ old('tanah',$last->aset->tanah) }}" >
+                        <input type="text" class="rupiah  form-control" name="tanah" id="tanah"  onkeyup="sum();" value="{{ old('tanah') }} @if($pengajuan != NULL ) {{ ucwords($last->aset->tanah) }} @endif" >
                     </div>
                     <span class="text-danger error-text tanah_error"> </span>
                 </div>
@@ -163,7 +164,7 @@
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah  form-control" name="bangunan" id="bangunan" onkeyup="sum();" value="{{ old('bangunan',$last->aset->bangunan) }}">
+                    <input type="text" class="rupiah  form-control" name="bangunan" id="bangunan" onkeyup="sum();" value="{{ old('bangunan') }} @if($pengajuan != NULL ) {{ ucwords($last->aset->bangunan) }} @endif">
                   </div>
                   <span class="text-danger error-text bangunan_error"> </span>
                 </div>
@@ -173,7 +174,7 @@
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah  form-control" name="persediaan" id="persediaan" onkeyup="sum();" value="{{ old('persediaan',$last->aset->persediaan) }}">
+                    <input type="text" class="rupiah  form-control" name="persediaan" id="persediaan" onkeyup="sum();" value="{{ old('persediaan') }}@if($pengajuan != NULL ) {{ ucwords($last->aset->persediaan) }} @endif">
                   </div>
                   <span class="text-danger error-text persediaan_error"> </span>
                 </div>
@@ -183,7 +184,7 @@
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah  form-control" name="alat" id="alat" onkeyup="sum();" value="{{ old('alat',$last->aset->alat) }}">
+                    <input type="text" class="rupiah  form-control" name="alat" id="alat" onkeyup="sum();" value="{{ old('alat') }}@if($pengajuan != NULL ) {{ ucwords($last->aset->alat) }} @endif">
                   </div>
                   <span class="text-danger error-text alat_error"> </span>
                 </div>
@@ -193,7 +194,7 @@
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah form-control" name="kas" id="kas" onkeyup="sum();" value="{{ old('kas',$last->aset->kas) }}">
+                    <input type="text" class="rupiah form-control" name="kas" id="kas" onkeyup="sum();" value="{{ old('kas') }}@if($pengajuan != NULL ) {{ ucwords($last->aset->kas) }} @endif">
                   </div>
                   <span class="text-danger error-text kas_error"> </span>
                 </div>
@@ -203,7 +204,7 @@
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                       <span class="input-group-text">Rp.</span>
-                      <input type="text" class=" rupiah form-control" name="piutang" id="piutang" onkeyup="sum();" value="{{ old('piutang',$last->aset->piutang) }}">
+                      <input type="text" class=" rupiah form-control" name="piutang" id="piutang" onkeyup="sum();" value="{{ old('piutang') }}@if($pengajuan != NULL ) {{ ucwords($last->aset->piutang) }} @endif">
                     </div>
                     <span class="text-danger error-text piutang_error"> </span>
                 </div>
@@ -213,7 +214,7 @@
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class=" rupiah form-control" name="peralatan" id="peralatan" onkeyup="sum();" value="{{ old('peralatan',$last->aset->peralatan) }}">
+                    <input type="text" class=" rupiah form-control" name="peralatan" id="peralatan" onkeyup="sum();" value="{{ old('peralatan') }}@if($pengajuan != NULL ) {{ ucwords($last->aset->peralatan) }} @endif">
                   </div>
                   <span class="text-danger error-text peralatan_error"> </span>
                 </div>
@@ -223,7 +224,7 @@
                 <div class="col-sm-10">
                   <div class="input-group mb-3">
                     <span class="input-group-text">Rp.</span>
-                    <input type="text" class="rupiah form-control" name="totaset" id="totaset" style="padding-bottom:5px;background-color: #e9ecef; cursor:auto;" value="{{ old('totaset',$last->aset->totaset) }}" readonly>
+                    <input type="text" class="rupiah form-control" name="totaset" id="totaset" style="padding-bottom:5px;background-color: #e9ecef; cursor:auto;" value="{{ old('totaset') }} @if($pengajuan != NULL ) {{ ucwords($last->aset->totaset) }} @endif" readonly>
                   </div>
                 </div>
               </div>
@@ -242,7 +243,7 @@
                   </tr>
                 </thead>
                 <tbody id="alats" class="alats">
-                  @if($last == NULL)
+                  @if($pengajuan == NULL)
                       <tr>
                         <td> <input type="text" name="nm_brg[]" class="form-control" value="{{ old('nm_brg[]') }}"></td>
                         <td> <input type="text" name="hrg_satuan[]" class="rupiah form-control" value="{{ old('hrg_satuan[]') }}"> </td>
@@ -277,7 +278,7 @@
                   </tr>
                 </thead>
                 <tbody id="tngkerja" class="tngkerja">
-                    @if($last == NULL)
+                    @if($pengajuan == NULL)
                         <tr>
                           <td> <input type="text" name="nmkry[]" class="form-control " value="{{ old('nmkry[]') }}"></td>
                           <td> <input type="text" name="jbtkry[]" class="form-control " value="{{ old('jbtkry[]') }}"></td>
@@ -306,7 +307,7 @@
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="transport" id="transport" onkeyup="sum1();" value="{{ old('transport',$last->oprasional->transport) }}">
+                  <input type="text" class="rupiah form-control" name="transport" id="transport" onkeyup="sum1();" value="{{ old('transport') }} @if($pengajuan != NULL ) {{ $last->oprasional->transport }} @endif">
                 </div>
                 <span class="text-danger error-text transport_error"> </span>
               </div>
@@ -316,7 +317,7 @@
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="listrik" id="listrik" onkeyup="sum1();" value="{{ old('listrik',$last->oprasional->listrik) }}" >
+                  <input type="text" class="rupiah form-control" name="listrik" id="listrik" onkeyup="sum1();" value="{{ old('listrik') }} @if($pengajuan != NULL ) {{ $last->oprasional->listrik }} @endif" >
                 </div>
                 <span class="text-danger error-text listrik_error"> </span>                    
               </div>
@@ -326,7 +327,7 @@
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="telp" id="telp" onkeyup="sum1();" value="{{ old('telp',$last->oprasional->telpon) }}">
+                  <input type="text" class="rupiah form-control" name="telp" id="telp" onkeyup="sum1();" value="{{ old('telp') }} @if($pengajuan != NULL ) {{ $last->oprasional->telpon }} @endif">
                 </div>
                 <span class="text-danger error-text telp_error"> </span>
               </div>
@@ -336,7 +337,7 @@
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="atk" id="atk" onkeyup="sum1();" value="{{ old('atk',$last->oprasional->atk) }}">
+                  <input type="text" class="rupiah form-control" name="atk" id="atk" onkeyup="sum1();" value="{{ old('atk') }} @if($pengajuan != NULL ) {{ $last->oprasional->atk }} @endif">
                 </div>
                 <span class="text-danger error-text atk_error"> </span>
               </div>
@@ -346,7 +347,7 @@
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="lain" id="lain" onkeyup="sum1();" value="{{ old('lain',$last->oprasional->lain) }}">
+                  <input type="text" class="rupiah form-control" name="lain" id="lain" onkeyup="sum1();" value="{{ old('lain') }} @if($pengajuan != NULL ) {{ $last->oprasional->lain }} @endif">
                 </div>
                 <span class="text-danger error-text lain_error"> </span>
               </div>
@@ -356,7 +357,7 @@
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="rupiah form-control" name="totop" id="totop" style="padding-bottom:5px;background-color: #e9ecef; cursor:auto;" value="{{ old('totop',$last->oprasional->totop) }}" readonly>
+                  <input type="text" class="rupiah form-control" name="totop" id="totop" style="padding-bottom:5px;background-color: #e9ecef; cursor:auto;" value="{{ old('totop') }} @if($pengajuan != NULL ) {{ $last->oprasional->totop }} @endif" readonly>
                 </div>
               </div>
             </div>
@@ -375,7 +376,7 @@
                     </tr>
                   </thead>
                   <tbody id="omzet" class="omzet">
-                        @if($last == NULL)
+                        @if($pengajuan == NULL)
                             <tr>
                               <td> <input type="text" name="nmomzet[]" class="form-control " >  </td>
                               <td> <input type="text" name="hrgomzet[]" class="rupiah form-control" > </td>
@@ -403,7 +404,7 @@
               <label for="modal" class="form-label"> Modal Usaha</label>
               <div class="input-group mb-3">
                 <span class="input-group-text">Rp.</span>
-                <input type="text" class="rupiah form-control " name="modal" id="modal" onkeyup="sum_modal();" value="{{ old('modal',$last->modal) }}">
+                <input type="text" class="rupiah form-control " name="modal" id="modal" onkeyup="sum_modal();" value="{{ old('modal') }} @if($pengajuan != NULL ) {{ ucwords($last->modal) }} @endif">
               </div>  
               <span class="text-danger error-text modal_error"> </span>
             </div>
@@ -411,14 +412,14 @@
               <label for="invst" class="form-label"> Investasi Usaha</label>
               <div class="input-group mb-3">
                 <span class="input-group-text">Rp.</span>
-                <input type="text" class="rupiah form-control " name="invest" id="invest" onkeyup="sum_modal();" value="{{ old('invest',$last->investasi) }}">
+                <input type="text" class="rupiah form-control " name="invest" id="invest" onkeyup="sum_modal();" value="{{ old('invest') }} @if($pengajuan != NULL ) {{ ucwords($last->investasi) }} @endif">
               </div>
             </div>
             <div class="col-12 ">
               <label for="bsr_pjm" class="form-label">Besar Pinjaman yang Diajukan </label>
               <div class="input-group mb-3">
                 <span class="input-group-text">Rp.</span>
-                <input type="text" class="rupiah form-control " name="bsr_pjm" id="bsr_pjm" value="{{ old('bsr_pjm',$last->bsr_pinjaman) }}"style="background-color: #e9ecef; cursor:auto;" readonly>
+                <input type="text" class="rupiah form-control " name="bsr_pjm" id="bsr_pjm" value="{{ old('bsr_pjm') }} @if($pengajuan != NULL ) {{ ucwords($last->bsr_pinjaman) }} @endif"style="background-color: #e9ecef; cursor:auto;" readonly>
               </div>
               <span class="text-danger error-text bsr_pjm_error"> </span>
             </div>
@@ -434,7 +435,7 @@
                 </tr>
               </thead>
               <tbody id="manfaat" class="manfaat">
-                @if($last == NULL)
+                @if($pengajuan == NULL)
                     <tr>
                       <td> <input type="text" name="manfaat[]" class="form-control" value="{{ old('manfaat[]') }}"> </td>
                       <td> <a href="javascript:void(0);" class="deleterow btn btn-danger" style="float:right;" name="deleterow">- </a> </td>
@@ -512,6 +513,9 @@
             <input class="form-control" type="file" id="srt_ksglns" name="srt_ksglns">
             <span class="text-danger error-text srt_ksglns_error"> </span>
           </div>
+          <input type="text" class="form-control " name="typenotifikasi" value="Pengajuan Proposal" >
+          <input type="text" class="form-control " name="tujuan" value="1" >
+          <input type="text" class="form-control " name="pesan" value="Pengajuan Proposal PUMK oleh {{ $mitra->nm }}" >
           <hr>
           <div class="row">
             <div class="form-group form-navigation">
@@ -700,6 +704,7 @@
       $('#form').on('submit',function(e){
         e.preventDefault();
         var form = this;
+        
         $.ajax({
           url: "{{ route('pengajuan.store') }}",
           method:$(form).attr('method'),

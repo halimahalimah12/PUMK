@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\Omzet;
 use App\Models\Pengajuan;
 use App\Models\Data_mitra;
+use App\Models\Notification;
 use App\Models\Pembayaran;
 use App\Models\Tenagakerja;
 use Illuminate\Http\Request;
@@ -22,14 +23,18 @@ class LaporanController extends Controller
     {
         $user = User::where('id', Auth::user()->id)->first();
         $pengajuan = Pengajuan::where('status','=','lulus_survei')->get();
+        $notification= Notification::where('id_tujuan','=','1')->get();
+        $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
 
-        return view('dashboard.laporan.lp_survei' , compact('user','pengajuan'));
+        return view('dashboard.laporan.lp_survei' , compact('user','pengajuan','notification','countnotifikasi'));
 
     }
     function angsuran()
     {
         $user = User::where('id', Auth::user()->id)->first();
         $kp = Kartu_piutang::orderBy('id','DESC')->get();
+        $notification= Notification::where('id_tujuan','=','1')->get();
+        $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
         
         if (request()->start_date || request()->end_date) {
             $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
@@ -52,7 +57,7 @@ class LaporanController extends Controller
                     ->groupBy('pembayarans.kartu_piutang_id')
                     ->get();
         
-        return view('dashboard.laporan.lp_angsuran' , compact('user','kp','byr'));
+        return view('dashboard.laporan.lp_angsuran' , compact('user','kp','byr','notification','countnotifikasi'));
 
         }
 
