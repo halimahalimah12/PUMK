@@ -83,9 +83,9 @@
                   <input type="hidden" class="form-control " name="pokok" id="pokok"  readonly>
                   <input type="hidden" class="form-control " name="jasa" id="jasa" readonly >
                   <input type="hidden" class="form-control " name="bulan" id="bulan" readonly >
-                  <input type="text" class="form-control " name="typenotifikasi" value="Pembayaran" >
-                  <input type="text" class="form-control " name="tujuan" value="1" >
-                  <input type="text" class="form-control " name="pesan" value="Pembayaran Angsuran oleh {{ $mitra->nm }}" >
+                  <input type="hidden" class="form-control " name="typenotifikasi" value="Pembayaran" >
+                  <input type="hidden" class="form-control " name="tujuan" value="1" >
+                  <input type="hidden" class="form-control " name="pesan" value="Pembayaran Angsuran oleh {{ $mitra->nm }}" >
               <div class="row mb-3">
                 <label for="foto" class="col-sm-3 col-form-label">Bukti Pembayaran</label>
                 <div class="col-sm-9">

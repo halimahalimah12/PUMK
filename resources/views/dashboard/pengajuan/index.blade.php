@@ -174,6 +174,12 @@
                           <input type="text" class="form-control hide" name="ket" id="ket">
                         </div>
                       </div>
+                      <input type="text" class="form-control " name="typenotifikasi" id="typenotifikasi" value="Pengajuan Proposal" >
+                      <input type="text" class="form-control " name="tujuan" id="tujuan" value="{{ $p->user_id }}" >
+                      <input type="text" class="form-control " name="pesan3" value="Selamat pengajuan anda lulus pendanaan. ">
+                      <input type="text" class="form-control " name="pesan1"  value="Selamat pengajuan anda lulus tahap survei, silahkan tunggu hingga pemberitahuan berikutnya.">
+                      <input type="text" class="form-control " name="pesan2"  value="Mohon maaf pengajuan anda tidak lulus, silahkan perbaiki data dan ajukan ulang. ">
+
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit"  class="btn btn-primary">Simpan</button>

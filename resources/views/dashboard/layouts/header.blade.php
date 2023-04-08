@@ -23,7 +23,7 @@
         <!-- Notification Dropdown Items -->
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
           <li class="dropdown-header">
-            You have 4 new notifications
+            You have {{ $countnotifikasi}} new notifications
             <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
           </li>
           <li>
@@ -34,7 +34,11 @@
           <li class="notification-item">
             <i class="bi bi-info-circle text-primary"></i>
               <div>
-                <h4>{{ $notif->type }}</h4>
+                @if ($notif->type == "Pengajuan Proposal")
+                  <h4> <a href= "/pengajuan" >{{ $notif->type }} </a></h4>
+                @else
+                  <h4> <a href= "/pembayaran" >{{ $notif->type }} </a></h4>
+                @endif
                 <p>{{ $notif->data }}</p>
               </div>  
           </li>

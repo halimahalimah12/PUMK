@@ -36,7 +36,11 @@
                 <div class="col-lg-6 col-12 form-group clearfix">
                   <label for="tgl_lhr" class="form-label">Tanggal Lahir</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control " id="tgl_lhr"  name="tgl_lhr" value="<?php echo e(old('tgl_lhr')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->pjb->tgl_lhr); ?> <?php endif; ?> ">
+                    <?php if($pengajuan != NULL ): ?>
+                        <input type="date" class="form-control"  id="tgl_lhr"  name="tgl_lhr"  value="<?php echo e(old('tgllahir', $last->pjb->tgl_lhr)); ?>">
+                      <?php else: ?>
+                        <input type="date" class="form-control"  id="tgl_lhr"  name="tgl_lhr"  value="<?php echo e(old('tgllahir')); ?>">
+                    <?php endif; ?>
                     <span class="text-danger error-text tgl_lhr_error"> </span>
                   </div>
                 </div>
@@ -97,9 +101,13 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                   <span class="text-danger error-text no_ktp_error"> </span>
                 </div>
                 <div class="col-lg-4 col-12 form-group clearfix">
-                  <label for="tgl_ktp" class="form-label">Tanggal KTP</label>
+                  <label for="tgl_ktp" class="form-label">Tanggal KTP</label>  
                   <div class="col-sm-12">
-                    <input type="date" class="form-control"  id="tgl_ktp"  name="tgl_ktp" value="<?php echo e(old('tgl_ktp')); ?><?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->pjb->tgl_ktp)); ?> <?php endif; ?>">
+                    <?php if($pengajuan != NULL ): ?>
+                        <input type="date" class="form-control"  id="tgl_ktp"  name="tgl_ktp" value="<?php echo e(old('tgl_ktp',$last->pjb->tgl_ktp)); ?>">
+                      <?php else: ?>
+                        <input type="date" class="form-control"  id="tgl_ktp"  name="tgl_ktp" value="<?php echo e(old('tgl_ktp')); ?>">
+                    <?php endif; ?>
                     <span class="text-danger error-text tgl_ktp_error"> </span>
                   </div>
                 </div>
@@ -315,7 +323,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class=" form-control" name="transport" id="transport" onkeyup="sum1();" value="<?php echo e(old('transport')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->oprasional->transport); ?> <?php endif; ?>">
+                  <input type="text" class="rupiah form-control" name="transport" id="transport" onkeyup="sum1();" value="<?php echo e(old('transport')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->oprasional->transport); ?> <?php endif; ?>">
                 </div>
                 <span class="text-danger error-text transport_error"> </span>
               </div>
@@ -521,9 +529,9 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
             <input class="form-control" type="file" id="srt_ksglns" name="srt_ksglns">
             <span class="text-danger error-text srt_ksglns_error"> </span>
           </div>
-          <input type="text" class="form-control " name="typenotifikasi" value="Pengajuan Proposal" >
-          <input type="text" class="form-control " name="tujuan" value="1" >
-          <input type="text" class="form-control " name="pesan" value="Pengajuan Proposal PUMK oleh <?php echo e($mitra->nm); ?>" >
+          <input type="text" class="form-control " name="typenotifikasi" id="typenotifikasi" value="Pengajuan Proposal" >
+          <input type="text" class="form-control " name="tujuan" id="tujuan" value="1" >
+          <input type="text" class="form-control " name="pesan" id="pesan" value="Pengajuan Proposal PUMK oleh <?php echo e($mitra->nm); ?>" >
           <hr>
           <div class="row">
             <div class="form-group form-navigation">

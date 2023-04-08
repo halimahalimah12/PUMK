@@ -42,7 +42,7 @@ class PengajuanController extends Controller
         {
             $mitra     = Data_Mitra::where('user_id',$user->id)->first();
             $ush       = Data_Ush::where('user_id',$user->id)->first();
-            $pengajuan = Pengajuan::where('data_mitra_id',$mitra->id)->get();
+            $pengajuan = Pengajuan::where('data_mitra_id',$mitra->id)->orderByDesc('id')->get();
             $last      = DB::table('pengajuans')
                         ->where('user_id',$user->id)
                         ->latest('id')->first();
@@ -136,7 +136,7 @@ class PengajuanController extends Controller
         if (!$validateData->passes()) {
             return response()->json(['code'=>0,'error'=>$validateData->errors()->toArray()]);
         } else {
-
+            
             $pjb = new Pjb;
             $pjb->nm        =   $request->nm_pjb;
             $pjb->jk        =   $request->gender;
@@ -755,13 +755,22 @@ class PengajuanController extends Controller
     //Konfirmasi pengajuan
     public function konfirmasi(Request $request , $id){
         $pengajuan1  = Pengajuan::find($id);
-        $status = ([
-            'status' => $request->status,
-            'ket' => $request->ket,
-            'ksg_bayar' => str_replace(",", "",$request->ksg_bayar),
-            'bsr_usulan' => str_replace(",", "",$request->bsr_usulan)
-        ]);
-        $pengajuan1->update($status);
+        if ($request->status == "lulus_survei") {
+            $status = ([
+                'status' => $request->status,
+                'ket' => $request->ket,
+                'ksg_bayar' => str_replace(",", "",$request->ksg_bayar),
+                'bsr_usulan' => str_replace(",", "",$request->bsr_usulan)
+            ]);
+            $pengajuan1->update($status);
+        } else {
+            $status = ([
+                'status' => $request->status,
+                'ket' => $request->ket,
+            ]);
+            $pengajuan1->update($status);
+        }
+        
         if( $request->bsrpemin != NULL ) {
             $kp = Kartu_piutang::where('pengajuan_id',$pengajuan1->id);
             $kp = new Kartu_piutang;
@@ -770,6 +779,28 @@ class PengajuanController extends Controller
             $kp->save();
             return redirect()->back()->with('flash_message_success','Data berhasil di perbarui'); 
         }
+        
+            
+        if ($request->status == "lulus_survei"){
+            $notifikasi= new Notification;
+            $notifikasi->type = $request->typenotifikasi;
+            $notifikasi->id_tujuan = $request->tujuan;  
+            $notifikasi->data = $request->pesan1;
+            $notifikasi->save();
+        } else if ($request->status == "lulus"){
+            $notifikasi= new Notification;
+            $notifikasi->type = $request->typenotifikasi;
+            $notifikasi->id_tujuan = $request->tujuan;
+            $notifikasi->data = $request->pesan3;
+            $notifikasi->save();
+        } else if  ($request->status == "tidak") {
+            $notifikasi= new Notification;
+            $notifikasi->type = $request->typenotifikasi;
+            $notifikasi->id_tujuan = $request->tujuan;
+            $notifikasi->data = $request->pesan2;
+            $notifikasi->save();
+        }
+        
         return redirect()->back()->with('flash_message_success','Data berhasil di perbarui'); 
     }
 

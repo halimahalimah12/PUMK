@@ -35,7 +35,11 @@
                 <div class="col-lg-6 col-12 form-group clearfix">
                   <label for="tgl_lhr" class="form-label">Tanggal Lahir</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control " id="tgl_lhr"  name="tgl_lhr" value="{{ old('tgl_lhr') }} @if($pengajuan != NULL ) {{ $last->pjb->tgl_lhr }} @endif ">
+                    @if($pengajuan != NULL )
+                        <input type="date" class="form-control"  id="tgl_lhr"  name="tgl_lhr"  value="{{ old('tgllahir', $last->pjb->tgl_lhr) }}">
+                      @else
+                        <input type="date" class="form-control"  id="tgl_lhr"  name="tgl_lhr"  value="{{ old('tgllahir') }}">
+                    @endif
                     <span class="text-danger error-text tgl_lhr_error"> </span>
                   </div>
                 </div>
@@ -89,9 +93,13 @@
                   <span class="text-danger error-text no_ktp_error"> </span>
                 </div>
                 <div class="col-lg-4 col-12 form-group clearfix">
-                  <label for="tgl_ktp" class="form-label">Tanggal KTP</label>
+                  <label for="tgl_ktp" class="form-label">Tanggal KTP</label>  
                   <div class="col-sm-12">
-                    <input type="date" class="form-control"  id="tgl_ktp"  name="tgl_ktp" value="{{ old('tgl_ktp') }}@if($pengajuan != NULL ) {{ ucwords($last->pjb->tgl_ktp) }} @endif">
+                    @if($pengajuan != NULL )
+                        <input type="date" class="form-control"  id="tgl_ktp"  name="tgl_ktp" value="{{ old('tgl_ktp',$last->pjb->tgl_ktp) }}">
+                      @else
+                        <input type="date" class="form-control"  id="tgl_ktp"  name="tgl_ktp" value="{{ old('tgl_ktp') }}">
+                    @endif
                     <span class="text-danger error-text tgl_ktp_error"> </span>
                   </div>
                 </div>
@@ -513,9 +521,9 @@
             <input class="form-control" type="file" id="srt_ksglns" name="srt_ksglns">
             <span class="text-danger error-text srt_ksglns_error"> </span>
           </div>
-          <input type="text" class="form-control " name="typenotifikasi" value="Pengajuan Proposal" >
-          <input type="text" class="form-control " name="tujuan" value="1" >
-          <input type="text" class="form-control " name="pesan" value="Pengajuan Proposal PUMK oleh {{ $mitra->nm }}" >
+          <input type="hidden" class="form-control " name="typenotifikasi" id="typenotifikasi" value="Pengajuan Proposal" >
+          <input type="hidden" class="form-control " name="tujuan" id="tujuan" value="1" >
+          <input type="hidden" class="form-control " name="pesan" id="pesan" value="Pengajuan Proposal PUMK oleh {{ $mitra->nm }}" >
           <hr>
           <div class="row">
             <div class="form-group form-navigation">
