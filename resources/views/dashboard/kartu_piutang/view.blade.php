@@ -153,44 +153,46 @@
                 <th> Status </th>
               </thead>
               <tbody>
-              @foreach ($pembayaran as $p )
-                <tr>
-                  <td> {{ $loop->iteration }} </td>
-                  <td> {{ date('d M Y',strtotime($p->tgl)) }} </td>
-                  <td> @if ($p->bank == 'bri') BRI
-                          @else Mandiri
+              @if ($pembayaran != NULL && $totpembayaran !=NULL )
+                @foreach ($pembayaran as $p )
+                  <tr>
+                    <td> {{ $loop->iteration }} </td>
+                    <td> {{ date('d M Y',strtotime($p->tgl)) }} </td>
+                    <td> @if ($p->bank == 'bri') BRI
+                            @else Mandiri
+                          @endif
+                    </td>
+                    <td> {{ $p->formatRupiah('jumlah') }}</td>
+                    <td><button type="button" class="btn btn-primary btn-sm"> <a href="/bukti/{{ $p->id }}"style="color:white;"> Lihat </a></button></td>
+                    <td> @if ( $p->status == "menunggu")
+                            <button type="button" class="btn btn-success btn-sm">Valid</button>
+                            <button type="button" class="btn btn-danger btn-sm">Tidak Valid</button>
+                          @elseif( $p->status == "valid") <span class="badge bg-success">Valid</span>
+                          @else <span class="badge bg-danger">Tidak Valid</span>
                         @endif
-                  </td>
-                  <td> {{ $p->formatRupiah('jumlah') }}</td>
-                  <td><button type="button" class="btn btn-primary btn-sm"> <a href="/bukti/{{ $p->id }}"style="color:white;"> Lihat </a></button></td>
-                  <td> @if ( $p->status == "menunggu")
-                          <button type="button" class="btn btn-success btn-sm">Valid</button>
-                          <button type="button" class="btn btn-danger btn-sm">Tidak Valid</button>
-                        @elseif( $p->status == "valid") <span class="badge bg-success">Valid</span>
-                        @else <span class="badge bg-danger">Tidak Valid</span>
-                      @endif
-                  </td>
-                </tr>
-              @endforeach
-                <p style="visibility: hidden;display: none;">{{ $uanglebih = $sum-$totpembayaran }}</p>
-                <tr>
-                  <th colspan="3">Total Pembayaran</th>
-                  <th>Rp. {{ number_format($totpembayaran,0,',','.' )}}</th>
-                </tr>
-                <tr>
-                  <th colspan="3">Sisa Tagihan</th>
-                  @if($totpembayaran  < $sum )
-                      <th>Rp. {{ number_format($sisatagihan= $sum-$totpembayaran,0,',','.') }}</th>
-                    @else 
-                      <th>Rp. {{ number_format($sisatagihan= $sum-$totpembayaran - $uanglebih,0,',','.') }}</th>
-                  @endif
-                </tr>
-                  @if($totpembayaran > $sum )
-                    <tr>
-                      <th colspan="3">Uang Lebih</th>
-                      <th>Rp. {{ number_format(abs($uanglebih),0,',','.') }}</th>
-                    </tr>
-                  @endif
+                    </td>
+                  </tr>
+                @endforeach
+                  <p style="visibility: hidden;display: none;">{{ $uanglebih = $sum-$totpembayaran }}</p>
+                  <tr>
+                    <th colspan="3">Total Pembayaran</th>
+                    <th>Rp. {{ number_format($totpembayaran,0,',','.' )}}</th>
+                  </tr>
+                  <tr>
+                    <th colspan="3">Sisa Tagihan</th>
+                    @if($totpembayaran  < $sum )
+                        <th>Rp. {{ number_format($sisatagihan= $sum-$totpembayaran,0,',','.') }}</th>
+                      @else 
+                        <th>Rp. {{ number_format($sisatagihan= $sum-$totpembayaran - $uanglebih,0,',','.') }}</th>
+                    @endif
+                  </tr>
+                    @if($totpembayaran > $sum )
+                      <tr>
+                        <th colspan="3">Uang Lebih</th>
+                        <th>Rp. {{ number_format(abs($uanglebih),0,',','.') }}</th>
+                      </tr>
+                    @endif
+              @endif
               </tbody>
             </table>
           </div>
@@ -211,6 +213,7 @@
                   </tr>
                 </thead>
                 <tbody>
+                @if ($pembayaran != NULL && $totpembayaran !=NULL )
                   <tr>
                     @for( $n=0 ; $n<6 ; $n++)
                       <td>0</td>
@@ -253,6 +256,7 @@
                         <th colspan="2" > Uang Lebih: {{ number_format(abs($uanglebih) ,0,',','.') }} </th>
                       @endif
                     </tr>
+                @endif
                 </tbody>
               </table>
             </div>

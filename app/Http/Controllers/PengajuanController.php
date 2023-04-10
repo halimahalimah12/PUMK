@@ -46,7 +46,9 @@ class PengajuanController extends Controller
             $last      = DB::table('pengajuans')
                         ->where('user_id',$user->id)
                         ->latest('id')->first();
-            return view('dashboard.pengajuan.index' ,compact('pengajuan','user','last','mitra','ush') );
+            $notification= Notification::where('id_tujuan',$user->id)->get();
+            $countnotifikasi = Notification::where('id_tujuan',$user->id)->count();
+            return view('dashboard.pengajuan.index' ,compact('pengajuan','user','last','mitra','ush','notification','countnotifikasi') );
         }else{
             $pengajuan1 = Pengajuan::orderByDesc('id')->get();
             $notification= Notification::where('id_tujuan','=','1')->get();
@@ -330,8 +332,9 @@ class PengajuanController extends Controller
             $totalat      = Alat::where('pengajuan_id',$pengajuan1->id)->sum('jmlh');
             $totgaji     = Tenagakerja::where('pengajuan_id',$pengajuan1->id)->sum('gaji');
             $totomzet     = Omzet::where('pengajuan_id',$pengajuan1->id)->sum('jmlh');
-
-            return view('dashboard.pengajuan.detail' ,compact('pengajuan1','ush','user','mitra','alat','tenaga','omzet' ,'totomzet','totalat','totgaji') );    
+            $notification= Notification::where('id_tujuan',$user->id)->get();
+            $countnotifikasi = Notification::where('id_tujuan',$user->id)->count();
+            return view('dashboard.pengajuan.detail' ,compact('pengajuan1','ush','user','mitra','alat','tenaga','omzet' ,'totomzet','totalat','totgaji','notification','countnotifikasi') );    
         } else{
         // halaman admin
             $pengajuan = Pengajuan::find($id);
@@ -755,7 +758,7 @@ class PengajuanController extends Controller
     //Konfirmasi pengajuan
     public function konfirmasi(Request $request , $id){
         $pengajuan1  = Pengajuan::find($id);
-        if ($request->status == "lulus_survei") {
+        if ($request->status == "lulus_survei"){
             $status = ([
                 'status' => $request->status,
                 'ket' => $request->ket,
@@ -763,37 +766,39 @@ class PengajuanController extends Controller
                 'bsr_usulan' => str_replace(",", "",$request->bsr_usulan)
             ]);
             $pengajuan1->update($status);
-        } else {
-            $status = ([
-                'status' => $request->status,
-                'ket' => $request->ket,
-            ]);
-            $pengajuan1->update($status);
-        }
-        
-        if( $request->bsrpemin != NULL ) {
-            $kp = Kartu_piutang::where('pengajuan_id',$pengajuan1->id);
-            $kp = new Kartu_piutang;
-            $kp->pengajuan_id = $pengajuan1->id;
-            $kp->pinjaman = str_replace(",", "",$request->bsrpemin);
-            $kp->save();
-            return redirect()->back()->with('flash_message_success','Data berhasil di perbarui'); 
-        }
-        
-            
-        if ($request->status == "lulus_survei"){
+
             $notifikasi= new Notification;
             $notifikasi->type = $request->typenotifikasi;
             $notifikasi->id_tujuan = $request->tujuan;  
             $notifikasi->data = $request->pesan1;
             $notifikasi->save();
-        } else if ($request->status == "lulus"){
+        } elseif ($request->status == "lulus"){
+            $status = ([
+                'status' => $request->status,
+                'ket' => $request->ket,
+            ]);
+            $pengajuan1->update($status);
+
             $notifikasi= new Notification;
             $notifikasi->type = $request->typenotifikasi;
             $notifikasi->id_tujuan = $request->tujuan;
             $notifikasi->data = $request->pesan3;
             $notifikasi->save();
-        } else if  ($request->status == "tidak") {
+
+            if( $request->bsrpemin != NULL ) {
+                $kp = Kartu_piutang::where('pengajuan_id',$pengajuan1->id);
+                $kp = new Kartu_piutang;
+                $kp->pengajuan_id = $pengajuan1->id;
+                $kp->pinjaman = str_replace(",", "",$request->bsrpemin);
+                $kp->save();
+            }
+
+        } elseif  ($request->status == "tidak") {
+            $status = ([
+                'status' => $request->status,
+                'ket' => $request->ket,
+            ]);
+            $pengajuan1->update($status);
             $notifikasi= new Notification;
             $notifikasi->type = $request->typenotifikasi;
             $notifikasi->id_tujuan = $request->tujuan;

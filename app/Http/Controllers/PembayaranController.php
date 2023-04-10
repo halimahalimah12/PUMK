@@ -24,23 +24,28 @@ class PembayaranController extends Controller
         if( $user->is_admin == 0 )
         {
             $mitra = Data_mitra::where('user_id',$user->id)->first();
-            $pengajuan = Pengajuan::where('user_id',$user->id)->first();
+            $pengajuan = Pengajuan::where('user_id',$user->id)->latest('id')->first();
             $kp = Kartu_piutang::where('pengajuan_id',$pengajuan->id)->latest('id')->first();
-            $pembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)->get();
-            $totpembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)
-                            ->where('status', '=', 'valid')
-                            ->sum('jumlah');
-            $totbulan = Pembayaran::where('kartu_piutang_id',$kp->id)
-                            ->where('status', '=', 'valid')
-                            ->sum('bulan');
-            return view ('dashboard.pembayaran.index',compact('user','totbulan','mitra','kp','pengajuan','pembayaran','totpembayaran'));
+            $pem = Pembayaran::get();
+            $notification= Notification::where('id_tujuan',$user->id)->get();
+            $countnotifikasi = Notification::where('id_tujuan',$user->id)->count();
+            if( $pem->isNotEmpty() ){
+                $pembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)->get();
+                $totpembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)
+                                ->where('status', '=', 'valid')
+                                ->sum('jumlah');
+                $totbulan = Pembayaran::where('kartu_piutang_id',$kp->id)
+                                ->where('status', '=', 'valid')
+                                ->sum('bulan');
+            return view ('dashboard.pembayaran.index',compact('user','totbulan','mitra','kp','pem','pengajuan','pembayaran','totpembayaran','notification','countnotifikasi'));
+            }
+            
+            return view ('dashboard.pembayaran.index',compact('user','mitra','kp','pengajuan','notification','countnotifikasi','pem'));
         }else{
             $notification= Notification::where('id_tujuan','=','1')->get();
             $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
-            $pengajuan = Pengajuan::first() ;
-            $kp = Kartu_piutang::where('pengajuan_id', $pengajuan->id)->first();
-            $pembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)->orderByDesc('id')->get();
-            return view ('dashboard.pembayaran.index',compact('user','kp','pembayaran','notification','countnotifikasi'));
+            $pembayaran = Pembayaran::orderByDesc('id')->get();
+            return view ('dashboard.pembayaran.index',compact('user','pembayaran','notification','countnotifikasi'));
 
         }
     }

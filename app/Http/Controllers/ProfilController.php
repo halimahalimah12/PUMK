@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Data_mitra;
+use App\Models\Notification;
 use App\Models\Data_ush;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -25,8 +26,10 @@ class ProfilController extends Controller
         $user   = User::where('id', Auth::user()->id)->first();
         $ush    = Data_Ush::where('user_id',$user->id)->first();
         $mitra  = Data_Mitra::where('data_ush_id',$ush->id)->first();
+        $notification= Notification::where('id_tujuan',$user->id)->get();
+        $countnotifikasi = Notification::where('id_tujuan',$user->id)->count();
         
-        return view('dashboard.profil.index',compact('mitra','ush','user'));
+        return view('dashboard.profil.index',compact('mitra','ush','user','notification','notification','countnotifikasi'));
         // return view('dashboard.profil.index');
     }
 

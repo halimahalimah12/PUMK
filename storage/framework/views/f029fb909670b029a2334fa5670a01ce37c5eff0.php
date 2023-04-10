@@ -224,44 +224,46 @@ unset($__errorArgs, $__bag); ?>
                 <th> Status </th>
               </thead>
               <tbody>
-              <?php $__currentLoopData = $pembayaran; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <tr>
-                  <td> <?php echo e($loop->iteration); ?> </td>
-                  <td> <?php echo e(date('d M Y',strtotime($p->tgl))); ?> </td>
-                  <td> <?php if($p->bank == 'bri'): ?> BRI
-                          <?php else: ?> Mandiri
+              <?php if($pembayaran != NULL && $totpembayaran !=NULL ): ?>
+                <?php $__currentLoopData = $pembayaran; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <tr>
+                    <td> <?php echo e($loop->iteration); ?> </td>
+                    <td> <?php echo e(date('d M Y',strtotime($p->tgl))); ?> </td>
+                    <td> <?php if($p->bank == 'bri'): ?> BRI
+                            <?php else: ?> Mandiri
+                          <?php endif; ?>
+                    </td>
+                    <td> <?php echo e($p->formatRupiah('jumlah')); ?></td>
+                    <td><button type="button" class="btn btn-primary btn-sm"> <a href="/bukti/<?php echo e($p->id); ?>"style="color:white;"> Lihat </a></button></td>
+                    <td> <?php if( $p->status == "menunggu"): ?>
+                            <button type="button" class="btn btn-success btn-sm">Valid</button>
+                            <button type="button" class="btn btn-danger btn-sm">Tidak Valid</button>
+                          <?php elseif( $p->status == "valid"): ?> <span class="badge bg-success">Valid</span>
+                          <?php else: ?> <span class="badge bg-danger">Tidak Valid</span>
                         <?php endif; ?>
-                  </td>
-                  <td> <?php echo e($p->formatRupiah('jumlah')); ?></td>
-                  <td><button type="button" class="btn btn-primary btn-sm"> <a href="/bukti/<?php echo e($p->id); ?>"style="color:white;"> Lihat </a></button></td>
-                  <td> <?php if( $p->status == "menunggu"): ?>
-                          <button type="button" class="btn btn-success btn-sm">Valid</button>
-                          <button type="button" class="btn btn-danger btn-sm">Tidak Valid</button>
-                        <?php elseif( $p->status == "valid"): ?> <span class="badge bg-success">Valid</span>
-                        <?php else: ?> <span class="badge bg-danger">Tidak Valid</span>
-                      <?php endif; ?>
-                  </td>
-                </tr>
-              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                <p style="visibility: hidden;display: none;"><?php echo e($uanglebih = $sum-$totpembayaran); ?></p>
-                <tr>
-                  <th colspan="3">Total Pembayaran</th>
-                  <th>Rp. <?php echo e(number_format($totpembayaran,0,',','.' )); ?></th>
-                </tr>
-                <tr>
-                  <th colspan="3">Sisa Tagihan</th>
-                  <?php if($totpembayaran  < $sum ): ?>
-                      <th>Rp. <?php echo e(number_format($sisatagihan= $sum-$totpembayaran,0,',','.')); ?></th>
-                    <?php else: ?> 
-                      <th>Rp. <?php echo e(number_format($sisatagihan= $sum-$totpembayaran - $uanglebih,0,',','.')); ?></th>
-                  <?php endif; ?>
-                </tr>
-                  <?php if($totpembayaran > $sum ): ?>
-                    <tr>
-                      <th colspan="3">Uang Lebih</th>
-                      <th>Rp. <?php echo e(number_format(abs($uanglebih),0,',','.')); ?></th>
-                    </tr>
-                  <?php endif; ?>
+                    </td>
+                  </tr>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                  <p style="visibility: hidden;display: none;"><?php echo e($uanglebih = $sum-$totpembayaran); ?></p>
+                  <tr>
+                    <th colspan="3">Total Pembayaran</th>
+                    <th>Rp. <?php echo e(number_format($totpembayaran,0,',','.' )); ?></th>
+                  </tr>
+                  <tr>
+                    <th colspan="3">Sisa Tagihan</th>
+                    <?php if($totpembayaran  < $sum ): ?>
+                        <th>Rp. <?php echo e(number_format($sisatagihan= $sum-$totpembayaran,0,',','.')); ?></th>
+                      <?php else: ?> 
+                        <th>Rp. <?php echo e(number_format($sisatagihan= $sum-$totpembayaran - $uanglebih,0,',','.')); ?></th>
+                    <?php endif; ?>
+                  </tr>
+                    <?php if($totpembayaran > $sum ): ?>
+                      <tr>
+                        <th colspan="3">Uang Lebih</th>
+                        <th>Rp. <?php echo e(number_format(abs($uanglebih),0,',','.')); ?></th>
+                      </tr>
+                    <?php endif; ?>
+              <?php endif; ?>
               </tbody>
             </table>
           </div>
@@ -282,6 +284,7 @@ unset($__errorArgs, $__bag); ?>
                   </tr>
                 </thead>
                 <tbody>
+                <?php if($pembayaran != NULL && $totpembayaran !=NULL ): ?>
                   <tr>
                     <?php for( $n=0 ; $n<6 ; $n++): ?>
                       <td>0</td>
@@ -324,6 +327,7 @@ unset($__errorArgs, $__bag); ?>
                         <th colspan="2" > Uang Lebih: <?php echo e(number_format(abs($uanglebih) ,0,',','.')); ?> </th>
                       <?php endif; ?>
                     </tr>
+                <?php endif; ?>
                 </tbody>
               </table>
             </div>

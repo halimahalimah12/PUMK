@@ -16,7 +16,9 @@
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
           <?php if( $user->is_admin ==1 ): ?>
-          <span class="badge bg-primary badge-number"><?php echo e($countnotifikasi); ?></span>
+              <span class="badge bg-primary badge-number"><?php echo e($countnotifikasi); ?></span>
+            <?php else: ?> 
+              <span class="badge bg-primary badge-number"><?php echo e($countnotifikasi); ?></span>
           <?php endif; ?>
           
         </a>
@@ -31,20 +33,37 @@
           </li>
           <?php if($user->is_admin == 1 ): ?>
             <?php $__currentLoopData = $notification; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notif): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-          <li class="notification-item">
-            <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <?php if($notif->type == "Pengajuan Proposal"): ?>
-                  <h4> <a href= "/pengajuan" ><?php echo e($notif->type); ?> </a></h4>
-                <?php else: ?>
-                  <h4> <a href= "/pembayaran" ><?php echo e($notif->type); ?> </a></h4>
-                <?php endif; ?>
-                <p><?php echo e($notif->data); ?></p>
-              </div>  
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
+              <li class="notification-item">
+                <i class="bi bi-info-circle text-primary"></i>
+                  <div>
+                    <?php if($notif->type == "Pengajuan Proposal"): ?>
+                      <h4> <a href= "/pengajuan" ><?php echo e($notif->type); ?> </a></h4>
+                    <?php else: ?>
+                      <h4> <a href= "/pembayaran" ><?php echo e($notif->type); ?> </a></h4>
+                    <?php endif; ?>
+                    <p><?php echo e($notif->data); ?></p>
+                  </div>  
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php else: ?> 
+            <?php $__currentLoopData = $notification; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notif): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <li class="notification-item">
+                <i class="bi bi-info-circle text-primary"></i>
+                  <div>
+                    <?php if($notif->type == "Pengajuan Proposal"): ?>
+                      <h4> <a href= "/pengajuan" ><?php echo e($notif->type); ?> </a></h4>
+                    <?php else: ?>
+                      <h4> <a href= "/pembayaran" ><?php echo e($notif->type); ?> </a></h4>
+                    <?php endif; ?>
+                    <p><?php echo e($notif->data); ?></p>
+                  </div>  
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
           <?php endif; ?>

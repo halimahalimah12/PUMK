@@ -33,11 +33,13 @@ class KrtpiutangController extends Controller
         {
             $pengajuan = Pengajuan::where('user_id',$user->id)->latest('id')->first();
             $mitra     = Data_Mitra::where('user_id',$user->id)->first();
+            $notification= Notification::where('id_tujuan',$user->id)->get();
+            $countnotifikasi = Notification::where('id_tujuan',$user->id)->count();
             if($pengajuan != NULL){
                 $kp =Kartu_piutang::where('pengajuan_id',$pengajuan->id)->latest('id')->first();
-                return view('dashboard.kartu_piutang.index' ,compact('user','pengajuan','kp','mitra') );
+                return view('dashboard.kartu_piutang.index' ,compact('user','pengajuan','kp','mitra','notification','countnotifikasi') );
             }
-            return view('dashboard.kartu_piutang.index' ,compact('user','pengajuan','mitra') );
+            return view('dashboard.kartu_piutang.index' ,compact('user','pengajuan','mitra','notification','countnotifikasi') );
         } else {
             $kp = Kartu_piutang::get();
             $notification= Notification::where('id_tujuan','=','1')->get();
@@ -109,17 +111,17 @@ class KrtpiutangController extends Controller
                         ->where('status','=','valid')->sum('jumlah');
         $pembayaranvalid = Pembayaran::where('kartu_piutang_id',$kp->id)
                         ->where('status','=','valid')->get();
-                
-        $jasa = $this->hitungjasa($id);
-        $jasa1 = $this->hitungjasa1($id);
-        $pokok = $this->hitungpokok($id);
-        $jumlah = $this->jumlah($id);
-        $jumlah1 = $this->jumlah1($id);
         $notification= Notification::where('id_tujuan','=','1')->get();
-        $countnotifikasi = Notification::where('id_tujuan','=','1')->count();   
-
-
+        $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
+        if ($kp->tgl_penyaluran != NULL && $kp->sb_thn != NULL && $kp->sb_bln != NULL &&  $kp->no_kontrak != NULL ){
+            $jasa = $this->hitungjasa($id);
+            $jasa1 = $this->hitungjasa1($id);
+            $pokok = $this->hitungpokok($id);
+            $jumlah = $this->jumlah($id);
+            $jumlah1 = $this->jumlah1($id);
         return view('dashboard.kartu_piutang.view' ,compact('user','pembayaranvalid','kp','jasa1','jasa','pokok','pembayaran','totpembayaran','jumlah','jumlah1','notification','countnotifikasi') );
+        }
+        return view('dashboard.kartu_piutang.view' ,compact('user','pembayaranvalid','kp','pembayaran','totpembayaran','notification','countnotifikasi') );
     }
 
     /**
@@ -221,7 +223,6 @@ class KrtpiutangController extends Controller
         $jumlah = $pokok+$jasa;
         return $jumlah; 
     }
-   
     
     //Total pinjaman = pokok+jasa
     public function totpinjaman($id){

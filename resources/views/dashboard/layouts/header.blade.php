@@ -16,7 +16,9 @@
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
           @if( $user->is_admin ==1 )
-          <span class="badge bg-primary badge-number">{{ $countnotifikasi }}</span>
+              <span class="badge bg-primary badge-number">{{ $countnotifikasi }}</span>
+            @else 
+              <span class="badge bg-primary badge-number">{{ $countnotifikasi }}</span>
           @endif
           
         </a>
@@ -31,20 +33,37 @@
           </li>
           @if($user->is_admin == 1 )
             @foreach ($notification as $notif )
-          <li class="notification-item">
-            <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                @if ($notif->type == "Pengajuan Proposal")
-                  <h4> <a href= "/pengajuan" >{{ $notif->type }} </a></h4>
-                @else
-                  <h4> <a href= "/pembayaran" >{{ $notif->type }} </a></h4>
-                @endif
-                <p>{{ $notif->data }}</p>
-              </div>  
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
+              <li class="notification-item">
+                <i class="bi bi-info-circle text-primary"></i>
+                  <div>
+                    @if ($notif->type == "Pengajuan Proposal")
+                      <h4> <a href= "/pengajuan" >{{ $notif->type }} </a></h4>
+                    @else
+                      <h4> <a href= "/pembayaran" >{{ $notif->type }} </a></h4>
+                    @endif
+                    <p>{{ $notif->data }}</p>
+                  </div>  
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+            @endforeach
+            @else 
+            @foreach ($notification as $notif )
+              <li class="notification-item">
+                <i class="bi bi-info-circle text-primary"></i>
+                  <div>
+                    @if ($notif->type == "Pengajuan Proposal")
+                      <h4> <a href= "/pengajuan" >{{ $notif->type }} </a></h4>
+                    @else
+                      <h4> <a href= "/pembayaran" >{{ $notif->type }} </a></h4>
+                    @endif
+                    <p>{{ $notif->data }}</p>
+                  </div>  
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
             @endforeach
 
           @endif

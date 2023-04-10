@@ -43,8 +43,14 @@ Route::post('/register', [RegisController::class,'store']);
 Route::get('/dashboard', function () {
     $user = User::where('id', Auth::user()->id)->first();
     $mitra = Data_Mitra::where('user_id',$user->id)->first();
-    $notification= Notification::where('id_tujuan','=','1')->get();
-    $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
+    if ($user->is_admin  == 1 ){
+        $notification= Notification::where('id_tujuan','=','1')->get();
+        $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
+    } else {
+        $notification= Notification::where('id_tujuan',$user->id)->get();
+        $countnotifikasi = Notification::where('id_tujuan',$user->id)->count();
+    }
+    
     return view('dashboard.index',compact('user','mitra','notification','countnotifikasi'));
 })->middleware('auth');
 // PENGAJUAN
@@ -85,6 +91,7 @@ Route::post('/pembayaran',[PembayaranController::class,'store'])->middleware('au
 Route::get('/bukti/{id}',[KrtpiutangController::class,'buktipembayaran'])->middleware('auth');
 Route::get('/pembayaran/valid/{id}',[PembayaranController::class,'valid'])->middleware('auth');
 Route::get('/pembayaran/tidak-valid/{id}',[PembayaranController::class,'tidak_valid'])->middleware('auth');
+
 //LAPORAN
 Route::get('/laporan-survei',[LaporanController::class,'index'])->middleware('auth');
 Route::get('/laporan-angsuran',[LaporanController::class,'angsuran'])->middleware('auth');

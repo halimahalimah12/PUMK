@@ -12,12 +12,14 @@
             </div>
       @endif 
           <div calss="card">
-
+            
             <p style="visibility: hidden;display: none;"> 
+              
                 @for ( 
                       $sum =0,
                       $sumpokok = 0,
                       $sumjasa = 0,
+                      $saldoawal = 0,
                       $i =1,
                       $saldoawal = $kp->pinjaman,
                       $sb_bln = $kp->sb_bln/100,
@@ -47,10 +49,16 @@
                   <input type="hidden" class="form-control "  id="getpokok"  value="{{  $pokok }}">
                   <input type="hidden" class="form-control "  id="getjasa"  value="{{  $jasa }}">
                   <input type="hidden" class="form-control "  id="getjasa1"  value="{{  $jasa1 }}">
-                  <input type="hidden" class="form-control "  id="getbulan"  value="{{  $totbulan }}">
+                  @if($pem ->isNotEmpty() )
+                    <input type="hidden" class="form-control "  id="getbulan"  value="{{  $totbulan }}">
+                    @else
+                    <input type="hidden" class="form-control "  id="getbulan"  value="0">
+                  @endif
+
 
             <form class="row g-3  contact-form" action="/pembayaran"  method="POST" enctype="multipart/form-data"  >
               @csrf
+              
               <input type="hidden"  name="idkp" value="{{ $kp->id }}">
               <div class="row mb-3" style="padding-top:25px">
                 <label for="tgl" class="col-sm-3 col-form-label">Tanggal Pembayaran</label>
@@ -108,32 +116,34 @@
                 <th> Status </th>
               </thead>
               <tbody>
-              @foreach ($pembayaran as $p )
-                <tr>
-                  <td> {{ $loop->iteration }} </td>
-                  <td> {{ date('d M Y',strtotime($p->tgl)) }} </td>
-                  <td> @if ($p->bank == 'bri') BRI
-                          @else Mandiri
-                        @endif
-                  </td>
-                  <td> {{ $p->formatRupiah('jumlah') }}</td>
-                  <td><button type="button" class="btn btn-primary btn-sm"> <a href="/bukti/{{ $p->id }}"style="color:white;"> Lihat </a></button></td>
-                  <td> @if ($p->status == "valid") <span class="badge bg-success">Valid</span>
-                        @elseif( $p->status == "tidak") <span class="badge bg-danger">Tidak Valid</span>
-                        @else <span class="badge bg-secondary">Menunggu</span>
-                      @endif
-                  </td>
-                </tr>
-              @endforeach
-                <tr>
-                  <th colspan="3" style="text-align:center">Total Pembayaran</th>
-                  <th>Rp. {{ number_format($totpembayaran,0,',','.' )}}</th>
-                </tr>
-                
-                <tr>
-                  <th colspan="3" style="text-align:center">Sisa Tagihan</th>
-                  <th>Rp. {{ number_format($sum - $totpembayaran,0,',','.') }}</th>
-                </tr>
+                @if($pem ->isNotEmpty())
+                  @foreach ($pembayaran as $p )
+                    <tr>
+                      <td> {{ $loop->iteration }} </td>
+                      <td> {{ date('d M Y',strtotime($p->tgl)) }} </td>
+                      <td> @if ($p->bank == 'bri') BRI
+                              @else Mandiri
+                            @endif
+                      </td>
+                      <td> {{ $p->formatRupiah('jumlah') }}</td>
+                      <td><button type="button" class="btn btn-primary btn-sm"> <a href="/bukti/{{ $p->id }}"style="color:white;"> Lihat </a></button></td>
+                      <td> @if ($p->status == "valid") <span class="badge bg-success">Valid</span>
+                            @elseif( $p->status == "tidak") <span class="badge bg-danger">Tidak Valid</span>
+                            @else <span class="badge bg-secondary">Menunggu</span>
+                          @endif
+                      </td>
+                    </tr>
+                  @endforeach
+                    <tr>
+                      <th colspan="3" style="text-align:center">Total Pembayaran</th>
+                      <th>Rp. {{ number_format($totpembayaran,0,',','.' )}}</th>
+                    </tr>
+                    
+                    <tr>
+                      <th colspan="3" style="text-align:center">Sisa Tagihan</th>
+                      <th>Rp. {{ number_format($sum - $totpembayaran,0,',','.') }}</th>
+                    </tr>
+                @endif
               </tbody>
             </table>
           </div>
@@ -159,7 +169,7 @@
               @foreach ($pembayaran as $p )
                 <tr>
                   <td> {{ $loop->iteration }} </td>
-                  <td> {{ $p->Kartu_piutang->Pengajuan->Data_mitra->nm }}</td>
+                  <td> <a href="/kartupiutang/{{$p->kartu_piiutang_id}}/edit" >{{ $p->Kartu_piutang->Pengajuan->Data_mitra->nm }}</a></td>
                   <td> {{ date('d M Y',strtotime($p->tgl)) }} </td>
                   <td> @if ($p->bank == 'bri') BRI
                           @else Mandiri
@@ -184,6 +194,12 @@
           </div>
           @endcan
       @endif 
+      {{-- <form class="row g-3  contact-form" action="/pembayaran/valid/{{ $p->id }}" method="post">
+                            <input type="text" class="form-control " name="typenotifikasi" id="typenotifikasi" value="Status Pembayaran" >
+                            <input type="text" class="form-control " name="tujuan" id="tujuan" value="{{ $p->Kartu_piutang->Pengajuan->user_id }}" >
+                            <input type="text" class="form-control " name="pesan1" value="Status pembayaran anda valid. ">
+                            <button type="button" class="btn btn-success btn-sm"> Valid </button>
+                          </form> --}}
   
   <script type='text/javascript'>
     function sum(){
