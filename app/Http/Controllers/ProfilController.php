@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\Data_ush;
 use App\Models\Data_mitra;
 use App\Models\Notification;
-use App\Models\Data_ush;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\file;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class ProfilController extends Controller
 {
@@ -145,5 +148,33 @@ class ProfilController extends Controller
 
         return view('dashboard.profil.scanktp',compact('mitra','user'));
     }
+
+    public function akun(){
+        $user   = User::where('id', Auth::user()->id)->first();
+        $mitra  = Data_Mitra::where('user_id',auth()->user()->id)->first();
+        $notification= Notification::where('id_tujuan',$user->id)->get();
+        $countnotifikasi = Notification::where('id_tujuan',$user->id)->count();
+
+        return view('dashboard.profil.akun',compact('mitra','user','countnotifikasi','notification'));
+    }
+
+    public function akun_update( Request $request ){
+        $request->validate([
+            'currentPassword' =>['required'],
+            'password' =>['required', 'min:8','confirmed'],
+        ]);
+
+        if (Hash::check($request->currentPassword, auth()->user()->password)){
+            auth()->user()->update(['password' => Hash::make($request->password),
+                                    'email' => $request->email]);
+            return back()->with('message','Data berhasil di perbarui');
+        }
+
+        throw ValidationException::withMessages([
+            'currentPassword' =>  ' Password lama anda tidak cocok dengan data kami',
+        ]);
+
+    }
+
 
 }

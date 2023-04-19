@@ -90,9 +90,8 @@
           <div class="row align-items-center">
             <div class="col-md-4 ms-auto order-2">
               <h2 class="mb-4">Pendanaan Usaha Mikro (PUMK)</h2>
-              <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur at reprehenderit optio,
-                laudantium eius quod, eum maxime molestiae porro omnis. Dolores aspernatur delectus impedit incidunt
-                dolore mollitia esse natus beatae.</p>
+              <p class="mb-4">Mitra Binaan  adalah Usaha Kecil yang mendapatkan pinjaman dari Program Kemitraan. Apabila dikelompokan maka usaha yang dilakukan oleh mitra binaan dapat dikelompokan kedalam  8 (delapan) sektor, yaitu :
+                Perdagangan,Industri,Pertanian,Perkebunan,Perikanan,<br>Peternakan,Jasa,Lainnya. </p>
             </div>
             <div class="col-md-6" data-aos="fade-right">
               <img src="assets/img/undraw_svg_3.svg" alt="Image" class="img-fluid">

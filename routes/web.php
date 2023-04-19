@@ -85,6 +85,12 @@ Route::get('/profil', [ProfilController::class,'edit'])->middleware('auth');
 Route::post('/profil',[ProfilController::class,'update'])->middleware('auth')->name('profil.update');
 Route::get('/foto', [ProfilController::class,'foto'])->middleware('auth');
 Route::get('/scanktp', [ProfilController::class,'scanktp'])->middleware('auth');
+
+//AKUN
+Route::get('/akun', [ProfilController::class,'akun'])->middleware('auth');
+Route::put('/akun-update', [ProfilController::class,'akun_update'])->middleware('auth');
+
+
 //PEMBAYARAN
 Route::get('/pembayaran', [PembayaranController::class,'index'])->middleware('auth');
 Route::post('/pembayaran',[PembayaranController::class,'store'])->middleware('auth');

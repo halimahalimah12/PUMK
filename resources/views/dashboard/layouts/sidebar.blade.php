@@ -52,7 +52,7 @@
               </a>
             </li>
             <li>
-              <a href="">
+              <a href="/akun">
                 <i class="bi bi-circle"></i><span>Akun</span>
               </a>
             </li>
