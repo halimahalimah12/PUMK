@@ -159,16 +159,21 @@ class ProfilController extends Controller
     }
 
     public function akun_update( Request $request ){
+        // dd($request);
+        $user   = User::where('id', Auth::user()->id)->first();
+
         $request->validate([
             'currentPassword' =>['required'],
             'password' =>['required', 'min:8','confirmed'],
+            'email'     =>  'email:dns'
         ]);
 
         if (Hash::check($request->currentPassword, auth()->user()->password)){
-            auth()->user()->update(['password' => Hash::make($request->password),
-                                    'email' => $request->email]);
-            return back()->with('message','Data berhasil di perbarui');
+            auth()->user()->update(['password' => Hash::make($request->password), 'email' => $request->email]);
+        
+            return back()->with('success','Data berhasil di perbarui');
         }
+        
 
         throw ValidationException::withMessages([
             'currentPassword' =>  ' Password lama anda tidak cocok dengan data kami',
