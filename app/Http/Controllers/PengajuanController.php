@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\PengajuanNotification;
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\PengajuanKonfirmasiNotification;
+
 
 class PengajuanController extends Controller
 {
@@ -42,19 +44,16 @@ class PengajuanController extends Controller
         if($user->is_admin ==0 )
         {
             $mitra     = Data_Mitra::where('user_id',$user->id)->first();
+            $mitra->unreadNotifications->markAsRead();
             $ush       = Data_Ush::where('user_id',$user->id)->first();
             $pengajuan = Pengajuan::where('data_mitra_id',$mitra->id)->orderByDesc('id')->get();
             $last      = DB::table('pengajuans')
                         ->where('user_id',$user->id)
                         ->latest('id')->first();
-            // $notification= Notification::where('id_tujuan',$user->id)->get();
-            // $countnotifikasi = Notification::where('id_tujuan',$user->id)->count();
             return view('dashboard.pengajuan.index' ,compact('pengajuan','user','last','mitra','ush') );
         }else{
             $pengajuan1 = Pengajuan::orderByDesc('id')->get();
-            $notification= Notification::where('id_tujuan','=','1')->get();
-            $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
-            return view('dashboard.pengajuan.index' ,compact('pengajuan1','user','notification','countnotifikasi') );
+            return view('dashboard.pengajuan.index' ,compact('pengajuan1','user') );
         }
         
     }
@@ -751,6 +750,7 @@ class PengajuanController extends Controller
     //Konfirmasi pengajuan
     public function konfirmasi(Request $request , $id){
         $pengajuan1  = Pengajuan::find($id);
+
         if ($request->status == "lulus_survei"){
             $status = ([
                 'status' => $request->status,
@@ -759,7 +759,7 @@ class PengajuanController extends Controller
                 'bsr_usulan' => str_replace(",", "",$request->bsr_usulan)
             ]);
             $pengajuan1->update($status);
-            
+
         } elseif ($request->status == "lulus"){
             $status = ([
                 'status' => $request->status,
@@ -783,6 +783,9 @@ class PengajuanController extends Controller
             $pengajuan1->update($status);
         }
         
+        $mitra = $pengajuan1->data_mitra;
+        $mitra->notify(new PengajuanKonfirmasiNotification($pengajuan1));
+
         return redirect()->back()->with('flash_message_success','Data berhasil di perbarui'); 
     }
 

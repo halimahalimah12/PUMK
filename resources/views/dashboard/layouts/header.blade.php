@@ -20,15 +20,18 @@
               <span class="badge bg-primary badge-number">{{ auth()->user()->unreadNotifications->count() }}</span>
             @else 
               {{-- <span class="badge bg-primary badge-number">{{ $countnotifikasi }}</span> --}}
-              <span class="badge bg-primary badge-number">{{ auth()->user()->unreadNotifications->count() }}</span>
+              <span class="badge bg-primary badge-number">{{ $mitra->unreadNotifications->count() }}</span>
           @endif
           
         </a>
         <!-- Notification Dropdown Items -->
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
           <li class="dropdown-header">
-            You have {{ auth()->user()->unreadNotifications->count() }} new notifications
-            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            @if($user->is_admin == 1)
+                You have {{ auth()->user()->unreadNotifications->count() }} new notifications
+              @else
+                You have {{ $mitra->unreadNotifications->count() }} new notifications
+            @endif
           </li>
           <li>
             <hr class="dropdown-divider">
@@ -59,12 +62,11 @@
             @endforeach
 
             @else 
-
-            @foreach ( auth()->user()->unreadNotifications as $notification )
+            @foreach ( $mitra->unreadNotifications as $notification )
                 <li class="notification-item">
                 <i class="bi bi-info-circle text-primary"></i>
                   <div>
-                      <h4> <a href= "/pengajuan" >{{ $notification->data['title'] }} </a></h4>
+                      <h4> <a href= "{{ $notification->data['url']}}" >{{ $notification->data['title'] }} </a></h4>
                     <p>{{ ucwords($notification->data['messages']) }}</p>
                     <p>{{ $notification->created_at->diffForHumans() }} </p>
                   </div>  
@@ -78,9 +80,7 @@
           <li>
             <hr class="dropdown-divider">
           </li>
-          <li class="dropdown-footer">
-            <a href="#">Show all notifications</a>
-          </li>
+        
         </ul>
       </li>
       <!--Messages Nav -->

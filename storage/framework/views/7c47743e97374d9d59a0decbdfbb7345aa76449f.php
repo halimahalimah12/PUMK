@@ -20,15 +20,18 @@
               <span class="badge bg-primary badge-number"><?php echo e(auth()->user()->unreadNotifications->count()); ?></span>
             <?php else: ?> 
               
-              <span class="badge bg-primary badge-number"><?php echo e(auth()->user()->unreadNotifications->count()); ?></span>
+              <span class="badge bg-primary badge-number"><?php echo e($mitra->unreadNotifications->count()); ?></span>
           <?php endif; ?>
           
         </a>
         <!-- Notification Dropdown Items -->
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
           <li class="dropdown-header">
-            You have <?php echo e(auth()->user()->unreadNotifications->count()); ?> new notifications
-            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            <?php if($user->is_admin == 1): ?>
+                You have <?php echo e(auth()->user()->unreadNotifications->count()); ?> new notifications
+              <?php else: ?>
+                You have <?php echo e($mitra->unreadNotifications->count()); ?> new notifications
+            <?php endif; ?>
           </li>
           <li>
             <hr class="dropdown-divider">
@@ -59,12 +62,11 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
             <?php else: ?> 
-
-            <?php $__currentLoopData = auth()->user()->unreadNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php $__currentLoopData = $mitra->unreadNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <li class="notification-item">
                 <i class="bi bi-info-circle text-primary"></i>
                   <div>
-                      <h4> <a href= "/pengajuan" ><?php echo e($notification->data['title']); ?> </a></h4>
+                      <h4> <a href= "<?php echo e($notification->data['url']); ?>" ><?php echo e($notification->data['title']); ?> </a></h4>
                     <p><?php echo e(ucwords($notification->data['messages'])); ?></p>
                     <p><?php echo e($notification->created_at->diffForHumans()); ?> </p>
                   </div>  
@@ -78,9 +80,7 @@
           <li>
             <hr class="dropdown-divider">
           </li>
-          <li class="dropdown-footer">
-            <a href="#">Show all notifications</a>
-          </li>
+        
         </ul>
       </li>
       <!--Messages Nav -->

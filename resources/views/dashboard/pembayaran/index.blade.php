@@ -15,6 +15,13 @@
               {{ session ('gagal') }} 
             </div>
       @endif 
+
+      @if($kp == NULL)
+            <div class="alert alert-success">
+                Anda belum bisa melakukan angsuran karena kartu piutang anda belum ada, Silahkan menunggu hingga kartu piutang anda dibuat oleh admin. 
+            </div>
+      @else 
+
           <div calss="card">
             
             <p style="visibility: hidden;display: none;"> 
@@ -95,9 +102,6 @@
                   <input type="hidden" class="form-control " name="pokok" id="pokok"  readonly>
                   <input type="hidden" class="form-control " name="jasa" id="jasa" readonly >
                   <input type="hidden" class="form-control " name="bulan" id="bulan" readonly >
-                  {{-- <input type="hidden" class="form-control " name="typenotifikasi" value="Pembayaran" >
-                  <input type="hidden" class="form-control " name="tujuan" value="1" >
-                  <input type="hidden" class="form-control " name="pesan" value="Pembayaran Angsuran oleh {{ $mitra->nm }}" > --}}
               <div class="row mb-3">
                 <label for="foto" class="col-sm-3 col-form-label">Bukti Pembayaran</label>
                 <div class="col-sm-9">
@@ -151,6 +155,7 @@
               </tbody>
             </table>
           </div>
+      @endif
         @else
           @can('admin')
           @if (session('success'))

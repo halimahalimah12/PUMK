@@ -25,14 +25,14 @@ class PembayaranController extends Controller
     function index()
     {
         $user = User::where('id', Auth::user()->id)->first();
-        $user->unreadNotifications->markAsRead();
+        
         if( $user->is_admin == 0 )
         {
             $mitra = Data_mitra::where('user_id',$user->id)->first();
+            $mitra->unreadNotifications->markAsRead();
             $pengajuan = Pengajuan::where('user_id',$user->id)->latest('id')->first();
             $kp = Kartu_piutang::where('pengajuan_id',$pengajuan->id)->latest('id')->first();
             $pem = Pembayaran::get();
-            
             
             if( $pem->isNotEmpty() ){
                 $pembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)->get();
@@ -47,7 +47,9 @@ class PembayaranController extends Controller
             
             return view ('dashboard.pembayaran.index',compact('user','mitra','kp','pengajuan','pem'));
         }else{
+            
             $pembayaran = Pembayaran::orderByDesc('id')->get();
+            $user->unreadNotifications->markAsRead();
             return view ('dashboard.pembayaran.index',compact('user','pembayaran'));
 
         }
@@ -99,21 +101,21 @@ class PembayaranController extends Controller
     {
         try{
             
-            $pem=Pembayaran::first();
-            $pembayaran = Pembayaran::where( 'id', $id)->update([
+            $pembayaran = Pembayaran::where( 'id', $id)->first();
+            $valid = ([
                 'status' => "valid"
             ]) ;
+            $pembayaran->update($valid);
             
-            // $mitra = $pem->kartu_piutang->pengajuan->data_mitra;
-            // dd($mitra);
-            // $mitra->notify(new PembayaranKonfirmasiNotification($pembayaran));
-                
+            $mitra = $pembayaran->kartu_piutang->pengajuan->data_mitra;
+            $mitra->notify(new PembayaranKonfirmasiNotification($pembayaran));
             \Session::flash('success', 'Tagihan berhasil disetujui');
                 
         } catch( \Excaption $e) {
             \Session::flash('gagal', $e->getMessage());
         } 
         return redirect()->back();
+
     }
     function tidak_valid($id)
     {
