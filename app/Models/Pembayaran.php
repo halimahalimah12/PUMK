@@ -8,11 +8,11 @@ use App\Models\Kartu_piutang;
 use App\Traits\HasFormatRupiah; 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
 
 class Pembayaran extends Model
 {
-    use HasFactory;
-    use HasFormatRupiah; 
+    use HasFactory, HasFormatRupiah, Notifiable;
     protected $fillable = [
         'tgl',
         'kartu_piutang_id',
@@ -36,5 +36,8 @@ class Pembayaran extends Model
         return $this->belongsTo(Kartu_piutang::class);
     }
     
-    
+    public function routeNotificationForMail($notification)
+    {
+        return $this->email;
+    }
 }

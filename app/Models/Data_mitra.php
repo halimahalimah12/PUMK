@@ -9,10 +9,11 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
 
 class Data_mitra extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'nm',

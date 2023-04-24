@@ -5,7 +5,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\Data_mitra;
-use App\Models\Notification;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisController;
 use App\Http\Controllers\ProfilController;
@@ -16,7 +15,7 @@ use App\Http\Controllers\Pengajuan1Controller;
 use App\Http\Controllers\KrtpiutangController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\LaporanController;
-
+use Illuminate\Notifications\Notification;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,15 +42,16 @@ Route::post('/register', [RegisController::class,'store']);
 Route::get('/dashboard', function () {
     $user = User::where('id', Auth::user()->id)->first();
     $mitra = Data_Mitra::where('user_id',$user->id)->first();
-    if ($user->is_admin  == 1 ){
-        $notification= Notification::where('id_tujuan','=','1')->get();
-        $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
-    } else {
-        $notification= Notification::where('id_tujuan',$user->id)->get();
-        $countnotifikasi = Notification::where('id_tujuan',$user->id)->count();
-    }
     
-    return view('dashboard.index',compact('user','mitra','notification','countnotifikasi'));
+    // if ($user->is_admin  == 1 ){
+    //     $notification= Notification::where('id_tujuan','=','1')->get();
+    //     $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
+    // } else {
+    //     $notification= Notification::where('id_tujuan',$user->id)->get();
+    //     $countnotifikasi = Notification::where('id_tujuan',$user->id)->count();
+    // }
+    
+    return view('dashboard.index',compact('user','mitra'));
 })->middleware('auth');
 // PENGAJUAN
 Route::resource('/pengajuan', PengajuanController::class)->middleware('auth');
@@ -92,7 +92,7 @@ Route::put('/akun-update', [ProfilController::class,'akun_update'])->middleware(
 
 
 //PEMBAYARAN
-Route::get('/pembayaran', [PembayaranController::class,'index'])->middleware('auth');
+Route::get('/pembayaran', [PembayaranController::class,'index'])->middleware('auth')->name('pembayaran.index');
 Route::post('/pembayaran',[PembayaranController::class,'store'])->middleware('auth');
 Route::get('/bukti/{id}',[KrtpiutangController::class,'buktipembayaran'])->middleware('auth');
 Route::get('/pembayaran/valid/{id}',[PembayaranController::class,'valid'])->middleware('auth');

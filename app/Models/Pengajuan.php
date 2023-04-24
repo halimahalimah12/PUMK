@@ -13,7 +13,8 @@ use App\Models\Oprasional;
 use App\Models\Tenagakerja;
 use App\Models\Kartu_piutang;
 use Illuminate\Support\Carbon;
-use App\Traits\HasFormatRupiah; 
+use App\Traits\HasFormatRupiah;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Model;
@@ -23,6 +24,7 @@ class Pengajuan extends Model
 {
     use HasFactory;
     use HasFormatRupiah; 
+    use Notifiable;
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -70,10 +72,13 @@ class Pengajuan extends Model
     }
 
     protected $fillable = [
+        'id',
         'user_id',
         'data_mitra_id',
         'pjb_id',
+        'aset_id',
         'alat_id',
+        'oprasional_id',
         'tenagakerja_id',
         'manfaat_id',
         'omzet_id',

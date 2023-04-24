@@ -521,9 +521,6 @@
             <input class="form-control" type="file" id="srt_ksglns" name="srt_ksglns">
             <span class="text-danger error-text srt_ksglns_error"> </span>
           </div>
-          <input type="hidden" class="form-control " name="typenotifikasi" id="typenotifikasi" value="Pengajuan Proposal" >
-          <input type="hidden" class="form-control " name="tujuan" id="tujuan" value="1" >
-          <input type="hidden" class="form-control " name="pesan" id="pesan" value="Pengajuan Proposal PUMK oleh {{ $mitra->nm }}" >
           <hr>
           <div class="row">
             <div class="form-group form-navigation">

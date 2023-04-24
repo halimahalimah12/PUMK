@@ -16,49 +16,57 @@
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
           <?php if( $user->is_admin ==1 ): ?>
-              <span class="badge bg-primary badge-number"><?php echo e($countnotifikasi); ?></span>
+              
+              <span class="badge bg-primary badge-number"><?php echo e(auth()->user()->unreadNotifications->count()); ?></span>
             <?php else: ?> 
-              <span class="badge bg-primary badge-number"><?php echo e($countnotifikasi); ?></span>
+              
+              <span class="badge bg-primary badge-number"><?php echo e(auth()->user()->unreadNotifications->count()); ?></span>
           <?php endif; ?>
           
         </a>
         <!-- Notification Dropdown Items -->
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
           <li class="dropdown-header">
-            You have <?php echo e($countnotifikasi); ?> new notifications
+            You have <?php echo e(auth()->user()->unreadNotifications->count()); ?> new notifications
             <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
           </li>
           <li>
             <hr class="dropdown-divider">
           </li>
           <?php if($user->is_admin == 1 ): ?>
-            <?php $__currentLoopData = $notification; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notif): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-              <li class="notification-item">
-                <i class="bi bi-info-circle text-primary"></i>
-                  <div>
-                    <?php if($notif->type == "Pengajuan Proposal"): ?>
-                      <h4> <a href= "/pengajuan" ><?php echo e($notif->type); ?> </a></h4>
-                    <?php else: ?>
-                      <h4> <a href= "/pembayaran" ><?php echo e($notif->type); ?> </a></h4>
-                    <?php endif; ?>
-                    <p><?php echo e($notif->data); ?></p>
-                  </div>  
-              </li>
+            <?php $__currentLoopData = auth()->user()->unreadNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <li class="notification-item">
+                  <i class="bi bi-info-circle text-primary"></i>
+                    <div>
+                      <?php if($notification->data['title'] == 'Pembayaran Tagihan'): ?>
+                        <a href= "<?php echo e($notification->data['url']); ?>" >
+                          <h4> <?php echo e($notification->data['title']); ?> </h4>
+                          <p><?php echo e(ucwords($notification->data['messages'])); ?></p>
+                          <p><?php echo e($notification->created_at->diffForHumans()); ?> </p>
+                        </a>
+                        <?php elseif($notification->data['title'] == 'Pengajuan Pendanaan.'): ?>
+                          <a href= "<?php echo e($notification->data['url'].'?id='.$notification->id); ?>" >
+                            <h4> <?php echo e($notification->data['title']); ?> </h4>
+                            <p><?php echo e(ucwords($notification->data['messages'])); ?></p>
+                            <p><?php echo e($notification->created_at->diffForHumans()); ?> </p>
+                          </a>
+                      <?php endif; ?>
+                    </div>  
+                </li>
               <li>
                 <hr class="dropdown-divider">
               </li>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
             <?php else: ?> 
-            <?php $__currentLoopData = $notification; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notif): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-              <li class="notification-item">
+
+            <?php $__currentLoopData = auth()->user()->unreadNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <li class="notification-item">
                 <i class="bi bi-info-circle text-primary"></i>
                   <div>
-                    <?php if($notif->type == "Pengajuan Proposal"): ?>
-                      <h4> <a href= "/pengajuan" ><?php echo e($notif->type); ?> </a></h4>
-                    <?php else: ?>
-                      <h4> <a href= "/pembayaran" ><?php echo e($notif->type); ?> </a></h4>
-                    <?php endif; ?>
-                    <p><?php echo e($notif->data); ?></p>
+                      <h4> <a href= "/pengajuan" ><?php echo e($notification->data['title']); ?> </a></h4>
+                    <p><?php echo e(ucwords($notification->data['messages'])); ?></p>
+                    <p><?php echo e($notification->created_at->diffForHumans()); ?> </p>
                   </div>  
               </li>
               <li>

@@ -16,49 +16,57 @@
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
           @if( $user->is_admin ==1 )
-              <span class="badge bg-primary badge-number">{{ $countnotifikasi }}</span>
+              {{-- <span class="badge bg-primary badge-number">{{ $countnotifikasi }}</span> --}}
+              <span class="badge bg-primary badge-number">{{ auth()->user()->unreadNotifications->count() }}</span>
             @else 
-              <span class="badge bg-primary badge-number">{{ $countnotifikasi }}</span>
+              {{-- <span class="badge bg-primary badge-number">{{ $countnotifikasi }}</span> --}}
+              <span class="badge bg-primary badge-number">{{ auth()->user()->unreadNotifications->count() }}</span>
           @endif
           
         </a>
         <!-- Notification Dropdown Items -->
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
           <li class="dropdown-header">
-            You have {{ $countnotifikasi}} new notifications
+            You have {{ auth()->user()->unreadNotifications->count() }} new notifications
             <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
           </li>
           <li>
             <hr class="dropdown-divider">
           </li>
           @if($user->is_admin == 1 )
-            @foreach ($notification as $notif )
-              <li class="notification-item">
-                <i class="bi bi-info-circle text-primary"></i>
-                  <div>
-                    @if ($notif->type == "Pengajuan Proposal")
-                      <h4> <a href= "/pengajuan" >{{ $notif->type }} </a></h4>
-                    @else
-                      <h4> <a href= "/pembayaran" >{{ $notif->type }} </a></h4>
-                    @endif
-                    <p>{{ $notif->data }}</p>
-                  </div>  
-              </li>
+            @foreach ( auth()->user()->unreadNotifications as $notification )
+                <li class="notification-item">
+                  <i class="bi bi-info-circle text-primary"></i>
+                    <div>
+                      @if($notification->data['title'] == 'Pembayaran Tagihan')
+                        <a href= "{{ $notification->data['url']}}" >
+                          <h4> {{ $notification->data['title'] }} </h4>
+                          <p>{{ ucwords($notification->data['messages']) }}</p>
+                          <p>{{ $notification->created_at->diffForHumans() }} </p>
+                        </a>
+                        @elseif($notification->data['title'] == 'Pengajuan Pendanaan.')
+                          <a href= "{{ $notification->data['url'].'?id='.$notification->id}}" >
+                            <h4> {{ $notification->data['title'] }} </h4>
+                            <p>{{ ucwords($notification->data['messages']) }}</p>
+                            <p>{{ $notification->created_at->diffForHumans() }} </p>
+                          </a>
+                      @endif
+                    </div>  
+                </li>
               <li>
                 <hr class="dropdown-divider">
               </li>
             @endforeach
+
             @else 
-            @foreach ($notification as $notif )
-              <li class="notification-item">
+
+            @foreach ( auth()->user()->unreadNotifications as $notification )
+                <li class="notification-item">
                 <i class="bi bi-info-circle text-primary"></i>
                   <div>
-                    @if ($notif->type == "Pengajuan Proposal")
-                      <h4> <a href= "/pengajuan" >{{ $notif->type }} </a></h4>
-                    @else
-                      <h4> <a href= "/pembayaran" >{{ $notif->type }} </a></h4>
-                    @endif
-                    <p>{{ $notif->data }}</p>
+                      <h4> <a href= "/pengajuan" >{{ $notification->data['title'] }} </a></h4>
+                    <p>{{ ucwords($notification->data['messages']) }}</p>
+                    <p>{{ $notification->created_at->diffForHumans() }} </p>
                   </div>  
               </li>
               <li>

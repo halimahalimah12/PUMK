@@ -9,11 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Traits\HasFormatRupiah; 
+use Illuminate\Notifications\Notifiable;
 
 class Kartu_piutang extends Model
 {
-    use HasFactory;
-    use HasFormatRupiah; 
+    use HasFactory, HasFormatRupiah, Notifiable;
 
     public function pengajuan(){
         return $this->belongsTo(Pengajuan::class);

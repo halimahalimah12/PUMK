@@ -29,10 +29,8 @@ class ProfilController extends Controller
         $user   = User::where('id', Auth::user()->id)->first();
         $ush    = Data_Ush::where('user_id',$user->id)->first();
         $mitra  = Data_Mitra::where('data_ush_id',$ush->id)->first();
-        $notification= Notification::where('id_tujuan',$user->id)->get();
-        $countnotifikasi = Notification::where('id_tujuan',$user->id)->count();
         
-        return view('dashboard.profil.index',compact('mitra','ush','user','notification','notification','countnotifikasi'));
+        return view('dashboard.profil.index',compact('mitra','ush','user'));
         // return view('dashboard.profil.index');
     }
 
@@ -152,10 +150,8 @@ class ProfilController extends Controller
     public function akun(){
         $user   = User::where('id', Auth::user()->id)->first();
         $mitra  = Data_Mitra::where('user_id',auth()->user()->id)->first();
-        $notification= Notification::where('id_tujuan',$user->id)->get();
-        $countnotifikasi = Notification::where('id_tujuan',$user->id)->count();
 
-        return view('dashboard.profil.akun',compact('mitra','user','countnotifikasi','notification'));
+        return view('dashboard.profil.akun',compact('mitra','user'));
     }
 
     public function akun_update( Request $request ){

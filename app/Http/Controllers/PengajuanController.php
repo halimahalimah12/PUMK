@@ -14,7 +14,6 @@ use App\Models\Data_mitra;
 use App\Models\Oprasional;
 use App\Models\Tenagakerja;
 use Illuminate\Http\Request;
-use App\Models\Notification;
 use App\Models\Kartu_piutang;
 use App\Traits\HasFormatRupiah; 
 use App\Notifications\Notifikasi;
@@ -24,6 +23,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\file;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\PengajuanNotification;
+use Illuminate\Support\Facades\Notification;
 
 class PengajuanController extends Controller
 {
@@ -46,9 +47,9 @@ class PengajuanController extends Controller
             $last      = DB::table('pengajuans')
                         ->where('user_id',$user->id)
                         ->latest('id')->first();
-            $notification= Notification::where('id_tujuan',$user->id)->get();
-            $countnotifikasi = Notification::where('id_tujuan',$user->id)->count();
-            return view('dashboard.pengajuan.index' ,compact('pengajuan','user','last','mitra','ush','notification','countnotifikasi') );
+            // $notification= Notification::where('id_tujuan',$user->id)->get();
+            // $countnotifikasi = Notification::where('id_tujuan',$user->id)->count();
+            return view('dashboard.pengajuan.index' ,compact('pengajuan','user','last','mitra','ush') );
         }else{
             $pengajuan1 = Pengajuan::orderByDesc('id')->get();
             $notification= Notification::where('id_tujuan','=','1')->get();
@@ -247,8 +248,7 @@ class PengajuanController extends Controller
                 $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
                 $file           ->  move('storage/dokumen',$namafile);
                 $pengajuan['surat_pj'] = $namafile;
-            }
-    
+            } 
             if  ($request->file( 'srt_ksglns')){
                 $file           =   $request->file('srt_ksglns');
                 $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
@@ -305,13 +305,10 @@ class PengajuanController extends Controller
                 $manfaat->save();
             }
 
-            $notifikasi= new Notification;
-            $notifikasi->type = $request->typenotifikasi;
-            $notifikasi->id_tujuan = $request->tujuan;
-            $notifikasi->data = $request->pesan;
-            $notifikasi->save();
+            $useradmin = User::where('is_admin','1')->get();
+            Notification::send($useradmin, new PengajuanNotification($pengajuan));    
             
-            if ( $pjb  && $aset && $oprasional && $pengajuan && $alat && $tenagakerja && $omzet && $manfaat && $notifikasi){
+            if ( $pjb  && $aset && $oprasional && $pengajuan && $alat && $tenagakerja && $omzet && $manfaat ){
                 return response()->json(['code'=>1, 'msg' => 'Berhasil ditambahkan']);
             }
         }
@@ -321,6 +318,7 @@ class PengajuanController extends Controller
     public function show($id)
     {
         $user = User::where('id', Auth::user()->id)->first();
+        $user->unreadNotifications->markAsRead();
         if($user->is_admin ==0 )
         { // halaman user
             $ush        = Data_Ush::where('user_id',Auth::user()->id)->first();
@@ -332,9 +330,8 @@ class PengajuanController extends Controller
             $totalat      = Alat::where('pengajuan_id',$pengajuan1->id)->sum('jmlh');
             $totgaji     = Tenagakerja::where('pengajuan_id',$pengajuan1->id)->sum('gaji');
             $totomzet     = Omzet::where('pengajuan_id',$pengajuan1->id)->sum('jmlh');
-            $notification= Notification::where('id_tujuan',$user->id)->get();
-            $countnotifikasi = Notification::where('id_tujuan',$user->id)->count();
-            return view('dashboard.pengajuan.detail' ,compact('pengajuan1','ush','user','mitra','alat','tenaga','omzet' ,'totomzet','totalat','totgaji','notification','countnotifikasi') );    
+
+            return view('dashboard.pengajuan.detail' ,compact('pengajuan1','ush','user','mitra','alat','tenaga','omzet' ,'totomzet','totalat','totgaji') );    
         } else{
         // halaman admin
             $pengajuan = Pengajuan::find($id);
@@ -344,10 +341,8 @@ class PengajuanController extends Controller
             $totalat      = Alat::where('pengajuan_id',$pengajuan->id)->sum('jmlh');
             $totgaji     = Tenagakerja::where('pengajuan_id',$pengajuan->id)->sum('gaji');
             $totomzet     = Omzet::where('pengajuan_id',$pengajuan->id)->sum('jmlh');
-            $notification= Notification::where('id_tujuan','=','1')->get();
-            $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
         
-        return view('dashboard.pengajuan.detail' ,compact('pengajuan','user','alat','tenaga','omzet' ,'totomzet','totalat','totgaji','notification','countnotifikasi') );
+        return view('dashboard.pengajuan.detail' ,compact('pengajuan','user','alat','tenaga','omzet' ,'totomzet','totalat','totgaji') );
         }
     }
 
@@ -399,10 +394,8 @@ class PengajuanController extends Controller
         $tenaga     = Tenagakerja::where('pengajuan_id',$pengajuan->id)->get();
         $omzet      = Omzet::where('pengajuan_id',$pengajuan->id)->get();
         $manfaat      = Manfaat::where('pengajuan_id',$pengajuan->id)->get();
-        $notification= Notification::where('id_tujuan','=','1')->get();
-        $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
 
-        return view ('dashboard.pengajuan.edit',compact('pengajuan','user','alat','tenaga','omzet' ,'manfaat','notification','countnotifikasi'));
+        return view ('dashboard.pengajuan.edit',compact('pengajuan','user','alat','tenaga','omzet' ,'manfaat'));
     }
 
     /**
@@ -766,24 +759,13 @@ class PengajuanController extends Controller
                 'bsr_usulan' => str_replace(",", "",$request->bsr_usulan)
             ]);
             $pengajuan1->update($status);
-
-            $notifikasi= new Notification;
-            $notifikasi->type = $request->typenotifikasi;
-            $notifikasi->id_tujuan = $request->tujuan;  
-            $notifikasi->data = $request->pesan1;
-            $notifikasi->save();
+            
         } elseif ($request->status == "lulus"){
             $status = ([
                 'status' => $request->status,
                 'ket' => $request->ket,
             ]);
             $pengajuan1->update($status);
-
-            $notifikasi= new Notification;
-            $notifikasi->type = $request->typenotifikasi;
-            $notifikasi->id_tujuan = $request->tujuan;
-            $notifikasi->data = $request->pesan3;
-            $notifikasi->save();
 
             if( $request->bsrpemin != NULL ) {
                 $kp = Kartu_piutang::where('pengajuan_id',$pengajuan1->id);
@@ -799,11 +781,6 @@ class PengajuanController extends Controller
                 'ket' => $request->ket,
             ]);
             $pengajuan1->update($status);
-            $notifikasi= new Notification;
-            $notifikasi->type = $request->typenotifikasi;
-            $notifikasi->id_tujuan = $request->tujuan;
-            $notifikasi->data = $request->pesan2;
-            $notifikasi->save();
         }
         
         return redirect()->back()->with('flash_message_success','Data berhasil di perbarui'); 

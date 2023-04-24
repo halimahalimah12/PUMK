@@ -10,6 +10,10 @@
             <div class="alert alert-success">
               {{ session ('success') }}, Silahkan tunggu pemberitahuan berikutnya. 
             </div>
+        @elseif(session('gagal'))
+            <div class="alert alert-danger">
+              {{ session ('gagal') }} 
+            </div>
       @endif 
           <div calss="card">
             
@@ -91,9 +95,9 @@
                   <input type="hidden" class="form-control " name="pokok" id="pokok"  readonly>
                   <input type="hidden" class="form-control " name="jasa" id="jasa" readonly >
                   <input type="hidden" class="form-control " name="bulan" id="bulan" readonly >
-                  <input type="hidden" class="form-control " name="typenotifikasi" value="Pembayaran" >
+                  {{-- <input type="hidden" class="form-control " name="typenotifikasi" value="Pembayaran" >
                   <input type="hidden" class="form-control " name="tujuan" value="1" >
-                  <input type="hidden" class="form-control " name="pesan" value="Pembayaran Angsuran oleh {{ $mitra->nm }}" >
+                  <input type="hidden" class="form-control " name="pesan" value="Pembayaran Angsuran oleh {{ $mitra->nm }}" > --}}
               <div class="row mb-3">
                 <label for="foto" class="col-sm-3 col-form-label">Bukti Pembayaran</label>
                 <div class="col-sm-9">
@@ -215,6 +219,8 @@
       if( test1 <  test2 ) {
         document.getElementById('pokok').value=jumlahValue;
         document.getElementById('jasa').value=0;
+        document.getElementById('bulan').value=1;
+
       }  else  {
         var jasa = test1-test2;
         var test3 = test2;

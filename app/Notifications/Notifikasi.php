@@ -16,9 +16,10 @@ class Notifikasi extends Notification
      *
      * @return void
      */
-    public function __construct()
+    private $user;
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
