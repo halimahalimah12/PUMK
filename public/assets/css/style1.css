@@ -635,10 +635,11 @@ section {
   text-decoration: none;
 }
 
-#header .logo img {
+.logo3 img {
   padding: 0;
   margin: 0;
-  max-height: 40px;
+  width:200px;
+  /* max-height: 300px; */
 }
 
 /*--------------------------------------------------------------
@@ -707,7 +708,7 @@ section {
 }
 
 .navbar .dropdown ul li {
-  min-width: 200px;
+  min-width: 100px;
 }
 
 .navbar .dropdown ul a {
@@ -864,6 +865,10 @@ section {
   position: relative;
 }
 
+.img-alur{
+  width: 600px;
+}
+
 .hero-section .wave {
   width: 100%;
   overflow: hidden;
@@ -945,8 +950,8 @@ section {
   position: absolute;
   top: -50%;
   overflow: hidden;
-  left: 0;
-  box-shadow: 0 15px 50px 0 rgba(0, 0, 0, 0.3);
+  right:25px;
+  filter: drop-shadow( 0 15px 50px #0000004d) ;
   border-radius: 30px;
 }
 
@@ -962,27 +967,29 @@ section {
 
 .hero-section .iphone-wrap .phone-2,
 .hero-section .iphone-wrap .phone-1 {
-  width: 250px;
+  width: 500px;
+  
 }
 
 @media screen and (max-width: 992px) {
   .hero-section .iphone-wrap .phone-1 {
-    margin-left: -150px;
+    float:center;
+    margin-top: 0px;
   }
 }
 
 .hero-section .iphone-wrap .phone-2 {
-  margin-top: 50px;
+  margin-top: 80px;
   margin-left: 100px;
-  width: 250px;
+  width: 700px;
 }
 
 @media screen and (max-width: 992px) {
   .hero-section .iphone-wrap .phone-2 {
-    width: 250px;
+    width: 450px;
     position: absolute;
-    margin-top: 0px;
-    margin-left: 100px;
+    margin-top: 100px;
+    float:center;
   }
 }
 

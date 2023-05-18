@@ -21,7 +21,6 @@
     <!-- Vendor CSS Files -->
     <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    {{-- <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('assets/vendor/boxicons/css1/boxicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
@@ -41,25 +40,6 @@
             <li><a class="active " href="index.html">Home</a></li>
             <li><a href="#Tentang_Kami">Tentang Kami </a></li>
             <li><a href="#Alur">Alur</a></li>
-            {{-- <li><a href="blog.html">Blog</a></li>
-            <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-              <ul>
-                <li><a href="#">Drop Down 1</a></li>
-                <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                  <ul>
-                    <li><a href="#">Deep Drop Down 1</a></li>
-                    <li><a href="#">Deep Drop Down 2</a></li>
-                    <li><a href="#">Deep Drop Down 3</a></li>
-                    <li><a href="#">Deep Drop Down 4</a></li>
-                    <li><a href="#">Deep Drop Down 5</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Drop Down 2</a></li>
-                <li><a href="#">Drop Down 3</a></li>
-                <li><a href="#">Drop Down 4</a></li>
-              </ul>
-            </li> --}}
-            <li><a href="#kontak">Contact Us</a></li>
             <a href="/login"> <li class="bi bi-box-arrow-in-right" > </li> Login</a>
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
@@ -81,13 +61,13 @@
           <div class="col-12 hero-text-image">
             <div class="row">
               <div class="col-lg-8 text-center text-lg-start">
-                <h1 data-aos="fade-right">Pendanaan Usaha Mikro Kecil </h1>
-                <p class="mb-5" data-aos="fade-right" data-aos-delay="100">Pendanaan Usaha Mikro Kecil oleh PT.Angkasa Pura II</p>
+                <h1 data-aos="fade-right">Pendanaan Usaha <br>Mikro Kecil </h1>
+                <p class="mb-5" data-aos="fade-right" data-aos-delay="100">Pendanaan Usaha Mikro Kecil <br> oleh PT.Angkasa Pura II</p>
                 <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500"><a href="/register" class="btn btn-outline-white">Registrasi Sekarang</a></p>
               </div>
               <div class="col-lg-4 iphone-wrap">
-                <img src="assets/img/phone_1.png" alt="Image" class="phone-1" data-aos="fade-right">
-                <img src="assets/img/phone_2.png" alt="Image" class="phone-2" data-aos="fade-right" data-aos-delay="200">
+                <img src="assets/img/foto.png" alt="Image" class="phone-1" data-aos="fade-right">
+                <img src="assets/img/foto2.png" alt="Image" class="phone-2" data-aos="fade-right" data-aos-delay="200">
               </div>
             </div>
           </div>
@@ -112,7 +92,7 @@
                 Perdagangan,Industri,Pertanian,Perkebunan,Perikanan,<br>Peternakan,Jasa,Lainnya. </p>
             </div>
             <div class="col-md-6" data-aos="fade-right">
-              <img src="assets/img/undraw_svg_3.svg" alt="Image" class="img-fluid">
+              <img src="assets/img/Store.svg" alt="Image" class="img-fluid">
             </div>
           </div>
         </div>
@@ -132,7 +112,7 @@
             <p class="mb-4">Login bagi mitra yang telah memiliki akun, bagi mitra yang tidak memiliki akun silahkan registrasi terlebih dahulu</p>
           </div>
           <div class="col-md-6" data-aos="fade-left">
-            <img src="assets/img/undraw_svg_2.svg" alt="Image" class="img-fluid">
+            <img src="assets/img/computer.svg" alt="Image" class="img-fluid">
           </div>
         </div>
         {{-- Langkah 2 --}}
@@ -140,10 +120,9 @@
           <div class="col-md-4 ms-auto order-2">
             <h2 class="mb-4">Langkah 2</h2>
             <p class="mb-4">Lakukan Pengajuan dengan mengisi data yang tertera pada halaman pengajuan. </p>
-            
           </div>
           <div class="col-md-6" data-aos="fade-right">
-            <img src="assets/img/undraw_svg_3.svg" alt="Image" class="img-fluid">
+            <img src="assets/img/alur2.svg" alt="Image" class="img-fluid">
           </div>
         </div>
         {{-- Langkah 3 --}}
@@ -154,7 +133,7 @@
               <p><a href="#" class="btn btn-primary">Registrasi Sekarang</a></p>
           </div>
             <div class="col-md-6" data-aos="fade-left">
-              <img src="assets/img/undraw_svg_2.svg" alt="Image" class="img-fluid">
+              <img src="assets/img/hp.svg" alt="Image" class="img-fluid">
             </div>
           </div>
         </div>
@@ -249,7 +228,7 @@
         </div>
       </section>
       {{-- kontak --}}
-      <section class="section" id="kontak">
+      {{-- <section class="section" id="kontak">
       <div class="container">
         <div class="row mb-5 align-items-end">
           <div class="col-md-6" data-aos="fade-up">
@@ -315,7 +294,7 @@
 
         </div>
       </div>
-    </section>
+    </section> --}}
       
     </main>
 
@@ -325,22 +304,15 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4 mb-4 mb-md-0">
-            <h3>About SoftLand</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius ea delectus pariatur, numquam aperiam
-              dolore nam optio dolorem facilis itaque voluptatum recusandae deleniti minus animi.</p>
-            <p class="social">
-              <a href="#"><span class="bi bi-twitter"></span></a>
-              <a href="#"><span class="bi bi-facebook"></span></a>
-              <a href="#"><span class="bi bi-instagram"></span></a>
-              <a href="#"><span class="bi bi-linkedin"></span></a>
-            </p>
+            <h3>Kontak kami:</h3>
+            <p class="mb-0">Jika terdapat saran dan keritikan atau bahkan ingin meminta bantuan silahkan hubungi kami yang tertera disamping ini: </p>
           </div>
           <div class="col-md-7 ms-auto">
             <div class="row site-section pt-0">
               <div class="col-md-4 mb-4 mb-md-0">
                 <h3>Navigation</h3>
                 <ul class="list-unstyled">
-                  <li><a href="#">Pricing</a></li>
+                  <li><a href="#"></a></li>
                   <li><a href="#">Features</a></li>
                   <li><a href="#">Blog</a></li>
                   <li><a href="#">Contact</a></li>

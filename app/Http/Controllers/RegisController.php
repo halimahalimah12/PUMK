@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
+use App\Rules\MixedCase;
+use App\Rules\Symbols;
+use App\Rules\Number;
 
 class RegisController extends Controller
 {
@@ -23,7 +27,13 @@ class RegisController extends Controller
             'name' => 'required|max:255',
             'nmush' => 'required|max:255',
             'email' => 'required|email:dns|unique:users',
-            'password' => 'required|min:5|max:255|alpha-dash'
+            'password' => ['required', 
+            Password::min(8)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()]
+            
         ]);
 
         $validateData['password'] = Hash::make($validateData['password']);

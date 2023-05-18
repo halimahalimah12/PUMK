@@ -3,7 +3,6 @@
 @section('container')
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Biodata Mitra</h5>
         <form  method="post" action="{{ route('profil.update')  }}" enctype="multipart/form-data" >
           @csrf
           @if (session('success'))

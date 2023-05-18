@@ -6,7 +6,7 @@
       @if ( $user->is_admin == 0 )
           @if($pengajuan == NULL )
               <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top:30px">
-                <i class="bi bi-exclamation-octagon me-1"></i>Kartu piutang anda belum ada , Silahkan <a href="/pengajuan" class="alert-link" > <ins> pengajuan </ins> </a>lakukan  terlebih dahulu.
+                <i class="bi bi-exclamation-octagon me-1"></i>Kartu piutang anda belum ada , Silahkan <a href="/pengajuan" class="alert-link" > <ins> pengajuan </ins> </a>dilakukan  terlebih dahulu.
               </div>
             @else
               @if ($pengajuan->status == "menunggu")
@@ -22,7 +22,7 @@
                   </div>
                 @else
                   @if($kp->tgl_penyaluran == NULL && $kp->sb_bln == NULL && $kp->sb_thn == NULL && $kp->no_kontrak == NULL)
-                      <h5 class="card-title1">KARTU PIUTANG</h5>
+                        <h5 class="card-title1">KARTU PIUTANG</h5>
                         <h5 class="card-title1">PROGRAM KEMITRAAN BANDARA SULTAN THAHA</h5>
                         @if($kp->tgl_penyaluran ==  NULL)
                           @else
@@ -33,9 +33,7 @@
                           <i class="bi bi-info-circle me-1"></i>Mohon tunggu karena kartu piutang anda belum dibuat.
                         </div>
                     @else
-                      <button class="btn btn-primary" style="margin-top:12px; float:right" >
-                        <a href="/cetak-kartu-piutang/{{ $kp->id}}" class="bi bi-printer" style="color:white" > </a>
-                      </button>
+                      <button class="btn btn-primary" style="margin-top:12px; float:right" ><a href="/cetak-kartu-piutang/{{ $kp->id}}" class="bi bi-printer" style="color:white" > </a></button>
                         <h5 class="card-title1">KARTU PIUTANG</h5>
                         <h5 class="card-title1">PROGRAM KEMITRAAN BANDARA SULTAN THAHA</h5>
                         <p >Tanggal Penyaluran : {{ date('d-m-Y',strtotime($kp->tgl_penyaluran))  }}</p>
@@ -47,14 +45,14 @@
                               <th rowspan="2" valign="middle">ANG ke</th>
                               <th colspan="2" scope="col">Tajuh Tempo</th>
                               <th colspan="3">Rincian Anggaran</th>
-                              <th rowspan="2">Saldo</th>
+                              <th rowspan="2">Saldo (Rp.)</th>
                             </tr>
                             <tr>
                               <th scope="col">Bulan</th>
                               <th scope="col">Tahun</th>
-                              <th scope="col">Pokok</th>
-                              <th scope="col">Jasa Pinj 0.25%</th>
-                              <th scope="col">Jumlah </th>
+                              <th scope="col">Pokok (Rp.)</th>
+                              <th scope="col">Jasa Pinj 0.25% (Rp.)</th>
+                              <th scope="col">Jumlah (Rp.)</th>
                             <tr>
                           </thead>
                           <tbody>
@@ -64,48 +62,24 @@
                               @endfor
                               <td>{{ $kp->formatRupiah('pinjaman') }}</td>
                             </tr>
-                            @for ( 
-                              $i =1,
-                              $sumpokok = 0,
-                              $sumjasa = 0,
-                              $sum = 0,
-                              $saldoawal = $kp->pinjaman,
-                              $saldo = $kp->pinjaman,
-                              $sb_bln = $kp->sb_bln/100,
-                              $waktu = $kp->waktu,
-                              $pokok = $saldoawal/$waktu,
-                              $jasa = $saldoawal*$sb_bln,
-                              $jasa1= $jasa/2;
-                              $i <= 24  ; $i++)
+                            @foreach ( $detailkp as $d )
                                 <tr>
-                                <td scope="row">{{ $i}}</td>
-                                <td>{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("F ") }}</td>
-                                <td>{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("Y ") }}</td>
-                                <td>Rp.{{ number_format(round($pokok), 0, ',','.') }} </td>
-                                @if($i <= 12 )
-                                    <td>Rp. {{ number_format(round($jasa), 0, ',','.') }} </td>
-                                    <td>Rp. {{ number_format(round($jumlah = $pokok+$jasa), 0, ',','.') }} </td>
-                                    <?php  $sumjasa += $jasa; 
-                                          $sum += $jumlah;
-                                    ?>
-                                  @else 
-                                    <td>Rp. {{ number_format(round($jasa1), 0, ',','.') }} </td>
-                                    <td>Rp. {{ number_format(round($jumlah = $pokok+$jasa1), 0, ',','.') }} </td>
-                                    <?php  $sumjasa += $jasa1; 
-                                            $sum += $jumlah;
-                                    ?>
-                                @endif
-                                <td>Rp.{{ number_format(round($saldo = $saldo-$pokok), 0, ',','.') }}</td>
-                              </tr>
-                              <?php $sumpokok += $pokok; ?>
-                            @endfor
-                              <tr>
-                                <th colspan="3">Jumlah </th>
-                                <th>Rp. {{ number_format(round($sumpokok), 0, ',','.') }}</th>
-                                <th>Rp. {{ number_format(round($sumjasa), 0, ',','.') }}</th>
-                                <th>Rp. {{ number_format(round($sum), 0, ',','.') }}</th>
-                                <th></th>
-                              </tr>
+                                  <td scope="row">{{ $loop->iteration }}</td>
+                                  <td>{{ $d->bulan}}</td>
+                                  <td>{{ $d->tahun }}</td>
+                                  <td>{{ number_format($d->pokok, 0, ',','.') }} </td>
+                                      <td> {{ number_format($d->jasa, 0, ',','.') }} </td>
+                                      <td> {{ number_format($d->jumlah , 0, ',','.') }} </td>
+                                  <td>{{ number_format($d->sisasaldo , 0, ',','.') }}</td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                              <th colspan="3">Jumlah </th>
+                              <th> {{ number_format($kp->jmlhpokok, 0, ',','.') }}</th>
+                              <th> {{ number_format($kp->jmlhjasa, 0, ',','.') }}</th>
+                              <th> {{ number_format($kp->totkp, 0, ',','.') }}</th>
+                              <th></th>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -120,7 +94,7 @@
             </div>
           @endif
           <div style="overflow-x:auto">
-            <table class="table table-striped" id="datatable">
+            <table class="table" id="datatable">
               <thead>
                 <tr>
                   <th scope="col">No</th>

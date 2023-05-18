@@ -7,7 +7,7 @@
       {{-- <button type="button" class="btn btn-primary">
         <a href="/pengajuan/create"  style="color:white;"> Tambah</a>
       </button> --}}
-      <table class="table table-striped" id="datatable">
+      <table class="table" id="datatable">
         <thead>
           <tr>
             <th scope="col">No</th>

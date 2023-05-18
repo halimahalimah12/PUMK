@@ -3,19 +3,24 @@
 @section('container')
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Data Mitra {{ $mitra->nm }}</h5>
             <table class="table ">
                 <tr><td colspan="5" class="table-primary";>  Data Diri Mitra</td></tr>
                 <tr>
-                    <td rowspan="6" width="200px"><embed src = "{{ asset('storage/dokumen/'.$mitra->foto) }}" width="300" height="200"></td>
+                    <td rowspan="6" width="200px">
+                        @if($mitra->scanktp != null)
+                                <embed src = "{{ asset('storage/dokumen/'.$mitra->foto) }}" width="300" height="200">
+                            @else 
+                                <div class="alert alert-info">Mitra belum mengupload foto nya.</div>
+                        @endif
+                    </td>
                     <td width="200px">Nama</td>
                     <td width="10px" >:</td>
-                    <td colspan="4">{{ $mitra->nm }}</td>
+                    <td colspan="4">{{ ucwords($mitra->nm) }}</td>
                 </tr>
                 <tr>
                     <td>Tempat Lahir</td>
                     <td width="10px" >:</td>
-                    <td>{{ $mitra->tpt_lhr }}</td>
+                    <td>{{ ucwords($mitra->tpt_lhr) }}</td>
                 </tr>
                 <tr>
                     <td width="150px">Tanggal Lahir</td>
@@ -49,23 +54,29 @@
                 <tr>
                     <td >Alamat</td>
                     <td width="10px" >:</td>
-                    <td > {{ $mitra->almt }} </td>
+                    <td > {{ ucwords($mitra->almt) }} </td>
                 </tr>
                 <tr>
-                    <td rowspan="9" width="200px"><embed src = "{{ asset('storage/dokumen/'.$mitra->scanktp) }}" width="300" height="200"></td>
+                    <td rowspan="9" width="200px"> 
+                        @if($mitra->scanktp != null)
+                                <embed src = "{{ asset('storage/dokumen/'.$mitra->scanktp) }}" width="300" height="200">
+                            @else 
+                                <div class="alert alert-info">Mitra belum mengupload scan KTP nya.</div>
+                        @endif
+                    </td>
                     <td >Kelurahan</td>
                     <td width="10px" >:</td>
-                    <td > {{ $mitra->kel }}</td>
+                    <td > {{ ucwords($mitra->kel) }}</td>
                 </tr>
                 <tr>
                     <td >Kecamatan</td>
                     <td width="10px" >:</td>
-                    <td > {{ $mitra->kel }} </td>
+                    <td > {{ ucwords($mitra->kel) }} </td>
                 </tr>
                 <tr>
                     <td >Kabupaten</td>
                     <td width="10px" >:</td>
-                    <td > {{ $mitra->kab }} </td>
+                    <td > {{ ucwords($mitra->kab) }} </td>
                 </tr>
                 <tr>
                     <td >Nomor HP</td>
@@ -85,17 +96,17 @@
                 <tr>
                     <td >Pendidikan</td>
                     <td width="10px" >:</td>
-                    <td > {{ $mitra->pddk }} </td>
+                    <td > {{ strtoupper($mitra->pddk) }} </td>
                 </tr>
                 <tr>
                     <td >Kursus</td>
                     <td width="10px" >:</td>
-                    <td > {{ $mitra->kursus }} </td>
+                    <td > {{ ucwords($mitra->kursus) }} </td>
                 </tr>
                 <tr>
                     <td >Jabatan</td>
                     <td width="10px" >:</td>
-                    <td > {{ $mitra->jbt}} </td>
+                    <td > {{ ucwords($mitra->jbt)}} </td>
                 </tr>
             </table>
             <table class="table ">
@@ -105,10 +116,10 @@
                 <tr>
                     <td width="180px">Nama Usaha</td>
                     <td width="10px" >:</td>
-                    <td  width="200px"> {{ $mitra->data_ush->nama_ush}} </td>
+                    <td  width="200px"> {{ ucwords($mitra->data_ush->nama_ush)}} </td>
                     <td width="180px">Jenis Usaha</td>
                     <td width="10px" >:</td>
-                    <td > {{ $mitra->data_ush->jnsush}} </td>
+                    <td > {{ ucwords($mitra->data_ush->jnsush)}} </td>
                 </tr>
                 <tr>
                     <td width="180px">Akta Usaha</td>
@@ -129,7 +140,7 @@
                 <tr>
                     <td width="180px">Alamat</td>
                     <td width="10px" >:</td>
-                    <td  width="200px"> {{ $mitra->data_ush->almt_ush}} </td>
+                    <td  width="200px"> {{ ucwords($mitra->data_ush->almt_ush)}} </td>
                     <td width="180px">No HP</td>
                     <td width="10px" >:</td>
                     <td > {{ $mitra->data_ush->nohp_ush}} </td>
@@ -137,7 +148,7 @@
                 <tr>
                     <td width="180px">Tempat Usaha</td>
                     <td width="10px" >:</td>
-                    <td  width="200px"> {{ $mitra->data_ush->tmptush}} </td>
+                    <td  width="200px"> {{ ucwords($mitra->data_ush->tmptush)}} </td>
                 </tr>
             </table>
         </div>

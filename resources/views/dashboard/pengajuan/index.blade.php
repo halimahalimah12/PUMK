@@ -19,7 +19,7 @@
       @endif
       @if($user->is_admin ==0 )
           @if($mitra->scanktp == NULL && $mitra->tpt_lhr == NULL && $mitra->tgl_lhr == NULL && $mitra->sts_prk == NULL && $mitra->jk == NULL && $mitra->almt == NULL && $mitra->no_hp == NULL && $mitra->pddk == NULL && $mitra->jbt == NULL && $mitra->kursus == NULL && $mitra->no_ktp == NULL        )
-              <div class="alert alert-info"> Silahkan Lengkapi Data Diri Terlebih Dahulu.</div>
+              <div class="alert alert-info"> Silahkan Lengkapi <a href="/profil/" class="alert-link" > <ins> Data Diri </ins>  </a>  Terlebih Dahulu.</div>
             @elseif($ush->jnsush==NULL && $ush->akta_ush ==NULL && $ush->izin_ush==NULL && $ush->thn_bersiri==NULL && $ush->almt_ush==NULL && $ush->almt_ush==NULL && $ush->nohp_ush==NULL && $ush->npwp==NULL && $ush->tmptush==NULL      )
               <div class="alert alert-info"> Silahkan Lengkapi Data Usaha Terlebih Dahulu.</div>
             @else
@@ -33,7 +33,7 @@
               @endempty
           @endif
           <div style="overflow-x:auto">
-            <table class="table table-striped" id="datatable" >
+            <table class="table " id="datatable" >
               <thead>
                 <tr>
                   <th scope="col">No</th>
@@ -78,7 +78,7 @@
               </div>
             @endif
             <div style="overflow-x:auto">
-              <table class="table table-striped" id="datatable">
+              <table class="table " id="datatable">
                 <thead>
                   <tr>
                     <th scope="col">No</th>
@@ -86,7 +86,7 @@
                     <th scope="col">Besar Pinjaman</th>
                     <th scope="col">Tanggal</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Keterangan</th>
+                    <th scope="col" style="width:200px">Keterangan</th>
                     <th scope="col">Aksi</th>
                   </tr>
                 </thead>
@@ -138,6 +138,7 @@
                       @csrf
                       <div class="modal-body">
                         <div class="col-4 form-group clearfix">
+                          <input type="hidden" class="id" name="id" id="id" value="{{ $p->id }}">
                           <label class="form-label" for ="status">Status</label>
                           <div class="col-sm-12">
                             <select class="form-select" name="status" id="status"  aria-label="Default select example">
@@ -195,6 +196,8 @@
 
 
   <script type='text/javascript'>
+
+    
     $('.menunggu').on('click', function(e){
       console.log(e);
         $('#bsrpemin').hide();
@@ -258,6 +261,7 @@
         $('#ket').show();
       }
     });
+    
   </script>
   
 @endsection

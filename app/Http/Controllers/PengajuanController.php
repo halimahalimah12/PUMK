@@ -19,13 +19,19 @@ use App\Traits\HasFormatRupiah;
 use App\Notifications\Notifikasi;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Mail\PengajuanSendingEmail;
+// use Peronh\PDFCompress\PDFCompress;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\file;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\PengajuanNotification;
 use Illuminate\Support\Facades\Notification;
+use App\Mail\PengajuanKonfirmasiSendingEmail;
 use App\Notifications\PengajuanKonfirmasiNotification;
+use Illuminate\Support\Facades\Mail;
+use Intervention\Image\Image;
+
 
 
 class PengajuanController extends Controller
@@ -92,48 +98,48 @@ class PengajuanController extends Controller
         
         $validateData = \Validator::make($request->all(),[
             // pjb
-            'nm_pjb'    => 'required|max:255',
-            'tpt_lhr'   => 'required',
+            'nm_pjb'    => 'required|max:255|alpha',
+            'tpt_lhr'   => 'required|max:255|alpha',
             'tgl_lhr'   => 'required',
-            'hub'       => 'required',
+            'hub'       => 'required|max:255',
             'gender'    => 'required',
-            'pekerjaan' => 'required',
-            'almt'      => 'required',
+            'pekerjaan' => 'required|max:255|alpha',
+            'almt'      => 'required|max:255',
             'no_hp'     => 'required|numeric',
             'no_ktp'    => 'required|numeric',
             'tgl_ktp'   => 'required|date',
             'pddk'      => 'required',
             'jbt'       => 'required | alpha', 
-            'foto'      => 'required | image | file',
-            'scanktp'   => 'required | image | file',
+            'foto'      => 'required |mimes:jpeg,png,jpg|max:10240',
+            'scanktp'   => 'required |mimes:jpeg,png,jpg|max:10240',
 
-            'tanah'     => 'required ',
-            'bangunan'  => 'required ',
-            'persediaan'=> 'required ',
-            'peralatan' => 'required ',
-            'kas'       => 'required ',
-            'piutang'   => 'required ',
-            'alat'      => 'required ',
-            'totaset'   => 'required ',
+            'tanah'     => 'required|max:20',
+            'bangunan'  => 'required|max:20',
+            'persediaan'=> 'required|max:20',
+            'peralatan' => 'required|max:20',
+            'kas'       => 'required|max:20',
+            'piutang'   => 'required|max:20',
+            'alat'      => 'required|max:20',
+            'totaset'   => 'required|max:255',
 
-            'transport' => 'required ',
-            'listrik'   => 'required ',
-            'telp'      => 'required ',
-            'atk'       => 'required ',
-            'lain'      => 'required ',
-            'totop'     => 'required ',
+            'transport' => 'required|max:20',
+            'listrik'   => 'required|max:20',
+            'telp'      => 'required|max:20',
+            'atk'       => 'required|max:20',
+            'lain'      => 'required|max:20',
+            'totop'     => 'required|max:255',
 
-            'modal'     => 'required ',
-            'invest'    => 'required ',
-            'bsr_pjm'   => 'required ',
+            'modal'     => 'required|max:20',
+            'invest'    => 'required|max:20',
+            'bsr_pjm'   => 'required|max:255',
 
-            'bkt_serius'    => 'required',
-            'kk'            => 'required',
-            'foto_kegiatan' => 'required',
-            'surat_ush'     => 'required',
-            'srt_blmbina'   => 'required',
-            'srt_pjb'       => 'required',
-            'srt_ksglns'    => 'required',
+            'bkt_serius'    => 'required |mimes:jpeg,png,jpg,pdf|max:10240',
+            'kk'            => 'required |mimes:jpeg,png,jpg|max:10240',
+            'foto_kegiatan' => 'required |mimes:jpeg,png,jpg|max:10240',
+            'surat_ush'     => 'required |mimes:jpeg,png,jpg,pdf|max:10240',
+            'srt_blmbina'   => 'required |mimes:jpeg,png,jpg,pdf|max:10240',
+            'srt_pjb'       => 'required |mimes:jpeg,png,jpg,pdf|max:10240',
+            'srt_ksglns'    => 'required |mimes:jpeg,png,jpg,pdf|max:10240',
         ]);
         if (!$validateData->passes()) {
             return response()->json(['code'=>0,'error'=>$validateData->errors()->toArray()]);
@@ -158,16 +164,24 @@ class PengajuanController extends Controller
     
             if  ($request->file('foto')){
                 $file           =   $request->file('foto');
-                $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
-                $file           ->  move('storage/dokumen',$namafile);
-                $pjb['foto']    = $namafile;
+                $pjb['foto']       =   time().str_replace(" ", "", $file->getClientOriginalName() );
+                $tujuanpath= public_path('/storage/dokumen');
+                $img =\Image::make($file->path());
+                
+                $img->resize(800,800,function($constraint){
+                    $constraint->aspectRatio();
+                })->save($tujuanpath.'/'.$pjb['foto']  );
             }
     
             if  ($request->file('scanktp')){
                 $file           =   $request->file('scanktp');
-                $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
-                $file           ->  move('storage/dokumen',$namafile);
-                $pjb['scanktp'] = $namafile;
+                $pjb['scanktp']       =   time().str_replace(" ", "", $file->getClientOriginalName() );
+                $tujuanpath= public_path('/storage/dokumen');
+                $img =\Image::make($file->path());
+                
+                $img->resize(800,800,function($constraint){
+                    $constraint->aspectRatio();
+                })->save($tujuanpath.'/'.$pjb['scanktp']   );
             }
             
             $pjb->save();
@@ -208,29 +222,42 @@ class PengajuanController extends Controller
             
     
             if  ($request->file( 'bkt_serius')){
+
                 $file           =   $request->file('bkt_serius');
                 $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
                 $file           ->  move('storage/dokumen',$namafile);
                 $pengajuan['bkt_keseriusan'] = $namafile;
+
             }
     
             if  ($request->file( 'kk')){
                 $file           =   $request->file('kk');
-                $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
-                $file           ->  move('storage/dokumen',$namafile);
-                $pengajuan['kk'] = $namafile;
+                $pengajuan['kk']      =   time().str_replace(" ", "", $file->getClientOriginalName() );
+                $tujuanpath= public_path('/storage/dokumen');
+                $img =\Image::make($file->path());
+                
+                $img->resize(800,800,function($constraint){
+                    $constraint->aspectRatio();
+                })->save($tujuanpath.'/'.$pengajuan['kk'] );
             }
     
             if  ($request->file( 'foto_kegiatan')){
                 $file           =   $request->file('foto_kegiatan');
-                $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
-                $file           ->  move('storage/dokumen',$namafile);
-                $pengajuan['foto_kegiatan'] = $namafile;
+                $pengajuan['foto_kegiatan']   =   time().str_replace(" ", "", $file->getClientOriginalName() );
+                $tujuanpath= public_path('/storage/dokumen');
+                $img =\Image::make($file->path());
+                
+                $img->resize(800,800,function($constraint){
+                    $constraint->aspectRatio();
+                })->save($tujuanpath.'/'.$pengajuan['foto_kegiatan'] );
             }
     
             if  ($request->file( 'surat_ush')){
                 $file           =   $request->file('surat_ush');
-                $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
+                $namafile     =   time().str_replace(" ", "", $file->getClientOriginalName() );
+                $tujuanpath= public_path('/storage/dokumen');
+                // $pdf = new PDFCompress();
+                // $pdf->CompressFile($tujuanpath.'/'.$pengajuan['surat_ush_rt'],'default_ebook' )->save();
                 $file           ->  move('storage/dokumen',$namafile);
                 $pengajuan['surat_ush_rt'] = $namafile;
             }
@@ -307,8 +334,10 @@ class PengajuanController extends Controller
             $useradmin = User::where('is_admin','1')->get();
             Notification::send($useradmin, new PengajuanNotification($pengajuan));    
             
+            Mail::to($request->user())->send(new PengajuanSendingEmail($pengajuan));
+
             if ( $pjb  && $aset && $oprasional && $pengajuan && $alat && $tenagakerja && $omzet && $manfaat ){
-                return response()->json(['code'=>1, 'msg' => 'Berhasil ditambahkan']);
+                return response()->json(['code'=>1,'msg'=>'Data Berhasil di Upload ']);
             }
         }
 
@@ -407,6 +436,7 @@ class PengajuanController extends Controller
     
     public function update(Request $request, $id)
     {
+        
         $pengajuan  = Pengajuan::find($id);
         $pengajuan1 = Pengajuan::where('id',$pengajuan->id);
         $pjb = Pjb::where('id',$pengajuan->pjb_id);
@@ -419,37 +449,38 @@ class PengajuanController extends Controller
 
         $validateData = $request->validate([
             // pjb
-            'nm_pjb'    => 'required|max:255',
-            'tpt_lhr'   => 'required',
+            'nm_pjb'    => 'required|max:255|alpha',
+            'tpt_lhr'   => 'required|max:255|alpha',
             'tgl_lhr'   => 'required',
-            'hub'       => 'required',
+            'hub'       => 'required|max:255',
             'gender'    => 'required',
-            'almt'      => 'required',
+            'pekerjaan' => 'required|max:255|alpha',
+            'almt'      => 'required|max:255',
             'no_hp'     => 'required|numeric',
             'no_ktp'    => 'required|numeric',
             'tgl_ktp'   => 'required|date',
             'pddk'      => 'required',
             'jbt'       => 'required | alpha', 
 
-            'tanah'     => 'required',
-            'bangunan'  => 'required',
-            'persediaan'=> 'required',
-            'peralatan' => 'required',
-            'kas'       => 'required',
-            'piutang'   => 'required',
-            'alat'      => 'required',
-            'totaset'   => 'required',
+            'tanah'     => 'required|max:20 ',
+            'bangunan'  => 'required|max:20 ',
+            'persediaan'=> 'required|max:20 ',
+            'peralatan' => 'required|max:20 ',
+            'kas'       => 'required|max:20 ',
+            'piutang'   => 'required|max:20 ',
+            'alat'      => 'required|max:20 ',
+            'totaset'   => 'required|max:255 ',
 
-            'transport' => 'required',
-            'listrik'   => 'required',
-            'telp'      => 'required',
-            'atk'       => 'required',
-            'lain'      => 'required',
-            'totop'     => 'required',
+            'transport' => 'required|max:20 ',
+            'listrik'   => 'required|max:20 ',
+            'telp'      => 'required|max:20 ',
+            'atk'       => 'required|max:20 ',
+            'lain'      => 'required|max:20 ',
+            'totop'     => 'required|max:255 ',
 
-            'modal'     => 'required',
-            'invest'    => 'required',
-            'bsr_pjm'   => 'required',
+            'modal'     => 'required|max:20 ',
+            'invest'    => 'required|max:20 ',
+            'bsr_pjm'   => 'required|max:255 ',
         ]);
 
         $dtpjb =([
@@ -473,9 +504,14 @@ class PengajuanController extends Controller
                 Storage::delete($request->oldfoto);
             }
             $file           =   $request->file('foto');
-            $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
-            $file           ->  move('storage/dokumen',$namafile);
-            $foto['foto']    = $namafile;
+            $foto['foto']       =   time().str_replace(" ", "", $file->getClientOriginalName() );
+            $tujuanpath= public_path('/storage/dokumen');
+            $img =\Image::make($file->path());
+            
+            $img->resize(800,800,function($constraint){
+                $constraint->aspectRatio();
+            })->save($tujuanpath.'/'.$foto['foto']  );
+
         } else {
             $foto['foto'] = $request->oldfoto;
         }
@@ -486,9 +522,13 @@ class PengajuanController extends Controller
                 Storage::delete($request->oldscanktp);
             }
             $file           =   $request->file('scanktp');
-            $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
-            $file           ->  move('storage/dokumen',$namafile);
-            $scanktp['scanktp'] = $namafile;
+            $scanktp['scanktp']        =   time().str_replace(" ", "", $file->getClientOriginalName() );
+            $tujuanpath= public_path('/storage/dokumen');
+            $img =\Image::make($file->path());
+            
+            $img->resize(800,800,function($constraint){
+                $constraint->aspectRatio();
+            })->save($tujuanpath.'/'.$scanktp['scanktp']   );
         } else {
             $scanktp['scanktp'] = $request->oldscanktp;
         }
@@ -664,7 +704,7 @@ class PengajuanController extends Controller
             $manfaat->save();
         }
         //$request->session()->flash('success',' Data Berhasil di perbarui ');
-        return redirect('/pengajuan')->with ('success','  Data Berhasil di perbarui ');
+        return redirect('/pengajuan')->with ('success','  Data Berhasil di Perbarui ');
             
     }
 
@@ -785,6 +825,7 @@ class PengajuanController extends Controller
         
         $mitra = $pengajuan1->data_mitra;
         $mitra->notify(new PengajuanKonfirmasiNotification($pengajuan1));
+        Mail::to($request->user())->send(new PengajuanKonfirmasiSendingEmail($pengajuan1));
 
         return redirect()->back()->with('flash_message_success','Data berhasil di perbarui'); 
     }

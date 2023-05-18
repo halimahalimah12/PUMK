@@ -57,10 +57,8 @@ class DtmitraController extends Controller
     {
         $user   = User::where('id', Auth::user()->id)->first();
         $mitra  = Data_Mitra::find($id);
-        $notification= Notification::where('id_tujuan','=','1')->get();
-        $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
         
-        return view('dashboard.data_mitra.view' ,compact('user','mitra','notification','countnotifikasi') );
+        return view('dashboard.data_mitra.view' ,compact('user','mitra') );
     }
 
     /**

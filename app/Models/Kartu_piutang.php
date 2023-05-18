@@ -5,11 +5,12 @@ namespace App\Models;
 
 use App\Models\Pengajuan;
 use App\Models\Pembayaran;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Traits\HasFormatRupiah; 
+use App\Models\Detail_Kartupiutang;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Kartu_piutang extends Model
 {
@@ -22,6 +23,10 @@ class Kartu_piutang extends Model
         return $this->hasMany(Pembayaran::class);
     }
 
+    public function detailkartupiutang(){
+        return $this->hasOne(Detail_Kartupiutang::class);
+    }
+
     protected $fillable = [
         'tgl_penyaluran',
         'pinjaman',
@@ -31,7 +36,9 @@ class Kartu_piutang extends Model
         'thn',
         'bln',
         'waktu',
-        'jasa',
+        'jmlhpokok',
+        'jmlhjasa',
+        'totkp',
     ];
     
     

@@ -22,6 +22,9 @@ class CreateKartuPiutangsTable extends Migration
             $table->float('sb_thn')->nullable();
             $table->float('sb_bln', 8,3)->nullable();
             $table->integer('waktu')->nullable();
+            $table->integer('jmlhpokok')->nullable();
+            $table->integer('jmlhjasa')->nullable();
+            $table->integer('totkp')->nullable();
             $table->timestamps();
         });
     }

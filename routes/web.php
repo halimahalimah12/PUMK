@@ -5,6 +5,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\Data_mitra;
+use App\Models\Pengajuan;
+use App\Models\Pembayaran;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisController;
 use App\Http\Controllers\ProfilController;
@@ -28,6 +30,14 @@ use Illuminate\Notifications\Notification;
 |
 */
 
+function set_active($route)
+    {
+        if (is_array($route)) {
+            return in_array(Request::path(), $route) ? 'active' : '';
+        } 
+        return Request::path() == $route ? 'active' : '';
+    }
+
 Route::get('/', function () {
     return view('index');
 });
@@ -43,15 +53,21 @@ Route::get('/dashboard', function () {
     $user = User::where('id', Auth::user()->id)->first();
     $mitra = Data_Mitra::where('user_id',$user->id)->first();
     
-    // if ($user->is_admin  == 1 ){
-    //     $notification= Notification::where('id_tujuan','=','1')->get();
-    //     $countnotifikasi = Notification::where('id_tujuan','=','1')->count();
-    // } else {
-    //     $notification= Notification::where('id_tujuan',$user->id)->get();
-    //     $countnotifikasi = Notification::where('id_tujuan',$user->id)->count();
-    // }
+    if ($user->is_admin  == 1 ){
+        $diterima = Pengajuan::where('status','=','lulus')->count();
+        $menunggu = Pengajuan::where('status','=','menunggu')->count();
+        $pembayaran = Pembayaran::where('status','=','menunggu')->count();
+        $pembayarans = Pembayaran::get();
+        $jmlhmitra = Data_Mitra::count();
+
+        return view('dashboard.index',compact('user','mitra','diterima','menunggu','pembayaran','pembayarans','jmlhmitra'));
+
+    } else {
+        $user->unreadNotifications->markAsRead();
+        return view('dashboard.index',compact('user','mitra'));
+        
+    }
     
-    return view('dashboard.index',compact('user','mitra'));
 })->middleware('auth');
 // PENGAJUAN
 Route::resource('/pengajuan', PengajuanController::class)->middleware('auth');
@@ -80,6 +96,7 @@ Route::resource('/datamitra', DtmitraController::class)->middleware('auth');
 Route::resource('/kartupiutang', KrtpiutangController::class)->middleware('auth');
 Route::get('/cetak-kartu-piutang/{id}', [KrtpiutangController::class,'cetak'])->middleware('auth');
 Route::get('/kartupiutang/hapus/{id}', [KrtpiutangController::class,'destroy'])->middleware('auth');
+Route::post('/detailkartupiutang',  [KrtpiutangController::class,'detail_kp'])->middleware('auth');
 // PROFIL (DATA MITRA & USAHA)
 Route::get('/profil', [ProfilController::class,'edit'])->middleware('auth');
 Route::post('/profil',[ProfilController::class,'update'])->middleware('auth')->name('profil.update');

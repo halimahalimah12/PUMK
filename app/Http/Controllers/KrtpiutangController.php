@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 use PDF;
 use App\Models\Data_ush;
-use App\Models\Data_mitra;
 use App\Models\Pengajuan;
-use App\Models\Kartu_piutang;
+use App\Models\Data_mitra;
 use App\Models\Pembayaran;
 use App\Models\Notification;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Models\Kartu_piutang;
+use App\Traits\HasFormatRupiah; 
 use Illuminate\Support\Facades\DB;
+use App\Models\Detail_Kartupiutang;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\file;
 use Illuminate\Support\Facades\Validator;
-use App\Traits\HasFormatRupiah; 
 
 class KrtpiutangController extends Controller
 {
@@ -35,7 +36,10 @@ class KrtpiutangController extends Controller
             $mitra     = Data_Mitra::where('user_id',$user->id)->first();
             if($pengajuan != NULL){
                 $kp =Kartu_piutang::where('pengajuan_id',$pengajuan->id)->latest('id')->first();
-                return view('dashboard.kartu_piutang.index' ,compact('user','pengajuan','kp','mitra') );
+                if($kp != NULL) {
+                    $detailkp = Detail_Kartupiutang::where('kartupiutang_id',$kp->id)->get();
+                    return view('dashboard.kartu_piutang.index' ,compact('user','pengajuan','kp','mitra','detailkp') );
+                }
             }
             return view('dashboard.kartu_piutang.index' ,compact('user','pengajuan','mitra') );
         } else {
@@ -77,15 +81,17 @@ class KrtpiutangController extends Controller
         { // halaman user
             $pengajuan = Pengajuan::where('user_id',$user->id)->first();
             $mitra     = Data_Mitra::where('user_id',$user->id)->first();
-            $kp        = Kartu_piutang::where('pengajuan_id',$pengajuan->id)->latest('id')->first();
-            $pdf = PDF::loadview('dashboard.kartu_piutang.cetak',compact('user','pengajuan','kp','mitra'))
+            $kp = Kartu_piutang::find($id);
+            $detailkp = Detail_Kartupiutang::where('kartupiutang_id',$kp->id)->get();
+            $pdf = PDF::loadview('dashboard.kartu_piutang.cetak',compact('user','pengajuan','kp','mitra','detailkp'))
                     ->setOptions(['defaultFont'=>'sans-serif']);
             return $pdf->setPaper('a4','potrait')->stream('kartu_piutang.pdf');
         } else {
             $user = User::where('id', Auth::user()->id)->first();
             $kp = Kartu_piutang::find($id);
             $pengajuan = Pengajuan::where('id',$kp->pengajuan_id)->first();
-            $pdf = PDF::loadview('dashboard.kartu_piutang.cetak',compact('user','kp','pengajuan'))
+            $detailkp = Detail_Kartupiutang::where('kartupiutang_id',$kp->id)->get();
+            $pdf = PDF::loadview('dashboard.kartu_piutang.cetak',compact('user','kp','pengajuan','detailkp'))
                     ->setOptions(['defaultFont'=>'sans-serif']);
             return $pdf->setPaper('a4','potrait')->stream('kartu_piutang.pdf');
         }
@@ -107,15 +113,17 @@ class KrtpiutangController extends Controller
                         ->where('status','=','valid')->sum('jumlah');
         $pembayaranvalid = Pembayaran::where('kartu_piutang_id',$kp->id)
                         ->where('status','=','valid')->get();
+        $iddetailkp = Detail_Kartupiutang::where('kartupiutang_id',$kp->id)->first();
+        $detailkp = Detail_Kartupiutang::where('kartupiutang_id',$kp->id)->get();
         if ($kp->tgl_penyaluran != NULL && $kp->sb_thn != NULL && $kp->sb_bln != NULL &&  $kp->no_kontrak != NULL ){
             $jasa = $this->hitungjasa($id);
             $jasa1 = $this->hitungjasa1($id);
             $pokok = $this->hitungpokok($id);
             $jumlah = $this->jumlah($id);
             $jumlah1 = $this->jumlah1($id);
-        return view('dashboard.kartu_piutang.view' ,compact('user','pembayaranvalid','kp','jasa1','jasa','pokok','pembayaran','totpembayaran','jumlah','jumlah1' ) );
+        return view('dashboard.kartu_piutang.view' ,compact('user','pembayaranvalid','kp','jasa1','jasa','pokok','pembayaran','totpembayaran','jumlah','jumlah1','detailkp','iddetailkp' ) );
         }
-        return view('dashboard.kartu_piutang.view' ,compact('user','pembayaranvalid','kp','pembayaran','totpembayaran') );
+        return view('dashboard.kartu_piutang.view' ,compact('user','pembayaranvalid','kp','pembayaran','totpembayaran','detailkp') );
     }
 
     /**
@@ -223,6 +231,41 @@ class KrtpiutangController extends Controller
         $sum = 0;
         $jumlah = $this->hitungjasa($id);
         
+    }
+
+    public function detail_kp( Request $request){
+        // dd($request);
+        $idkp =$request->kartupiutang_id;
+        $bulan=$request->bulan;
+        $tahun=$request->tahun;
+        $pokok       = $request->pokok ; 
+        $jasa       = $request->jasa ; 
+        $jumlah       = $request->jumlah ;
+        $sisasaldo    = $request->sisasaldo; 
+
+        for ($no =0 ; $no< count($jasa) ; $no++){
+            $detailkp = new Detail_Kartupiutang;
+            $detailkp->kartupiutang_id =  $idkp[$no] ;
+            $detailkp->bulan      =   $bulan[$no];
+            $detailkp->tahun   =  $tahun[$no] ;
+            $detailkp->pokok         =    str_replace(".", "",$pokok[$no]);
+            $detailkp->jasa   =    str_replace(".", "",$jasa[$no]);
+            $detailkp->jumlah         =    str_replace(".", "",$jumlah[$no]);
+            $detailkp->sisasaldo         =    str_replace(".", "",$sisasaldo[$no]);
+            $detailkp->save();
+        }
+
+        $kp= Kartu_piutang::where('id',$idkp);
+        // update data sum pokok,jasa,totkp
+        $jmlh = ([
+            'jmlhpokok' => str_replace(".", "",$request->sumpokok),
+            'jmlhjasa' => str_replace(".", "",$request->sumjasa),
+            'totkp' => str_replace(".", "",$request->sum),
+        ]);
+        $kp->update($jmlh);
+
+        return redirect()->back()->with('flash_message_success','Data berhasil di masukan'); 
+
     }
     
 

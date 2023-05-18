@@ -8,16 +8,21 @@ use App\Models\Data_mitra;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use App\Models\Kartu_piutang;
+use App\Models\Detail_Kartupiutang;
+use Intervention\Image\Image;
 use App\Traits\HasFormatRupiah; 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Mail\PembayaranSendingEmail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\file;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\PembayaranNotification;
+use App\Mail\PembayaranKonfirmasiSendingEmail;
 use App\Notifications\PembayaranKonfirmasiNotification;
 
 class PembayaranController extends Controller
@@ -31,21 +36,27 @@ class PembayaranController extends Controller
             $mitra = Data_mitra::where('user_id',$user->id)->first();
             $mitra->unreadNotifications->markAsRead();
             $pengajuan = Pengajuan::where('user_id',$user->id)->latest('id')->first();
-            $kp = Kartu_piutang::where('pengajuan_id',$pengajuan->id)->latest('id')->first();
-            $pem = Pembayaran::get();
+            if ($pengajuan != NULL){
+                $kp = Kartu_piutang::where('pengajuan_id',$pengajuan->id)->latest('id')->first();
+                if($kp != NULL){
+                    $pem = Pembayaran::get();
+                    if( $pem->isNotEmpty() ){
+                        $pembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)->get();
+                        $totpembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)
+                                        ->where('status', '=', 'valid')
+                                        ->sum('jumlah');
+                        $totbulan = Pembayaran::where('kartu_piutang_id',$kp->id)
+                                        ->where('status', '=', 'valid')
+                                        ->sum('bulan');
+                    return view ('dashboard.pembayaran.index',compact('user','totbulan','mitra','kp','pem','pengajuan','pembayaran','totpembayaran'));
+                    }
+                } else {
+                    return view ('dashboard.pembayaran.index',compact('user','pengajuan','mitra','kp'));
+                }
+                
+        }
             
-            if( $pem->isNotEmpty() ){
-                $pembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)->get();
-                $totpembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)
-                                ->where('status', '=', 'valid')
-                                ->sum('jumlah');
-                $totbulan = Pembayaran::where('kartu_piutang_id',$kp->id)
-                                ->where('status', '=', 'valid')
-                                ->sum('bulan');
-            return view ('dashboard.pembayaran.index',compact('user','totbulan','mitra','kp','pem','pengajuan','pembayaran','totpembayaran'));
-            }
-            
-            return view ('dashboard.pembayaran.index',compact('user','mitra','kp','pengajuan','pem'));
+            return view ('dashboard.pembayaran.index',compact('user','mitra','pengajuan'));
         }else{
             
             $pembayaran = Pembayaran::orderByDesc('id')->get();
@@ -76,9 +87,14 @@ class PembayaranController extends Controller
 
         if  ($request->file('foto')){
             $file           =   $request->file('foto');
-            $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
-            $file           ->  move('storage/bukti_pembayaran',$namafile);
-            $dtpembayaran['foto'] = $namafile;
+            $dtpembayaran['foto']       =   time().str_replace(" ", "", $file->getClientOriginalName() );
+            $tujuanpath= public_path('/storage/bukti_pembayaran');
+            $img =\Image::make($file->path());
+            
+            $img->resize(800,800,function($constraint){
+                $constraint->aspectRatio();
+            })->save($tujuanpath.'/'.$dtpembayaran['foto']);
+            
         }
         // DB::beginTransaction();
         // try {
@@ -93,22 +109,30 @@ class PembayaranController extends Controller
         //     return redirect()->back()->with('gagal','Gagal menyimpan data pembayaran');
         // }
         
+            Mail::to($request->user())->send(new PembayaranSendingEmail($pembayaran));
+        
         return redirect('/pembayaran')->with ('success','Data Berhasil di masukan');
 
     }
     
-    function valid($id)
+    function valid(Request $request ,$id)
     {
         try{
             
-            $pembayaran = Pembayaran::where( 'id', $id)->first();
+            $pembayaran = Pembayaran::find($id);
             $valid = ([
                 'status' => "valid"
             ]) ;
             $pembayaran->update($valid);
-            
+            $sdhbyr = Detail_kartupiutang::where('kartupiutang_id',$pembayaran->kartu_piutang_id)->first();
+            $bayar =([
+                'status' =>"sudahbayar"
+            ]);
+            $sdhbyr->update($bayar);
+
             $mitra = $pembayaran->kartu_piutang->pengajuan->data_mitra;
             $mitra->notify(new PembayaranKonfirmasiNotification($pembayaran));
+            Mail::to($request->user())->send(new PembayaranKonfirmasiSendingEmail($pembayaran));
             \Session::flash('success', 'Tagihan berhasil disetujui');
                 
         } catch( \Excaption $e) {
@@ -117,12 +141,19 @@ class PembayaranController extends Controller
         return redirect()->back();
 
     }
-    function tidak_valid($id)
+    function tidak_valid(Request $request , $id)
     {
-        try{
-            Pembayaran::where( 'id', $id)->update([
+        try{            
+            $pembayaran = Pembayaran::where( 'id', $id)->first();
+            $tidakvalid = ([
                 'status' => "tidak"
             ]) ;
+            $pembayaran->update($tidakvalid);
+            
+            $mitra = $pembayaran->kartu_piutang->pengajuan->data_mitra;
+            $mitra->notify(new PembayaranKonfirmasiNotification($pembayaran));
+            Mail::to($request->user())->send(new PembayaranKonfirmasiSendingEmail($pembayaran));
+
             \Session::flash('success', 'Tagihan berhasil tidak disetujui');
                 
         } catch( \Excaption $e) {

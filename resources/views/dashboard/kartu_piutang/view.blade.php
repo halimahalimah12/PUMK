@@ -73,72 +73,153 @@
             </form>
           </div>
           @if($kp->sb_bln != null)
-            <div style="padding-top:25px; overflow-x:auto"> 
-              <table class="table table-bordered" style="text-align:center">
-                <thead>
-                  <tr>
-                    <th rowspan="2" valign="middle">ANG ke</th>
-                    <th colspan="2" scope="col">Tajuh Tempo</th>
-                    <th colspan="3">Rincian Anggaran</th>
-                    <th rowspan="2">Saldo</th>
-                  </tr>
-                  <tr>
-                    <th scope="col">Bulan</th>
-                    <th scope="col">Tahun</th>
-                    <th scope="col">Pokok</th>
-                    <th scope="col">Jasa Pinj 0.25%</th>
-                    <th scope="col">Jumlah </th>
-                  <tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    @for( $n=0 ; $n<6 ; $n++)
-                    <td>0</td>
-                    @endfor
-                    <td>{{ $kp->formatRupiah('pinjaman') }}</td>
-                  </tr>
-                    @for ( 
-                      $i =1,
-                      $sumjasa =0,
-                      $sum = 0,
-                      $uanglebih = 0,
-                      $sumpokok =0,
-                      $saldo = $kp->pinjaman;
-                      $i <= 24  ; $i++)
-                        <tr>
-                        <td scope="row">{{ $i}}</td>
-                        <td>{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("F ") }}</td>
-                        <td>{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("Y ") }}</td>
-                        <td>Rp.{{ number_format(round($pokok), 0, ',','.') }} </td>
-                        @if($i <= 12 )
-                            <td>Rp. {{ number_format(round($jasa), 0, ',','.') }} </td>
-                            <td>Rp. {{ number_format(round($jumlah ), 0, ',','.') }} </td>
-                            <?php  $sumjasa += $jasa; 
-                                  $sum += $jumlah;
-                            ?>
-                          @else 
-                            <td>Rp. {{ number_format(round($jasa1), 0, ',','.') }} </td>
-                            <td>Rp. {{ number_format(round($jumlah1), 0, ',','.') }} </td>
-                            <?php  $sumjasa += $jasa1; 
-                                  $sum += $jumlah1;
-                            ?>
-                        @endif
-                        <td>Rp.{{ number_format(round($saldo = $saldo-$pokok), 0, ',','.') }}</td>
-                      </tr>
-                      <?php 
-                        $sumpokok += $pokok;
-                      ?>
-                    @endfor
-                    <tr>
-                    <th colspan="3">Jumlah </th>
-                    <th>Rp. {{ number_format(round($sumpokok), 0, ',','.') }}</th>
-                    <th>Rp. {{ number_format(round($sumjasa), 0, ',','.') }}</th>
-                    <th>Rp. {{ number_format(round($sum), 0, ',','.') }}</th>
-                    <th></th>
-                    </tr>
-                </tbody>
-              </table>
+            
+        <form class="row g-3  contact-form" action="/detailkartupiutang" method="POST" enctype="multipart/form-data"  >
+                @csrf    
+          {{method_field('post')}}
+          @if($iddetailkp == NULL)
+            <div >
+              <button type="submit" class="btn btn-primary" style="float:right; float: right;display: block;margin-top:15px;"><i class="ri-send-plane-fill"></i></i> Simpan </button>
             </div>
+            @else
+              @if( $iddetailkp->kartupiutang_id != $kp->id )
+                <div >
+                  <button type="submit" class="btn btn-primary" style="float:right; float: right;display: block;margin-top:15px;"><i class="ri-send-plane-fill"></i></i> Simpan </button>
+                </div>
+              @endif
+          @endif
+              <div style="padding-top:25px; overflow-x:auto"> 
+                <table class="table table-bordered" style="text-align:center">
+                  <thead>
+                    <tr>
+                      <th rowspan="2" valign="middle">ANG ke</th>
+                      <th colspan="2" scope="col">Tajuh Tempo</th>
+                      <th colspan="3">Rincian Anggaran</th>
+                      <th rowspan="2">Saldo (Rp.)</th>
+                    </tr>
+                    <tr>
+                      <th scope="col">Bulan</th>
+                      <th scope="col">Tahun</th>
+                      <th scope="col">Pokok (Rp.)</th>
+                      <th scope="col">Jasa Pinj 0.25% (Rp.)</th>
+                      <th scope="col">Jumlah (Rp.) </th>
+                    <tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      @for( $n=0 ; $n<6 ; $n++)
+                      <td>0</td>
+                      @endfor
+                      <td>{{ number_format($kp->pinjaman, 0, ',','.') }}</td>
+                    </tr>
+                    @if($iddetailkp == NULL)
+                        @for ( 
+                              $i =1,
+                              $sumjasa =0,
+                              $sum = 0,
+                              $uanglebih = 0,
+                              $sumpokok =0,
+                              $saldo = $kp->pinjaman;
+                              $i <= 24  ; $i++)
+                                <tr>
+                                <td style="display:none"><input type="hidden" name="kartupiutang_id[]" value="{{$kp->id }}" ></td>
+                                <td scope="row">{{ $i}}</td>
+                                <td><input name="bulan[]" id="bulan"value="{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("F") }}" style="border:none; width:90px" readonly></td>
+                                <td><input name="tahun[]" value="{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("Y") }}" style="border:none; width:90px" readonly></td>
+                                <td><input name="pokok[]" value="{{ number_format(round($pokok), 0, ',','.')}}" style="border:none; width:100px" readonly> </td>
+                                @if($i <= 12 )
+                                    <td><input name="jasa[]" value="{{  number_format(round($jasa), 0, ',','.')}} " style="border:none; width:100px" readonly></td>
+                                    <td><input name="jumlah[]" value="{{ number_format( round($jumlah), 0, ',','.') }}" style="border:none; width:100px" readonly > </td>
+                                    <?php  $sumjasa += $jasa; 
+                                          $sum += $jumlah;
+                                    ?>
+                                  @else 
+                                    <td><input name="jasa[]" value="{{  number_format(round($jasa1), 0, ',','.')}} " style="border:none; width:100px" readonly ></td>
+                                    <td><input name="jumlah[]" value="{{  number_format(round($jumlah1), 0, ',','.')}}" style="border:none; width:100px" readonly > </td>
+                                    <?php  $sumjasa += $jasa1; 
+                                          $sum += $jumlah1;
+                                    ?>
+                                @endif
+                                <td><input readonly name="sisasaldo[]" value="{{  number_format(round(abs($saldo = $saldo-$pokok)), 0, ',','.')}}" style="border:none; width:100px" readonly ></td>
+                                
+                              </tr>
+                              <?php 
+                                $sumpokok += $pokok;
+                              ?>
+                              
+                          @endfor
+                          <tr>
+                              <th colspan="3">Jumlah </th>
+                              <th><input name="sumpokok" value="{{ number_format($sumpokok, 0, ',','.') }}" style="border:none; width:100px"  ></th>
+                              <th><input name="sumjasa"value="{{ number_format($sumjasa, 0, ',','.') }}" style="border:none; width:100px"></th>
+                              <th><input name="sum" value="{{ number_format($sum, 0, ',','.') }}" style="border:none; width:100px"></th>
+                              <th></th>
+                              </tr>
+                      @else
+                        @if( $iddetailkp->kartupiutang_id != $kp->id )
+                            @for ( 
+                              $i =1,
+                              $sumjasa =0,
+                              $sum = 0,
+                              $uanglebih = 0,
+                              $sumpokok =0,
+                              $saldo = $kp->pinjaman;
+                              $i <= 24  ; $i++)
+                                <tr>
+                                <td style="display:none"><input type="hidden" name="kartupiutang_id[]" value="{{$kp->id }}" ></td>
+                                <td scope="row">{{ $i}}</td>
+                                <td><input  name="bulan[]" id="bulan"value="{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("F") }}" ></td>
+                                <td><input name="tahun[]" value="{{ Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("Y") }}"></td>
+                                <td><input name="pokok[]" value="{{ round($pokok)}}"> </td>
+                                @if($i <= 12 )
+                                    <td><input name="jasa[]" value="{{ round($jasa)}} " ></td>
+                                    <td><input name="jumlah[]" value="{{ round($jumlah) }}" > </td>
+                                    <?php  $sumjasa += $jasa; 
+                                          $sum += $jumlah;
+                                    ?>
+                                  @else 
+                                    <td><input name="jasa[]" value="{{ round($jasa1)}} " ></td>
+                                    <td><input name="jumlah[]" value="{{ round($jumlah1)}}" > </td>
+                                    <?php  $sumjasa += $jasa1; 
+                                          $sum += $jumlah1;
+                                    ?>
+                                @endif
+                                <td><input name="sisasaldo[]" value="{{ round(abs($saldo = $saldo-$pokok))}}" ></td>
+                                
+                              </tr>
+                              <?php 
+                                $sumpokok += $pokok;
+                              ?>
+                            @endfor
+                          @else
+                            @foreach ( $detailkp as $d )
+                                <tr>
+                                  <td scope="row">{{ $loop->iteration }}</td>
+                                  <td>{{ $d->bulan}}</td>
+                                  <td>{{ $d->tahun }}</td>
+                                  <td>{{ number_format($d->pokok, 0, ',','.') }} </td>
+                                      <td> {{ number_format($d->jasa, 0, ',','.') }} </td>
+                                      <td> {{ number_format($d->jumlah , 0, ',','.') }} </td>
+                                  <td>{{ number_format($d->sisasaldo , 0, ',','.') }}</td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                          <th colspan="3">Jumlah </th>
+                          <th> {{ number_format($kp->jmlhpokok, 0, ',','.') }}</th>
+                          <th> {{ number_format($kp->jmlhjasa, 0, ',','.') }}</th>
+                          <th> {{ number_format($kp->totkp, 0, ',','.') }}</th>
+                          <th></th>
+                          </tr>
+                            
+                        @endif
+                    @endif
+                      
+                      
+                  </tbody>
+                </table>
+              </div>
+        </form>
+            
           @endif
         </div>
         <div class="tab-pane fade" id="angsuran-justified" role="tabpanel" aria-labelledby="angsuran-tab">

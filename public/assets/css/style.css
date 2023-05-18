@@ -138,7 +138,7 @@ h6 {
   box-shadow: 0 5px 30px 0 rgba(82, 63, 105, 0.2);
 }
 
-.dropdown-menu .dropdown-header,
+/* .dropdown-menu .dropdown-header,
 .dropdown-menu .dropdown-footer {
   text-align: center;
   font-size: 15px;
@@ -152,7 +152,7 @@ h6 {
 
 .dropdown-menu .dropdown-footer a:hover {
   text-decoration: none;
-}
+} */
 
 .dropdown-menu .dropdown-divider {
   color: #a5c5fe;
@@ -274,7 +274,7 @@ h6 {
   padding: 20px 0 15px 0;
   font-size: 18px;
   font-weight: 500;
-  color: #012970;
+  color: #030058;
   font-family: "Poppins", sans-serif;
 }
 .card-title1 {
@@ -393,9 +393,21 @@ h6 {
 
 .nav-tabs-bordered .nav-link.active {
   background-color: #fff;
-  color:  #012970;;
+  color:  #012970;
   border-bottom: 2px solid  #012970;;
 }
+.btn-primary, .btn-primary.disabled {
+  box-shadow: 0 2px 6px #acb5f6;
+  background-color: #030058;
+  border-color: #030058; }
+  .btn-primary:focus, .btn-primary.disabled:focus {
+    background-color: #394eea !important; }
+    .btn-primary:focus:active, .btn-primary.disabled:focus:active {
+      background-color: #394eea !important; }
+  .btn-primary:active, .btn-primary:hover, .btn-primary.disabled:active, .btn-primary.disabled:hover {
+    background-color: #394eea !important; }
+
+
 
 /*--------------------------------------------------------------
 # Header
@@ -410,15 +422,22 @@ h6 {
   }
 }
 
-.logo img {
+.logo .img {
   max-height: 26px;
   margin-right: 6px;
+}
+
+.logo1 span {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  font-family: "Nunito", sans-serif;
 }
 
 .logo span {
   font-size: 26px;
   font-weight: 700;
-  color: #01298f;
+  color: #030058;
   font-family: "Nunito", sans-serif;
 }
 
@@ -677,8 +696,11 @@ h6 {
 
 @media (min-width: 1200px) {
 
-  #main,
+  /* #main,
   #footer {
+    margin-left: 300px;
+  } */
+  #mainr {
     margin-left: 300px;
   }
 }
@@ -884,7 +906,7 @@ h6 {
 }
 
 .dashboard .customers-card .card-icon {
-  color: #ff771d;
+  color: #ff1d1d;
   background: #ffecdf;
 }
 
@@ -1277,7 +1299,7 @@ h6 {
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
-.footer {
+/* .footer {
   padding: 20px 0;
   font-size: 14px;
   transition: all 0.3s;
@@ -1294,7 +1316,7 @@ h6 {
   text-align: center;
   font-size: 13px;
   color: #012970;
-}
+} */
 
 /*--------------------------------------------------------------
 # panel
@@ -1318,7 +1340,7 @@ h6 {
 }
 
 .panel-primary > .panel-heading {
-  background-color: #188ae2;
+  background-color: #030058;
 }
 
 .panel-title {

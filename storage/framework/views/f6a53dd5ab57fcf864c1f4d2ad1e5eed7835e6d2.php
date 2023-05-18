@@ -6,7 +6,7 @@
       <?php if( $user->is_admin == 0 ): ?>
           <?php if($pengajuan == NULL ): ?>
               <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top:30px">
-                <i class="bi bi-exclamation-octagon me-1"></i>Kartu piutang anda belum ada , Silahkan <a href="/pengajuan" class="alert-link" > <ins> pengajuan </ins> </a>lakukan  terlebih dahulu.
+                <i class="bi bi-exclamation-octagon me-1"></i>Kartu piutang anda belum ada , Silahkan <a href="/pengajuan" class="alert-link" > <ins> pengajuan </ins> </a>dilakukan  terlebih dahulu.
               </div>
             <?php else: ?>
               <?php if($pengajuan->status == "menunggu"): ?>
@@ -22,7 +22,7 @@
                   </div>
                 <?php else: ?>
                   <?php if($kp->tgl_penyaluran == NULL && $kp->sb_bln == NULL && $kp->sb_thn == NULL && $kp->no_kontrak == NULL): ?>
-                      <h5 class="card-title1">KARTU PIUTANG</h5>
+                        <h5 class="card-title1">KARTU PIUTANG</h5>
                         <h5 class="card-title1">PROGRAM KEMITRAAN BANDARA SULTAN THAHA</h5>
                         <?php if($kp->tgl_penyaluran ==  NULL): ?>
                           <?php else: ?>
@@ -33,9 +33,7 @@
                           <i class="bi bi-info-circle me-1"></i>Mohon tunggu karena kartu piutang anda belum dibuat.
                         </div>
                     <?php else: ?>
-                      <button class="btn btn-primary" style="margin-top:12px; float:right" >
-                        <a href="/cetak-kartu-piutang/<?php echo e($kp->id); ?>" class="bi bi-printer" style="color:white" > </a>
-                      </button>
+                      <button class="btn btn-primary" style="margin-top:12px; float:right" ><a href="/cetak-kartu-piutang/<?php echo e($kp->id); ?>" class="bi bi-printer" style="color:white" > </a></button>
                         <h5 class="card-title1">KARTU PIUTANG</h5>
                         <h5 class="card-title1">PROGRAM KEMITRAAN BANDARA SULTAN THAHA</h5>
                         <p >Tanggal Penyaluran : <?php echo e(date('d-m-Y',strtotime($kp->tgl_penyaluran))); ?></p>
@@ -47,14 +45,14 @@
                               <th rowspan="2" valign="middle">ANG ke</th>
                               <th colspan="2" scope="col">Tajuh Tempo</th>
                               <th colspan="3">Rincian Anggaran</th>
-                              <th rowspan="2">Saldo</th>
+                              <th rowspan="2">Saldo (Rp.)</th>
                             </tr>
                             <tr>
                               <th scope="col">Bulan</th>
                               <th scope="col">Tahun</th>
-                              <th scope="col">Pokok</th>
-                              <th scope="col">Jasa Pinj 0.25%</th>
-                              <th scope="col">Jumlah </th>
+                              <th scope="col">Pokok (Rp.)</th>
+                              <th scope="col">Jasa Pinj 0.25% (Rp.)</th>
+                              <th scope="col">Jumlah (Rp.)</th>
                             <tr>
                           </thead>
                           <tbody>
@@ -64,48 +62,24 @@
                               <?php endfor; ?>
                               <td><?php echo e($kp->formatRupiah('pinjaman')); ?></td>
                             </tr>
-                            <?php for( 
-                              $i =1,
-                              $sumpokok = 0,
-                              $sumjasa = 0,
-                              $sum = 0,
-                              $saldoawal = $kp->pinjaman,
-                              $saldo = $kp->pinjaman,
-                              $sb_bln = $kp->sb_bln/100,
-                              $waktu = $kp->waktu,
-                              $pokok = $saldoawal/$waktu,
-                              $jasa = $saldoawal*$sb_bln,
-                              $jasa1= $jasa/2;
-                              $i <= 24  ; $i++): ?>
+                            <?php $__currentLoopData = $detailkp; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                <td scope="row"><?php echo e($i); ?></td>
-                                <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("F ")); ?></td>
-                                <td><?php echo e(Carbon\Carbon::parse($kp->tgl_penyaluran)->startOfMonth()->addMonth($i)->format("Y ")); ?></td>
-                                <td>Rp.<?php echo e(number_format(round($pokok), 0, ',','.')); ?> </td>
-                                <?php if($i <= 12 ): ?>
-                                    <td>Rp. <?php echo e(number_format(round($jasa), 0, ',','.')); ?> </td>
-                                    <td>Rp. <?php echo e(number_format(round($jumlah = $pokok+$jasa), 0, ',','.')); ?> </td>
-                                    <?php  $sumjasa += $jasa; 
-                                          $sum += $jumlah;
-                                    ?>
-                                  <?php else: ?> 
-                                    <td>Rp. <?php echo e(number_format(round($jasa1), 0, ',','.')); ?> </td>
-                                    <td>Rp. <?php echo e(number_format(round($jumlah = $pokok+$jasa1), 0, ',','.')); ?> </td>
-                                    <?php  $sumjasa += $jasa1; 
-                                            $sum += $jumlah;
-                                    ?>
-                                <?php endif; ?>
-                                <td>Rp.<?php echo e(number_format(round($saldo = $saldo-$pokok), 0, ',','.')); ?></td>
-                              </tr>
-                              <?php $sumpokok += $pokok; ?>
-                            <?php endfor; ?>
-                              <tr>
-                                <th colspan="3">Jumlah </th>
-                                <th>Rp. <?php echo e(number_format(round($sumpokok), 0, ',','.')); ?></th>
-                                <th>Rp. <?php echo e(number_format(round($sumjasa), 0, ',','.')); ?></th>
-                                <th>Rp. <?php echo e(number_format(round($sum), 0, ',','.')); ?></th>
-                                <th></th>
-                              </tr>
+                                  <td scope="row"><?php echo e($loop->iteration); ?></td>
+                                  <td><?php echo e($d->bulan); ?></td>
+                                  <td><?php echo e($d->tahun); ?></td>
+                                  <td><?php echo e(number_format($d->pokok, 0, ',','.')); ?> </td>
+                                      <td> <?php echo e(number_format($d->jasa, 0, ',','.')); ?> </td>
+                                      <td> <?php echo e(number_format($d->jumlah , 0, ',','.')); ?> </td>
+                                  <td><?php echo e(number_format($d->sisasaldo , 0, ',','.')); ?></td>
+                                </tr>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <tr>
+                              <th colspan="3">Jumlah </th>
+                              <th> <?php echo e(number_format($kp->jmlhpokok, 0, ',','.')); ?></th>
+                              <th> <?php echo e(number_format($kp->jmlhjasa, 0, ',','.')); ?></th>
+                              <th> <?php echo e(number_format($kp->totkp, 0, ',','.')); ?></th>
+                              <th></th>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -121,7 +95,7 @@
             </div>
           <?php endif; ?>
           <div style="overflow-x:auto">
-            <table class="table table-striped" id="datatable">
+            <table class="table" id="datatable">
               <thead>
                 <tr>
                   <th scope="col">No</th>

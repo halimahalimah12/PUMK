@@ -179,6 +179,9 @@ return [
         // dompdf
         Barryvdh\DomPDF\ServiceProvider::class,
 
+        //compress image
+        Intervention\Image\ImageServiceProvider::class,
+
     ],
 
     /*
@@ -234,6 +237,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'PDFCompress' => Peronh\PDFCompress\src\PDFCompress::class,
 
     ],
 

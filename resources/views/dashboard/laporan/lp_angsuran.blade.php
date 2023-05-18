@@ -44,7 +44,7 @@
           </div>
           <hr>
             <div style="overflow-x:auto">
-              <table class="table table-striped" id="datatable">
+              <table class="table" id="datatable">
                 <thead>
                   <tr>
                     <th>No</th>

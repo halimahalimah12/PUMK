@@ -1,207 +1,140 @@
 <!-- ======= Header ======= -->
-<header id="header" class="header fixed-top d-flex align-items-center">
+
   <!-- Logo -->
-  <div class="d-flex align-items-center justify-content-between">
-    <a href="" class="logo d-flex align-items-center">
-      <span class="d-none d-lg-block">PUMK</span>
-    </a>
-    <i class="bi bi-list toggle-sidebar-btn"></i>
-  </div>
+  
   <!-- Icons Navigation -->
-  <nav class="header-nav ms-auto">
-    <ul class="d-flex align-items-center">
+  
       <!-- Notification Nav -->
-      <li class="nav-item dropdown">
+      
         <!-- Notification Icon -->
-        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-          <i class="bi bi-bell"></i>
-          <?php if( $user->is_admin ==1 ): ?>
-              
-              <span class="badge bg-primary badge-number"><?php echo e(auth()->user()->unreadNotifications->count()); ?></span>
-            <?php else: ?> 
-              
-              <span class="badge bg-primary badge-number"><?php echo e($mitra->unreadNotifications->count()); ?></span>
-          <?php endif; ?>
-          
-        </a>
-        <!-- Notification Dropdown Items -->
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-          <li class="dropdown-header">
-            <?php if($user->is_admin == 1): ?>
-                You have <?php echo e(auth()->user()->unreadNotifications->count()); ?> new notifications
-              <?php else: ?>
-                You have <?php echo e($mitra->unreadNotifications->count()); ?> new notifications
-            <?php endif; ?>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <?php if($user->is_admin == 1 ): ?>
-            <?php $__currentLoopData = auth()->user()->unreadNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <li class="notification-item">
-                  <i class="bi bi-info-circle text-primary"></i>
-                    <div>
-                      <?php if($notification->data['title'] == 'Pembayaran Tagihan'): ?>
-                        <a href= "<?php echo e($notification->data['url']); ?>" >
-                          <h4> <?php echo e($notification->data['title']); ?> </h4>
-                          <p><?php echo e(ucwords($notification->data['messages'])); ?></p>
-                          <p><?php echo e($notification->created_at->diffForHumans()); ?> </p>
-                        </a>
-                        <?php elseif($notification->data['title'] == 'Pengajuan Pendanaan.'): ?>
-                          <a href= "<?php echo e($notification->data['url'].'?id='.$notification->id); ?>" >
-                            <h4> <?php echo e($notification->data['title']); ?> </h4>
-                            <p><?php echo e(ucwords($notification->data['messages'])); ?></p>
-                            <p><?php echo e($notification->created_at->diffForHumans()); ?> </p>
-                          </a>
-                      <?php endif; ?>
-                    </div>  
-                </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-            <?php else: ?> 
-            <?php $__currentLoopData = $mitra->unreadNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <li class="notification-item">
-                <i class="bi bi-info-circle text-primary"></i>
-                  <div>
-                      <h4> <a href= "<?php echo e($notification->data['url']); ?>" ><?php echo e($notification->data['title']); ?> </a></h4>
-                    <p><?php echo e(ucwords($notification->data['messages'])); ?></p>
-                    <p><?php echo e($notification->created_at->diffForHumans()); ?> </p>
-                  </div>  
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-          <?php endif; ?>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
         
-        </ul>
-      </li>
+              
+              
+              
+              
+        <!-- Notification Dropdown Items -->
+        
       <!--Messages Nav -->
-      <li class="nav-item dropdown">
+      
         <!--  Messages Icon -->
         
         <!-- Messages Dropdown Items -->
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-          <li class="dropdown-header">
-            You have 3 new messages
-            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li class="message-item">
-            <a href="#">
-              <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-              <div>
-                <h4>Maria Hudson</h4>
-                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li class="message-item">
-            <a href="#">
-              <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-              <div>
-                <h4>Anna Nelson</h4>
-                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                <p>6 hrs. ago</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li class="message-item">
-            <a href="#">
-              <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-              <div>
-                <h4>David Muldon</h4>
-                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                <p>8 hrs. ago</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li class="dropdown-footer">
-            <a href="#">Show all messages</a>
-          </li>
-
-        </ul>
-      </li>
+        
       <!-- Profile Nav -->
-      <li class="nav-item dropdown pe-3">
+      
         <!--Profile Iamge Icon -->
-        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          <?php if($user->is_admin == 0): ?>
+        
             
-            <span class="d-none d-md-block dropdown-toggle ps-2" style="color:white"><?php echo e(ucwords($mitra->nm)); ?></span>
-          <?php else: ?>
-            <span class="d-none d-md-block dropdown-toggle ps-2" style="color:white"><?php echo e(ucwords($user->email)); ?></span>
-          <?php endif; ?>
-        </a>
+            
         <!-- Profile Dropdown Items -->
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-          <li class="dropdown-header">
-            <?php if($user->is_admin == 0): ?>
-                <h6><?php echo e($mitra->nm); ?></h6>
-                <span><?php echo e($mitra->data_ush->nama_ush); ?></span>
-              <?php else: ?>
-            <?php endif; ?>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li>
-            <a class="dropdown-item d-flex align-items-center" href="/profil">
-              <i class="bi bi-person"></i> <span>My Profile</span>
-            </a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li>
-            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-              <i class="bi bi-gear"></i>
-              <span>Account Settings</span>
-            </a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li>
-            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-              <i class="bi bi-question-circle"></i>
-              <span>Need Help?</span>
-            </a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li>
-            <a class="dropdown-item d-flex align-items-center" href="#">
-              <i class="bi bi-box-arrow-right"></i>
-              <span>Sign Out</span>
-            </a>
-          </li>
+        
+
+<nav class="navbar navbar-expand-lg main-navbar">
+    
+      <form class="form-inline mr-auto" style="width:72%">
+        <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+            <li><img src="<?php echo e(asset ('assets/img/logoap2.png')); ?>" alt="" style="width:100px"></li>
+
         </ul>
-      </li>
-    </ul>
-  </nav>
-</header><?php /**PATH D:\applaravel\pumk\resources\views/dashboard/layouts/header.blade.php ENDPATH**/ ?>
+      </form>
+      <ul class="navbar-nav navbar-right " >
+        
+        <li class="dropdown dropdown-list-toggle" width=><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+          <div class="dropdown-menu dropdown-list dropdown-menu-right " style="width:260px;height:400px">
+            <div class="dropdown-header">Notifications
+              <div class="float-right">
+                <?php if($user->is_admin == 1): ?>
+                    Anda memiliki <?php echo e(auth()->user()->unreadNotifications->count()); ?> notifikasi baru.
+                  <?php else: ?>
+                    Anda memiliki <?php echo e($mitra->unreadNotifications->count()); ?> notifikasi baru.
+                <?php endif; ?>
+              </div>
+            </div>
+            <div class="dropdown-list-content dropdown-list-icons">
+              <?php if($user->is_admin == 1 ): ?>
+                  <?php $__currentLoopData = auth()->user()->unreadNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php if($notification->data['title'] == 'Pembayaran Tagihan'): ?>
+                          <a href="<?php echo e($notification->data['url']); ?>" class="dropdown-item">
+                            <div class="dropdown-item-icon bg-info text-white">
+                              <i class="fas fa-paper-plane"></i>
+                            </div>
+                            <div class="dropdown-item-desc">
+                              <b style="font-weight: bold;"><?php echo e($notification->data['title']); ?> </b><br>
+                              <b><?php echo e(ucwords($notification->data['messages'])); ?></b>
+                              <div class="time"><?php echo e($notification->created_at->diffForHumans()); ?></div>
+                            </div>
+                          </a>
+                        <?php elseif($notification->data['title'] == 'Pengajuan Pendanaan.'): ?>
+                          <a href="<?php echo e($notification->data['url'].'?id='.$notification->id); ?>" class="dropdown-item">
+                            <div class="dropdown-item-icon bg-info text-white">
+                              <i class="fas fa-money-bill-wave-alt"></i>
+                            </div>
+                            <div class="dropdown-item-desc">
+                              <b style="font-weight: bold;"><?php echo e($notification->data['title']); ?> </b><br>
+                              <b><?php echo e(ucwords($notification->data['messages'])); ?></b>
+                              <div class="time"><?php echo e($notification->created_at->diffForHumans()); ?></div>
+                            </div>
+                          </a>
+                      <?php endif; ?>
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php else: ?>
+                  <?php $__currentLoopData = $mitra->unreadNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                          <a href="<?php echo e($notification->data['url']); ?>" class="dropdown-item">
+                            <div class="dropdown-item-icon bg-info text-white">
+                              <i class="fal fa-info-circle"></i>
+                            </div>
+                            <div class="dropdown-item-desc">
+                              <b style="font-weight: bold;"><?php echo e($notification->data['title']); ?> </b><br>
+                              <b><?php echo e(ucwords($notification->data['messages'])); ?></b>
+                              <div class="time"><?php echo e($notification->created_at->diffForHumans()); ?></div>
+                            </div>
+                          </a>
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+              <?php endif; ?>
+            </div>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="#" data-toggle="dropdown" class="nav-link nav-link-lg nav-link-user">
+            <?php if($user->is_admin == 0): ?>
+              <div class="round">
+                <?php if($mitra->foto != NULL): ?>
+                    <img alt="image" src="<?php echo e(asset('storage/dokumen/'.$mitra->foto)); ?>" style="margin-right:30px;"height="100px" width=auto>
+                  <?php else: ?>
+                    <img alt="image" src="<?php echo e(asset('assets/img/avatar-1.png')); ?>">
+                <?php endif; ?>
+              </div>
+            <?php endif; ?>
+          </a>
+        </li>
+        <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+            <div class="d-sm-none d-lg-inline-block">
+                <?php if($user->is_admin == 0): ?> 
+                    <span class="d-none d-md-block " style="color:white"><?php echo e(ucwords($mitra->nm)); ?></span>
+                  <?php else: ?>
+                    <span class="d-none d-md-block " style="color:white"><?php echo e(ucwords($user->email)); ?></span>
+                <?php endif; ?>
+            </div>
+            <div class="dropdown-menu dropdown-menu-right">
+              <div class="dropdown-title" >
+                <?php if($user->is_admin == 0): ?>
+                    <span><?php echo e($mitra->nm); ?></span>
+                    <span><?php echo e($mitra->data_ush->nama_ush); ?></span>
+                  <?php else: ?>
+                    <span><?php echo e($user->email); ?></span>
+                <?php endif; ?>
+              </div>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-gear"></i>
+                <span>Pengaturan Akun</span>
+              </a>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Logout</span>
+              </a>
+              
+            </div>
+          </li>
+      </ul>
+  </nav><?php /**PATH D:\applaravel\pumk\resources\views/dashboard/layouts/header.blade.php ENDPATH**/ ?>

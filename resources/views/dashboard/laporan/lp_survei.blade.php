@@ -15,7 +15,7 @@
       </div>
       @can('admin')
         <div style="overflow-x:auto;">
-          <table class="table table-striped" id="datatable">
+          <table class="table" id="datatable">
             <thead>
               <tr>
                 <th scope="col">No</th>

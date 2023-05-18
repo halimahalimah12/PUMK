@@ -3,7 +3,6 @@
 <?php $__env->startSection('container'); ?>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Biodata Mitra</h5>
         <form  method="post" action="<?php echo e(route('profil.update')); ?>" enctype="multipart/form-data" >
           <?php echo csrf_field(); ?>
           <?php if(session('success')): ?>
