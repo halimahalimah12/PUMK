@@ -254,20 +254,20 @@
                     </td>
                   </tr>
                 @endforeach
-                  <p style="visibility: hidden;display: none;">{{ $uanglebih = $sum-$totpembayaran }}</p>
+                  <p style="visibility: hidden;display: none;">{{ $uanglebih = $kp->totkp-$totpembayaran }}</p>
                   <tr>
                     <th colspan="3">Total Pembayaran</th>
                     <th>Rp. {{ number_format($totpembayaran,0,',','.' )}}</th>
                   </tr>
                   <tr>
                     <th colspan="3">Sisa Tagihan</th>
-                    @if($totpembayaran  < $sum )
-                        <th>Rp. {{ number_format($sisatagihan= $sum-$totpembayaran,0,',','.') }}</th>
+                    @if($totpembayaran  < $kp->totkp )
+                        <th>Rp. {{ number_format($sisatagihan= $kp->totkp-$totpembayaran,0,',','.') }}</th>
                       @else 
-                        <th>Rp. {{ number_format($sisatagihan= $sum-$totpembayaran - $uanglebih,0,',','.') }}</th>
+                        <th>Rp. {{ number_format($sisatagihan= $kp->totkp-$totpembayaran - $uanglebih,0,',','.') }}</th>
                     @endif
                   </tr>
-                    @if($totpembayaran > $sum )
+                    @if($totpembayaran > $kp->totkp )
                       <tr>
                         <th colspan="3">Uang Lebih</th>
                         <th>Rp. {{ number_format(abs($uanglebih),0,',','.') }}</th>
@@ -299,7 +299,7 @@
                     @for( $n=0 ; $n<6 ; $n++)
                       <td>0</td>
                     @endfor
-                    <td>{{ number_format($sum,0,',','.')}}</td>
+                    <td>{{ number_format($kp->totkp,0,',','.')}}</td>
                       <td></td>
                   </tr>
                     @for(  $n=1,$jmlhpokok=0 ,$jmlhjasa=0, $jumlahbayar=0 , $jmlhbulan=0 ; $n<=1 ; $n++)
@@ -315,10 +315,10 @@
                                 <?php $jmlhpokok += $p->pokok ?> 
                             <td>{{ number_format($p->jasa,0,',','.') }}</td>
                                 <?php $jmlhjasa += $p->jasa ?> 
-                            @if ( $sum > $p->jumlah)
-                                <td>{{ number_format($sum=$sum - $p->jumlah ,0,',','.') }}</td>
+                            @if ( $kp->totkp > $p->jumlah)
+                                <td>{{ number_format($kp->totkp=$kp->totkp - $p->jumlah ,0,',','.') }}</td>
                               @else 
-                                <td>{{ number_format($sum=$sum - $p->jumlah-$uanglebih ,0,',','.') }}</td>
+                                <td>{{ number_format($kp->totkp=$kp->totkp - $p->jumlah-$uanglebih ,0,',','.') }}</td>
                             @endif
                             <td>@if ($p->bank == 'bri') BRI
                                 @else Mandiri
@@ -333,7 +333,7 @@
                       <th > {{ number_format($jmlhbulan,0,',','.') }} </th>
                       <th > {{ number_format($jmlhpokok,0,',','.') }} </th>
                       <th > {{ number_format($jmlhjasa ,0,',','.') }} </th>
-                      @if($p->jumlah > $sum)
+                      @if($p->jumlah > $kp->totkp)
                         <th colspan="2" > Uang Lebih: {{ number_format(abs($uanglebih) ,0,',','.') }} </th>
                       @endif
                     </tr>

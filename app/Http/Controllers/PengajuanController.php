@@ -29,6 +29,8 @@ use App\Notifications\PengajuanNotification;
 use Illuminate\Support\Facades\Notification;
 use App\Mail\PengajuanKonfirmasiSendingEmail;
 use App\Notifications\PengajuanKonfirmasiNotification;
+use App\Mail\PengajuanLunasSendingEmail;
+use App\Notifications\PengajuanLunasNotification;
 use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Image;
 
@@ -59,7 +61,9 @@ class PengajuanController extends Controller
             return view('dashboard.pengajuan.index' ,compact('pengajuan','user','last','mitra','ush') );
         }else{
             $pengajuan1 = Pengajuan::orderByDesc('id')->get();
-            return view('dashboard.pengajuan.index' ,compact('pengajuan1','user') );
+            $summenunggu= Pengajuan::where('status','=','menunggu')->count();
+
+            return view('dashboard.pengajuan.index' ,compact('pengajuan1','user','summenunggu') );
         }
         
     }
@@ -828,6 +832,30 @@ class PengajuanController extends Controller
         Mail::to($request->user())->send(new PengajuanKonfirmasiSendingEmail($pengajuan1));
 
         return redirect()->back()->with('flash_message_success','Data berhasil di perbarui'); 
+    }
+
+    //Konfirmasi pengajuan lunas
+    function lunas(Request $request ,$id)
+    {
+        try{
+            
+            $pengajuan1= Pengajuan::find($id);
+            $lunas = ([
+                'status' => "lunas",
+                'ket' => "Terimakasih sudah melunaskan peminjaman."
+            ]) ;
+            $pengajuan1->update($lunas);
+
+            $mitra = $pengajuan1->data_mitra;
+            $mitra->notify(new PengajuanLunasNotification($pengajuan1));
+            Mail::to($request->user())->send(new PengajuanLunasSendingEmail($pengajuan1));
+            \Session::flash('success', 'Data berhasil diperbarui.');
+                
+        } catch( \Excaption $e) {
+            \Session::flash('gagal', $e->getMessage());
+        } 
+        return redirect()->back();
+
     }
 
     public function download(){

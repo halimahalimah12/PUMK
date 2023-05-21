@@ -20,8 +20,8 @@
           @foreach ($mitra as $p )
             <tr>
               <td>{{ $loop->iteration }}</td>
-              <td>{{ $p->nm }}</td>
-              <td>{{ $p->data_ush->nama_ush }}</td>
+              <td>{{ ucwords($p->nm) }}</td>
+              <td>{{ ucwords($p->data_ush->nama_ush) }}</td>
               <td><a href="/datamitra/{{$p->id}}" class="bi bi-file-earmark-text" ></a>
                   <a href="" class="bi bi-trash" ></a>
               </td>

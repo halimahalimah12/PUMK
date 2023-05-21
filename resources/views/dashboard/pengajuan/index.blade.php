@@ -55,11 +55,13 @@
                           <span class="badge bg-success">Pengajuan Diterima</span>
                         @elseif($p->status == 'lulus_survei')
                           <span class="badge bg-warning">Lulus Survei</span>
+                        @elseif($p->status == "lunas")
+                            <span class="badge bg-info">Pengajuan Lunas</span>
                         @else
                         <span class="badge bg-danger">Pengajuan Ditolak</span>
                       @endif
                     </td>
-                    <td style="width:280px">{{ $p->ket }} </td>
+                    <td style="width:280px">{{ ucfirst($p->ket) }} </td>
                     <td>
                       <a href="/show/{{ $p->id }}" class="bi bi-file-earmark-text" ></a>
                       <a href="/cetak/{{ $p->id }}" class="bi bi-printer"> </a>
@@ -98,8 +100,9 @@
                       <td>{{ $p->formatRupiah('bsr_pinjaman') }}</td>
                       <td>{{ $p->created_at}}</td>
                       <td>  
+                        {{-- <input type="text" class="id" name="id" id="id{{ $p->id }}" value="{{ $p->id }}"> --}}
                         @if($p->status == 'menunggu') 
-                            <button type="button" class="btn  btn-secondary btn-sm menunggu" data-bs-toggle="modal" data-bs-target="#menunggu-{{ $p->id }}">
+                            <button type="button" class="btn  btn-secondary btn-sm menunggu" data-bs-toggle="modal" data-bs-target="#menunggu-{{ $p->id }}" >
                             Menunggu
                             </button>
                           @elseif($p->status == 'lulus')
@@ -108,11 +111,13 @@
                             <button type="button" class="btn  btn-warning btn-sm menunggu" data-bs-toggle="modal" data-bs-target="#menunggu-{{ $p->id }}">
                             Lulus Survei
                             </button>
+                          @elseif($p->status == "lunas")
+                            <span class="badge bg-info">Pengajuan Lunas</span>
                           @else
                             <span class="badge bg-danger">Pengajuan Ditolak</span>
                         @endif
                       </td>
-                      <td scope="col" >{{ $p->ket }}</td>
+                      <td scope="col" >{{ ucfirst($p->ket) }}</td>
                       <td>
                         <a href="/show/{{$p->id}}" class="bi bi-file-earmark-text" ></a>
                         <a href="/survei/{{$p->id}}" class="bi bi-file-earmark-check" ></a>
@@ -138,7 +143,6 @@
                       @csrf
                       <div class="modal-body">
                         <div class="col-4 form-group clearfix">
-                          <input type="hidden" class="id" name="id" id="id" value="{{ $p->id }}">
                           <label class="form-label" for ="status">Status</label>
                           <div class="col-sm-12">
                             <select class="form-select" name="status" id="status"  aria-label="Default select example">
@@ -149,6 +153,7 @@
                             </select>
                           </div>
                         </div>
+                        <div id="input"> 
                         <div class="col-12 " >
                           <label for="bsrpemin" class="form-label" id="bsrpin" >Besar Peminjaman yang diberikan </label>
                           <div class="input-group mb-3">
@@ -174,6 +179,7 @@
                           <label for="ket" class="form-label" id="lebket">Keterangan </label>
                           <input type="text" class="form-control hide" name="ket" id="ket">
                         </div>
+                        </div>
                       </div>
 
                       <div class="modal-footer">
@@ -196,10 +202,11 @@
 
 
   <script type='text/javascript'>
+  
+      $('.menunggu').each(function(){
+        $('.menunggu').on('click', function(e){
 
-    
-    $('.menunggu').on('click', function(e){
-      console.log(e);
+        console.log(e);
         $('#bsrpemin').hide();
         $('#bsrpin').hide();
         $('.rp').hide();
@@ -212,8 +219,12 @@
         $('#ksg_bayar').hide();
         $('#lebbsr_usulan').hide();
         $('#bsr_usulan').hide();
+        
       });
-    $('#status').on('change', function(e){
+      });
+
+    $('#status').each(function(){
+      $(this).on('change', function(e){
       console.log(e);
       var status= e.target.value;
       if (status == "lulus"){
@@ -261,7 +272,10 @@
         $('#ket').show();
       }
     });
+
     
+    });
+        
   </script>
   
 @endsection

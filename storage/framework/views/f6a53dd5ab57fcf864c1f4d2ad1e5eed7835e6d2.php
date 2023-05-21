@@ -20,6 +20,10 @@
                     <i class="bi bi-info-circle me-1"></i>Kartu piutang anda belum ada.Saat ini pengajuan anda masih ditahap 
                         lulus survei dan berkas, Mohon tunggu hingga pengajuan disetujui.
                   </div>
+                <?php elseif($pengajuan->status == "lunas"): ?>
+                  <div class="alert alert-info alert-dismissible fade show" role="alert" style="margin-top:30px">
+                    <i class="bi bi-info-circle me-1"></i>Anda tidak memiliki kartu piutang lagi, silahkan melakukan pengajuan lagi.
+                  </div>
                 <?php else: ?>
                   <?php if($kp->tgl_penyaluran == NULL && $kp->sb_bln == NULL && $kp->sb_thn == NULL && $kp->no_kontrak == NULL): ?>
                         <h5 class="card-title1">KARTU PIUTANG</h5>
@@ -86,6 +90,8 @@
                   <?php endif; ?>
               <?php endif; ?>
           <?php endif; ?>
+      
+      
         <?php else: ?>
           <h5 class="card-title">Kartu Piutang</h5>
           <?php if(session('flash_message_success')): ?>

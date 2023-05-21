@@ -13,8 +13,8 @@
                 </p>
               </div>
             @else
-              <div class="alert alert-info alert-dismissible fade show" role="alert" style="padding-bottom:1px">
-                <p style="text-align:center">
+              <div class="alert alert-info alert-dismissible fade show" role="alert" style="margin-top:60px">
+                <p style="text-align:left;align-items:center">
                   {{-- Selamat Datang di Sistem Informasi PUMK. --}}
                   <i class="bi bi-emoji-smile"></i>
                   {{ session('success') }}  
@@ -24,6 +24,63 @@
           @endif
         @else
       @endif
+
+    <section class="section ">
+      <section class="section ">
+        <div class="section-header">
+              <h1>Dashboard</h1>
+        </div>
+        <div class="section-body">
+            <div class="row">
+              <div class="row">
+
+                {{-- Pengajuan diterima --}}
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                  <div class="card card-statistic-1">
+                    <div class="card-icon bg-success">
+                      <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="card-wrap">
+                      <div class="card-header">
+                        <h4>Pengajuan Diterima</h4>
+                      </div>
+                      <div class="card-body">
+                        <h6>{{ $diterima }}</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {{-- menunggu ferifikasi pembayaran--}}
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                  <div class="card card-statistic-1">
+                    <div class="card-icon bg-danger">
+                      <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="card-wrap">
+                      <div class="card-header">
+                        <a href="/pembayaran"><h4>Sisa Piutang</h4></a>
+                      </div>
+                      <div class="card-body">
+                      @if($kp != NULL)
+                        @if($kp->totkp != NULL)
+                          <h6>{{ $jmlhpem - $kp->totkp }}</h6>
+                          @else
+                          <h6>0</h6>
+                        @endif
+                        @else
+                          <h6>0</h6>
+                      @endif
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+        </div>
+      </section>
+    </section>
 
     @else
     <section class="section ">

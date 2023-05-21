@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Data_mitra;
 use App\Models\Pengajuan;
 use App\Models\Pembayaran;
+use App\Models\Kartu_piutang;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisController;
 use App\Http\Controllers\ProfilController;
@@ -64,7 +65,17 @@ Route::get('/dashboard', function () {
 
     } else {
         $user->unreadNotifications->markAsRead();
-        return view('dashboard.index',compact('user','mitra'));
+        $diterima = Pengajuan::where('user_id','=',$user->id)
+                    ->where('status','=','lulus')->count();
+        $pengajuan = Pengajuan::where('user_id','=',$user->id)->latest('id')->first();
+        $kp = Kartu_piutang::where('pengajuan_id','=',$pengajuan->id)->latest('id')->first();
+        if($kp != null){
+                $jmlhpem = Pembayaran::where('kartu_piutang_id',$kp->id)
+                    ->where('status','=','valid')->sum('jumlah');
+            return view('dashboard.index',compact('user','mitra','diterima','jmlhpem','kp'));
+            }
+
+        return view('dashboard.index',compact('user','mitra','diterima','kp'));
         
     }
     
@@ -77,6 +88,8 @@ Route::put('/konfirmasi/{id}',[PengajuanController::class,'konfirmasi']);
 Route::get('/hapus/{id}', [PengajuanController::class,'destroy'])->middleware('auth');
 Route::get('/show/{id}', [PengajuanController::class,'show'])->middleware('auth');
 Route::get('/cetak/{id}', [PengajuanController::class,'cetak'])->middleware('auth');
+Route::get('/lunas/{id}',[PengajuanController::class,'lunas'])->middleware('auth');
+
 // DOKUMEN PENGAJUAN
 Route::get('/bukti-keseriusan/{id}', [PengajuanController::class,'buktiserius'])->middleware('auth');
 Route::get('/scan-kk/{id}', [PengajuanController::class,'scan_kk'])->middleware('auth');

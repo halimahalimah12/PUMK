@@ -326,20 +326,20 @@ unset($__errorArgs, $__bag); ?>
                     </td>
                   </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                  <p style="visibility: hidden;display: none;"><?php echo e($uanglebih = $sum-$totpembayaran); ?></p>
+                  <p style="visibility: hidden;display: none;"><?php echo e($uanglebih = $kp->totkp-$totpembayaran); ?></p>
                   <tr>
                     <th colspan="3">Total Pembayaran</th>
                     <th>Rp. <?php echo e(number_format($totpembayaran,0,',','.' )); ?></th>
                   </tr>
                   <tr>
                     <th colspan="3">Sisa Tagihan</th>
-                    <?php if($totpembayaran  < $sum ): ?>
-                        <th>Rp. <?php echo e(number_format($sisatagihan= $sum-$totpembayaran,0,',','.')); ?></th>
+                    <?php if($totpembayaran  < $kp->totkp ): ?>
+                        <th>Rp. <?php echo e(number_format($sisatagihan= $kp->totkp-$totpembayaran,0,',','.')); ?></th>
                       <?php else: ?> 
-                        <th>Rp. <?php echo e(number_format($sisatagihan= $sum-$totpembayaran - $uanglebih,0,',','.')); ?></th>
+                        <th>Rp. <?php echo e(number_format($sisatagihan= $kp->totkp-$totpembayaran - $uanglebih,0,',','.')); ?></th>
                     <?php endif; ?>
                   </tr>
-                    <?php if($totpembayaran > $sum ): ?>
+                    <?php if($totpembayaran > $kp->totkp ): ?>
                       <tr>
                         <th colspan="3">Uang Lebih</th>
                         <th>Rp. <?php echo e(number_format(abs($uanglebih),0,',','.')); ?></th>
@@ -371,7 +371,7 @@ unset($__errorArgs, $__bag); ?>
                     <?php for( $n=0 ; $n<6 ; $n++): ?>
                       <td>0</td>
                     <?php endfor; ?>
-                    <td><?php echo e(number_format($sum,0,',','.')); ?></td>
+                    <td><?php echo e(number_format($kp->totkp,0,',','.')); ?></td>
                       <td></td>
                   </tr>
                     <?php for(  $n=1,$jmlhpokok=0 ,$jmlhjasa=0, $jumlahbayar=0 , $jmlhbulan=0 ; $n<=1 ; $n++): ?>
@@ -387,10 +387,10 @@ unset($__errorArgs, $__bag); ?>
                                 <?php $jmlhpokok += $p->pokok ?> 
                             <td><?php echo e(number_format($p->jasa,0,',','.')); ?></td>
                                 <?php $jmlhjasa += $p->jasa ?> 
-                            <?php if( $sum > $p->jumlah): ?>
-                                <td><?php echo e(number_format($sum=$sum - $p->jumlah ,0,',','.')); ?></td>
+                            <?php if( $kp->totkp > $p->jumlah): ?>
+                                <td><?php echo e(number_format($kp->totkp=$kp->totkp - $p->jumlah ,0,',','.')); ?></td>
                               <?php else: ?> 
-                                <td><?php echo e(number_format($sum=$sum - $p->jumlah-$uanglebih ,0,',','.')); ?></td>
+                                <td><?php echo e(number_format($kp->totkp=$kp->totkp - $p->jumlah-$uanglebih ,0,',','.')); ?></td>
                             <?php endif; ?>
                             <td><?php if($p->bank == 'bri'): ?> BRI
                                 <?php else: ?> Mandiri
@@ -405,7 +405,7 @@ unset($__errorArgs, $__bag); ?>
                       <th > <?php echo e(number_format($jmlhbulan,0,',','.')); ?> </th>
                       <th > <?php echo e(number_format($jmlhpokok,0,',','.')); ?> </th>
                       <th > <?php echo e(number_format($jmlhjasa ,0,',','.')); ?> </th>
-                      <?php if($p->jumlah > $sum): ?>
+                      <?php if($p->jumlah > $kp->totkp): ?>
                         <th colspan="2" > Uang Lebih: <?php echo e(number_format(abs($uanglebih) ,0,',','.')); ?> </th>
                       <?php endif; ?>
                     </tr>

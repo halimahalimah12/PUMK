@@ -56,11 +56,13 @@
                           <span class="badge bg-success">Pengajuan Diterima</span>
                         <?php elseif($p->status == 'lulus_survei'): ?>
                           <span class="badge bg-warning">Lulus Survei</span>
+                        <?php elseif($p->status == "lunas"): ?>
+                            <span class="badge bg-info">Pengajuan Lunas</span>
                         <?php else: ?>
                         <span class="badge bg-danger">Pengajuan Ditolak</span>
                       <?php endif; ?>
                     </td>
-                    <td style="width:280px"><?php echo e($p->ket); ?> </td>
+                    <td style="width:280px"><?php echo e(ucfirst($p->ket)); ?> </td>
                     <td>
                       <a href="/show/<?php echo e($p->id); ?>" class="bi bi-file-earmark-text" ></a>
                       <a href="/cetak/<?php echo e($p->id); ?>" class="bi bi-printer"> </a>
@@ -100,8 +102,9 @@
                       <td><?php echo e($p->formatRupiah('bsr_pinjaman')); ?></td>
                       <td><?php echo e($p->created_at); ?></td>
                       <td>  
+                        
                         <?php if($p->status == 'menunggu'): ?> 
-                            <button type="button" class="btn  btn-secondary btn-sm menunggu" data-bs-toggle="modal" data-bs-target="#menunggu-<?php echo e($p->id); ?>">
+                            <button type="button" class="btn  btn-secondary btn-sm menunggu" data-bs-toggle="modal" data-bs-target="#menunggu-<?php echo e($p->id); ?>" >
                             Menunggu
                             </button>
                           <?php elseif($p->status == 'lulus'): ?>
@@ -110,11 +113,13 @@
                             <button type="button" class="btn  btn-warning btn-sm menunggu" data-bs-toggle="modal" data-bs-target="#menunggu-<?php echo e($p->id); ?>">
                             Lulus Survei
                             </button>
+                          <?php elseif($p->status == "lunas"): ?>
+                            <span class="badge bg-info">Pengajuan Lunas</span>
                           <?php else: ?>
                             <span class="badge bg-danger">Pengajuan Ditolak</span>
                         <?php endif; ?>
                       </td>
-                      <td scope="col" ><?php echo e($p->ket); ?></td>
+                      <td scope="col" ><?php echo e(ucfirst($p->ket)); ?></td>
                       <td>
                         <a href="/show/<?php echo e($p->id); ?>" class="bi bi-file-earmark-text" ></a>
                         <a href="/survei/<?php echo e($p->id); ?>" class="bi bi-file-earmark-check" ></a>
@@ -140,7 +145,6 @@
                       <?php echo csrf_field(); ?>
                       <div class="modal-body">
                         <div class="col-4 form-group clearfix">
-                          <input type="hidden" class="id" name="id" id="id" value="<?php echo e($p->id); ?>">
                           <label class="form-label" for ="status">Status</label>
                           <div class="col-sm-12">
                             <select class="form-select" name="status" id="status"  aria-label="Default select example">
@@ -151,6 +155,7 @@
                             </select>
                           </div>
                         </div>
+                        <div id="input"> 
                         <div class="col-12 " >
                           <label for="bsrpemin" class="form-label" id="bsrpin" >Besar Peminjaman yang diberikan </label>
                           <div class="input-group mb-3">
@@ -176,6 +181,7 @@
                           <label for="ket" class="form-label" id="lebket">Keterangan </label>
                           <input type="text" class="form-control hide" name="ket" id="ket">
                         </div>
+                        </div>
                       </div>
 
                       <div class="modal-footer">
@@ -198,10 +204,11 @@
 
 
   <script type='text/javascript'>
+  
+      $('.menunggu').each(function(){
+        $('.menunggu').on('click', function(e){
 
-    
-    $('.menunggu').on('click', function(e){
-      console.log(e);
+        console.log(e);
         $('#bsrpemin').hide();
         $('#bsrpin').hide();
         $('.rp').hide();
@@ -214,8 +221,12 @@
         $('#ksg_bayar').hide();
         $('#lebbsr_usulan').hide();
         $('#bsr_usulan').hide();
+        
       });
-    $('#status').on('change', function(e){
+      });
+
+    $('#status').each(function(){
+      $(this).on('change', function(e){
       console.log(e);
       var status= e.target.value;
       if (status == "lulus"){
@@ -263,7 +274,10 @@
         $('#ket').show();
       }
     });
+
     
+    });
+        
   </script>
   
 <?php $__env->stopSection(); ?>
