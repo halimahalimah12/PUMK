@@ -227,7 +227,7 @@
                   <div class="card recent-sales overflow-auto">
                     <div class="card-body">
                       <h5 class="card-title">Pembayaran</h5>
-                      <table class="table table-borderless datatable">
+                      <table class="table datatable">
                         <thead>
                           <tr>
                             <th scope="col">No</th>
@@ -240,9 +240,9 @@
                         <tbody>
                           @foreach ( $pembayarans as $p )
                               <tr>
-                                <th scope="row"></th>
-                                {{-- <td>{{ $p->kartu_piutang->pengajuan->data_mitra->nm }}</td> --}}
-                                {{-- <td>{{ $p->kartu_piutang->Pengajuan->data_mitra->data_ush->nama_ush }}</td> --}}
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ ucwords($p->kartu_piutang->pengajuan->data_mitra->nm) }}</td>
+                                <td>{{ ucwords($p->kartu_piutang->Pengajuan->data_mitra->data_ush->nama_ush) }}</td>
                                 <td class="rupiah">{{ $p->jumlah }}</td>
                                 <td> 
                                     @if($p->status == "menunggu")

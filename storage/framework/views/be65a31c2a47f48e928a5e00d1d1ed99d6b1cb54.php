@@ -6,8 +6,8 @@
   <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title>PUMK | Angkasa Pura II</title>
+    <link rel="icon" href="assets/img/icontitle.png">
+    <title>PUMK </title>
     <meta content="" name="description">
     <meta content="" name="keywords">
     

@@ -1,33 +1,3 @@
-<!-- ======= Header ======= -->
-
-  <!-- Logo -->
-  
-  <!-- Icons Navigation -->
-  
-      <!-- Notification Nav -->
-      
-        <!-- Notification Icon -->
-        
-              
-              
-              
-              
-        <!-- Notification Dropdown Items -->
-        
-      <!--Messages Nav -->
-      
-        <!--  Messages Icon -->
-        
-        <!-- Messages Dropdown Items -->
-        
-      <!-- Profile Nav -->
-      
-        <!--Profile Iamge Icon -->
-        
-            
-            
-        <!-- Profile Dropdown Items -->
-        
 
 <nav class="navbar navbar-expand-lg main-navbar">
     

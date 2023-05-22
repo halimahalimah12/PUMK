@@ -8,10 +8,26 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+            <!-- Template Main CSS File -->
+        <link href="{{ asset ('assets/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset ('assets/css/style2.css') }}" rel="stylesheet">
 
     </head>
     <body >
-        <h2> Selamat Pengajuan anda berhasil dilakukan, silahkan tunggu hingga pemberitahuan berikutnya.</h2>
+        <div class= "card">
+        
+            <div class="card-body">
+                <h3> Kepada yang terhormat mitra PUMK Angkasa Pura II.</h3>
+                
+                <p>Pengajuan anda telah berhasil disubmit, silahkan<br>
+                tunggu hingga admin melakukan konfirmasi pengajuan anda.</p>
+                <br>
+                <br>
+                <p>Be Better, Be Grow, Be creatif</p>
+                <br>
+                <p>Salam, PUMK Angkasa Pura II Sultan Thaha Jambi</p> 
+            </div>
+        </div>
     
     </body>
 </html>

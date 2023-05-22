@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <link rel="icon" href="assets/img/icontitle.png">
     <title>PUMK</title>
 
     <!-- Google Fonts -->
@@ -86,11 +87,11 @@
         <script>
           $(document).ready( function () {
               $('#datatable').DataTable({
-                responsive:true,
-                scrollX:        false,
-                scrollCollapse: false,
-                paging:         true,
-                fixedColumns:   false
+                "responsive":true,
+                "scrollX":        false,
+                "scrollCollapse": false,
+                "paging":         true,
+                "fixedColumns":   false
               });
               $('.rupiah').mask("#,##0",{
                 reverse:true,

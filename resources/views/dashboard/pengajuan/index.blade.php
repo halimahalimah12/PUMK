@@ -88,7 +88,7 @@
                     <th scope="col">Besar Pinjaman</th>
                     <th scope="col">Tanggal</th>
                     <th scope="col">Status</th>
-                    <th scope="col" style="width:200px">Keterangan</th>
+                    <th scope="col" >Keterangan</th>
                     <th scope="col">Aksi</th>
                   </tr>
                 </thead>
@@ -102,7 +102,7 @@
                       <td>  
                         {{-- <input type="text" class="id" name="id" id="id{{ $p->id }}" value="{{ $p->id }}"> --}}
                         @if($p->status == 'menunggu') 
-                            <button type="button" class="btn  btn-secondary btn-sm menunggu" data-bs-toggle="modal" data-bs-target="#menunggu-{{ $p->id }}" >
+                            <button type="button" class="btn  btn-secondary btn-sm menunggu" data-bs-toggle="modal" data-bs-target="#menunggu-{{ $p->id }}" data-id="<?= $p['id']; ?>" >
                             Menunggu
                             </button>
                           @elseif($p->status == 'lulus')
@@ -202,10 +202,12 @@
 
 
   <script type='text/javascript'>
-  
-      $('.menunggu').each(function(){
-        $('.menunggu').on('click', function(e){
+      
+      $('.menunggu').each(function(id){
+        let $this = $(this);
+        let id = $this.attr('data-id');
 
+        $('.menunggu').on('click', function(e){
         console.log(e);
         $('#bsrpemin').hide();
         $('#bsrpin').hide();
@@ -219,7 +221,6 @@
         $('#ksg_bayar').hide();
         $('#lebbsr_usulan').hide();
         $('#bsr_usulan').hide();
-        
       });
       });
 

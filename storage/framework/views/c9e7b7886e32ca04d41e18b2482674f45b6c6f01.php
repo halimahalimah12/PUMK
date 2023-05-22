@@ -228,7 +228,7 @@
                   <div class="card recent-sales overflow-auto">
                     <div class="card-body">
                       <h5 class="card-title">Pembayaran</h5>
-                      <table class="table table-borderless datatable">
+                      <table class="table datatable">
                         <thead>
                           <tr>
                             <th scope="col">No</th>
@@ -241,9 +241,9 @@
                         <tbody>
                           <?php $__currentLoopData = $pembayarans; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                               <tr>
-                                <th scope="row"></th>
-                                
-                                
+                                <th scope="row"><?php echo e($loop->iteration); ?></th>
+                                <td><?php echo e(ucwords($p->kartu_piutang->pengajuan->data_mitra->nm)); ?></td>
+                                <td><?php echo e(ucwords($p->kartu_piutang->Pengajuan->data_mitra->data_ush->nama_ush)); ?></td>
                                 <td class="rupiah"><?php echo e($p->jumlah); ?></td>
                                 <td> 
                                     <?php if($p->status == "menunggu"): ?>

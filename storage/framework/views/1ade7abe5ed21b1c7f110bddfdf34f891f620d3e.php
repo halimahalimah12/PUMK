@@ -1,10 +1,10 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <link rel="icon" href="assets/img/icontitle.png">
+
   <title>PUMK </title>
 
   <!-- General CSS Files -->
@@ -85,7 +85,7 @@ unset($__errorArgs, $__bag); ?>
                       </div>
 
                       <div class="col-12">
-                        <button class="btn btn-primary w-100" type="submit" href="/dashboard">Masuk</button>
+                        <button class="btn btn-primary w-100" type="submit" href="/dashboard">Login</button>
                       </div>
                       
                       <div class="col-12">
@@ -94,7 +94,7 @@ unset($__errorArgs, $__bag); ?>
                     </form>
                   </div>
                 </div>
-                <div class="credits">PT. Angkasa Pura II </div>
+                <div class="credits"><p class="copyright">&copy; Copyright PT. Angkasa Pura II . All Rights Reserved</p> </div>
               </div>
             </div>
           </div>
