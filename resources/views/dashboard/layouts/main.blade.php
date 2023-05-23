@@ -79,11 +79,14 @@
         <script src="{{ asset('assets/js/stisla.js') }}"></script>
         <script src="{{ asset('assets/js/custom.js') }}"></script>
         <script src="{{ asset('assets/js/scripts.js') }}"></script>
+        <script src="{{ asset('assets/js/vue.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 
         <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js" ></script>
         <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js" ></script>
         <script type="text/javascript" src="https://unpkg.com/currency.js@1.2.2/dist/currency.min.js"></script>
+        <!-- cdn vue -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
         <script>
           $(document).ready( function () {
               $('#datatable').DataTable({

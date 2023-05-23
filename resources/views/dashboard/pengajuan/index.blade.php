@@ -145,43 +145,42 @@
                         <div class="col-4 form-group clearfix">
                           <label class="form-label" for ="status">Status</label>
                           <div class="col-sm-12">
-                            <select class="form-select" name="status" id="status"  aria-label="Default select example">
-                              <option value = "menunggu" {{ $p->status =="menunggu"  ? 'selected' : ''}}>Menunggu</option>
-                              <option value = "lulus_survei" {{ $p->status =="lulus_survei"  ? 'selected' : ''}}> Lulus Survei </option> 
-                              <option value = "lulus" {{ $p->status =="lulus"  ? 'selected' : ''}}>Pengajuan Diterima</option>
-                              <option value = "tidak" {{ $p->status =="tidak"  ? 'selected' : ''}}>Pengajuan Tidak Diterima</option>
+                            <select class="form-select" name="status" v-model='selectValue'>
+                              <option value = "menunggu">Menunggu</option>
+                              <option value = "lulus_survei" > Lulus Survei </option> 
+                              <option value = "lulus" >Pengajuan Diterima</option>
+                              <option value = "tidak" >Pengajuan Tidak Diterima</option>
                             </select>
                           </div>
                         </div>
                         <div id="input"> 
-                        <div class="col-12 " >
-                          <label for="bsrpemin" class="form-label" id="bsrpin" >Besar Peminjaman yang diberikan </label>
+                        <div v-if='selectValue == "lulus"' class="col-12">
+                          <label for="bsrpemin" class="form-label">Besar Peminjaman yang diberikan </label>
                           <div class="input-group mb-3">
-                            <span class="input-group-text rp">Rp.</span>
-                            <input type="text" class="rupiah form-control hide" name="bsrpemin"  id="bsrpemin">
+                            <span class="input-group-text">Rp.</span>
+                            <input type="text" class="rupiah form-control hide" name="bsrpemin"  id="bsrpemin-{{$p->id}}">
                           </div> 
                         </div> 
-                        <div class="col-12 ">
-                          <label for="ksg_bayar" class="form-label" id="lebksg_bayar">Kesanggupan Bayar Pinjaman </label>
+                        <div v-if='selectValue == "lulus_survei"' class="col-12 ">
+                          <label for="ksg_bayar" class="form-label" id="lebksg_bayar-{{$p->id}}">Kesanggupan Bayar Pinjaman </label>
                           <div class="input-group mb-3">
-                            <span class="input-group-text rp1">Rp.</span>
-                            <input type="text" class="rupiah form-control hide" name="ksg_bayar" id="ksg_bayar">
+                            <span class="input-group-text rp1-{{$p->id}}">Rp.</span>
+                            <input type="text" class="rupiah form-control hide" name="ksg_bayar" id="ksg_bayar-{{$p->id}}">
                           </div>
                         </div>
-                        <div class="col-12 ">
-                          <label for="bsr_usulan" class="form-label" id="lebbsr_usulan">Besar Usulan Pinjaman dari Tim Survei </label>
+                        <div v-if='selectValue == "lulus_survei"' class="col-12 ">
+                          <label for="bsr_usulan" class="form-label" id="lebbsr_usulan-{{$p->id}}">Besar Usulan Pinjaman dari Tim Survei </label>
                           <div class="input-group mb-3">
-                            <span class="input-group-text rp2">Rp.</span>
-                            <input type="text" class="rupiah form-control hide" name="bsr_usulan" id="bsr_usulan">
+                            <span class="input-group-text rp2-{{$p->id}}">Rp.</span>
+                            <input type="text" class="rupiah form-control hide" name="bsr_usulan" id="bsr_usulan-{{$p->id}}">
                           </div> 
                         </div>
-                        <div class="col-12 ">
-                          <label for="ket" class="form-label" id="lebket">Keterangan </label>
-                          <input type="text" class="form-control hide" name="ket" id="ket">
+                        <div v-if='selectValue != "menunggu"' class="col-12 ">
+                          <label for="ket" class="form-label" id="lebket-{{$p->id}}">Keterangan </label>
+                          <input type="text" class="form-control hide" name="ket" id="ket-{{$p->id}}">
                         </div>
                         </div>
                       </div>
-
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit"  class="btn btn-primary">Simpan</button>
@@ -190,6 +189,14 @@
                   </div>
                 </div>
               </div>
+              <script>
+                 var modal_{{$p->id}} = new Vue({
+                  el: '#menunggu-{{ $p->id }}',
+                  data: {
+                    selectValue: 'menunggu'
+                  }
+                 });
+              </script>
             @endforeach
           @endcan
       @endif
@@ -200,83 +207,4 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 
-
-  <script type='text/javascript'>
-      
-      $('.menunggu').each(function(id){
-        let $this = $(this);
-        let id = $this.attr('data-id');
-
-        $('.menunggu').on('click', function(e){
-        console.log(e);
-        $('#bsrpemin').hide();
-        $('#bsrpin').hide();
-        $('.rp').hide();
-        $('#lebket').hide();
-        $('#ket').hide();
-        $('.rp1').hide();
-        $('.rp2').hide();
-        $('#bsrpin').hide();
-        $('#lebksg_bayar').hide();
-        $('#ksg_bayar').hide();
-        $('#lebbsr_usulan').hide();
-        $('#bsr_usulan').hide();
-      });
-      });
-
-    $('#status').each(function(){
-      $(this).on('change', function(e){
-      console.log(e);
-      var status= e.target.value;
-      if (status == "lulus"){
-        $('#bsrpin').show();
-        $('.rp').show();
-        $('.rp1').hide();
-        $('.rp2').hide();
-        $('#lebksg_bayar').hide();
-        $('#ksg_bayar').hide();
-        $('#lebbsr_usulan').hide();
-        $('#bsr_usulan').hide();
-        $('#bsrpemin').show();
-        $('#lebket').show();
-        $('#ket').show();
-      } else if ( status == "menunggu"){
-        $('#bsrpemin').hide();
-        $('.rp').hide();
-        $('.rp1').hide();
-        $('.rp2').hide();
-        $('#bsrpin').hide();
-        $('#lebksg_bayar').hide();
-        $('#ksg_bayar').hide();
-        $('#lebbsr_usulan').hide();
-        $('#bsr_usulan').hide();
-        $('#lebket').hide();
-        $('#ket').hide();
-      } else if ( status == "lulus_survei"){
-        $('#bsrpemin').hide();
-        $('.rp').hide();
-        $('.rp1').show();
-        $('.rp2').show();
-        $('#bsrpin').hide();
-        $('#lebksg_bayar').show();
-        $('#ksg_bayar').show();
-        $('#lebbsr_usulan').show();
-        $('#bsr_usulan').show();
-        $('#lebket').show();
-        $('#ket').show();
-      }
-      else{
-        $('#bsrpemin').hide();
-        $('.rp').hide();
-        $('#bsrpin').hide();
-        $('#lebket').show();
-        $('#ket').show();
-      }
-    });
-
-    
-    });
-        
-  </script>
-  
 @endsection
