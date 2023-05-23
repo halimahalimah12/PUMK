@@ -30,7 +30,7 @@ class PengajuanSendingEmail extends Mailable
     public function build()
     {
         return $this->from('example@example.com', 'Example')
-        ->view('emails.Pengajuan-mail')
-        ->subject('Pengajuan berhasil dimasukan.');
+        ->subject('Pengajuan berhasil dimasukan.')
+        ->view('emails.Pengajuan-mail');
     }
 }

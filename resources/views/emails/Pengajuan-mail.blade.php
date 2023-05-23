@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" >
             <!-- Template Main CSS File -->
         <link href="{{ asset ('assets/css/style.css') }}" rel="stylesheet">
         <link href="{{ asset ('assets/css/style2.css') }}" rel="stylesheet">

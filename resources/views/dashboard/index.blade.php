@@ -62,12 +62,16 @@
                         <a href="/pembayaran"><h4>Sisa Piutang</h4></a>
                       </div>
                       <div class="card-body">
-                      @if($kp != NULL)
-                        @if($kp->totkp != NULL)
-                          <h6>{{ $jmlhpem - $kp->totkp }}</h6>
-                          @else
-                          <h6>0</h6>
-                        @endif
+                      @if($pengajuan != NULL)
+                          @if($kp != NULL)
+                            @if($kp->totkp != NULL)
+                              <h6>{{ $jmlhpem - $kp->totkp }}</h6>
+                              @else
+                              <h6>0</h6>
+                            @endif
+                            @else
+                              <h6>0</h6>
+                          @endif
                         @else
                           <h6>0</h6>
                       @endif

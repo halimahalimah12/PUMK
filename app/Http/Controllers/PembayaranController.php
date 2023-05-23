@@ -64,10 +64,14 @@ class PembayaranController extends Controller
             
             $pembayaran = Pembayaran::orderByDesc('id')->get();
             $kp = Kartu_piutang::first();
-            $lunas = Pembayaran::where('status','=','valid')
+            if($kp != null) {
+                $lunas = Pembayaran::where('status','=','valid')
                     ->where('kartu_piutang_id','=',$kp->id)->sum('jumlah');
-            $user->unreadNotifications->markAsRead();
             return view ('dashboard.pembayaran.index',compact('user','pembayaran','lunas','kp'));
+            }
+            
+            $user->unreadNotifications->markAsRead();
+            return view ('dashboard.pembayaran.index',compact('user','pembayaran','kp'));
 
         }
     }

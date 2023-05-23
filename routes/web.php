@@ -19,6 +19,7 @@ use App\Http\Controllers\KrtpiutangController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\LaporanController;
 use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Notifiable;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,18 +65,19 @@ Route::get('/dashboard', function () {
         return view('dashboard.index',compact('user','mitra','diterima','menunggu','pembayaran','pembayarans','jmlhmitra'));
 
     } else {
-        $user->unreadNotifications->markAsRead();
+        $mitra->unreadNotifications->markAsRead();
         $diterima = Pengajuan::where('user_id','=',$user->id)
                     ->where('status','=','lulus')->count();
         $pengajuan = Pengajuan::where('user_id','=',$user->id)->latest('id')->first();
-        $kp = Kartu_piutang::where('pengajuan_id','=',$pengajuan->id)->latest('id')->first();
-        if($kp != null){
-                $jmlhpem = Pembayaran::where('kartu_piutang_id',$kp->id)
-                    ->where('status','=','valid')->sum('jumlah');
-            return view('dashboard.index',compact('user','mitra','diterima','jmlhpem','kp'));
-            }
-
-        return view('dashboard.index',compact('user','mitra','diterima','kp'));
+        if($pengajuan != null ){
+            $kp = Kartu_piutang::where('pengajuan_id','=',$pengajuan->id)->latest('id')->first();
+            if($kp != null){
+                    $jmlhpem = Pembayaran::where('kartu_piutang_id',$kp->id)
+                        ->where('status','=','valid')->sum('jumlah');
+                return view('dashboard.index',compact('user','mitra','diterima','jmlhpem','kp','pengajuan'));
+                }
+        }
+        return view('dashboard.index',compact('user','mitra','diterima','pengajuan'));
         
     }
     

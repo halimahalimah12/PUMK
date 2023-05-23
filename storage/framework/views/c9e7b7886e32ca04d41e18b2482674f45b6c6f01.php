@@ -62,12 +62,16 @@
                         <a href="/pembayaran"><h4>Sisa Piutang</h4></a>
                       </div>
                       <div class="card-body">
-                      <?php if($kp != NULL): ?>
-                        <?php if($kp->totkp != NULL): ?>
-                          <h6><?php echo e($jmlhpem - $kp->totkp); ?></h6>
-                          <?php else: ?>
-                          <h6>0</h6>
-                        <?php endif; ?>
+                      <?php if($pengajuan != NULL): ?>
+                          <?php if($kp != NULL): ?>
+                            <?php if($kp->totkp != NULL): ?>
+                              <h6><?php echo e($jmlhpem - $kp->totkp); ?></h6>
+                              <?php else: ?>
+                              <h6>0</h6>
+                            <?php endif; ?>
+                            <?php else: ?>
+                              <h6>0</h6>
+                          <?php endif; ?>
                         <?php else: ?>
                           <h6>0</h6>
                       <?php endif; ?>
