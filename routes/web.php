@@ -76,6 +76,7 @@ Route::get('/dashboard', function () {
                         ->where('status','=','valid')->sum('jumlah');
                 return view('dashboard.index',compact('user','mitra','diterima','jmlhpem','kp','pengajuan'));
                 }
+        return view('dashboard.index',compact('user','mitra','diterima','pengajuan','kp'));
         }
         return view('dashboard.index',compact('user','mitra','diterima','pengajuan'));
         

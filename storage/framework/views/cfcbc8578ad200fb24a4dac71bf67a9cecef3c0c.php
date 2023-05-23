@@ -27,6 +27,10 @@
     <link href="<?php echo e(asset ('assets/css/style.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset ('assets/css/style2.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset ('assets/css/components.css')); ?>" rel="stylesheet">
+
+    <script src="<?php echo e(asset('assets/js/vue.js')); ?>"></script>
+        <!-- cdn vue -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
     
 
     <body>
@@ -61,7 +65,7 @@
         <script src="<?php echo e(asset('assets/vendor/simple-datatables/simple-datatables.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/vendor/tinymce/tinymce.min.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/vendor/php-email-form/validate.js')); ?>"></script>
-
+        
 
         <!-- Template js file-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
