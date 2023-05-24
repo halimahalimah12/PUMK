@@ -30,6 +30,7 @@ class PengajuanLunasSendingEmail extends Mailable
     public function build()
     {
         return $this->from('example@example.com', 'Example')
+        ->subject('Pengajuan Lunas.')
         ->view('emails.PengajuanLunas-mail');
     }
 }

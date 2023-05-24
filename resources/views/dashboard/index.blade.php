@@ -65,7 +65,7 @@
                       @if($pengajuan != NULL)
                           @if($kp != NULL)
                             @if($kp->totkp != NULL)
-                              <h6>{{ $jmlhpem - $kp->totkp }}</h6>
+                              <h6 class="rupiah">{{ abs($jmlhpem - $kp->totkp) }}</h6>
                               @else
                               <h6>0</h6>
                             @endif

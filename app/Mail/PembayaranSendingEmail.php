@@ -30,6 +30,7 @@ class PembayaranSendingEmail extends Mailable
     public function build()
     {
         return $this->from('example@example.com', 'Example')
+                        ->subject('Pembayaran Berhasil Dimasukan.')
                         ->view('emails.Pembayaran-mail');
     }
 }
