@@ -102,11 +102,15 @@ class ProfilController extends Controller
             $data_mitra ['scanktp'] = $namafile;
         }
 
-        if  ($request->file( 'foto')){
-            $file       =   $request->file('foto');
-            $namafile   =   time().str_replace(" ", "", $file->getClientOriginalName() );
-            $file       ->  move('storage/dokumen',$namafile);
-            $data_mitra ['foto'] = $namafile;
+        if  ($request->file('foto')){
+            $file           =   $request->file('foto');
+            $data_mitra['foto']       =   time().str_replace(" ", "", $file->getClientOriginalName() );
+            $tujuanpath= public_path('/storage/dokumen');
+            $img =\Image::make($file->path());
+            
+            $img->resize(400,400,function($constraint){
+                $constraint->aspectRatio();
+            })->save($tujuanpath.'/'.$data_mitra['foto']  );
         }
 
         $data_ush= ([
