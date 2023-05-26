@@ -257,14 +257,28 @@ unset($__errorArgs, $__bag); ?>
                     </div>
                     <div class="col-12 col-lg-4 form-group clearfix">
                       <label for="kab" class="form-label">Kabupaten </label>
-                      <input type="text" class="form-control <?php $__errorArgs = ['kab'];
+                      <select class="form-select <?php $__errorArgs = ['kab'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid  <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>"   id="kab" name="kab" value="<?php echo e(old('kab', ucwords($mitra->kab))); ?>">
+unset($__errorArgs, $__bag); ?>" name="kab" aria-label="Default select example">
+                            <option value = "">- Pilih -</option>
+                            <option value="btghari"  <?php echo e(old('kab',$mitra->kab)=="btghari"  ? 'selected' : ''); ?>>Batanghari</option>
+                            <option value="majambi" <?php echo e(old('kab',$mitra->kab)=="majambi" ? 'selected' : ''); ?>>Muaro Jambi</option>
+                            <option value="bungo" <?php echo e(old('kab',$mitra->kab)=="bungo" ? 'selected' : ''); ?>>Bungo</option>
+                            <option value="tebo"  <?php echo e(old('kab',$mitra->kab)=="tebo" ? 'selected' : ''); ?> >Tebo</option>
+                            <option value="tanjbtim"  <?php echo e(old('kab',$mitra->kab)=="tanjbtim" ? 'selected' : ''); ?> >Tanjung Jabung Timur</option>
+                            <option value="tanjabar"  <?php echo e(old('kab',$mitra->kab)=="tanjabar" ? 'selected' : ''); ?> >Tanjung Jabung Barat</option>
+                            <option value="merangin"  <?php echo e(old('kab',$mitra->kab)=="merangin" ? 'selected' : ''); ?> >Merangin</option>
+                            <option value="sarolangun"  <?php echo e(old('kab',$mitra->kab)=="sarolangun" ? 'selected' : ''); ?> >Sarolangun</option>
+                            <option value="spenuh"  <?php echo e(old('kab',$mitra->kab)=="spenuh" ? 'selected' : ''); ?> >Sungai Penuh</option>
+                            <option value="kotajambi"  <?php echo e(old('kab',$mitra->kab)=="kotajambi" ? 'selected' : ''); ?> >Kota Jambi</option>
+                            <option value="kerinci"  <?php echo e(old('kab',$mitra->kab)=="kerinci" ? 'selected' : ''); ?> >Kerinci</option>
+                        
+                        </select>
                         <?php $__errorArgs = ['kab'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -274,6 +288,46 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
+                    <div class="col-12 col-lg-4 form-group clearfix">
+                      <label for="kursus" class="form-label">Kursus </label>
+                      <input type="text" class="form-control <?php $__errorArgs = ['kursus'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid  <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"  id="kursus" name="kursus" value="<?php echo e(old('kursus', ucwords($mitra->kursus))); ?>">
+                        <?php $__errorArgs = ['kursus'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?><div class="invalid-feedback"><?php echo e($message); ?></div> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                      <p>* Jika tidak ada, beri tanda strip(-) </p>
+                    </div>
+                    <div class="col-12 col-lg-4 form-group clearfix">
+                      <label for="jbt" class="form-label">Jabatan</label>
+                      <input type="text" class="form-control <?php $__errorArgs = ['jbt'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid  <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"  id="jbt" name="jbt" value="<?php echo e(old('jbt', ucwords($mitra->jbt))); ?>">
+                        <?php $__errorArgs = ['jbt'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <div class="invalid-feedback"><?php echo e($message); ?></div> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                    </div> 
+                  </div> 
                   </div>
                   <div class="row gx-3 gy-0">
                     <div class="col-12 col-lg-4 form-group clearfix">

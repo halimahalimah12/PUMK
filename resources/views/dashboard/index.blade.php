@@ -33,7 +33,7 @@
         @endif
 
         @if($mitra->unreadNotifications->count() != NULL )
-        <div class="alert alert-info alert-dismissible fade show" role="alert" style="margin-top:10px">
+        <div class="alert alert-info alert-dismissible fade show" role="alert" style="margin-top:5px">
                 <p style="text-align:left;align-items:center">
                   <i class="bi bi-info"></i> 
                   Mohon untuk mengecek notifikasi, karena ada notifikasi baru.
@@ -178,14 +178,16 @@
                 </div>
                 <div class="row">
                 <!-- diagram grafis -->
-                <div class="col-lg-6">
-                  <div class="card">
-                    <div class="card-body">
-                    {{-- {!! $kab->container() !!} --}}
-                    {!! $chart->container() !!}
+                @if($mitra->kab != NULL)
+                  <div class="col-lg-6">
+                    <div class="card">
+                      <div class="card-body">
+                      {{-- {!! $kab->container() !!} --}}
+                      {!! $chart->container() !!}
+                      </div>
                     </div>
                   </div>
-                </div><!-- End Reports -->
+                @endif
                 <!-- pembayaran -->
                 <div class="col-6">
                   <div class="card recent-sales overflow-auto">
@@ -219,11 +221,13 @@
                       </table>
                     </div>
                   </div>
-                </div><!-- End Recent Sales -->
+                </div>
               </div>
               </div>
             </div>
         </div>
+        <script src="{{ $chart->cdn() }}"></script>
+        {{ $chart->script() }}
       </section>
     </section>
   @endif
@@ -258,9 +262,7 @@
               </div>
               </div>          
   </div> --}}
-<script src="{{ $chart->cdn() }}"></script>
 
-{{ $chart->script() }}
 
 
 @endsection

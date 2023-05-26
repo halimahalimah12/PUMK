@@ -102,9 +102,35 @@
                     </div>
                     <div class="col-12 col-lg-4 form-group clearfix">
                       <label for="kab" class="form-label">Kabupaten </label>
-                      <input type="text" class="form-control @error('kab') is-invalid  @enderror"   id="kab" name="kab" value="{{ old('kab', ucwords($mitra->kab)) }}">
+                      <select class="form-select @error('kab') is-invalid  @enderror" name="kab" aria-label="Default select example">
+                            <option value = "">- Pilih -</option>
+                            <option value="btghari"  {{ old('kab',$mitra->kab)=="btghari"  ? 'selected' : ''}}>Batanghari</option>
+                            <option value="majambi" {{ old('kab',$mitra->kab)=="majambi" ? 'selected' : ''}}>Muaro Jambi</option>
+                            <option value="bungo" {{ old('kab',$mitra->kab)=="bungo" ? 'selected' : ''}}>Bungo</option>
+                            <option value="tebo"  {{ old('kab',$mitra->kab)=="tebo" ? 'selected' : ''}} >Tebo</option>
+                            <option value="tanjbtim"  {{ old('kab',$mitra->kab)=="tanjbtim" ? 'selected' : ''}} >Tanjung Jabung Timur</option>
+                            <option value="tanjabar"  {{ old('kab',$mitra->kab)=="tanjabar" ? 'selected' : ''}} >Tanjung Jabung Barat</option>
+                            <option value="merangin"  {{ old('kab',$mitra->kab)=="merangin" ? 'selected' : ''}} >Merangin</option>
+                            <option value="sarolangun"  {{ old('kab',$mitra->kab)=="sarolangun" ? 'selected' : ''}} >Sarolangun</option>
+                            <option value="spenuh"  {{ old('kab',$mitra->kab)=="spenuh" ? 'selected' : ''}} >Sungai Penuh</option>
+                            <option value="kotajambi"  {{ old('kab',$mitra->kab)=="kotajambi" ? 'selected' : ''}} >Kota Jambi</option>
+                            <option value="kerinci"  {{ old('kab',$mitra->kab)=="kerinci" ? 'selected' : ''}} >Kerinci</option>
+                        
+                        </select>
                         @error('kab')<div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
+                    <div class="col-12 col-lg-4 form-group clearfix">
+                      <label for="kursus" class="form-label">Kursus </label>
+                      <input type="text" class="form-control @error('kursus') is-invalid  @enderror"  id="kursus" name="kursus" value="{{ old('kursus', ucwords($mitra->kursus)) }}">
+                        @error('kursus')<div class="invalid-feedback">{{ $message }}</div> @enderror
+                      <p>* Jika tidak ada, beri tanda strip(-) </p>
+                    </div>
+                    <div class="col-12 col-lg-4 form-group clearfix">
+                      <label for="jbt" class="form-label">Jabatan</label>
+                      <input type="text" class="form-control @error('jbt') is-invalid  @enderror"  id="jbt" name="jbt" value="{{ old('jbt', ucwords($mitra->jbt)) }}">
+                        @error('jbt') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    </div> 
+                  </div> 
                   </div>
                   <div class="row gx-3 gy-0">
                     <div class="col-12 col-lg-4 form-group clearfix">
