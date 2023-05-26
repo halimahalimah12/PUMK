@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     {{-- ikon --}}
     <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome/css/all.min.css')}}">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
     {{-- css file online --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" >
@@ -65,6 +66,9 @@
         <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
         <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
         <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
+
+        {{-- chart js --}}
+        <script src="{{ asset('assets/vendor/chart.js/chart.min.js') }}"></script>
         
 
         <!-- Template js file-->

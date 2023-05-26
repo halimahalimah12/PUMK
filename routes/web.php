@@ -8,6 +8,8 @@ use App\Models\Data_mitra;
 use App\Models\Pengajuan;
 use App\Models\Pembayaran;
 use App\Models\Kartu_piutang;
+use App\Charts\KabupatenChart;
+use App\Charts\PembayaranChart;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisController;
 use App\Http\Controllers\ProfilController;
@@ -51,7 +53,7 @@ Route::post('/logout', [LoginController::class,'logout'] );
 Route::get('/register', [RegisController::class,'index'])->middleware('guest');
 Route::post('/register', [RegisController::class,'store']);
 //DASHBOARD 
-Route::get('/dashboard', function () {
+Route::get('/dashboard', function (KabupatenChart $chart, PembayaranChart $chart1) {
     $user = User::where('id', Auth::user()->id)->first();
     $mitra = Data_Mitra::where('user_id',$user->id)->first();
     
@@ -61,8 +63,9 @@ Route::get('/dashboard', function () {
         $pembayaran = Pembayaran::where('status','=','menunggu')->count();
         $pembayarans = Pembayaran::get();
         $jmlhmitra = Data_Mitra::count();
+        
 
-        return view('dashboard.index',compact('user','mitra','diterima','menunggu','pembayaran','pembayarans','jmlhmitra'));
+        return view('dashboard.index',['chart' => $chart->build(), 'chart1' => $chart1->build()],compact('user','mitra','diterima','menunggu','pembayaran','pembayarans','jmlhmitra'));
 
     } else {
         $mitra->unreadNotifications->markAsRead();

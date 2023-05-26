@@ -23,7 +23,6 @@
                 <p>Pengajuan anda telah berhasil disubmit, silahkan<br>
                 tunggu hingga admin melakukan konfirmasi pengajuan anda.</p>
                 <br>
-                <br>
                 <p>Be Better, Be Grow, Be creatif</p>
                 <br>
                 <p>Salam, PUMK Angkasa Pura II Sultan Thaha Jambi</p> 

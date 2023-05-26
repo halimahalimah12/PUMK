@@ -86,7 +86,7 @@ class ProfilController extends Controller
             'almt'      => $validateData['alamat'] ,
             'kel'       => $validateData['klh'] ,
             'kec'       => $validateData['kec'] ,
-            'kab'       => $validateData['kab']  ,
+            'kab'       => strtolower($validateData['kab'])  ,
             'no_hp'     => $validateData['notlp'] ,
             'no_ktp'    => $validateData['noktp']  ,
             'tgl_ktp'   => $validateData['tglktp']  ,

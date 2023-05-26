@@ -192,15 +192,15 @@
                 </div>
               </div>
               <script>
-                 var modal_<?php echo e($p->id); ?> = new Vue({
+                var modal_<?php echo e($p->id); ?> = new Vue({
                   el: '#menunggu-<?php echo e($p->id); ?>',
                   data: {
                     selectValue: 'menunggu'
                   }
-                 });
+                });
               </script>
-       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
           <?php endif; ?>
       <?php endif; ?>
     </div>

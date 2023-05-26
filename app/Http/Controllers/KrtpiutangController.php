@@ -34,6 +34,8 @@ class KrtpiutangController extends Controller
         {
             $pengajuan = Pengajuan::where('user_id',$user->id)->latest('id')->first();
             $mitra     = Data_Mitra::where('user_id',$user->id)->first();
+            $mitra->unreadNotifications->markAsRead();
+
             if($pengajuan != NULL){
                 $kp =Kartu_piutang::where('pengajuan_id',$pengajuan->id)->latest('id')->first();
                 if($kp != NULL) {
@@ -152,7 +154,7 @@ class KrtpiutangController extends Controller
             'waktu' => $validateData['waktu']
         ]);
         $kp->update($editkp);
-        return redirect()->back()->with('flash_message_success','Data berhasil di perbarui'); 
+        return redirect()->back()->with('flash_message_success','Data berhasil di perbarui, silahkan klik tombol simpan untuk menyimpan kartu piutang mitra'); 
     }
 
     /**

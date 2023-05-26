@@ -38,25 +38,26 @@ class PembayaranController extends Controller
             $pengajuan = Pengajuan::where('user_id',$user->id)->latest('id')->first();
             if ($pengajuan != NULL){
                 $kp = Kartu_piutang::where('pengajuan_id',$pengajuan->id)->latest('id')->first();
-                $detailkp = Detail_Kartupiutang::where('kartupiutang_id',$kp->id)->latest('id')->first();
-                if($kp != NULL && $detailkp != NULL){
-                    $pem = Pembayaran::get();
-                    if( $pem->isNotEmpty() ){
-                        $pembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)->get();
-                        $totpembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)
-                                        ->where('status', '=', 'valid')
-                                        ->sum('jumlah');
-                        $totbulan = Pembayaran::where('kartu_piutang_id',$kp->id)
-                                        ->where('status', '=', 'valid')
-                                        ->sum('bulan');
-                    return view ('dashboard.pembayaran.index',compact('user','totbulan','mitra','kp','pem','pengajuan','pembayaran','detailkp','totpembayaran'));
+                if ($kp != NULL) {
+                    $detailkp = Detail_Kartupiutang::where('kartupiutang_id',$kp->id)->latest('id')->first();
+                    if($kp != NULL && $detailkp != NULL){
+                        $pem = Pembayaran::get();
+                            if( $pem->isNotEmpty() ){
+                                $pembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)->get();
+                                $totpembayaran = Pembayaran::where('kartu_piutang_id',$kp->id)
+                                                ->where('status', '=', 'valid')
+                                                ->sum('jumlah');
+                                $totbulan = Pembayaran::where('kartu_piutang_id',$kp->id)
+                                                ->where('status', '=', 'valid')
+                                                ->sum('bulan');
+                            return view ('dashboard.pembayaran.index',compact('user','totbulan','mitra','kp','pem','pengajuan','pembayaran','detailkp','totpembayaran'));
+                            }
+                        return view ('dashboard.pembayaran.index',compact('user','mitra','kp','pem','pengajuan','detailkp'));
                     }
-                return view ('dashboard.pembayaran.index',compact('user','mitra','kp','pem','pengajuan','detailkp'));
-                } else {
-                    return view ('dashboard.pembayaran.index',compact('user','pengajuan','mitra','kp','detailkp'));
+                }else {
+                    return view ('dashboard.pembayaran.index',compact('user','pengajuan','mitra','kp'));
                 }
-                return view ('dashboard.pembayaran.index',compact('user','mitra','kp','pengajuan'));
-                
+                return view ('dashboard.pembayaran.index',compact('user','mitra','kp','pengajuan','detailkp'));
         }
             
             return view ('dashboard.pembayaran.index',compact('user','mitra','pengajuan'));

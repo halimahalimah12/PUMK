@@ -27,7 +27,7 @@ class CreateDataMitrasTable extends Migration
             $table->string('pekerjaan',15)->nullable();
             $table->string('kel',60)->nullable();
             $table->string('kec',60)->nullable();
-            $table->string('kab',60)->nullable();
+            $table->enum('kab',['btghari','majambi','bungo','tebo','tanjbtim','tanjabar','merangin','sarolangun','spenuh','kotajambi','kerinci'])->nullable();
             $table->string('no_hp')->nullable();
             $table->string('no_ktp')->nullable();
             $table->date('tgl_ktp')->nullable();

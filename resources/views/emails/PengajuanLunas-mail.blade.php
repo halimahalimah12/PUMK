@@ -7,13 +7,27 @@
         <title></title>
 
         <!-- Fonts -->
-        <linkp href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" >
+            <!-- Template Main CSS File -->
+        <link href="{{ asset ('assets/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset ('assets/css/style2.css') }}" rel="stylesheet">
 
     </head>
     <body >
-        <h2> Pengajuan anda Telah Lunas.</h2>
-        <h2> Silahkan kunjungi website PUMK untuk melakukan Pengajuan lagi .</h2>
-
+        <div class= "card">
+        
+            <div class="card-body">
+                <h3> Kepada yang terhormat mitra PUMK Angkasa Pura II.</h3>
+                
+                <p>Terimakasih telah melunaskan pengajuan anda, silahkan<br>
+                melakukan pengajuan lagi.</p>
+                <br>
+                <p>Be Better, Be Grow, Be creatif</p>
+                <br>
+                <p>Salam, PUMK Angkasa Pura II Sultan Thaha Jambi</p> 
+            </div>
+        </div>
     
     </body>
 </html>

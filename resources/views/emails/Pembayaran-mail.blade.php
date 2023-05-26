@@ -8,10 +8,26 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" >
+            <!-- Template Main CSS File -->
+        <link href="{{ asset ('assets/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset ('assets/css/style2.css') }}" rel="stylesheet">
 
     </head>
     <body >
-        <h2> Pembayaran anda berhasil dilakukan, silahkaan tunggu hingga pemberitahuan berikutnya.</h2>
+        <div class= "card">
+        
+            <div class="card-body">
+                <h3> Kepada yang terhormat mitra PUMK Angkasa Pura II.</h3>
+                
+                <p>Pembayaran anda telah berhasil disubmit, silahkan<br>
+                tunggu hingga admin melakukan konfirmasi pembayaran anda.</p>
+                <br>
+                <p>Be Better, Be Grow, Be creatif</p>
+                <br>
+                <p>Salam, PUMK Angkasa Pura II Sultan Thaha Jambi</p> 
+            </div>
+        </div>
     
     </body>
 </html>
