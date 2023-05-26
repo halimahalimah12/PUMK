@@ -9,7 +9,6 @@ use App\Models\Pengajuan;
 use App\Models\Pembayaran;
 use App\Models\Kartu_piutang;
 use App\Charts\KabupatenChart;
-use App\Charts\PembayaranChart;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisController;
 use App\Http\Controllers\ProfilController;
