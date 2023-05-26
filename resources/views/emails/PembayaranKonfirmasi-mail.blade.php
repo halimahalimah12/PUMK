@@ -19,11 +19,10 @@
         
             <div class="card-body">
                 <h3> Kepada yang terhormat mitra PUMK Angkasa Pura II.</h3>
-                
-                <p>Pembayaran anda telah dikonfirmasi, silahkan<br>
-                kunjungi website untuk melihat konfirmasi pembayaran anda.</p>
                 <br>
-                <p>Be Better, Be Grow, Be creatif</p>
+                <p>Pembayaran anda telah dikonfirmasi oleh admin, silahkan kunjungi website<br>
+                untuk melihat konfirmasi pembayaran anda.
+                </p>
                 <br>
                 <p>Salam, PUMK Angkasa Pura II Sultan Thaha Jambi</p> 
             </div>

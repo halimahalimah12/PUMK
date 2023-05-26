@@ -25,7 +25,7 @@
               </div>
               <div class="col-12 ">
                 <label for="bsr_pinjaman" class="form-label">Besar Pinjaman </label>
-                <input type="text" class="form-control " name="bsr_pinjaman" id="bsr_pinjaman" value="{{ old('bsr_pinjaman', $pengajuan->bsr_pinjaman) }}" disabled>
+                <input type="text" class="rupiah form-control " name="bsr_pinjaman" id="bsr_pinjaman" value="{{ old('bsr_pinjaman', $pengajuan->bsr_pinjaman) }}" disabled>
               </div>
               <hr>
               {{-- Data Diri Penanggung Jawab Berikutnya --}}

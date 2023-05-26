@@ -344,7 +344,6 @@ class PengajuanController extends Controller
                 return response()->json(['code'=>1,'msg'=>'Data Berhasil di Upload ']);
             }
         }
-
     }
 
     public function show($id)

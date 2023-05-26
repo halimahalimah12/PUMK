@@ -19,7 +19,6 @@
         
             <div class="card-body">
                 <h3> Kepada yang terhormat mitra PUMK Angkasa Pura II.</h3>
-                
                 <p>Terimakasih telah melunaskan pengajuan anda, silahkan<br>
                 melakukan pengajuan lagi.</p>
                 <br>
