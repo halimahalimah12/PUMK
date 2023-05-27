@@ -528,7 +528,7 @@
         var kasValue        = document.getElementById('kas').value;
         var piutangValue    = document.getElementById('piutang').value;
         var peralatranValue = document.getElementById('peralatan').value;
-         var tes1 = tanahValue.split("")
+        var tes1 = tanahValue.split("")
 			for( var i = 0; i < tes1.length; i++){ 
           if ( tes1[i] === ',' || tes1[i] === '.') {
           tes1.splice(i, 1); 

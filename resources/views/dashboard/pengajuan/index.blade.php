@@ -26,7 +26,7 @@
               @empty($last)
                 <button type="button" class="btn btn-primary" style="margin-bottom:12px"> <a href="/pengajuan/create"  style="color:white;"> Tambah</a></button>
                 @else
-                  @if($last->status == 'tidak')
+                  @if($last->status == 'tidak' || $last->status == 'lunas')
                       <button type="button" class="btn btn-primary" style="margin-bottom:12px"> <a href="/pengajuan/create"  style="color:white;"> Tambah</a> </button>
                     @else
                   @endif

@@ -740,7 +740,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
         }
     }
 
-      $('#form').on('submit',function(e){
+        $('#form').on('submit',function(e){
         e.preventDefault();
         var form = this;
         
@@ -760,15 +760,19 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                 $(form).find('span.'+prefix+'_error').text(val[0]);
               });
             }else{
-
+              Swal.fire(
+                'Good job!',
+                'Data berhasil dimasukan.',
+                'success'
+              );
               
-              //
               window.location ="/pengajuan";
-              //
             }
           }
         });
-      });
+      }); 
+
+      
 
       
   </script>

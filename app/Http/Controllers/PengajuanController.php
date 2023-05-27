@@ -99,7 +99,7 @@ class PengajuanController extends Controller
         
         $user      = User::where('id', Auth::user()->id)->first();
         $mitra     = Data_Mitra::where('user_id',$user->id)->first();
-        
+        // dd($request);
         $validateData = \Validator::make($request->all(),[
             // pjb
             'nm_pjb'    => 'required|max:255|alpha',
@@ -145,8 +145,9 @@ class PengajuanController extends Controller
             'srt_pjb'       => 'required |mimes:jpeg,png,jpg,pdf|max:10240',
             'srt_ksglns'    => 'required |mimes:jpeg,png,jpg,pdf|max:10240',
         ]);
+
         if (!$validateData->passes()) {
-            return response()->json(['code'=>0,'error'=>$validateData->errors()->toArray()]);
+            return response()->json(['code'=>0,'error'=>$validateData->errors()->all()]);
         } else {
             
             $pjb = new Pjb;
@@ -340,8 +341,8 @@ class PengajuanController extends Controller
             
             Mail::to($request->user())->send(new PengajuanSendingEmail($pengajuan));
 
-            if ( $pjb  && $aset && $oprasional && $pengajuan && $alat && $tenagakerja && $omzet && $manfaat ){
-                return response()->json(['code'=>1,'msg'=>'Data Berhasil di Upload ']);
+            if ( $pjb  && $aset && $oprasional && $pengajuan && $alat && $tenagakerja && $omzet && $manfaat != null){
+                return response()->json(['code'=>1,'success'=>'Data Berhasil di Upload ']);
             }
         }
     }

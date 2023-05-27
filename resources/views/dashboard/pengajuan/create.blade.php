@@ -731,7 +731,7 @@
         }
     }
 
-      $('#form').on('submit',function(e){
+        $('#form').on('submit',function(e){
         e.preventDefault();
         var form = this;
         
@@ -751,16 +751,18 @@
                 $(form).find('span.'+prefix+'_error').text(val[0]);
               });
             }else{
-
-              
-              //{{-- alert('Pengajuan Berhasil Ditambahkan.');  --}}
+              Swal.fire(
+                'Good job!',
+                'Data berhasil dimasukan.',
+                'success'
+              );
+              {{-- alert(data.success);   --}}
               window.location ="/pengajuan";
-              //{{-- $('#sukses').addClass('alert alert-success');
-              //$('#sukses').text(response.msg); --}}
             }
           }
         });
-      });
+      }); 
+
 
       
   </script>

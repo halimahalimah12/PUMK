@@ -32,6 +32,8 @@
     <script src="<?php echo e(asset('assets/js/vue.js')); ?>"></script>
     <!-- cdn vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
     
 
     <body>
@@ -60,16 +62,11 @@
         <!-- Vendor JS Files -->
         <script src="<?php echo e(asset('assets/vendor/apexcharts/apexcharts.min.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')); ?>"></script>
-        
         <script src="<?php echo e(asset('assets/vendor/echarts/echarts.min.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/vendor/quill/quill.min.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/vendor/simple-datatables/simple-datatables.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/vendor/tinymce/tinymce.min.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/vendor/php-email-form/validate.js')); ?>"></script>
-
-        
-        <script src="<?php echo e(asset('assets/vendor/chart.js/chart.min.js')); ?>"></script>
-        
 
         <!-- Template js file-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -93,6 +90,8 @@
         <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js" ></script>
         <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js" ></script>
         <script type="text/javascript" src="https://unpkg.com/currency.js@1.2.2/dist/currency.min.js"></script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js" ></script>
         
         <script>
           $(document).ready( function () {

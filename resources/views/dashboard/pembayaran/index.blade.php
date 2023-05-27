@@ -120,7 +120,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary"><i class="ri-send-plane-fill"></i></i> Simpan </button>
                       </form>
-                    <div style="margin-top:35px">
+                    <div style="margin-top:35px;overflow-x:auto;">
                       <table class="table ">
                         <thead>
                           <th> No</th>

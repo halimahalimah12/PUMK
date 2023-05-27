@@ -27,7 +27,7 @@
               <?php if(empty($last)): ?>
                 <button type="button" class="btn btn-primary" style="margin-bottom:12px"> <a href="/pengajuan/create"  style="color:white;"> Tambah</a></button>
                 <?php else: ?>
-                  <?php if($last->status == 'tidak'): ?>
+                  <?php if($last->status == 'tidak' || $last->status == 'lunas'): ?>
                       <button type="button" class="btn btn-primary" style="margin-bottom:12px"> <a href="/pengajuan/create"  style="color:white;"> Tambah</a> </button>
                     <?php else: ?>
                   <?php endif; ?>
@@ -160,26 +160,26 @@
                           <label for="bsrpemin" class="form-label">Besar Peminjaman yang diberikan </label>
                           <div class="input-group mb-3">
                             <span class="input-group-text">Rp.</span>
-                            <input type="text" class="rupiah form-control hide" name="bsrpemin"  id="bsrpemin-<?php echo e($p->id); ?>">
+                            <input type="text" class="rupiah form-control hide" name="bsrpemin"  id="bsrpemin">
                           </div> 
                         </div> 
                         <div v-if='selectValue == "lulus_survei"' class="col-12 ">
-                          <label for="ksg_bayar" class="form-label" id="lebksg_bayar-<?php echo e($p->id); ?>">Kesanggupan Bayar Pinjaman </label>
+                          <label for="ksg_bayar" class="form-label" id="lebksg_bayar">Kesanggupan Bayar Pinjaman </label>
                           <div class="input-group mb-3">
-                            <span class="input-group-text rp1-<?php echo e($p->id); ?>">Rp.</span>
-                            <input type="text" class="rupiah form-control hide" name="ksg_bayar" id="ksg_bayar-<?php echo e($p->id); ?>">
+                            <span class="input-group-text rp1">Rp.</span>
+                            <input type="text" class="rupiah form-control hide" name="ksg_bayar" id="ksg_bayar">
                           </div>
                         </div>
                         <div v-if='selectValue == "lulus_survei"' class="col-12 ">
-                          <label for="bsr_usulan" class="form-label" id="lebbsr_usulan-<?php echo e($p->id); ?>">Besar Usulan Pinjaman dari Tim Survei </label>
+                          <label for="bsr_usulan" class="form-label" id="lebbsr_usulan">Besar Usulan Pinjaman dari Tim Survei </label>
                           <div class="input-group mb-3">
-                            <span class="input-group-text rp2-<?php echo e($p->id); ?>">Rp.</span>
-                            <input type="text" class="rupiah form-control hide" name="bsr_usulan" id="bsr_usulan-<?php echo e($p->id); ?>">
+                            <span class="input-group-text rp2">Rp.</span>
+                            <input type="text" class="rupiah form-control hide" name="bsr_usulan" id="bsr_usulan">
                           </div> 
                         </div>
                         <div v-if='selectValue != "menunggu"' class="col-12 ">
-                          <label for="ket" class="form-label" id="lebket-<?php echo e($p->id); ?>">Keterangan </label>
-                          <input type="text" class="form-control hide" name="ket" id="ket-<?php echo e($p->id); ?>">
+                          <label for="ket" class="form-label" id="lebket">Keterangan </label>
+                          <input type="text" class="form-control hide" name="ket" id="ket">
                         </div>
                         </div>
                       </div>
@@ -210,9 +210,5 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-
-
-  
-  
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('dashboard.layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\applaravel\pumk\resources\views/dashboard/pengajuan/index.blade.php ENDPATH**/ ?>

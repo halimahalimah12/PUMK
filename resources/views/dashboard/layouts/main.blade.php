@@ -32,6 +32,8 @@
     <script src="{{ asset('assets/js/vue.js') }}"></script>
     <!-- cdn vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
     
 
     <body>
@@ -88,6 +90,8 @@
         <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js" ></script>
         <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js" ></script>
         <script type="text/javascript" src="https://unpkg.com/currency.js@1.2.2/dist/currency.min.js"></script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js" ></script>
         
         <script>
           $(document).ready( function () {
