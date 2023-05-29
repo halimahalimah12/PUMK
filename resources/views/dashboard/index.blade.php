@@ -11,8 +11,8 @@
         </div>
         @if(session()-> has('success'))
           @if($mitra->scanktp == NULL && $mitra->tpt_lhr == NULL && $mitra->tgl_lhr == NULL && $mitra->sts_prk == NULL && $mitra->jk == NULL && $mitra->almt == NULL && $mitra->no_hp == NULL && $mitra->pddk == NULL && $mitra->jbt == NULL && $mitra->kursus == NULL && $mitra->no_ktp == NULL)
-              <div class="alert alert-info alert-dismissible fade show" role="alert" style="padding-bottom:1px">
-                <p>
+              <div class="alert alert-info alert-dismissible fade show" role="alert" style="margin-top:10px; ">
+                <p style="text-align:left;align-items:center">
                   <i class="bi bi-emoji-smile"></i>
                   {{ session('success') }}  
                   <a href="/profil/" class="alert-link" > <ins> Klik </ins>  </a> untuk melengkapi data diri 
@@ -20,7 +20,7 @@
                 </p>
               </div>
             @else
-              <div class="alert alert-info alert-dismissible fade show" role="alert" style="margin-top:10px">
+              <div class="alert alert-info alert-dismissible fade show" role="alert" style="margin-top:10px; ">
                 <p style="text-align:left;align-items:center">
                   {{-- Selamat Datang di Sistem Informasi PUMK. --}}
                   <i class="bi bi-emoji-smile"></i>
@@ -48,7 +48,7 @@
               <div class="row">
 
                 {{-- Pengajuan diterima --}}
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                   <div class="card card-statistic-1">
                     <div class="card-icon bg-success">
                       <i class="fas fa-clipboard-check"></i>
@@ -64,8 +64,8 @@
                   </div>
                 </div>
 
-                {{-- menunggu ferifikasi pembayaran--}}
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                {{-- sisa piutang--}}
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                   <div class="card card-statistic-1">
                     <div class="card-icon bg-danger">
                       <i class="fas fa-money-bill-wave"></i>
@@ -178,11 +178,10 @@
                 </div>
                 <div class="row">
                 <!-- diagram grafis -->
-                @if($mitra->kab != NULL)
+                @if(empty($mitra->kab) )
                   <div class="col-lg-6">
-                    <div class="card">
+                    <div class="card" style="width:476px">
                       <div class="card-body">
-                      {{-- {!! $kab->container() !!} --}}
                       {!! $chart->container() !!}
                       </div>
                     </div>

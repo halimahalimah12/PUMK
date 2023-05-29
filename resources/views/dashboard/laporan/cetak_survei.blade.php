@@ -107,9 +107,15 @@
                         @for( $n=0 ; $n<9 ; $n++)
                             <td></td>
                         @endfor
-                        <th>Rp.{{ number_format($sumusulan,0,',','.') }}</th>
-                        <th>Rp.{{ number_format($sumusulan,0,',','.') }}</th>
-                        <td id="no"></td>
+                        @if(!$pengajuan->isEmpty())
+                            <th>Rp.{{ number_format($sumusulan,0,',','.') }}</th>
+                            <th>Rp.{{ number_format($sumusulan,0,',','.') }}</th>
+                            <td id="no"></td>
+                          @else
+                            <th></th>
+                            <th></th>
+                            <td id="no"></td>
+                        @endif
                     </tr>
                 </tbody>
               </table>

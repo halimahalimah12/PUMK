@@ -149,201 +149,220 @@ class PengajuanController extends Controller
         if (!$validateData->passes()) {
             return response()->json(['code'=>0,'error'=>$validateData->errors()->all()]);
         } else {
-            
-            $pjb = new Pjb;
-            $pjb->nm        =   $request->nm_pjb;
-            $pjb->jk        =   $request->gender;
-            $pjb->tpt_lhr   =   $request->tpt_lhr;
-            $pjb->tgl_lhr   =   $request->tgl_lhr;
-            $pjb->hub       =   $request->hub;
-            $pjb->almt      =   $request->almt;
-            $pjb->pekerjaan =   $request->pekerjaan;
-            $pjb->no_hp     =   $request->no_hp;
-            $pjb->no_ktp    =   $request->no_ktp;
-            $pjb->tgl_ktp   =   $request->tgl_ktp;
-            $pjb->kursus    =   $request->kursus;
-            $pjb->pddk      =   $request->pddk;
-            $pjb->jbt       =   $request->jbt; 
-            $pjb->foto      =   $request->foto;
-            $pjb->scanktp   =   $request->scanktp;
-    
-            if  ($request->file('foto')){
-                $file           =   $request->file('foto');
-                $pjb['foto']       =   time().str_replace(" ", "", $file->getClientOriginalName() );
-                $tujuanpath= public_path('/storage/dokumen');
-                $img =\Image::make($file->path());
-                
-                $img->resize(800,800,function($constraint){
-                    $constraint->aspectRatio();
-                })->save($tujuanpath.'/'.$pjb['foto']  );
-            }
-    
-            if  ($request->file('scanktp')){
-                $file           =   $request->file('scanktp');
-                $pjb['scanktp']       =   time().str_replace(" ", "", $file->getClientOriginalName() );
-                $tujuanpath= public_path('/storage/dokumen');
-                $img =\Image::make($file->path());
-                
-                $img->resize(800,800,function($constraint){
-                    $constraint->aspectRatio();
-                })->save($tujuanpath.'/'.$pjb['scanktp']   );
-            }
-            
-            $pjb->save();
-    
-            $aset = new Aset;
-            $aset->tanah           = str_replace(",", "", $request->tanah); 
-            $aset->bangunan        = str_replace(",", "",$request->bangunan); 
-            $aset->persediaan      = str_replace(",", "",$request->persediaan); 
-            $aset->alat            = str_replace(",", "",$request->alat); 
-            $aset->kas             = str_replace(",", "",$request->kas); 
-            $aset->piutang         = str_replace(",", "",$request->piutang); 
-            $aset->peralatan       = str_replace(",", "",$request->peralatan); 
-            $totset = str_replace(".00", "",$request->totaset);
-            $aset->totaset         = str_replace(",", "",$totset); 
-            $aset->save();
-            
-            $oprasional = new Oprasional;
-            $oprasional->transport = str_replace(",", "",$request->transport); 
-            $oprasional->listrik   = str_replace(",", "",$request->listrik); 
-            $oprasional->telpon    = str_replace(",", "",$request->telp); 
-            $oprasional->atk       = str_replace(",", "",$request->atk); 
-            $oprasional->lain      = str_replace(",", "",$request->lain);
-            $totop= str_replace(".00", "",$request->totop);
-            $oprasional->totop     = str_replace(",", "",$totop); 
-            $oprasional->save();
-    
-            $pengajuan = new Pengajuan;
-            $pengajuan->user_id         = $user->id;
-            $pengajuan->data_mitra_id   = $mitra->id;
-            $pengajuan->pjb_id          = $pjb->id;
-            $pengajuan->aset_id         = $aset->id;
-            $pengajuan->oprasional_id   = $oprasional->id;
-    
-            $pengajuan->modal        = str_replace(",", "",$request->modal); 
-            $pengajuan->investasi    = str_replace(",", "",$request->invest); 
-            $bsr_pjm= str_replace(".00", "",$request->bsr_pjm);
-            $pengajuan->bsr_pinjaman = str_replace(",", "",$bsr_pjm); 
-            
-    
-            if  ($request->file( 'bkt_serius')){
 
-                $file           =   $request->file('bkt_serius');
-                $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
-                $file           ->  move('storage/dokumen',$namafile);
-                $pengajuan['bkt_keseriusan'] = $namafile;
+            DB::beginTransaction();
 
-            }
-    
-            if  ($request->file( 'kk')){
-                $file           =   $request->file('kk');
-                $pengajuan['kk']      =   time().str_replace(" ", "", $file->getClientOriginalName() );
-                $tujuanpath= public_path('/storage/dokumen');
-                $img =\Image::make($file->path());
+            try{
+
+                // =============
+                $pjb = new Pjb;
+                $pjb->nm        =   $request->nm_pjb;
+                $pjb->jk        =   $request->gender;
+                $pjb->tpt_lhr   =   $request->tpt_lhr;
+                $pjb->tgl_lhr   =   $request->tgl_lhr;
+                $pjb->hub       =   $request->hub;
+                $pjb->almt      =   $request->almt;
+                $pjb->pekerjaan =   $request->pekerjaan;
+                $pjb->no_hp     =   $request->no_hp;
+                $pjb->no_ktp    =   $request->no_ktp;
+                $pjb->tgl_ktp   =   $request->tgl_ktp;
+                $pjb->kursus    =   $request->kursus;
+                $pjb->pddk      =   $request->pddk;
+                $pjb->jbt       =   $request->jbt; 
+                $pjb->foto      =   $request->foto;
+                $pjb->scanktp   =   $request->scanktp;
+        
+                if  ($request->file('foto')){
+                    $file           =   $request->file('foto');
+                    $pjb['foto']       =   time().str_replace(" ", "", $file->getClientOriginalName() );
+                    $tujuanpath= public_path('/storage/dokumen');
+                    $img =\Image::make($file->path());
+                    
+                    $img->resize(800,800,function($constraint){
+                        $constraint->aspectRatio();
+                    })->save($tujuanpath.'/'.$pjb['foto']  );
+                }
+        
+                if  ($request->file('scanktp')){
+                    $file           =   $request->file('scanktp');
+                    $pjb['scanktp']       =   time().str_replace(" ", "", $file->getClientOriginalName() );
+                    $tujuanpath= public_path('/storage/dokumen');
+                    $img =\Image::make($file->path());
+                    
+                    $img->resize(800,800,function($constraint){
+                        $constraint->aspectRatio();
+                    })->save($tujuanpath.'/'.$pjb['scanktp']   );
+                }
                 
-                $img->resize(800,800,function($constraint){
-                    $constraint->aspectRatio();
-                })->save($tujuanpath.'/'.$pengajuan['kk'] );
-            }
-    
-            if  ($request->file( 'foto_kegiatan')){
-                $file           =   $request->file('foto_kegiatan');
-                $pengajuan['foto_kegiatan']   =   time().str_replace(" ", "", $file->getClientOriginalName() );
-                $tujuanpath= public_path('/storage/dokumen');
-                $img =\Image::make($file->path());
+                $pjb->save();
+        
+                $aset = new Aset;
+                $aset->tanah           = str_replace(",", "", $request->tanah); 
+                $aset->bangunan        = str_replace(",", "",$request->bangunan); 
+                $aset->persediaan      = str_replace(",", "",$request->persediaan); 
+                $aset->alat            = str_replace(",", "",$request->alat); 
+                $aset->kas             = str_replace(",", "",$request->kas); 
+                $aset->piutang         = str_replace(",", "",$request->piutang); 
+                $aset->peralatan       = str_replace(",", "",$request->peralatan); 
+                $totset = str_replace(".00", "",$request->totaset);
+                $aset->totaset         = str_replace(",", "",$totset); 
+                $aset->save();
                 
-                $img->resize(800,800,function($constraint){
-                    $constraint->aspectRatio();
-                })->save($tujuanpath.'/'.$pengajuan['foto_kegiatan'] );
-            }
+                $oprasional = new Oprasional;
+                $oprasional->transport = str_replace(",", "",$request->transport); 
+                $oprasional->listrik   = str_replace(",", "",$request->listrik); 
+                $oprasional->telpon    = str_replace(",", "",$request->telp); 
+                $oprasional->atk       = str_replace(",", "",$request->atk); 
+                $oprasional->lain      = str_replace(",", "",$request->lain);
+                $totop= str_replace(".00", "",$request->totop);
+                $oprasional->totop     = str_replace(",", "",$totop); 
+                $oprasional->save();
+        
+                $pengajuan = new Pengajuan;
+                $pengajuan->user_id         = $user->id;
+                $pengajuan->data_mitra_id   = $mitra->id;
+                $pengajuan->pjb_id          = $pjb->id;
+                $pengajuan->aset_id         = $aset->id;
+                $pengajuan->oprasional_id   = $oprasional->id;
+        
+                $pengajuan->modal        = str_replace(",", "",$request->modal); 
+                $pengajuan->investasi    = str_replace(",", "",$request->invest); 
+                $bsr_pjm= str_replace(".00", "",$request->bsr_pjm);
+                $pengajuan->bsr_pinjaman = str_replace(",", "",$bsr_pjm); 
+                
+        
+                if  ($request->file( 'bkt_serius')){
     
-            if  ($request->file( 'surat_ush')){
-                $file           =   $request->file('surat_ush');
-                $namafile     =   time().str_replace(" ", "", $file->getClientOriginalName() );
-                $tujuanpath= public_path('/storage/dokumen');
-                // $pdf = new PDFCompress();
-                // $pdf->CompressFile($tujuanpath.'/'.$pengajuan['surat_ush_rt'],'default_ebook' )->save();
-                $file           ->  move('storage/dokumen',$namafile);
-                $pengajuan['surat_ush_rt'] = $namafile;
-            }
+                    $file           =   $request->file('bkt_serius');
+                    $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
+                    $file           ->  move('storage/dokumen',$namafile);
+                    $pengajuan['bkt_keseriusan'] = $namafile;
+    
+                }
+        
+                if  ($request->file( 'kk')){
+                    $file           =   $request->file('kk');
+                    $pengajuan['kk']      =   time().str_replace(" ", "", $file->getClientOriginalName() );
+                    $tujuanpath= public_path('/storage/dokumen');
+                    $img =\Image::make($file->path());
+                    
+                    $img->resize(800,800,function($constraint){
+                        $constraint->aspectRatio();
+                    })->save($tujuanpath.'/'.$pengajuan['kk'] );
+                }
+        
+                if  ($request->file( 'foto_kegiatan')){
+                    $file           =   $request->file('foto_kegiatan');
+                    $pengajuan['foto_kegiatan']   =   time().str_replace(" ", "", $file->getClientOriginalName() );
+                    $tujuanpath= public_path('/storage/dokumen');
+                    $img =\Image::make($file->path());
+                    
+                    $img->resize(800,800,function($constraint){
+                        $constraint->aspectRatio();
+                    })->save($tujuanpath.'/'.$pengajuan['foto_kegiatan'] );
+                }
+        
+                if  ($request->file( 'surat_ush')){
+                    $file           =   $request->file('surat_ush');
+                    $namafile     =   time().str_replace(" ", "", $file->getClientOriginalName() );
+                    $tujuanpath= public_path('/storage/dokumen');
+                    // $pdf = new PDFCompress();
+                    // $pdf->CompressFile($tujuanpath.'/'.$pengajuan['surat_ush_rt'],'default_ebook' )->save();
+                    $file           ->  move('storage/dokumen',$namafile);
+                    $pengajuan['surat_ush_rt'] = $namafile;
+                }
+                
+                if  ($request->file( 'srt_blmbina')){
+                    $file           =   $request->file('srt_blmbina');
+                    $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
+                    $file           ->  move('storage/dokumen',$namafile);
+                    $pengajuan['surat_blmbina'] = $namafile;
+                }
+        
+                if  ($request->file( 'srt_pjb')){
+                    $file           =   $request->file('srt_pjb');
+                    $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
+                    $file           ->  move('storage/dokumen',$namafile);
+                    $pengajuan['surat_pj'] = $namafile;
+                } 
+                if  ($request->file( 'srt_ksglns')){
+                    $file           =   $request->file('srt_ksglns');
+                    $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
+                    $file           ->  move('storage/dokumen',$namafile);
+                    $pengajuan['surat_ksglns'] = $namafile;
+                }
+        
+                $pengajuan->save(); 
+        
+                $nm_brg     = $request->nm_brg ;
+                $hrg_satuan = $request->hrg_satuan ;
+                $jmlh       = $request->jmlh ; 
+                
+                for ($no =0 ; $no< count($nm_brg) ; $no++){
+                    $alat = new Alat;
+                    $alat->pengajuan_id =   $pengajuan->id;
+                    $alat->nm_brg       =   $nm_brg[$no];
+                    $alat->hrg_satuan   =   str_replace(",", "",$hrg_satuan[$no]);
+                    $alat->jmlh         =   str_replace(",", "",$jmlh[$no]);
+                    $alat->save();
+                }
+        
+                $nmkry     = $request->nmkry;
+                $jbtkry    = $request->jbtkry;
+                $gaji      = $request->gaji;
+        
+                for ($no =0 ; $no< count($nmkry) ; $no++ ) { 
+                    $tenagakerja = new Tenagakerja;
+                    $tenagakerja->pengajuan_id = $pengajuan->id;
+                    $tenagakerja->nm_tngk      = $nmkry[$no];
+                    $tenagakerja->jbt          = $jbtkry[$no];
+                    $tenagakerja->gaji         = str_replace(",", "",$gaji[$no]);
+                    $tenagakerja->save();
+                }
+                
+                $nmomzet    = $request->nmomzet;
+                $hrgomzet   = $request->hrgomzet;
+                $jmlhomzet  = $request->jmlhomzet;
+        
+                for ($no =0 ; $no<count($nmomzet) ; $no++ ) { 
+                    $omzet = new Omzet;
+                    $omzet->pengajuan_id    =   $pengajuan->id;
+                    $omzet->nm_brg          =   $nmomzet[$no];
+                    $omzet->hrg_satuan      =   str_replace(",", "",$hrgomzet[$no]);
+                    $omzet->jmlh            =   str_replace(",", "",$jmlhomzet[$no]);
+                    $omzet->save();
+                }
+        
+                $faat = $request->manfaat;
+                for ($no = 0 ; $no<count($faat) ; $no++ ) { 
+                    $manfaat = new Manfaat;
+                    $manfaat->pengajuan_id =    $pengajuan->id;
+                    $manfaat->manfaat      =    $faat[$no];
+                    $manfaat->save();
+                }
+
+                DB::commit();
+    
+                $useradmin = User::where('is_admin','1')->get();
+                Notification::send($useradmin, new PengajuanNotification($pengajuan));    
+                
+                Mail::to($request->user())->send(new PengajuanSendingEmail($pengajuan));
+    
+                if ( $pjb  && $aset && $oprasional && $pengajuan && $alat && $tenagakerja && $omzet && $manfaat != null){
+                    return response()->json(['code'=>1,'success'=>'Data Berhasil di Upload ']);
+                }
+                //===============
+
+                
+
             
-            if  ($request->file( 'srt_blmbina')){
-                $file           =   $request->file('srt_blmbina');
-                $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
-                $file           ->  move('storage/dokumen',$namafile);
-                $pengajuan['surat_blmbina'] = $namafile;
-            }
-    
-            if  ($request->file( 'srt_pjb')){
-                $file           =   $request->file('srt_pjb');
-                $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
-                $file           ->  move('storage/dokumen',$namafile);
-                $pengajuan['surat_pj'] = $namafile;
+                
+            }catch( \Illuminate\Database\QueryException $e) {
+                DB::rollback();
+                return redirect()->back()->with('gagal','Pada bagian alat/ tenaga kerja/ omzet/ manfaat harus diisi minimal 1');
             } 
-            if  ($request->file( 'srt_ksglns')){
-                $file           =   $request->file('srt_ksglns');
-                $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
-                $file           ->  move('storage/dokumen',$namafile);
-                $pengajuan['surat_ksglns'] = $namafile;
-            }
-    
-            $pengajuan->save(); 
-    
-            $nm_brg     = $request->nm_brg ;
-            $hrg_satuan = $request->hrg_satuan ;
-            $jmlh       = $request->jmlh ; 
             
-            for ($no =0 ; $no< count($nm_brg) ; $no++){
-                $alat = new Alat;
-                $alat->pengajuan_id =   $pengajuan->id;
-                $alat->nm_brg       =   $nm_brg[$no];
-                $alat->hrg_satuan   =   str_replace(",", "",$hrg_satuan[$no]);
-                $alat->jmlh         =   str_replace(",", "",$jmlh[$no]);
-                $alat->save();
-            }
-    
-            $nmkry     = $request->nmkry;
-            $jbtkry    = $request->jbtkry;
-            $gaji      = $request->gaji;
-    
-            for ($no =0 ; $no< count($nmkry) ; $no++ ) { 
-                $tenagakerja = new Tenagakerja;
-                $tenagakerja->pengajuan_id = $pengajuan->id;
-                $tenagakerja->nm_tngk      = $nmkry[$no];
-                $tenagakerja->jbt          = $jbtkry[$no];
-                $tenagakerja->gaji         = str_replace(",", "",$gaji[$no]);
-                $tenagakerja->save();
-            }
             
-            $nmomzet    = $request->nmomzet;
-            $hrgomzet   = $request->hrgomzet;
-            $jmlhomzet  = $request->jmlhomzet;
-    
-            for ($no =0 ; $no<count($nmomzet) ; $no++ ) { 
-                $omzet = new Omzet;
-                $omzet->pengajuan_id    =   $pengajuan->id;
-                $omzet->nm_brg          =   $nmomzet[$no];
-                $omzet->hrg_satuan      =   str_replace(",", "",$hrgomzet[$no]);
-                $omzet->jmlh            =   str_replace(",", "",$jmlhomzet[$no]);
-                $omzet->save();
-            }
-    
-            $faat = $request->manfaat;
-            for ($no = 0 ; $no<count($faat) ; $no++ ) { 
-                $manfaat = new Manfaat;
-                $manfaat->pengajuan_id =    $pengajuan->id;
-                $manfaat->manfaat      =    $faat[$no];
-                $manfaat->save();
-            }
-
-            $useradmin = User::where('is_admin','1')->get();
-            Notification::send($useradmin, new PengajuanNotification($pengajuan));    
-            
-            Mail::to($request->user())->send(new PengajuanSendingEmail($pengajuan));
-
-            if ( $pjb  && $aset && $oprasional && $pengajuan && $alat && $tenagakerja && $omzet && $manfaat != null){
-                return response()->json(['code'=>1,'success'=>'Data Berhasil di Upload ']);
-            }
         }
     }
 

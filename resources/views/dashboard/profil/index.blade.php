@@ -118,17 +118,6 @@
                         
                         </select>
                         @error('kab')<div class="invalid-feedback">{{ $message }}</div> @enderror
-                    </div>
-                    <div class="col-12 col-lg-4 form-group clearfix">
-                      <label for="kursus" class="form-label">Kursus </label>
-                      <input type="text" class="form-control @error('kursus') is-invalid  @enderror"  id="kursus" name="kursus" value="{{ old('kursus', ucwords($mitra->kursus)) }}">
-                        @error('kursus')<div class="invalid-feedback">{{ $message }}</div> @enderror
-                      <p>* Jika tidak ada, beri tanda strip(-) </p>
-                    </div>
-                    <div class="col-12 col-lg-4 form-group clearfix">
-                      <label for="jbt" class="form-label">Jabatan</label>
-                      <input type="text" class="form-control @error('jbt') is-invalid  @enderror"  id="jbt" name="jbt" value="{{ old('jbt', ucwords($mitra->jbt)) }}">
-                        @error('jbt') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div> 
                   </div> 
                   </div>

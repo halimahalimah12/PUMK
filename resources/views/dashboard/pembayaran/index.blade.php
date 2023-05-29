@@ -222,12 +222,6 @@
           @endcan
       @endif 
     </div>
-      {{-- <form class="row g-3  contact-form" action="/pembayaran/valid/{{ $p->id }}" method="post">
-                            <input type="text" class="form-control " name="typenotifikasi" id="typenotifikasi" value="Status Pembayaran" >
-                            <input type="text" class="form-control " name="tujuan" id="tujuan" value="{{ $p->Kartu_piutang->Pengajuan->user_id }}" >
-                            <input type="text" class="form-control " name="pesan1" value="Status pembayaran anda valid. ">
-                            <button type="button" class="btn btn-success btn-sm"> Valid </button>
-                          </form> --}}
   
   <script type='text/javascript'>
     function sum(){

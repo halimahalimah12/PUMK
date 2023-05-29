@@ -60,12 +60,18 @@ class LaporanController extends Controller
     }
 
     function cetak_survei(){
+
         $pengajuan = Pengajuan::where('status','=','lulus_survei')->get();
-        $pengajuan1 = Pengajuan::where('status','=','lulus_survei')->first();
-        $pengajuanlama = Pengajuan::where('status','=','lulus')->latest('id')->first();
-        $sumomzet = Omzet::where('pengajuan_id', $pengajuan1->id)->sum('jmlh');
-        $countsdm = Tenagakerja::where('pengajuan_id', $pengajuan1->id)->count();
-        $pdf = PDF::loadview('dashboard.laporan.cetak_survei', compact('pengajuan','sumomzet','countsdm','pengajuanlama'))->setOptions(['defaultFont'=>'sans-serif']);
+        if (!$pengajuan->isEmpty()) {
+            $pengajuan1 = Pengajuan::where('status','=','lulus_survei')->first();
+            $pengajuanlama = Pengajuan::where('status','=','lulus')->latest('id')->first();
+            $sumomzet = Omzet::where('pengajuan_id', $pengajuan1->id)->sum('jmlh');
+            $countsdm = Tenagakerja::where('pengajuan_id', $pengajuan1->id)->count();
+            $pdf = PDF::loadview('dashboard.laporan.cetak_survei', compact('pengajuan','sumomzet','countsdm','pengajuanlama'))->setOptions(['defaultFont'=>'sans-serif']);
+        }
+        $pdf = PDF::loadview('dashboard.laporan.cetak_survei', compact('pengajuan'))->setOptions(['defaultFont'=>'sans-serif']);
+
+        
         return $pdf->setPaper('a4','landscape')->stream('laporan-survei.pdf');
     }
 

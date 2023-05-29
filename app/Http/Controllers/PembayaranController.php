@@ -120,7 +120,7 @@ class PembayaranController extends Controller
         //     return redirect()->back()->with('gagal','Gagal menyimpan data pembayaran');
         // }
         
-            Mail::to($request->user())->send(new PembayaranSendingEmail($pembayaran));
+          //  Mail::to($request->user())->send(new PembayaranSendingEmail($pembayaran));
         
         return redirect('/pembayaran')->with ('success','Data Berhasil di masukan');
 

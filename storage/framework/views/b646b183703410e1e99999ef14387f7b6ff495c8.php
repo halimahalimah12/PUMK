@@ -8,7 +8,19 @@
           <div class="panel-heading">
             <h3 class="panel-title">Pengajuan Form</h3>
           </div>
+
+         
+
           <div class="panel-body">
+           <?php if(session()-> has('gagal')): ?>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top:10px; ">
+                <p style="text-align:left;align-items:center">
+                  <i class="bi bi-emoji-smile"></i>
+                  <?php echo e(session('gagal')); ?>  
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </p>
+              </div>
+          <?php endif; ?>
             <form  class="row contact-form" method="POST" enctype="multipart/form-data" id="form"  name="form"  >
               <?php echo csrf_field(); ?>    
               <?php echo e(method_field('post')); ?>
@@ -169,6 +181,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               <div class="card-body">
                 <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Asset</h5>
                 <h6>Asset (Aktiva) yang berkaitan langsung dengan kegiatan usaha</h6>
+                <p style="font-style: italic;">Jangan kosongkan jawaban, jika tidak ada ketik angka nol ( 0 )</p>
                   <div class="row mb-2">
                     <label for="tanah" class="col-sm-2 col-form-label">Tanah</label>
                     <div class="col-sm-10">
@@ -252,6 +265,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               
               <div class="card-body">
                 <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Alat kerja dan alat bantu</h5>
+                <p style="font-style: italic;">Jangan kosongkan jawaban, Mininal beri 1 jawaban </p>
                 <div style="overflow-x:auto">
                   <table class="table table-striped table-responsive" >
                     <thead >
@@ -287,6 +301,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               
               <div class="card-body">
                 <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Tenaga Kerja</h5>
+                <p style="font-style: italic;">Jangan kosongkan jawaban, Mininal beri 1 jawaban </p>
                 <div style="overflow-x:auto">
                   <table class="table table-striped" >
                     <thead >
@@ -322,6 +337,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               
               <div class="card-body">
                 <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Biaya Oprasional</h5>
+                <p style="font-style: italic;">Jangan kosongkan jawaban, jika tidak ada ketik angka nol ( 0 )</p>
                 <div class="row mb-3">
                   <label for="transport" class="col-sm-2 col-form-label">Transport</label>
                   <div class="col-sm-10">
@@ -385,6 +401,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               
               <div class="card-body">
                 <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Penjualan (Omzet)</h5>
+                <p style="font-style: italic;">Jangan kosongkan jawaban, Mininal beri 1 jawaban </p>
                   <div style="overflow-x:auto">
                     <table class="table table-striped" >
                       <thead >
@@ -420,6 +437,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               
               <div class="card-body">
                 <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Penempatan Modal</h5>
+                <p style="font-style: italic;">Jangan kosongkan jawaban, jika tidak ada ketik angka nol ( 0 )</p>
                 <div class="col-12 ">
                   <label for="modal" class="form-label"> Modal Usaha</label>
                   <div class="input-group mb-3">
@@ -447,6 +465,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               
               <div class="card-body">
                 <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Manfaat</h5>
+                <p style="font-style: italic;">Jangan kosongkan jawaban, Mininal beri 1 jawaban </p>
                 <table class="table table-striped" >
                   <thead >
                     <tr>
@@ -741,38 +760,36 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
     }
 
         $('#form').on('submit',function(e){
-        e.preventDefault();
-        var form = this;
-        
-        $.ajax({
-          url: "<?php echo e(route('pengajuan.store')); ?>",
-          method:$(form).attr('method'),
-          data:new FormData(form),
-          processData:false,
-          dataType:'json',
-          contentType:false,
-          beforeSend:function(){
-              $(form).find('span.error-text').text('');
-          },
-          success:function(data){
-            if(data.code == 0 ){
-              $.each(data.error, function(prefix,val){
-                $(form).find('span.'+prefix+'_error').text(val[0]);
-              });
-            }else{
-              Swal.fire(
-                'Good job!',
-                'Data berhasil dimasukan.',
-                'success'
-              );
-              
-              window.location ="/pengajuan";
+          e.preventDefault();
+          var form = this;
+          
+          $.ajax({
+            url: "<?php echo e(route('pengajuan.store')); ?>",
+            method:$(form).attr('method'),
+            data:new FormData(form),
+            processData:false,
+            dataType:'json',
+            contentType:false,
+            beforeSend:function(){
+                $(form).find('span.error-text').text('');
+            },
+            success:function(data){
+              if(data.code == 0 ){
+                $.each(data.error, function(prefix,val){
+                  $(form).find('span.'+prefix+'_error').text(val[0]);
+                });
+              }else{
+                Swal.fire(
+                  'Good job!',
+                  'Data berhasil dimasukan.',
+                  'success'
+                );
+                window.location ="/pengajuan";
+              }
             }
-          }
-        });
+          });
       }); 
 
-      
 
       
   </script>
