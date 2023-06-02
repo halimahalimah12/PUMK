@@ -10,10 +10,6 @@
     <title>PUMK </title>
     <meta content="" name="description">
     <meta content="" name="keywords">
-    
-    <!-- Favicons -->
-    {{-- <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> --}}
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -21,11 +17,13 @@
     <!-- Vendor CSS Files -->
     <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/boxicons/css1/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/boxicons/css1/boxicons1.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style1.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome/css/all.min.css')}}">
+
   </head>                                                       
 
   <body>
@@ -129,7 +127,7 @@
         <div class="row align-items-center">
           <div class="col-md-4 me-auto">
             <h2 class="mb-4">Langkah 3</h2>
-            <p class="mb-4">Tunggu pengajuan hingga pengajuan di verifikasi oleh admin. Terdapat pemberitahuan ke gmail bahwa pengajuan anda diterima atau tidak diterima. </p>
+            <p class="mb-4">Tunggu pengajuan hingga pengajuan di verifikasi oleh admin. </p>
               <p><a href="#" class="btn btn-primary">Registrasi Sekarang</a></p>
           </div>
             <div class="col-md-6" data-aos="fade-left">
@@ -143,7 +141,7 @@
         <div class="container">
           <div class="row justify-content-center text-center mb-5">
             <div class="col-md-4">
-              <h2 class="section-heading">Review From Our Users</h2>
+              <h2 class="section-heading">Testimoni</h2>
             </div>
           </div>
           <div class="row justify-content-center text-center">
@@ -160,16 +158,12 @@
                         <span class="bi bi-star-fill"></span>
                         <span class="bi bi-star-fill muted"></span>
                       </p>
-                      <h3>Excellent App!</h3>
                       <blockquote>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius ea delectus pariatur, numquam
-                          aperiam dolore nam optio dolorem facilis itaque voluptatum recusandae deleniti minus animi,
-                          provident voluptates consectetur maiores quos.</p>
+                        <p>Program PUMK ini selain menambahkan modal saya, juga membantu saya dalam mempromosikan produk saya.</p>
                       </blockquote>
                       <p class="review-user">
-                        <img src="assets/img/person_1.jpg" alt="Image" class="img-fluid rounded-circle mb-3">
                         <span class="d-block">
-                          <span class="text-black">Jean Doe</span>, &mdash; App User
+                          <span class="text-black">Khodijah qolbi</span>, &mdash; Owner Qolbi
                         </span>
                       </p>
                     </div>
@@ -183,16 +177,12 @@
                         <span class="bi bi-star-fill"></span>
                         <span class="bi bi-star-fill muted"></span>
                       </p>
-                      <h3>This App is easy to use!</h3>
                       <blockquote>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius ea delectus pariatur, numquam
-                          aperiam dolore nam optio dolorem facilis itaque voluptatum recusandae deleniti minus animi,
-                          provident voluptates consectetur maiores quos.</p>
+                        <p>Membantu Usaha Mikro Kecil  (UMK) dan Koperasi yang sudah berjalan agar dapat berkembang dan  mandiri.</p>
                       </blockquote>
                       <p class="review-user">
-                        <img src="assets/img/person_2.jpg" alt="Image" class="img-fluid rounded-circle mb-3">
                         <span class="d-block">
-                          <span class="text-black">Johan Smith</span>, &mdash; App User
+                          <span class="text-black">Ratumas Asia</span>, &mdash; Owner Batik Jambi Hj.Nurmah
                         </span>
                       </p>
                     </div>
@@ -206,16 +196,14 @@
                         <span class="bi bi-star-fill"></span>
                         <span class="bi bi-star-fill muted"></span>
                       </p>
-                      <h3>Awesome functionality!</h3>
                       <blockquote>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius ea delectus pariatur, numquam
-                          aperiam dolore nam optio dolorem facilis itaque voluptatum recusandae deleniti minus animi,
-                          provident voluptates consectetur maiores quos.</p>
+                        <p>Saya sangat berterimakasih sekali dengan adanya program PUMK ini sangat membantu para UMK 
+                          dan juga difasilitasi dalam mengikuti pameran-pameran besar yang ada di Jambi.
+                        </p>
                       </blockquote>
                       <p class="review-user">
-                        <img src="assets/img/person_3.jpg" alt="Image" class="img-fluid rounded-circle mb-3">
                         <span class="d-block">
-                          <span class="text-black">Jean Thunberg</span>, &mdash; App User
+                          <span class="text-black">Marina tri hartati</span>, &mdash; Owner Kahla snack
                         </span>
                       </p>
                     </div>
@@ -226,76 +214,7 @@
             </div>
           </div>
         </div>
-      </section>
-      {{-- kontak --}}
-      {{-- <section class="section" id="kontak">
-      <div class="container">
-        <div class="row mb-5 align-items-end">
-          <div class="col-md-6" data-aos="fade-up">
-
-            <h2>Contact Form</h2>
-            <p class="mb-0">Jika terdapat saran dan keritikan atau bahkan ingin meminta bantuan silahkan hubungi kami dengan mengisi formulir dibawah ini atau bisa hubungi kami di nomor yang tertera dibawah ini. </p>
-          </div>
-
-        </div>
-
-        <div class="row">
-          <div class="col-md-4 ms-auto order-2" data-aos="fade-up">
-            <ul class="list-unstyled">
-              <li class="mb-3">
-                <strong class="d-block mb-1">Address</strong>
-                <span>203 Fake St. Mountain View, San Francisco, California, USA</span>
-              </li>
-              <li class="mb-3">
-                <strong class="d-block mb-1">Phone</strong>
-                <span>+1 232 3235 324</span>
-              </li>
-              <li class="mb-3">
-                <strong class="d-block mb-1">Email</strong>
-                <span>youremail@domain.com</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-up">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <label for="name">Name</label>
-                  <input type="text" name="name" class="form-control" id="name" required>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <label for="name">Email</label>
-                  <input type="email" class="form-control" name="email" id="email" required>
-                </div>
-                <div class="col-md-12 form-group mt-3">
-                  <label for="name">Subject</label>
-                  <input type="text" class="form-control" name="subject" id="subject" required>
-                </div>
-                <div class="col-md-12 form-group mt-3">
-                  <label for="name">Message</label>
-                  <textarea class="form-control" name="message" required></textarea>
-                </div>
-
-                <div class="col-md-12 mb-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-                </div>
-
-                <div class="col-md-6 form-group">
-                  <input type="submit" class="btn btn-primary d-block w-100" value="Send Message">
-                </div>
-              </div>
-
-            </form>
-          </div>
-
-        </div>
-      </div>
-    </section> --}}
-      
+      </section>      
     </main>
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -303,38 +222,22 @@
     <footer class="footer" role="contentinfo">
       <div class="container">
         <div class="row">
-          <div class="col-md-4 mb-4 mb-md-0">
-            <h3>Kontak kami:</h3>
-            <p class="mb-0">Jika terdapat saran dan keritikan atau bahkan ingin meminta bantuan silahkan hubungi kami yang tertera disamping ini: </p>
+          <div class="row">
+              <div class="col-md-6 offset-md-3">
+              <h3>Kontak kami:</h3>
+              <p class="mb-0"> Jika terdapat saran dan keritikan atau bahkan ingin meminta bantuan silahkan hubungi kami pada nomor yang tertera:</p>
+              </div>
           </div>
-          <div class="col-md-7 ms-auto">
-            <div class="row site-section pt-0">
-              <div class="col-md-4 mb-4 mb-md-0">
-                <h3>Navigation</h3>
-                <ul class="list-unstyled">
-                  <li><a href="#"></a></li>
-                  <li><a href="#">Features</a></li>
-                  <li><a href="#">Blog</a></li>
-                  <li><a href="#">Contact</a></li>
-                </ul>
+          <div class="row">
+              <div class="row site-section pt-0">
+                <div class="col-md-6 offset-md-3">
+                  <ul class="list-unstyled">
+                    <li style=" margin-top:10px; margin-left:20px"><i class="fas fa-mobile-alt"></i> <span style="margin-left:20px">081328849726 an Muhammad Arief</span></li>
+                    <li style="margin-left:20px"><i class="fas fa-mobile-alt"></i>  <span style="margin-left:20px">085266928612 an Nur Ikhsan Pulungan</span></li>
+                  </ul>
+                </div>
+                
               </div>
-              <div class="col-md-4 mb-4 mb-md-0">
-                <h3>Services</h3>
-                <ul class="list-unstyled">
-                  <li><a href="#">Team</a></li>
-                  <li><a href="#">Collaboration</a></li>
-                  <li><a href="#">Todos</a></li>
-                  <li><a href="#">Events</a></li>
-                </ul>
-              </div>
-              <div class="col-md-4 mb-4 mb-md-0">
-                <h3>Downloads</h3>
-                <ul class="list-unstyled">
-                  <li><a href="#">Get from the App Store</a></li>
-                  <li><a href="#">Get from the Play Store</a></li>
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
         <div class="row justify-content-center text-center">

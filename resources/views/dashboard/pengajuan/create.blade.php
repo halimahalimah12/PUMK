@@ -257,7 +257,7 @@
               {{-- Alat --}}
               <div class="card-body">
                 <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Alat kerja dan alat bantu</h5>
-                <p style="font-style: italic;">Jangan kosongkan jawaban, Mininal beri 1 jawaban </p>
+                <p style="font-style: italic;">Jangan kosongkan jawaban, Minimal beri 1 jawaban </p>
                 <div style="overflow-x:auto">
                   <table class="table table-striped table-responsive" >
                     <thead >
@@ -293,10 +293,10 @@
               {{-- Tenaga kerja --}}
               <div class="card-body">
                 <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Tenaga Kerja</h5>
-                <p style="font-style: italic;">Jangan kosongkan jawaban, Mininal beri 1 jawaban </p>
+                <p style="font-style: italic;">Jangan kosongkan jawaban, Minimal beri 1 jawaban </p>
                 <div style="overflow-x:auto">
                   <table class="table table-striped" >
-                    <thead >
+                    <thead>
                       <tr>
                         <th> Nama  </th>
                         <th> Jabatan</th>
@@ -329,6 +329,7 @@
               {{-- biaya oprasional --}}
               <div class="card-body">
                 <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Biaya Oprasional</h5>
+                <h6>Biaya oprasional tiap bulannya.</h6>
                 <p style="font-style: italic;">Jangan kosongkan jawaban, jika tidak ada ketik angka nol ( 0 )</p>
                 <div class="row mb-3">
                   <label for="transport" class="col-sm-2 col-form-label">Transport</label>
@@ -393,6 +394,7 @@
               {{-- omzet --}}
               <div class="card-body">
                 <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Penjualan (Omzet)</h5>
+                <h6>Omzet tiap bulannya.</h6>
                 <p style="font-style: italic;">Jangan kosongkan jawaban, Mininal beri 1 jawaban </p>
                   <div style="overflow-x:auto">
                     <table class="table table-striped" >
@@ -457,6 +459,7 @@
               {{-- Manfaat --}}
               <div class="card-body">
                 <h5 class="card-title" style="padding-top:5px; padding-bottom:5px">Manfaat</h5>
+                <h6>Manfaat yang mitra dapat ketika pengajuan diterima.</h6>
                 <p style="font-style: italic;">Jangan kosongkan jawaban, Mininal beri 1 jawaban </p>
                 <table class="table table-striped" >
                   <thead >

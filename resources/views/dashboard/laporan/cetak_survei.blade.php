@@ -29,10 +29,10 @@
   <body>
     <div class="book">
       <div class="page">
-        
             <center> <h3> DAFTAR PERSETUJUAN CALON MITRA BINAAN TAHUN 2022 </br> 
                       PT. ANGKASA PURA II </br>
-                      CABANG BANDARA SULTAN THAHA - JAMBI</h3> </center>
+                      CABANG BANDARA SULTAN THAHA - JAMBI</h3> 
+            </center>
             
             <div style="padding-top:20px; font-size:12px">
               <table >

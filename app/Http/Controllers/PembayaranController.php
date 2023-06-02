@@ -73,7 +73,6 @@ class PembayaranController extends Controller
             
             $user->unreadNotifications->markAsRead();
             return view ('dashboard.pembayaran.index',compact('user','pembayaran','kp'));
-
         }
     }
     function store(Request $request)
@@ -107,20 +106,12 @@ class PembayaranController extends Controller
             })->save($tujuanpath.'/'.$dtpembayaran['foto']);
             
         }
-        // DB::beginTransaction();
-        // try {
             
-            $pembayaran = Pembayaran::create($dtpembayaran);
-            $useradmin = User::where('is_admin','1')->get();
-            Notification::send($useradmin, new PembayaranNotification($pembayaran));
-            // $useradmin->notify(new PembayaranNotification($pembayaran) );
-        //     DB::commit();
-        // } catch (\Throwable $th) {
-        //     DB::rollback();
-        //     return redirect()->back()->with('gagal','Gagal menyimpan data pembayaran');
-        // }
-        
-          //  Mail::to($request->user())->send(new PembayaranSendingEmail($pembayaran));
+        $pembayaran = Pembayaran::create($dtpembayaran);
+        $useradmin = User::where('is_admin','1')->get();
+        Notification::send($useradmin, new PembayaranNotification($pembayaran));
+
+        Mail::to($request->user())->send(new PembayaranSendingEmail($pembayaran));
         
         return redirect('/pembayaran')->with ('success','Data Berhasil di masukan');
 

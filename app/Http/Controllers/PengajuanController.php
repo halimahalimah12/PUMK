@@ -96,10 +96,8 @@ class PengajuanController extends Controller
      */
     public function store(Request $request)
     {
-        
         $user      = User::where('id', Auth::user()->id)->first();
         $mitra     = Data_Mitra::where('user_id',$user->id)->first();
-        // dd($request);
         $validateData = \Validator::make($request->all(),[
             // pjb
             'nm_pjb'    => 'required|max:255|alpha',
@@ -151,10 +149,7 @@ class PengajuanController extends Controller
         } else {
 
             DB::beginTransaction();
-
             try{
-
-                // =============
                 $pjb = new Pjb;
                 $pjb->nm        =   $request->nm_pjb;
                 $pjb->jk        =   $request->gender;
@@ -232,12 +227,10 @@ class PengajuanController extends Controller
                 
         
                 if  ($request->file( 'bkt_serius')){
-    
                     $file           =   $request->file('bkt_serius');
                     $namafile       =   time().str_replace(" ", "", $file->getClientOriginalName() );
                     $file           ->  move('storage/dokumen',$namafile);
                     $pengajuan['bkt_keseriusan'] = $namafile;
-    
                 }
         
                 if  ($request->file( 'kk')){
@@ -266,8 +259,6 @@ class PengajuanController extends Controller
                     $file           =   $request->file('surat_ush');
                     $namafile     =   time().str_replace(" ", "", $file->getClientOriginalName() );
                     $tujuanpath= public_path('/storage/dokumen');
-                    // $pdf = new PDFCompress();
-                    // $pdf->CompressFile($tujuanpath.'/'.$pengajuan['surat_ush_rt'],'default_ebook' )->save();
                     $file           ->  move('storage/dokumen',$namafile);
                     $pengajuan['surat_ush_rt'] = $namafile;
                 }
@@ -348,21 +339,12 @@ class PengajuanController extends Controller
                 
                 Mail::to($request->user())->send(new PengajuanSendingEmail($pengajuan));
     
-                if ( $pjb  && $aset && $oprasional && $pengajuan && $alat && $tenagakerja && $omzet && $manfaat != null){
-                    return response()->json(['code'=>1,'success'=>'Data Berhasil di Upload ']);
-                }
-                //===============
+                return response()->json(['code'=>1,'success'=>'Data Berhasil di Upload ']);
 
-                
-
-            
-                
             }catch( \Illuminate\Database\QueryException $e) {
                 DB::rollback();
                 return redirect()->back()->with('gagal','Pada bagian alat/ tenaga kerja/ omzet/ manfaat harus diisi minimal 1');
             } 
-            
-            
         }
     }
 
@@ -726,9 +708,7 @@ class PengajuanController extends Controller
             $manfaat->manfaat      =    $faat[$no];
             $manfaat->save();
         }
-        //$request->session()->flash('success',' Data Berhasil di perbarui ');
         return redirect('/pengajuan')->with ('success','  Data Berhasil di Perbarui ');
-            
     }
 
     public function survei($id)
@@ -848,7 +828,7 @@ class PengajuanController extends Controller
         
         $mitra = $pengajuan1->data_mitra;
         $mitra->notify(new PengajuanKonfirmasiNotification($pengajuan1));
-        Mail::to($request->user())->send(new PengajuanKonfirmasiSendingEmail($pengajuan1));
+        Mail::to($pengajuan1->user->email)->send(new PengajuanKonfirmasiSendingEmail($pengajuan1));
 
         return redirect()->back()->with('flash_message_success','Data berhasil di perbarui'); 
     }

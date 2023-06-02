@@ -4,9 +4,6 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Data Mitra </h5>
-      {{-- <button type="button" class="btn btn-primary">
-        <a href="/pengajuan/create"  style="color:white;"> Tambah</a>
-      </button> --}}
       <table class="table" id="datatable">
         <thead>
           <tr>

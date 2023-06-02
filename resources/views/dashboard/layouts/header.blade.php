@@ -1,25 +1,22 @@
 
 <nav class="navbar navbar-expand-lg main-navbar">
     
-      <form class="form-inline mr-auto" style="width:72%">
+      <form class="form-inline mr-auto" style="width:65%">
         <ul class="navbar-nav mr-3">
             <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
             <li><img src="{{ asset ('assets/img/logoap2.png')   }}" alt="" style="width:100px"></li>
-
         </ul>
       </form>
-      <ul class="navbar-nav navbar-right " >
+      <ul class="navbar-nav navbar-right "  style="margin-right:80px">
         {{-- notifikasi --}}
         <li class="dropdown dropdown-list-toggle" width=><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
-          <div class="dropdown-menu dropdown-list dropdown-menu-right " style="width:260px;height:400px">
-            <div class="dropdown-header">Notifications
-              <div class="float-right">
+          <div class="dropdown-menu dropdown-list dropdown-menu-right " style="width:260px" >
+            <div class="dropdown-header">
                 @if($user->is_admin == 1)
                     Anda memiliki {{ auth()->user()->unreadNotifications->count() }} notifikasi baru.
                   @else
                     Anda memiliki {{ $mitra->unreadNotifications->count() }} notifikasi baru.
                 @endif
-              </div>
             </div>
             <div class="dropdown-list-content dropdown-list-icons">
               @if($user->is_admin == 1 )
@@ -65,6 +62,8 @@
             </div>
           </div>
         </li>
+
+        {{-- profil --}}
         <li class="dropdown">
           <a href="#" data-toggle="dropdown" class="nav-link nav-link-lg nav-link-user">
             @if($user->is_admin == 0)
@@ -78,28 +77,28 @@
             @endif
           </a>
         </li>
-        <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+        <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link  nav-link-lg nav-link-user" style="maring-bottom:0px">
             <div class="d-sm-none d-lg-inline-block">
                 @if($user->is_admin == 0) 
-                    <span class="d-none d-md-block " style="color:white">{{ ucwords($mitra->nm) }}</span>
+                    <span class="d-none d-md-block " style="color:white" >{{ ucwords($mitra->nm) }} <i class="fas fa-sort-down"></i></span>
                   @else
-                    <span class="d-none d-md-block " style="color:white">{{ ucwords($user->email) }}</span>
+                    <span class="d-none d-md-block " style="color:white" >{{ ucwords($user->email) }} <i class="fas fa-sort-down"></i></span>
                 @endif
             </div>
-            <div class="dropdown-menu dropdown-menu-right">
+            <div class="dropdown-menu dropdown-menu-right" style="width:150px;">
               <div class="dropdown-title" >
                 @if($user->is_admin == 0)
-                    <span>{{ $mitra->nm }}</span>
-                    <span>{{ $mitra->data_ush->nama_ush }}</span>
+                    <center>{{ $mitra->nm }}</center> <br>
+                    <center>{{ $mitra->data_ush->nama_ush }}</center>
                   @else
                     <span>{{ $user->email }}</span>
                 @endif
               </div>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="/akun">
                 <i class="bi bi-gear"></i>
                 <span>Pengaturan Akun</span>
               </a>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="/logout">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Logout</span>
               </a>

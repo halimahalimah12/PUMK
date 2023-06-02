@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
-use App\Models\Detail_Kartupiutang;
+use App\Models\Pengajuan;
 use App\Jobs\PembayaranJob;
+use App\Models\Kartu_piutang;
+use App\Models\Detail_Kartupiutang;
 use App\Console\Commands\JatuhTempo;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Console\Scheduling\Schedule;
@@ -25,13 +27,7 @@ class Kernel extends ConsoleKernel
     
     protected function schedule(Schedule $schedule)
     {
-        $pengajuan=Pengajuan::first();
-        $kp=Kartu_piutang::where('pengajuan_id','=',$pengajua->id)->first();
-        $schedule->call(function () {
-            Detail_Kartupiutang::where('status','=','belumbayar')
-                                -> where('kartupiutang_id','=',$kp->id)->get();
-        })->twiceMonthly( 18,19, 20, '13:00');
-
+        $schedule->command('users:jatuh-tempo')->twiceMonthly(20, '13:00');
     }
 
     /**

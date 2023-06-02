@@ -73,8 +73,6 @@
                 </li>
               @endcan
             @endif
-            
-            
           </ul>
 
           <div class="mt-4 mb-4 p-3 hide-sidebar-mini">

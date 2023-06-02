@@ -165,7 +165,11 @@
                 @elseif($pengajuan->status == "lunas")
                 <div class="alert alert-info alert-dismissible fade show" role="alert" style="margin-top:30px">
                     <i class="bi bi-info-circle me-1"></i>Anda tidak bisa melakukan pembayaran angsuran kerena pengajuan anda telah lunas, silahkan melakukan pengajuan lagi.
-                  </div>
+                </div>
+                @elseif($pengajuan->status == "tidak")
+                <div class="alert alert-info alert-dismissible fade show" role="alert" style="margin-top:30px">
+                    <i class="bi bi-info-circle me-1"></i>Anda tidak bisa melakukan pembayaran angsuran kerena pengajuan anda tidak diterima, silahkan melakukan pengajuan lagi.
+                </div>
               @endif
           @endif
           {{-- ADMIN --}}

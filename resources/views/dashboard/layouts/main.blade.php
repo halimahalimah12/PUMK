@@ -25,8 +25,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css">
 
     <!-- Template Main CSS File -->
-    <link href="{{ asset ('assets/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset ('assets/css/style2.css') }}" rel="stylesheet">
+    <link href="{{ asset ('assets/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset ('assets/css/components.css') }}" rel="stylesheet">
 
     <script src="{{ asset('assets/js/vue.js') }}"></script>
@@ -35,7 +35,6 @@
 
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
     
-
     <body>
         <div id="app">
       <div class="main-wrapper main-wrapper-1">
@@ -92,6 +91,8 @@
         <script type="text/javascript" src="https://unpkg.com/currency.js@1.2.2/dist/currency.min.js"></script>
         
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js" ></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.60/inputmask/jquery.inputmask.js"></script>
         
         <script>
           $(document).ready( function () {
@@ -105,7 +106,6 @@
               $('.rupiah').mask("#,##0",{
                 reverse:true,
               });
-
           } );
         </script>
     

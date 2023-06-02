@@ -213,13 +213,10 @@
                             
                         @endif
                     @endif
-                      
-                      
                   </tbody>
                 </table>
               </div>
         </form>
-            
           @endif
         </div>
         <div class="tab-pane fade" id="angsuran-justified" role="tabpanel" aria-labelledby="angsuran-tab">

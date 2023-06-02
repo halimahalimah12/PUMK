@@ -29,8 +29,8 @@ class PengajuanKonfirmasiSendingEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('example@example.com', 'Example')
-        ->subject('Konfirmasi Pengajuan.')
-        ->view('emails.PengajuanKonfirmasi-mail');
+        return $this->from('example@example.com', 'PUMK')
+                    ->subject('Konfirmasi Pengajuan.')
+                    ->view('emails.PengajuanKonfirmasi-mail');
     }
 }

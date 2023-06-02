@@ -2,10 +2,16 @@
 
 namespace App\Console\Commands;
 
+use Mail;
+use App\Models\Pengajuan;
+use App\Models\Kartu_piutang;
 use Illuminate\Console\Command;
-use Illuminate\Foundation\Auth\User;
-use Illuminate\Support\Facades\Mail;
+use App\Mail\JatuhtempoSendEmail;
 use Illuminate\Support\Facades\DB;
+use App\Models\Detail_Kartupiutang;
+// use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Foundation\Auth\User;
 
 class JatuhTempo extends Command
 {
@@ -21,7 +27,7 @@ class JatuhTempo extends Command
      *
      * @var string
      */
-    protected $description = 'Send a Daily email to all users with a word and its meaning';
+    protected $description = 'Kirim jatuh tempo';
 
     /**
      * Create a new command instance.
@@ -40,51 +46,22 @@ class JatuhTempo extends Command
      */
     public function handle()
     {
-        // $words = [
-        //     'tidakvalid' => 'pembayaran anda bulan ini tidak valid silahkan lakukan penguploadan bukti pembayarannya lagi',
-        //     'convivial' => 'Kepada mitra yang terhormat, pada bulan ini anda belum melakukan pembayaran tagihan. Silahkan lakukan pembayaran dan upload bukti pembayaran',
-        // ];
+        $pengajuan=Pengajuan::first();
+        $kp = Kartu_piutang::where('pengajuan_id',$pengajuan->id)->first();
+        $detailkp = Detail_kartupiutang ::select('kartupiutang_id')
+                ->where('status','=','belumbayar')
+                ->groupBy('kartupiutang_id')
+                ->where('kartupiutang_id',$kp->id)
+                ->get();
         
-        // // Finding a random word
-        // $key = array_rand($words);
-        // $value = $words[$key];
-        
-        // $users = User::all();
-        
-        
-        // foreach ($users as $user) {
-        //     Mail::raw("{$key} -> {$value}", function ($mail) use ($user) {
-        //         $mail->from('info@tutsforweb.com');
-        //         $mail->to($user->email)
-        //             ->subject('Jatuh tempo pembayaran');
-        //     });
-        // }
-
-         // Finding a random word
-        
-        // $users = User::first();
-        // $pengajuan= Pengajuan::where('user_id','=',$user->id)->latest('id');
-        // $kartupiutang = Kartu_piutang::where('pengajuan_id','=',$pengajuan->id)->first();
-        // $pembayaran = Pembayaran::where('kartu_piutang_id','=',$kartupiutang->id)
-        //                 ->where('status','=','belumbayar')->first();
-        
-        $users= DB::table('users')
-                ->where('pembayarans', 'pembayarans.status','=','belumbayar')
-                ->where('pembayarans', 'kartu_piutangs.id','=','pembayarans.kartu_piutang_id')
-                ->where('kartu_piutangs', 'pengajuans.id','=','kartu_piutangs.pengajuan_id')
-                ->where('users','pengajuans.user_id','=','users.id')->get();
-        
-        foreach ($users as $user) {
-            Mail::raw( function ($mail) use ($user) {
-                $mail->from('info@tutsforweb.com');
-                $mail->to($user->email)
-                    ->subject('Jatuh tempo pembayaran')
-                    ->massage('Kepada mitra yang terhormat,');
-            });
+        foreach ($kp as $p) {
+            // Log::info("Cron job Berhasil di jalankan " );
+            $user = DB::table('users')
+            ->where('id',$pengajuan->user_id )->first();
+            Mail::to($user->email)->send(new JatuhtempoSendEmail($user));
         }
         
+        return 0;
         
-        $this->info('Word of the Day sent to All Users');
-    
     }
 }

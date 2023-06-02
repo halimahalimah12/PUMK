@@ -86,7 +86,7 @@
                 <thead>
                   <tr>
                     <th scope="col">No</th>
-                    <th scope="col">Nama Usaha</th>
+                    <th scope="col">Nama Mitra</th>
                     <th scope="col">Besar Pinjaman</th>
                     <th scope="col">Tanggal</th>
                     <th scope="col">Status</th>
@@ -98,7 +98,7 @@
                   <?php $__currentLoopData = $pengajuan1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                       <td><?php echo e($loop->iteration); ?></td>
-                      <td><?php echo e(ucwords($p->data_mitra->data_ush->nama_ush)); ?></td>
+                      <td><?php echo e(ucwords($p->data_mitra->nm)); ?></td>
                       <td><?php echo e($p->formatRupiah('bsr_pinjaman')); ?></td>
                       <td><?php echo e($p->created_at); ?></td>
                       <td>  
@@ -149,39 +149,37 @@
                           <div class="col-sm-12">
                             <select class="form-select" name="status" v-model='selectValue'>
                               <option value = "menunggu">Menunggu</option>
-                              <option value = "lulus_survei" > Lulus Survei </option> 
-                              <option value = "lulus" >Pengajuan Diterima</option>
-                              <option value = "tidak" >Pengajuan Tidak Diterima</option>
+                              <option value = "lulus_survei">Lulus Survei </option> 
+                              <option value = "lulus">Pengajuan Diterima</option>
+                              <option value = "tidak">Pengajuan Tidak Diterima</option>
                             </select>
                           </div>
                         </div>
-                        <div id="input"> 
-                        <div v-if='selectValue == "lulus"' class="col-12">
-                          <label for="bsrpemin" class="form-label">Besar Peminjaman yang diberikan </label>
-                          <div class="input-group mb-3">
-                            <span class="input-group-text">Rp.</span>
-                            <input type="text" class="rupiah form-control hide" name="bsrpemin"  id="bsrpemin">
+                          <div v-if='selectValue == "lulus"' class="col-12">
+                            <label for="bsrpemin" class="form-label">Besar Peminjaman yang diberikan </label>
+                            <div class="input-group mb-3">
+                              <span class="input-group-text">Rp.</span>
+                              <input type="text" class="rupiah form-control hide" name="bsrpemin"  id="bsrpemin">
+                            </div> 
                           </div> 
-                        </div> 
-                        <div v-if='selectValue == "lulus_survei"' class="col-12 ">
-                          <label for="ksg_bayar" class="form-label" id="lebksg_bayar">Kesanggupan Bayar Pinjaman </label>
-                          <div class="input-group mb-3">
-                            <span class="input-group-text rp1">Rp.</span>
-                            <input type="text" class="rupiah form-control hide" name="ksg_bayar" id="ksg_bayar">
+                          <div v-if='selectValue == "lulus_survei"' class="col-12 ">
+                            <label for="ksg_bayar" class="form-label" id="lebksg_bayar">Kesanggupan Bayar Pinjaman </label>
+                            <div class="input-group mb-3">
+                              <span class="input-group-text">Rp.</span>
+                              <input type="text" class="rupiah form-control hide" name="ksg_bayar" id="ksg_bayar">
+                            </div>
                           </div>
-                        </div>
-                        <div v-if='selectValue == "lulus_survei"' class="col-12 ">
-                          <label for="bsr_usulan" class="form-label" id="lebbsr_usulan">Besar Usulan Pinjaman dari Tim Survei </label>
-                          <div class="input-group mb-3">
-                            <span class="input-group-text rp2">Rp.</span>
-                            <input type="text" class="rupiah form-control hide" name="bsr_usulan" id="bsr_usulan">
-                          </div> 
-                        </div>
-                        <div v-if='selectValue != "menunggu"' class="col-12 ">
-                          <label for="ket" class="form-label" id="lebket">Keterangan </label>
-                          <input type="text" class="form-control hide" name="ket" id="ket">
-                        </div>
-                        </div>
+                          <div v-if='selectValue == "lulus_survei"' class="col-12 ">
+                            <label for="bsr_usulan" class="form-label" id="lebbsr_usulan">Besar Usulan Pinjaman dari Tim Survei </label>
+                            <div class="input-group mb-3">
+                              <span class="input-group-text rp2">Rp.</span>
+                              <input type="text" class="rupiah form-control hide" name="bsr_usulan" id="bsr_usulan">
+                            </div> 
+                          </div>
+                          <div v-if='selectValue != "menunggu"' class="col-12 ">
+                            <label for="ket" class="form-label" id="lebket">Keterangan </label>
+                            <input type="text" class="form-control hide" name="ket" id="ket">
+                          </div>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -942,6 +942,7 @@ section {
 @media screen and (max-width: 992px) {
   .hero-section .iphone-wrap {
     text-align: center;
+    float:center;
   }
 }
 
@@ -950,7 +951,7 @@ section {
   position: absolute;
   top: -50%;
   overflow: hidden;
-  right:25px;
+  right:0px;
   filter: drop-shadow( 0 15px 50px #0000004d) ;
   border-radius: 30px;
 }
@@ -962,6 +963,7 @@ section {
     position: relative;
     top: 0;
     max-width: 100%;
+    
   }
 }
 

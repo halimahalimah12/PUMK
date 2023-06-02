@@ -71,7 +71,6 @@ class LaporanController extends Controller
         }
         $pdf = PDF::loadview('dashboard.laporan.cetak_survei', compact('pengajuan'))->setOptions(['defaultFont'=>'sans-serif']);
 
-        
         return $pdf->setPaper('a4','landscape')->stream('laporan-survei.pdf');
     }
 
