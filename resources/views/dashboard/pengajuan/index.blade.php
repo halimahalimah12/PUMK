@@ -157,7 +157,7 @@
                             <label for="bsrpemin" class="form-label">Besar Peminjaman yang diberikan </label>
                             <div class="input-group mb-3">
                               <span class="input-group-text">Rp.</span>
-                              <input type="text" class="form-control uang" name="bsrpemin"  id="bsrpemin">
+                              <input type="text" class="form-control rupiah" name="bsrpemin"  id="bsrpemin">
                             </div> 
                           </div> 
                           <div v-if='selectValue == "lulus_survei"' class="col-12 ">
