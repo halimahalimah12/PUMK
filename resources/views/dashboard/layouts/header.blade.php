@@ -85,7 +85,7 @@
                     <span class="d-none d-md-block " style="color:white" >{{ ucwords($user->email) }} <i class="fas fa-sort-down"></i></span>
                 @endif
             </div>
-            <div class="dropdown-menu dropdown-menu-right" style="width:150px;">
+            <div class="dropdown-menu dropdown-menu-right" style="width:200px;">
               <div class="dropdown-title" >
                 @if($user->is_admin == 0)
                     <center>{{ $mitra->nm }}</center> <br>

@@ -31,9 +31,9 @@
                         <button type="button" class="btn btn-danger"  style=" float:right;margin-top:36px;">  <a href="/cetak-laporan-angsuran/?start_date={{$start_date}}&end_date={{ $end_date }}" style="color:white" >PDF </a> </button>
                         </div>
                         @endif
-                      <div class="col-lg-1"  style="margin-left:5px;">
+                      {{-- <div class="col-lg-1"  style="margin-left:5px;">
                         <button type="button" class="btn btn-success"  style=" float:right;margin-top:36px">  <a href="/cetak-laporan-angsuran"style="color:white" > EXCEL</a> </button>
-                      </div>
+                      </div> --}}
                   </div>
               </div>
           </div>

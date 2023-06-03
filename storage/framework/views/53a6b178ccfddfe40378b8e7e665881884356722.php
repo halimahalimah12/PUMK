@@ -4,7 +4,6 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Data Mitra </h5>
-      
       <table class="table" id="datatable">
         <thead>
           <tr>

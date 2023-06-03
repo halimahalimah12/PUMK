@@ -127,14 +127,16 @@ class PembayaranController extends Controller
             ]) ;
             $pembayaran->update($valid);
             $sdhbyr = Detail_kartupiutang::where('kartupiutang_id',$pembayaran->kartu_piutang_id)->first();
+            
             $bayar =([
                 'status' =>"sudahbayar"
             ]);
             $sdhbyr->update($bayar);
+            // dd($bayar);
 
             $mitra = $pembayaran->kartu_piutang->pengajuan->data_mitra;
             $mitra->notify(new PembayaranKonfirmasiNotification($pembayaran));
-            Mail::to($request->user())->send(new PembayaranKonfirmasiSendingEmail($pembayaran));
+            Mail::to($pembayaran->kartu_piutang->pengajuan->user->email)->send(new PembayaranKonfirmasiSendingEmail($pembayaran));
             \Session::flash('success', 'Tagihan berhasil disetujui');
                 
         } catch( \Excaption $e) {
@@ -154,7 +156,7 @@ class PembayaranController extends Controller
             
             $mitra = $pembayaran->kartu_piutang->pengajuan->data_mitra;
             $mitra->notify(new PembayaranKonfirmasiNotification($pembayaran));
-            Mail::to($request->user())->send(new PembayaranKonfirmasiSendingEmail($pembayaran));
+            Mail::to($pembayaran->kartu_piutang->pengajuan->user->email)->send(new PembayaranKonfirmasiSendingEmail($pembayaran));
 
             \Session::flash('success', 'Tagihan berhasil tidak disetujui');
                 

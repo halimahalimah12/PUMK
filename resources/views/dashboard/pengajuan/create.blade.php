@@ -9,10 +9,13 @@
             <h3 class="panel-title">Pengajuan Form</h3>
           </div>
 
-         
+        {{-- <div class="alert alert-danger print-error-msg" style="display:none">
+          <button type="button" class="close" data-dismiss="alert">x</button>
+          <ul></ul>
+        </div> --}}
 
           <div class="panel-body">
-           @if(session()-> has('gagal'))
+          @if(session()-> has('gagal'))
               <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top:10px; ">
                 <p style="text-align:left;align-items:center">
                   <i class="bi bi-emoji-smile"></i>
@@ -67,7 +70,7 @@
                           <label class="form-check-label" for="gender">Laki-Laki</label>
                         </div>
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="gender" id="gender" value="P"  {{ old('gender') == 'P' ? 'checked':'' }} @if($pengajuan != NULL ) {{ $last->pjb->jk == 'P' ? 'checked':''}} @endif}>
+                          <input class="form-check-input" type="radio" name="gender" id="gender" value="P"  {{ old('gender') == 'P' ? 'checked':'' }} @if($pengajuan != NULL ) {{ $last->pjb->jk == 'P' ? 'checked':''}} @endif>
                           <label class="form-check-label" for="gender">Perempuan</label>
                         </div>                                  
                         <span class="text-danger error-text gender_error"> </span>
@@ -179,7 +182,7 @@
                     <div class="col-sm-10">
                         <div class="input-group mb-3">
                             <span class="input-group-text">Rp.</span>
-                            <input type="text" class="rupiah  form-control" name="tanah" id="tanah"  onkeyup="sum();" value="{{ old('tanah') }} @if($pengajuan != NULL ) {{ ucwords($last->aset->tanah) }} @endif" >
+                            <input type="text" class="form-control rupiah " name="tanah" id="tanah"  onkeyup="sum();" value="{{ old('tanah') }} @if($pengajuan != NULL ) {{ ucwords($last->aset->tanah) }} @endif" >
                         </div>
                         <span class="text-danger error-text tanah_error"> </span>
                     </div>
@@ -446,6 +449,7 @@
                     <span class="input-group-text">Rp.</span>
                     <input type="text" class="rupiah form-control " name="invest" id="invest" onkeyup="sum_modal();" value="{{ old('invest') }} @if($pengajuan != NULL ) {{ ucwords($last->investasi) }} @endif">
                   </div>
+                  <span class="text-danger error-text invest_error"> </span>
                 </div>
                 <div class="col-12 ">
                   <label for="bsr_pjm" class="form-label">Besar Pinjaman yang Diajukan </label>
@@ -489,6 +493,7 @@
               <div class="col-12  ">
                 <div class="mb-3">
                   <label for="bkt_serius" class="form-label">Bukti tanda keseriusan </label>
+                  <span>Foto bukti tanda keseriusan anda, seperti BPKB</span>
                   <input class="form-control " type="file" id="bkt_serius" name="bkt_serius">
                   <span class="text-danger error-text bkt_serius_error"> </span>
                   <span style="font-style: italic;">Format foto (.jpg, .png, .jpeg, pdf) </span>
@@ -518,7 +523,7 @@
                   <label for="surat_ush" class="form-label">Scan Surat Keterangan Berusaha dari RT/RW Setingkat</label>
                   <input class="form-control" type="file" id="surat_ush" name="surat_ush">
                   <span class="text-danger error-text surat_ush_error"> </span>
-                  <span style="font-style: italic;">Format foto (.jpg, .png, .jpeg, .pdf) </span>
+                  <span style="font-style: italic;">Format file (.jpg, .png, .jpeg, .pdf) </span>
                 </div> 
               </div> 
               {{-- Blm bina BUMN --}}
@@ -534,7 +539,7 @@
                   <label for="srt_blmbina" class="form-label">Surat Belum Dibina BUMN </label>
                   <input class="form-control" type="file" id="srt_blmbina" name="srt_blmbina"></a>
                   <span class="text-danger error-text srt_blmbina_error"> </span>
-                  <span style="font-style: italic;">Format foto (.jpg, .png, .jpeg, .pdf) </span>
+                  <span style="font-style: italic;">Format file (.jpg, .png, .jpeg, .pdf) </span>
                 </div>
               {{-- PJ berikutnya --}}
               <div class="col-md-4">
@@ -549,7 +554,7 @@
                 <label for="srt_pjb" class="form-label">Upload Surat Penanggung Jawab berikutnya  </label>
                 <input class="form-control" type="file" id="srt_pjb" name="srt_pjb">
                 <span class="text-danger error-text srt_pjb_error"> </span>
-                <span style="font-style: italic;">Format foto (.jpg, .png, .jpeg, .pdf) </span>
+                <span style="font-style: italic;">Format file (.jpg, .png, .jpeg, .pdf) </span>
               </div>
               {{-- melunasi --}}
               <div class="col-md-4">
@@ -564,7 +569,7 @@
                 <label for="srt_ksglns" class="form-label">Upload Surat Kesanggupan Melunasi Peminjaman  </label>
                 <input class="form-control" type="file" id="srt_ksglns" name="srt_ksglns">
                 <span class="text-danger error-text srt_ksglns_error"> </span>
-                <span style="font-style: italic;">Format foto (.jpg, .png, .jpeg, .pdf) </span>
+                <span style="font-style: italic;">Format file (.jpg, .png, .jpeg, .pdf) </span>
               </div>
               <hr>
               <div class="row">
@@ -591,7 +596,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   <script type='text/javascript'>
     
     $('thead').on('click','.addalat',function(){
@@ -769,10 +774,13 @@
             },
             success:function(data){
               if(data.code == 0 ){
+                {{-- console.log(); --}}
                 $.each(data.error, function(prefix,val){
                   $(form).find('span.'+prefix+'_error').text(val[0]);
                 });
+                {{-- printErrorMsg(data.error); --}}
               }else{
+                $(form)[0].reset();
                 Swal.fire(
                   'Good job!',
                   'Data berhasil dimasukan.',
@@ -782,7 +790,14 @@
               }
             }
           });
-      }); 
+        });
+        {{-- function printErrorMsg(msg){
+          $(".print-error-msg").find("ul").html('');
+          $(".print-error-msg").css('display','block');
+          $.each(msg, function(key, value){
+            $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+          });
+        } --}}
 
 
       

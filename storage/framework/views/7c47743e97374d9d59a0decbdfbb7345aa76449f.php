@@ -5,7 +5,6 @@
         <ul class="navbar-nav mr-3">
             <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
             <li><img src="<?php echo e(asset ('assets/img/logoap2.png')); ?>" alt="" style="width:100px"></li>
-
         </ul>
       </form>
       <ul class="navbar-nav navbar-right "  style="margin-right:80px">
@@ -86,7 +85,7 @@
                     <span class="d-none d-md-block " style="color:white" ><?php echo e(ucwords($user->email)); ?> <i class="fas fa-sort-down"></i></span>
                 <?php endif; ?>
             </div>
-            <div class="dropdown-menu dropdown-menu-right" style="width:150px;">
+            <div class="dropdown-menu dropdown-menu-right" style="width:200px;">
               <div class="dropdown-title" >
                 <?php if($user->is_admin == 0): ?>
                     <center><?php echo e($mitra->nm); ?></center> <br>

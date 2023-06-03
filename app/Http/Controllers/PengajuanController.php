@@ -145,7 +145,7 @@ class PengajuanController extends Controller
         ]);
 
         if (!$validateData->passes()) {
-            return response()->json(['code'=>0,'error'=>$validateData->errors()->all()]);
+            return response()->json(['code'=>0,'error'=>$validateData->errors()->toArray()]);
         } else {
 
             DB::beginTransaction();
@@ -443,7 +443,7 @@ class PengajuanController extends Controller
     {
         
         $pengajuan  = Pengajuan::find($id);
-        $pengajuan1 = Pengajuan::where('id',$pengajuan->id);
+        // $pengajuan1 = Pengajuan::where('id',$pengajuan->id);
         $pjb = Pjb::where('id',$pengajuan->pjb_id);
         $aset = Aset::where('id',$pengajuan->aset_id);
         $oprasional = Oprasional::where('id',$pengajuan->oprasional_id);
@@ -452,55 +452,21 @@ class PengajuanController extends Controller
         $omzet = Omzet::where('pengajuan_id',$pengajuan->id)->delete();
         $manfaat = Manfaat::where('pengajuan_id',$pengajuan->id)->delete();
 
-        $validateData = $request->validate([
-            // pjb
-            'nm_pjb'    => 'required|max:255|alpha',
-            'tpt_lhr'   => 'required|max:255|alpha',
-            'tgl_lhr'   => 'required',
-            'hub'       => 'required|max:255',
-            'gender'    => 'required',
-            'pekerjaan' => 'required|max:255|alpha',
-            'almt'      => 'required|max:255',
-            'no_hp'     => 'required|numeric',
-            'no_ktp'    => 'required|numeric',
-            'tgl_ktp'   => 'required|date',
-            'pddk'      => 'required',
-            'jbt'       => 'required | alpha', 
-
-            'tanah'     => 'required|max:20 ',
-            'bangunan'  => 'required|max:20 ',
-            'persediaan'=> 'required|max:20 ',
-            'peralatan' => 'required|max:20 ',
-            'kas'       => 'required|max:20 ',
-            'piutang'   => 'required|max:20 ',
-            'alat'      => 'required|max:20 ',
-            'totaset'   => 'required|max:255 ',
-
-            'transport' => 'required|max:20 ',
-            'listrik'   => 'required|max:20 ',
-            'telp'      => 'required|max:20 ',
-            'atk'       => 'required|max:20 ',
-            'lain'      => 'required|max:20 ',
-            'totop'     => 'required|max:255 ',
-
-            'modal'     => 'required|max:20 ',
-            'invest'    => 'required|max:20 ',
-            'bsr_pjm'   => 'required|max:255 ',
-        ]);
+        // dd($request);
 
         $dtpjb =([
-            'nm'        =>   $validateData['nm_pjb'],
-            'jk'        =>   $validateData['gender'],
-            'tpt_lhr'   =>   $validateData['tpt_lhr'],
-            'tgl_lhr'   =>   $validateData['tgl_lhr'],
-            'hub'       =>   $validateData['hub'],
-            'almt'      =>   $validateData['almt'],
-            'no_hp'     =>   $validateData['no_hp'],
-            'no_ktp'    =>   $validateData['no_ktp'],
-            'tgl_ktp'   =>   $validateData['tgl_ktp'],
+            'nm'        =>   $request->nm_pjb,
+            'jk'        =>   $request->gender,
+            'tpt_lhr'   =>   $request->tpt_lhr,
+            'tgl_lhr'   =>   $request->tgl_lhr,
+            'hub'       =>   $request->hub,
+            'almt'      =>   $request->almt,
+            'no_hp'     =>   $request->no_hp,
+            'no_ktp'    =>   $request->no_ktp,
+            'tgl_ktp'   =>   $request->tgl_ktp,
             'kursus'    =>   $request->kursus,
-            'pddk'      =>   $validateData['pddk'],
-            'jbt'       =>   $validateData['jbt'], 
+            'pddk'      =>   $request->pddk,
+            'jbt'       =>   $request->jbt, 
         ]);
         $pjb->update($dtpjb);
 
@@ -541,34 +507,34 @@ class PengajuanController extends Controller
         $pjb->update($scanktp);
         
         $dtaset = ([
-            'tanah'     => str_replace(",", "", $validateData['tanah']), 
-            'bangunan'  => str_replace(",", "", $validateData['bangunan']), 
-            'persediaan'=> str_replace(",", "", $validateData['persediaan']), 
-            'alat'      => str_replace(",", "", $validateData['alat']), 
-            'kas'       => str_replace(",", "", $validateData['kas']), 
-            'piutang'   => str_replace(",", "", $validateData['piutang']), 
-            'peralatan' => str_replace(",", "", $validateData['peralatan']), 
-            'totaset'   => str_replace(",", "", $validateData['totaset']), 
+            'tanah'     => str_replace(",", "", $request->tanah), 
+            'bangunan'  => str_replace(",", "", $request->bangunan), 
+            'persediaan'=> str_replace(",", "", $request->persediaan), 
+            'alat'      => str_replace(",", "", $request->alat), 
+            'kas'       => str_replace(",", "", $request->kas), 
+            'piutang'   => str_replace(",", "", $request->piutang), 
+            'peralatan' => str_replace(",", "", $request->peralatan), 
+            'totaset'   => str_replace(",", "", $request->totaset), 
         ]);
 
         $aset->update($dtaset);
 
         $dtop = ([
-            'transport'=> str_replace(",", "", $validateData['transport']),  
-            'listrik'  => str_replace(",", "", $validateData['listrik']),  
-            'telpon'   => str_replace(",", "", $validateData['telp']),  
-            'atk'      => str_replace(",", "", $validateData['atk']),  
-            'lain'     => str_replace(",", "", $validateData['lain']),  
-            'totop'    => str_replace(",", "", $validateData['totop']), 
+            'transport'=> str_replace(",", "", $request->transport),  
+            'listrik'  => str_replace(",", "", $request->listrik),  
+            'telpon'   => str_replace(",", "", $request->telp),  
+            'atk'      => str_replace(",", "", $request->atk),  
+            'lain'     => str_replace(",", "", $request->lain),  
+            'totop'    => str_replace(",", "", $request->totop), 
         ]);
         $oprasional->update($dtop);
 
         $dtpengajuan = ([
-            'modal'       => str_replace(",", "", $validateData['modal']),  
-            'investasi'   => str_replace(",", "", $validateData['invest']),  
-            'bsr_pinjaman'=> str_replace(",", "", $validateData['bsr_pjm']),  
+            'modal'       => str_replace(",", "", $request->modal),  
+            'investasi'   => str_replace(",", "", $request->invest),  
+            'bsr_pinjaman'=> str_replace(",", "", $request->bsr_pjm),  
         ]);
-        $pengajuan1->update($dtpengajuan); 
+        $pengajuan->update($dtpengajuan); 
 
         if  ($request->hasFile('bkt_serius')){
             if($request->oldbktserius){
@@ -847,7 +813,7 @@ class PengajuanController extends Controller
 
             $mitra = $pengajuan1->data_mitra;
             $mitra->notify(new PengajuanLunasNotification($pengajuan1));
-            Mail::to($request->user())->send(new PengajuanLunasSendingEmail($pengajuan1));
+            Mail::to($pengajuan1->user->email)->send(new PengajuanLunasSendingEmail($pengajuan1));
             \Session::flash('success', 'Data berhasil diperbarui.');
                 
         } catch( \Excaption $e) {

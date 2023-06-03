@@ -157,26 +157,26 @@
                             <label for="bsrpemin" class="form-label">Besar Peminjaman yang diberikan </label>
                             <div class="input-group mb-3">
                               <span class="input-group-text">Rp.</span>
-                              <input type="text" class="rupiah form-control hide" name="bsrpemin"  id="bsrpemin">
+                              <input type="text" class="form-control uang" name="bsrpemin"  id="bsrpemin">
                             </div> 
                           </div> 
                           <div v-if='selectValue == "lulus_survei"' class="col-12 ">
                             <label for="ksg_bayar" class="form-label" id="lebksg_bayar">Kesanggupan Bayar Pinjaman </label>
                             <div class="input-group mb-3">
                               <span class="input-group-text">Rp.</span>
-                              <input type="text" class="rupiah form-control hide" name="ksg_bayar" id="ksg_bayar">
+                              <input type="text" class="form-control rupiah" name="ksg_bayar" id="ksg_bayar">
                             </div>
                           </div>
                           <div v-if='selectValue == "lulus_survei"' class="col-12 ">
                             <label for="bsr_usulan" class="form-label" id="lebbsr_usulan">Besar Usulan Pinjaman dari Tim Survei </label>
                             <div class="input-group mb-3">
                               <span class="input-group-text rp2">Rp.</span>
-                              <input type="text" class="rupiah form-control hide" name="bsr_usulan" id="bsr_usulan">
+                              <input type="text" class="form-control rupiah" name="bsr_usulan" id="bsr_usulan">
                             </div> 
                           </div>
                           <div v-if='selectValue != "menunggu"' class="col-12 ">
                             <label for="ket" class="form-label" id="lebket">Keterangan </label>
-                            <input type="text" class="form-control hide" name="ket" id="ket">
+                            <input type="text" class="form-control " name="ket" id="ket">
                           </div>
                       </div>
                       <div class="modal-footer">
@@ -206,4 +206,5 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+  
 @endsection

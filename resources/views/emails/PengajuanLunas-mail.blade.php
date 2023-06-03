@@ -12,7 +12,6 @@
     </head>
     <body >
         <div class= "card">
-            
             <div class="card-body" style="color:black;">
                 <h3> Kepada yang terhormat mitra PUMK Angkasa Pura II.</h3>
                 <p>Terimakasih telah melunaskan pengajuan anda, silahkan<br>

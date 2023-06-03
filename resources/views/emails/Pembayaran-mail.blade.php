@@ -16,7 +16,7 @@
                 <br>
                 <p>Semoga kabar bapak/ibu baik-baik saja. Tujuan email ini dikirim untuk memberi tahu bapak/ibu <br>
                     bahwa pembayaran angsuran talah berhasil disubmit. <br>
-                    Silahkan tunggu hingga admin melakukan konfirmasi pengajuan anda.<br>
+                    Silahkan tunggu hingga admin melakukan konfirmasi pembayaran anda.<br>
                 <br></p>
                 Salam Hormat. <br>
                 <p>PUMK Angkasa Pura II Sultan Thaha Jambi</p> 

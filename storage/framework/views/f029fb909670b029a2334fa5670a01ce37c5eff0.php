@@ -285,13 +285,10 @@ unset($__errorArgs, $__bag); ?>
                             
                         <?php endif; ?>
                     <?php endif; ?>
-                      
-                      
                   </tbody>
                 </table>
               </div>
         </form>
-            
           <?php endif; ?>
         </div>
         <div class="tab-pane fade" id="angsuran-justified" role="tabpanel" aria-labelledby="angsuran-tab">

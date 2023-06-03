@@ -9,10 +9,10 @@
             <h3 class="panel-title">Pengajuan Form</h3>
           </div>
 
-         
+        
 
           <div class="panel-body">
-           <?php if(session()-> has('gagal')): ?>
+          <?php if(session()-> has('gagal')): ?>
               <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top:10px; ">
                 <p style="text-align:left;align-items:center">
                   <i class="bi bi-emoji-smile"></i>
@@ -68,7 +68,7 @@
                           <label class="form-check-label" for="gender">Laki-Laki</label>
                         </div>
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="gender" id="gender" value="P"  <?php echo e(old('gender') == 'P' ? 'checked':''); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->pjb->jk == 'P' ? 'checked':''); ?> <?php endif; ?>}>
+                          <input class="form-check-input" type="radio" name="gender" id="gender" value="P"  <?php echo e(old('gender') == 'P' ? 'checked':''); ?> <?php if($pengajuan != NULL ): ?> <?php echo e($last->pjb->jk == 'P' ? 'checked':''); ?> <?php endif; ?>>
                           <label class="form-check-label" for="gender">Perempuan</label>
                         </div>                                  
                         <span class="text-danger error-text gender_error"> </span>
@@ -187,7 +187,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                     <div class="col-sm-10">
                         <div class="input-group mb-3">
                             <span class="input-group-text">Rp.</span>
-                            <input type="text" class="rupiah  form-control" name="tanah" id="tanah"  onkeyup="sum();" value="<?php echo e(old('tanah')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->aset->tanah)); ?> <?php endif; ?>" >
+                            <input type="text" class="form-control rupiah " name="tanah" id="tanah"  onkeyup="sum();" value="<?php echo e(old('tanah')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->aset->tanah)); ?> <?php endif; ?>" >
                         </div>
                         <span class="text-danger error-text tanah_error"> </span>
                     </div>
@@ -454,6 +454,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                     <span class="input-group-text">Rp.</span>
                     <input type="text" class="rupiah form-control " name="invest" id="invest" onkeyup="sum_modal();" value="<?php echo e(old('invest')); ?> <?php if($pengajuan != NULL ): ?> <?php echo e(ucwords($last->investasi)); ?> <?php endif; ?>">
                   </div>
+                  <span class="text-danger error-text invest_error"> </span>
                 </div>
                 <div class="col-12 ">
                   <label for="bsr_pjm" class="form-label">Besar Pinjaman yang Diajukan </label>
@@ -497,6 +498,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               <div class="col-12  ">
                 <div class="mb-3">
                   <label for="bkt_serius" class="form-label">Bukti tanda keseriusan </label>
+                  <span>Foto bukti tanda keseriusan anda, seperti BPKB</span>
                   <input class="form-control " type="file" id="bkt_serius" name="bkt_serius">
                   <span class="text-danger error-text bkt_serius_error"> </span>
                   <span style="font-style: italic;">Format foto (.jpg, .png, .jpeg, pdf) </span>
@@ -526,7 +528,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                   <label for="surat_ush" class="form-label">Scan Surat Keterangan Berusaha dari RT/RW Setingkat</label>
                   <input class="form-control" type="file" id="surat_ush" name="surat_ush">
                   <span class="text-danger error-text surat_ush_error"> </span>
-                  <span style="font-style: italic;">Format foto (.jpg, .png, .jpeg, .pdf) </span>
+                  <span style="font-style: italic;">Format file (.jpg, .png, .jpeg, .pdf) </span>
                 </div> 
               </div> 
               
@@ -542,7 +544,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                   <label for="srt_blmbina" class="form-label">Surat Belum Dibina BUMN </label>
                   <input class="form-control" type="file" id="srt_blmbina" name="srt_blmbina"></a>
                   <span class="text-danger error-text srt_blmbina_error"> </span>
-                  <span style="font-style: italic;">Format foto (.jpg, .png, .jpeg, .pdf) </span>
+                  <span style="font-style: italic;">Format file (.jpg, .png, .jpeg, .pdf) </span>
                 </div>
               
               <div class="col-md-4">
@@ -557,7 +559,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                 <label for="srt_pjb" class="form-label">Upload Surat Penanggung Jawab berikutnya  </label>
                 <input class="form-control" type="file" id="srt_pjb" name="srt_pjb">
                 <span class="text-danger error-text srt_pjb_error"> </span>
-                <span style="font-style: italic;">Format foto (.jpg, .png, .jpeg, .pdf) </span>
+                <span style="font-style: italic;">Format file (.jpg, .png, .jpeg, .pdf) </span>
               </div>
               
               <div class="col-md-4">
@@ -572,7 +574,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
                 <label for="srt_ksglns" class="form-label">Upload Surat Kesanggupan Melunasi Peminjaman  </label>
                 <input class="form-control" type="file" id="srt_ksglns" name="srt_ksglns">
                 <span class="text-danger error-text srt_ksglns_error"> </span>
-                <span style="font-style: italic;">Format foto (.jpg, .png, .jpeg, .pdf) </span>
+                <span style="font-style: italic;">Format file (.jpg, .png, .jpeg, .pdf) </span>
               </div>
               <hr>
               <div class="row">
@@ -600,7 +602,7 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-    
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   <script type='text/javascript'>
     
     $('thead').on('click','.addalat',function(){
@@ -778,10 +780,13 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
             },
             success:function(data){
               if(data.code == 0 ){
+                
                 $.each(data.error, function(prefix,val){
                   $(form).find('span.'+prefix+'_error').text(val[0]);
                 });
+                
               }else{
+                $(form)[0].reset();
                 Swal.fire(
                   'Good job!',
                   'Data berhasil dimasukan.',
@@ -791,7 +796,8 @@ unset($__errorArgs, $__bag); ?>" id="almt" name="almt" value="<?php echo e(old('
               }
             }
           });
-      }); 
+        });
+        
 
 
       

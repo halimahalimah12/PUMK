@@ -35,7 +35,6 @@
 
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
     
-
     <body>
         <div id="app">
       <div class="main-wrapper main-wrapper-1">
@@ -107,7 +106,6 @@
               $('.rupiah').mask("#,##0",{
                 reverse:true,
               });
-
           } );
         </script>
     

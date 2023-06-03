@@ -86,8 +86,10 @@
           <div class="row align-items-center">
             <div class="col-md-4 ms-auto order-2">
               <h2 class="mb-4">Pendanaan Usaha Mikro (PUMK)</h2>
-              <p class="mb-4">Mitra Binaan  adalah Usaha Kecil yang mendapatkan pinjaman dari Program Kemitraan. Apabila dikelompokan maka usaha yang dilakukan oleh mitra binaan dapat dikelompokan kedalam  8 (delapan) sektor, yaitu :
-                Perdagangan,Industri,Pertanian,Perkebunan,Perikanan,<br>Peternakan,Jasa,Lainnya. </p>
+              <p class="mb-4">PUMK merupakan salah satu program Corporate Social Responsibility (CSR) dari PT. Angkasa Pura II. 
+                Program ini bertujuan membantu usaha mikro kecil didaerah Jambi dengan harapan membantu meningkatkan perekonomian masyarakat yang sejahtera di provinsi jambi.
+                Program PUMK ini telah ada sejak 2010, dan banyak dari UMK yang berkembang berkat mengikuti program ini. 
+                </p>
             </div>
             <div class="col-md-6" data-aos="fade-right">
               <img src="assets/img/Store.svg" alt="Image" class="img-fluid">
@@ -117,7 +119,10 @@
         <div class="row align-items-center">
           <div class="col-md-4 ms-auto order-2">
             <h2 class="mb-4">Langkah 2</h2>
-            <p class="mb-4">Lakukan Pengajuan dengan mengisi data yang tertera pada halaman pengajuan. </p>
+            <p class="mb-4">Lengkapi data diri dan data usaha terlebih dahulu, lalu
+            lakukan Pengajuan dengan mengisi data yang tertera pada halaman pengajuan. 
+            Simpan data dan tunggu hingga pengajuan disetujui oleh admin. 
+            Terdapat pemberitahuan di email jika admin telah konfirmasi pengajuan anda. </p>
           </div>
           <div class="col-md-6" data-aos="fade-right">
             <img src="assets/img/alur2.svg" alt="Image" class="img-fluid">
@@ -127,8 +132,12 @@
         <div class="row align-items-center">
           <div class="col-md-4 me-auto">
             <h2 class="mb-4">Langkah 3</h2>
-            <p class="mb-4">Tunggu pengajuan hingga pengajuan di verifikasi oleh admin. </p>
-              <p><a href="#" class="btn btn-primary">Registrasi Sekarang</a></p>
+            <p class="mb-4">Jika pengajuan anda disetujui oleh admin, anda akan dihubungi 
+            oleh admin untuk tahap penandatanganan kontrak dan penyerahan uang tunai.
+            Anda dapat melihat kartu piutang anda dan dapat mengaupload bukti pembayaran angsuran 
+            anda setiap bulannya. Terdapat pemberitahuan di email jika anda melawatkan pembayaran angsuran tiap bulannya.
+            </p>
+              <p><a href="/register" class="btn btn-primary">Registrasi Sekarang</a></p>
           </div>
             <div class="col-md-6" data-aos="fade-left">
               <img src="assets/img/hp.svg" alt="Image" class="img-fluid">
@@ -159,7 +168,7 @@
                         <span class="bi bi-star-fill muted"></span>
                       </p>
                       <blockquote>
-                        <p>Program PUMK ini selain menambahkan modal saya, juga membantu saya dalam mempromosikan produk saya.</p>
+                        <p>"Program PUMK ini selain menambahkan modal saya, juga membantu saya dalam mempromosikan produk saya."</p>
                       </blockquote>
                       <p class="review-user">
                         <span class="d-block">
@@ -178,7 +187,7 @@
                         <span class="bi bi-star-fill muted"></span>
                       </p>
                       <blockquote>
-                        <p>Membantu Usaha Mikro Kecil  (UMK) dan Koperasi yang sudah berjalan agar dapat berkembang dan  mandiri.</p>
+                        <p>"Membantu Usaha Mikro Kecil  (UMK) dan Koperasi yang sudah berjalan agar dapat berkembang dan  mandiri."</p>
                       </blockquote>
                       <p class="review-user">
                         <span class="d-block">
@@ -197,8 +206,8 @@
                         <span class="bi bi-star-fill muted"></span>
                       </p>
                       <blockquote>
-                        <p>Saya sangat berterimakasih sekali dengan adanya program PUMK ini sangat membantu para UMK 
-                          dan juga difasilitasi dalam mengikuti pameran-pameran besar yang ada di Jambi.
+                        <p>"Saya sangat berterimakasih sekali dengan adanya program PUMK, program ini sangat membantu para UMK 
+                          dan juga difasilitasi dalam mengikuti pameran-pameran besar yang ada di Jambi."
                         </p>
                       </blockquote>
                       <p class="review-user">

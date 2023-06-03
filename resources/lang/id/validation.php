@@ -188,7 +188,7 @@ return [
     'numeric' => 'Isian :attribute harus berupa angka.',
     'present' => 'Bidang isian :attribute wajib ada.',
     'regex' => 'Format isian :attribute tidak valid.',
-    'required' => 'Wajib diisi.',
+    'required' => 'Bidang isian ini wajib diisi.',
     'required_if' => 'Bidang isian :attribute wajib diisi bila :other adalah :value.',
     'required_unless' => 'Bidang isian :attribute wajib diisi kecuali :other memiliki nilai :values.',
     'required_with' => 'Bidang isian :attribute wajib diisi bila terdapat :values.',

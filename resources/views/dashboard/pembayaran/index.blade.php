@@ -195,7 +195,7 @@
                   @foreach ($pembayaran as $p )
                     <tr>
                       <td> {{ $loop->iteration }} </td>
-                      <td> <a href="/kartupiutang/{{$p->kartu_piutang_id}}/edit" >{{ $p->kartu_piutang->pengajuan->data_mitra->nm }}</a></td>
+                      <td > <a href="/kartupiutang/{{$p->kartu_piutang_id}}/edit" style="color:black" >{{ ucwords($p->kartu_piutang->pengajuan->data_mitra->nm) }}</a></td>
                       <td> {{ date('d M Y',strtotime($p->tgl)) }} </td>
                       <td> @if ($p->bank == 'bri') BRI
                               @else Mandiri
